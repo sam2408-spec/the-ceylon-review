@@ -1,0 +1,9 @@
+{
+  "appId": "com.ceylonreview.app",
+  "appName": "The Ceylon Review",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
