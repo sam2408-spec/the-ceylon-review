@@ -1,0 +1,17 @@
+{
+  "short_name": "CeylonReview",
+  "name": "The Ceylon Review",
+  "description": "An elegant, independent dark-themed digital newspaper showcasing Sri Lankan columnists, archives, and live commentary moderation.",
+  "icons": [
+    {
+      "src": "/earth-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "display": "standalone",
+  "orientation": "portrait"
+}

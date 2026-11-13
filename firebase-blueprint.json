@@ -1,0 +1,159 @@
+{
+  "entities": {
+    "Article": {
+      "title": "Article",
+      "description": "Investigative journalism article or archival dispatch in The Ceylon Review.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Unique identifier for the article"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Headline of the investigative report"
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "Deck or secondary headline"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Executive summary or abstract"
+        },
+        "content": {
+          "type": "array",
+          "description": "Article body paragraphs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Reference ID to the contributing journalist"
+        },
+        "publishedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "Publication date string"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Politics", "Tech", "Science", "Opinion", "Culture", "Business"],
+          "description": "Topic desk (Politics, Tech, Science, Opinion, Culture, Business)"
+        },
+        "imageUrl": {
+          "type": "string",
+          "maxLength": 500000,
+          "description": "Header image URL or compressed data URI"
+        },
+        "readTime": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "Estimated reading duration"
+        },
+        "isCurrent": {
+          "type": "boolean",
+          "description": "True for active front-page dispatches, false for archive"
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "description": "True if featured on the cover broadside"
+        },
+        "likes": {
+          "type": "number",
+          "description": "Community appreciation counter"
+        },
+        "views": {
+          "type": "number",
+          "description": "Total reader views"
+        },
+        "comments": {
+          "type": "array",
+          "description": "Public discussion and peer review comments",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "author": { "type": "string" },
+              "text": { "type": "string" },
+              "timestamp": { "type": "string" }
+            },
+            "required": ["id", "author", "text"]
+          }
+        }
+      },
+      "required": ["id", "title", "content", "authorId", "publishedAt", "category"]
+    },
+    "Writer": {
+      "title": "Writer",
+      "description": "Correspondent or contributing journalist for The Ceylon Review.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Unique writer identifier"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Full name of the journalist"
+        },
+        "role": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Editorial role or beat"
+        },
+        "bio": {
+          "type": "string",
+          "maxLength": 5000,
+          "description": "Biographical summary"
+        },
+        "avatarUrl": {
+          "type": "string",
+          "maxLength": 500000,
+          "description": "Portrait photograph URL or compressed JPEG data URI"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Contact email"
+        },
+        "twitter": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Social handle"
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Reporting bureau / base"
+        },
+        "joinedDate": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "Date joined the editorial board"
+        }
+      },
+      "required": ["id", "name", "role"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": { "$ref": "#/entities/Article" },
+      "description": "Collection of all current and archival articles published by The Ceylon Review."
+    },
+    "/writers/{writerId}": {
+      "schema": { "$ref": "#/entities/Writer" },
+      "description": "Registered journalists and correspondents."
+    }
+  }
+}
