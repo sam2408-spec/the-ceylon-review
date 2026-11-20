@@ -16,7 +16,9 @@ import {
   Link as LinkIcon, 
   FileVideo, 
   Eye,
-  Check
+  Check,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { subscribeToEvents, saveEventToFirestore, deleteEventFromFirestore } from '../firebase';
 import { compressImage } from '../utils/image';
@@ -38,6 +40,29 @@ interface EventItem {
   imageUrl: string;
   date: string;
   location: string;
+}
+
+// Photos uploaded together share an id like evt-<time>-<n>; they are shown as one set.
+const SET_ID_RE = /^evt-(\d+)-(\d+)$/;
+const SUFFIX_RE = /\s*\(\d+ of \d+\)\s*$/;
+interface EventSet { key: string; title: string; items: EventItem[]; }
+function groupIntoSets(list: EventItem[]): EventSet[] {
+  const order: string[] = [];
+  const map = new Map<string, EventItem[]>();
+  for (const ev of list) {
+    const m = SET_ID_RE.exec(ev.id);
+    const key = m ? `set-${m[1]}` : ev.id;
+    if (!map.has(key)) { map.set(key, []); order.push(key); }
+    map.get(key)!.push(ev);
+  }
+  return order.map((key) => {
+    const items = map.get(key)!.slice().sort((a, b) => {
+      const ia = Number(SET_ID_RE.exec(a.id)?.[2] ?? 0);
+      const ib = Number(SET_ID_RE.exec(b.id)?.[2] ?? 0);
+      return ia - ib;
+    });
+    return { key, title: items[0].title.replace(SUFFIX_RE, ''), items };
+  });
 }
 
 interface MediaHubProps {
@@ -151,9 +176,22 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
   }, []);
 
   const shownEvents = cloudEvents.length > 0 ? cloudEvents : events;
+  const sets = groupIntoSets(shownEvents);
 
   // Lightbox Modal for Gallery Events
-  const [activeLightboxImage, setActiveLightboxImage] = useState<EventItem | null>(null);
+  const [activeSetKey, setActiveSetKey] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [confirmKey, setConfirmKey] = useState<string | null>(null);
+  const [addBusy, setAddBusy] = useState(false);
+  const activeSet = sets.find((x) => x.key === activeSetKey) || null;
+  const activeLightboxImage: EventItem | null = activeSet ? activeSet.items[Math.min(activeIndex, activeSet.items.length - 1)] : null;
+  const setActiveLightboxImage = (_: null) => setActiveSetKey(null);
+  const openSet = (key: string) => { setActiveIndex(0); setActiveSetKey(key); };
+  const stepSet = (d: number) => {
+    if (!activeSet) return;
+    const n = activeSet.items.length;
+    setActiveIndex((i) => (i + d + n) % n);
+  };
 
   // Keyboard Escape & Scroll Lock for Lightbox
   useEffect(() => {
@@ -162,6 +200,10 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setActiveLightboxImage(null);
+      } else if (e.key === 'ArrowRight') {
+        stepSet(1);
+      } else if (e.key === 'ArrowLeft') {
+        stepSet(-1);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -172,7 +214,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = originalOverflow;
     };
-  }, [activeLightboxImage]);
+  }, [activeSetKey, activeSet?.items.length]);
 
   // Forms Toggle State
   const [showVideoForm, setShowVideoForm] = useState(false);
@@ -325,7 +367,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
         const id = `evt-${base}-${i}`;
         await saveEventToFirestore({
           id,
-          title: sources.length > 1 ? `${eventTitle.trim()} (${i + 1} of ${sources.length})` : eventTitle.trim(),
+          title: eventTitle.trim(),
           description: eventDesc.trim() || 'Official archival coverage from Ceylon Review public dispatches.',
           imageUrl: sources[i],
           date: eventDate.trim(),
@@ -354,6 +396,38 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
   // Deletion Handlers
   const handleDeleteVideo = (id: string) => {
     setVideos(prev => prev.filter(v => v.id !== id));
+  };
+
+  const handleDeleteSet = async (set: EventSet) => {
+    setConfirmKey(null);
+    for (const it of set.items) await handleDeleteEvent(it.id);
+    setActiveSetKey(null);
+  };
+
+  const handleAddToSet = async (set: EventSet, fileList: FileList | null) => {
+    if (!fileList || fileList.length === 0) return;
+    setAddBusy(true);
+    setEventError('');
+    const m = SET_ID_RE.exec(set.items[0].id);
+    const base = m ? m[1] : String(Date.now());
+    let next = Math.max(...set.items.map((it) => Number(SET_ID_RE.exec(it.id)?.[2] ?? -1))) + 1;
+    try {
+      for (const f of Array.from(fileList).slice(0, 20)) {
+        const data = await compressImage(f);
+        await saveEventToFirestore({
+          id: `evt-${base}-${next++}`,
+          title: set.title,
+          description: set.items[0].description,
+          imageUrl: data,
+          date: set.items[0].date,
+          location: set.items[0].location,
+          createdAt: new Date().toISOString()
+        });
+      }
+    } catch {
+      setEventError('Could not add those photos. Make sure you are signed in as the editor.');
+    }
+    setAddBusy(false);
   };
 
   const handleDeleteEvent = async (id: string) => {
@@ -756,7 +830,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   </div>
                 )}
                 {eventFiles.length > 1 && (
-                  <p className="font-mono text-[10px] text-stone-600">Each photo becomes its own gallery entry, numbered under this title.</p>
+                  <p className="font-mono text-[10px] text-stone-600">These {eventFiles.length} photos will be saved together as one set under this title.</p>
                 )}
                 {eventError && <p role="alert" className="text-xs font-sans font-semibold text-[#991b1b]">{eventError}</p>}
 
@@ -787,18 +861,18 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-photo-grid">
-              {shownEvents.map(item => (
+              {sets.map(set => { const item = set.items[0]; return (
                 <div 
-                  key={item.id}
-                  onClick={() => setActiveLightboxImage(item)}
+                  key={set.key}
+                  onClick={() => openSet(set.key)}
                   className="bg-white border-2 border-[#991b1b]/35 rounded overflow-hidden flex flex-col justify-between hover:border-red-500/60 hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                  id={`event-card-${item.id}`}
+                  id={`event-card-${set.key}`}
                 >
                   {/* Photo Container */}
                   <div className="relative aspect-video overflow-hidden bg-zinc-950 border-b border-[#991b1b]/25">
                     <img 
                       src={item.imageUrl} 
-                      alt={item.title}
+                      alt={set.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                       onError={(e) => {
@@ -808,9 +882,14 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="flex items-center gap-1 bg-white text-stone-900 text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-sm border border-red-500/50 shadow font-bold">
                         <Eye size={11} className="text-[#991b1b]" />
-                        View Archive Image
+                        {set.items.length > 1 ? `View ${set.items.length} Photos` : 'View Archive Image'}
                       </span>
                     </div>
+                    {set.items.length > 1 && (
+                      <span className="absolute bottom-2 right-2 bg-black/75 text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                        <ImageIcon size={10} /> {set.items.length} photos
+                      </span>
+                    )}
                   </div>
 
                   {/* Text Details */}
@@ -818,19 +897,28 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     <div className="space-y-2">
                       <div className="flex justify-between items-start gap-2">
                         <h4 className="font-serif font-black text-sm text-stone-900 group-hover:text-[#991b1b] transition-colors leading-snug">
-                          {item.title}
+                          {set.title}
                         </h4>
                         {isAdmin && (
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteEvent(item.id);
-                            }}
-                            className="text-[#991b1b] hover:text-red-800 bg-red-50/60 p-1 rounded border border-red-800/60 cursor-pointer"
-                            title="Delete Event Log"
-                          >
-                            <Trash2 size={12} />
-                          </button>
+                          confirmKey === set.key ? (
+                            <span className="flex items-center gap-1 shrink-0 text-[10px] font-mono font-bold" onClick={(e) => e.stopPropagation()}>
+                              <button onClick={() => handleDeleteSet(set)} className="bg-[#991b1b] text-white px-2 py-0.5 rounded cursor-pointer">
+                                Delete{set.items.length > 1 ? ` ${set.items.length}` : ''}
+                              </button>
+                              <button onClick={() => setConfirmKey(null)} className="text-stone-600 underline cursor-pointer">Cancel</button>
+                            </span>
+                          ) : (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setConfirmKey(set.key);
+                              }}
+                              className="text-[#991b1b] hover:text-red-800 bg-red-50/60 p-1 rounded border border-red-800/60 cursor-pointer"
+                              title={set.items.length > 1 ? 'Delete this whole set' : 'Delete Event Log'}
+                            >
+                              <Trash2 size={12} />
+                            </button>
+                          )
                         )}
                       </div>
                       <p className="font-sans text-xs text-stone-700 leading-relaxed line-clamp-3">
@@ -851,7 +939,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ); })}
             </div>
           )}
         </div>
@@ -889,6 +977,29 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800';
                 }}
               />
+              {activeSet && activeSet.items.length > 1 && (
+                <>
+                  <button
+                    onClick={() => stepSet(-1)}
+                    aria-label="Previous photo"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/85 text-white p-2 rounded-full cursor-pointer"
+                    id="lightbox-prev"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    onClick={() => stepSet(1)}
+                    aria-label="Next photo"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/85 text-white p-2 rounded-full cursor-pointer"
+                    id="lightbox-next"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                  <span className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white font-mono text-[10px] font-bold px-2.5 py-0.5 rounded">
+                    {Math.min(activeIndex, activeSet.items.length - 1) + 1} / {activeSet.items.length}
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Info details Column */}
@@ -899,7 +1010,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                 </span>
                 
                 <h3 className="font-serif font-black text-xl md:text-2xl text-stone-900 uppercase tracking-normal leading-tight">
-                  {activeLightboxImage.title}
+                  {activeSet ? activeSet.title : activeLightboxImage.title}
                 </h3>
                 
                 <p className="font-sans text-xs md:text-sm text-stone-700 leading-relaxed">
@@ -917,6 +1028,31 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   <MapPin size={13} className="text-[#991b1b] shrink-0" />
                   <span>Sovereign Chamber: {activeLightboxImage.location}</span>
                 </div>
+                {isAdmin && activeSet && (
+                  <div className="pt-3 space-y-2">
+                    <label className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white px-3 py-1.5 rounded text-[10px] uppercase cursor-pointer w-fit">
+                      <Plus size={11} /> {addBusy ? 'Adding…' : 'Add photos to this set'}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        className="hidden"
+                        disabled={addBusy}
+                        onChange={(e) => { handleAddToSet(activeSet, e.target.files); e.target.value = ''; }}
+                        id="set-add-photos-input"
+                      />
+                    </label>
+                    {activeSet.items.length > 1 && (
+                      <button
+                        onClick={async () => { await handleDeleteEvent(activeLightboxImage.id); setActiveIndex(0); }}
+                        className="flex items-center gap-1.5 border border-[#991b1b]/60 text-[#991b1b] px-3 py-1.5 rounded text-[10px] uppercase cursor-pointer"
+                      >
+                        <Trash2 size={11} /> Delete this photo
+                      </button>
+                    )}
+                    {eventError && <p role="alert" className="text-[11px] font-sans font-semibold text-[#991b1b]">{eventError}</p>}
+                  </div>
+                )}
               </div>
             </div>
           </div>
