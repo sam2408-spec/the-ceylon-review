@@ -197,7 +197,7 @@ export default function Header({
           id="main-newspaper-logo"
         >
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-5">
-            <RotatingEarth size={108} showLabels className="shrink-0" />
+            <RotatingEarth size={120} showLabels={false} className="shrink-0" />
             <div className="flex items-center gap-3 sm:gap-4">
               <div className="hidden sm:block w-6 md:w-8 h-[2px] bg-[#dc2626]" />
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-stone-900 uppercase leading-none">

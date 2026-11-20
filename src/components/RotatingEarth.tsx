@@ -356,15 +356,16 @@ export default function RotatingEarth({
       const blinkWave = (Math.sin(elapsedSec * 5.2) + 1) / 2;
 
       // Highlight Palestine & Sri Lanka landmasses with blinking crimson/white outline
-      // Sri Lanka: steady crimson blink. Palestine: the brightest, fastest blink on the globe.
+      // Sri Lanka and Palestine blink brightest; Palestine is the fastest.
       const palBlink = (Math.sin(elapsedSec * 7.5) + 1) / 2;
+      const slBlink = (Math.sin(elapsedSec * 6.0 + 1.3) + 1) / 2;
       const specials: { rings: LonLat[][]; fill: string; stroke: string; width: number; glow: number }[] = [
         {
           rings: SRI_LANKA_RINGS,
-          fill: `rgba(239, 68, 68, ${0.55 + blinkWave * 0.4})`,
-          stroke: `rgba(255, 255, 255, ${0.65 + blinkWave * 0.35})`,
-          width: Math.max(0.9, size * 0.011),
-          glow: 0,
+          fill: slBlink > 0.5 ? `rgba(255, 255, 255, ${0.75 + slBlink * 0.25})` : `rgba(255, 40, 40, 1)`,
+          stroke: `rgba(255, 255, 255, 1)`,
+          width: Math.max(1.4, size * 0.016),
+          glow: Math.max(6, size * 0.12) * (0.4 + slBlink * 0.6),
         },
         {
           rings: PALESTINE_RINGS,
