@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Mail, X, CheckCircle2 } from 'lucide-react';
-import { addSubscriber } from '../firebase';
 
 interface SubscribeModalProps {
   onClose: () => void;
@@ -15,6 +14,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -34,10 +34,16 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
     }
     setStatus('sending');
     try {
-      await Promise.race([
-        addSubscriber(email),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 10000)),
-      ]);
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 15000);
+      const r = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), website: honeypot }),
+        signal: ctrl.signal,
+      });
+      clearTimeout(timer);
+      if (!r.ok) throw new Error(String(r.status));
       setStatus('done');
     } catch {
       setStatus('error');
@@ -71,7 +77,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
             <CheckCircle2 size={40} className="mx-auto text-[#007A3D] mb-3" />
             <h2 id="subscribe-title" className="font-serif font-black text-2xl text-stone-900">You are subscribed</h2>
             <p className="font-sans text-sm text-stone-700 mt-2">
-              Thank you. We will write to <strong>{email.trim()}</strong> when new dispatches are published.
+              Thank you. A thank-you note is on its way to <strong>{email.trim()}</strong>. Please check your inbox, or your spam folder.
             </p>
             <button
               onClick={onClose}
@@ -108,6 +114,16 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
                 className="w-full border-2 border-[#991b1b]/40 focus:border-[#dc2626] focus:outline-none rounded pl-9 pr-3 py-2.5 text-sm font-sans text-stone-900 placeholder-gray-500"
               />
             </div>
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="absolute opacity-0 pointer-events-none h-0 w-0"
+            />
             {status === 'error' && (
               <p role="alert" className="mt-2 text-xs font-sans font-semibold text-[#991b1b]">
                 {message}{' '}

@@ -6,7 +6,6 @@ import {
   UserPlus, RefreshCw, Cloud, LogIn, LogOut
 } from 'lucide-react';
 import { User } from 'firebase/auth';
-import SubscribersPanel from './SubscribersPanel';
 
 interface SovereignEditorialDeskProps {
   isOpen: boolean;
@@ -43,7 +42,7 @@ export default function SovereignEditorialDesk({
   onSignInGoogle,
   onSignOutGoogle
 }: SovereignEditorialDeskProps) {
-  const [activeSubTab, setActiveSubTab] = useState<'articles' | 'data' | 'writers' | 'subscribers'>('articles');
+  const [activeSubTab, setActiveSubTab] = useState<'articles' | 'data' | 'writers'>('articles');
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [deletingArticleId, setDeletingArticleId] = useState<string | null>(null);
   const [deletingWriterId, setDeletingWriterId] = useState<string | null>(null);
@@ -326,12 +325,6 @@ export default function SovereignEditorialDesk({
           className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'writers' ? 'bg-[#991b1b] text-white' : 'hover:bg-stone-100 text-stone-600'}`}
         >
           Writers ({writers.length})
-        </button>
-        <button 
-          onClick={() => setActiveSubTab('subscribers')}
-          className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'subscribers' ? 'bg-[#991b1b] text-white' : 'hover:bg-stone-100 text-stone-600'}`}
-        >
-          Subscribers
         </button>
         <button 
           onClick={() => setActiveSubTab('data')}
@@ -1023,9 +1016,6 @@ export default function SovereignEditorialDesk({
             </p>
           </div>
         )}
-
-        {/* SUBTAB: SUBSCRIBERS */}
-        {activeSubTab === 'subscribers' && <SubscribersPanel signedIn={!!currentUser} />}
 
         {/* SUBTAB: DATA OPTIONS */}
         {activeSubTab === 'data' && (

@@ -253,24 +253,3 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     console.warn('Initial seeding could not complete (might require editorial auth):', error);
   }
 }
-
-
-// Newsletter subscription (public create-only; see firestore.rules)
-export async function addSubscriber(email: string): Promise<void> {
-  const clean = email.trim().toLowerCase();
-  const id = clean.replace(/[^a-z0-9]/g, '_').slice(0, 128);
-  await setDoc(doc(db, 'subscribers', id), { email: clean, subscribedAt: new Date().toISOString() });
-}
-
-export interface Subscriber { id: string; email: string; subscribedAt: string; }
-
-export async function fetchSubscribers(): Promise<Subscriber[]> {
-  const snap = await getDocs(collection(db, 'subscribers'));
-  return snap.docs
-    .map((d) => ({ id: d.id, ...(d.data() as { email: string; subscribedAt: string }) }))
-    .sort((a, b) => (b.subscribedAt || '').localeCompare(a.subscribedAt || ''));
-}
-
-export async function deleteSubscriber(id: string): Promise<void> {
-  await deleteDoc(doc(db, 'subscribers', id));
-}
