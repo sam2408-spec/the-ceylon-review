@@ -288,9 +288,9 @@ export default function RotatingEarth({
         cy,
         r * 1.05
       );
-      oceanGrad.addColorStop(0, '#1e4e79');
-      oceanGrad.addColorStop(0.55, '#0d2b4e');
-      oceanGrad.addColorStop(1, '#040d1a');
+      oceanGrad.addColorStop(0, '#14543f');
+      oceanGrad.addColorStop(0.55, '#0a2e22');
+      oceanGrad.addColorStop(1, '#03120d');
       ctx.fillStyle = oceanGrad;
       ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
 

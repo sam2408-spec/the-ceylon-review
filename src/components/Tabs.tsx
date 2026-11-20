@@ -16,7 +16,7 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 mt-6" id="editorial-nav-bar">
-      <nav className="border-2 border-[#7f1d1d] bg-[#991b1b] rounded shadow-md" id="tab-nav-wrapper">
+      <nav className="border-2 border-black bg-[#141414] rounded shadow-md" id="tab-nav-wrapper">
         <div className="flex justify-start sm:justify-center gap-2 sm:gap-12 py-3 sm:py-3.5 px-2 overflow-x-auto whitespace-nowrap" id="tabs-inner-list">
           {tabs.map((tab) => {
             const IconComponent = tab.icon;
@@ -28,7 +28,7 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
                 className={`
                   flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.2em] font-bold shrink-0 cursor-pointer transition-all duration-200 px-3 sm:px-4 py-2 rounded border-2
                   ${isActive 
-                    ? 'bg-[#6b1414] text-white border-white shadow-inner' 
+                    ? 'bg-[#007A3D] text-white border-white shadow-inner' 
                     : 'text-white/85 hover:text-white hover:bg-white/10 border-transparent'
                   }
                 `}

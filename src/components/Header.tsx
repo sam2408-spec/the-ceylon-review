@@ -177,7 +177,7 @@ export default function Header({
 
             <button
               onClick={onOpenBookmarks}
-              className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] border border-red-700 text-white px-3 py-1 rounded transition-all font-sans text-[10px] font-bold uppercase cursor-pointer shadow"
+              className="flex items-center gap-1.5 bg-black hover:bg-stone-800 border border-stone-700 text-white px-3 py-1 rounded transition-all font-sans text-[10px] font-bold uppercase cursor-pointer shadow"
               id="bookmarks-btn"
             >
               <Heart size={10} className="fill-current text-stone-900" />
@@ -214,7 +214,7 @@ export default function Header({
           <button
             type="button"
             onClick={() => setShowSubscribe(true)}
-            className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 bg-[#007A3D] hover:bg-[#00582b] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
             id="subscribe-btn"
           >
             <Mail size={11} />

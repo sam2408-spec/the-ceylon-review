@@ -97,7 +97,7 @@ export default function SearchBar({
                 className={`
                   px-3 py-1.5 text-xs font-serif font-black border cursor-pointer transition-all rounded-full select-none
                   ${isActive 
-                    ? 'bg-[#991b1b] text-white border-[#dc2626] font-bold shadow-md ring-1 ring-red-400/30' 
+                    ? 'bg-[#007A3D] text-white border-[#005a2c] font-bold shadow-md ring-1 ring-green-500/30' 
                     : 'bg-stone-100 border-[#991b1b]/30 text-stone-700 hover:border-[#dc2626] hover:text-stone-900 hover:bg-red-50'
                   }
                 `}
