@@ -138,14 +138,14 @@ export default function ArticleCard({
             </p>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-[#991b1b]/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div className="mt-8 pt-6 border-t border-[#991b1b]/30 flex flex-col justify-between items-start gap-4">
             {/* Author */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               {(author || article.authorId === 'w1' || article.authorId === 'w-sameera') && (
                 <img 
                   src={author?.avatarUrl || sameeraAvatar} 
                   alt={author?.name || 'Sameera Mahboobdeen'}
-                  className="w-10 h-10 rounded-full object-cover border-2 border-[#991b1b]/50 shadow-md ring-1 ring-red-500/20"
+                  className="w-10 h-10 shrink-0 rounded-full object-cover border-2 border-[#991b1b]/50 shadow-md ring-1 ring-red-500/20"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = sameeraAvatar;
@@ -163,9 +163,9 @@ export default function ArticleCard({
             </div>
 
             {/* Read Indicators / Saved */}
-            <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-              <div className="flex items-center gap-3 font-mono text-[11px] text-stone-600">
-                <span className="flex items-center gap-1.5 font-bold">
+            <div className="flex items-center gap-4 w-full justify-between">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-stone-600 whitespace-nowrap">
+                <span className="flex items-center gap-1.5 font-bold whitespace-nowrap">
                   <Clock size={12} className="text-[#dc2626]" />
                   {article.readTime}
                 </span>

@@ -47,11 +47,7 @@ export default function Header({
       
       {/* Top Ticker: News Marquee using Cover Colors (Crimson / Deep Black) */}
       <div className="bg-red-50 text-stone-900 px-4 py-2 flex items-center overflow-hidden text-[11px] font-mono select-none border-b border-[#991b1b]/30" id="ticker-container">
-        <span className="bg-[#b91c1c] text-white px-2 py-0.5 rounded font-bold tracking-wider animate-pulse flex items-center gap-1 shrink-0 uppercase text-[10px]">
-          <span className="w-1.5 h-1.5 rounded-full bg-white inline-block animate-ping"></span>
-          PRIME DISPATCH
-        </span>
-        <div className="ml-3 animate-marquee whitespace-nowrap overflow-hidden flex items-center">
+        <div className="animate-marquee whitespace-nowrap overflow-hidden flex items-center">
           <span className="mx-4 text-stone-900 font-serif font-bold tracking-wide italic">{breakingNews}</span>
           <span className="mx-4 text-stone-600">•</span>
           <span className="mx-4 text-stone-700 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>

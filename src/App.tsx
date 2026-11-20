@@ -3,7 +3,6 @@ import Header from './components/Header';
 import Tabs from './components/Tabs';
 import SearchBar from './components/SearchBar';
 import ArticleCard from './components/ArticleCard';
-import CoverPage from './components/CoverPage';
 import ArticleDetailModal from './components/ArticleDetailModal';
 import WriterProfileView from './components/WriterProfileView';
 import BookmarksDrawer from './components/BookmarksDrawer';
@@ -11,7 +10,7 @@ import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
-import { Shield, Mail, Globe, Play, Film, ExternalLink, HelpCircle, Users, Newspaper, Settings } from 'lucide-react';
+import { Shield, Mail, Globe, Play, Film, ExternalLink, HelpCircle, Users, Settings } from 'lucide-react';
 import { 
   auth, 
   signInEditorWithGoogle, 
@@ -176,7 +175,6 @@ export default function App() {
   const [isBookmarksOpen, setIsBookmarksOpen] = useState<boolean>(false);
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
   const [isEditorialDeskOpen, setIsEditorialDeskOpen] = useState<boolean>(false);
-  const [showCover, setShowCover] = useState<boolean>(true);
   const [toastNotification, setToastNotification] = useState<string | null>(null);
 
   const showToast = (message: string) => {
@@ -736,24 +734,6 @@ export default function App() {
           {activeTab === 'current' && (
             <div className="max-w-7xl mx-auto px-4 mt-8" id="viewport-current">
               
-              {/* Cover Page Jpeg Reproduction Banner */}
-              {showCover && searchTerm === '' && selectedCategory === 'All' ? (
-                <CoverPage onUnfold={() => setShowCover(false)} />
-              ) : (
-                searchTerm === '' && selectedCategory === 'All' && (
-                  <div className="flex justify-end mb-4 pr-1">
-                    <button 
-                      onClick={() => setShowCover(true)}
-                      className="flex items-center gap-1.5 border border-[#991b1b]/50 hover:bg-[#991b1b]/20 bg-white text-stone-900 px-3.5 py-1.5 font-mono text-[10px] font-bold uppercase transition-all cursor-pointer rounded shadow-sm"
-                      id="view-cover-btn"
-                    >
-                      <Newspaper size={12} className="text-[#991b1b]" />
-                      <span>Show Cover Page</span>
-                    </button>
-                  </div>
-                )
-              )}
-
               {filteredArticles.length === 0 ? (
                 <div className="text-center py-24 border-2 border-dashed border-[#991b1b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
                   <p className="font-serif text-xl italic text-stone-700">"No archived dispatches fell into today's news queries."</p>

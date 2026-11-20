@@ -26,10 +26,10 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`
-                  flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold cursor-pointer transition-all duration-200 pb-1 border-b-2
+                  flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold cursor-pointer transition-all duration-200 px-4 py-2 rounded border-2
                   ${isActive 
-                    ? 'text-stone-900 border-[#dc2626]' 
-                    : 'text-stone-500 hover:text-stone-900 border-transparent'
+                    ? 'bg-[#991b1b] text-white border-[#991b1b] shadow-md' 
+                    : 'text-stone-500 hover:text-stone-900 hover:bg-red-50 border-transparent'
                   }
                 `}
                 id={`tab-btn-${tab.id}`}
@@ -38,7 +38,7 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
                   size={14} 
                   className={`
                     stroke-[2] transition-colors
-                    ${isActive ? 'text-[#dc2626]' : 'text-gray-500'}
+                    ${isActive ? 'text-white' : 'text-gray-500'}
                   `} 
                 />
                 <span>{tab.label}</span>
