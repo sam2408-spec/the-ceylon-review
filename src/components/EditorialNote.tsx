@@ -66,23 +66,6 @@ export default function EditorialNote() {
               — who understand that a court ruling is also a political act, that a piece of legislation carries the
               weight of its colonial origins, that what is called security is sometimes the name given to impunity.
             </p>
-            <div>
-              <p className="font-bold text-stone-900">What we report on</p>
-              <ul className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1.5 list-disc pl-5 marker:text-[#991b1b]" id="editorial-note-scope">
-                <li>Human rights and civil liberties</li>
-                <li>Law, courts and constitutional safeguards</li>
-                <li>Community and social issues, and the rights of minorities, women, children and workers</li>
-                <li>International humanitarian crises, from Palestine to every place where civilians are under fire</li>
-                <li>Humanitarian aid, and the obstruction of it</li>
-                <li>International law and accountability: the laws of war, the UN, the ICJ and the ICC</li>
-                <li>Global justice for the oppressed, and the unfinished struggles against colonialism and occupation</li>
-                <li>Truth, reconciliation and transitional justice, including the missing and the disappeared</li>
-                <li>Press freedom, the right to information and digital rights</li>
-                <li>Refugees, migration and displaced people</li>
-                <li>Climate and environmental justice</li>
-                <li>Economic and labour justice, and the history that explains them</li>
-              </ul>
-            </div>
             <p>
               We write from Sri Lanka, and we write about Sri Lanka. But we do not write only for Sri Lanka. The
               dynamics we examine — emergency law that outlasts its emergency, counter-terrorism frameworks that
