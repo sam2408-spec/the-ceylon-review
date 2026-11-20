@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Clock, Heart, Lock, Unlock, Mail, Cloud, LogIn, LogOut, CheckCircle2 } from 'lucide-react';
 import { User } from 'firebase/auth';
 import RotatingEarth from './RotatingEarth';
@@ -32,6 +32,23 @@ export default function Header({
   onSignInGoogle,
   onSignOutGoogle
 }: HeaderProps) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const zoneText = (tz: string) =>
+    new Intl.DateTimeFormat('en-GB', {
+      timeZone: tz,
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    }).format(now).replace(',', '');
+
   const currentDateString = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -95,12 +112,15 @@ export default function Header({
         
         {/* Metabar: Volume / Slogan / Actions */}
         <div className="w-full flex flex-col md:flex-row justify-between items-center border-b border-[#991b1b]/30 pb-4 mb-4 text-[10px] font-mono text-stone-600 gap-3">
-          <div className="flex items-center gap-3">
-            <span className="font-bold text-stone-900">VOL. I • NO. 1</span>
-            <span className="text-[#991b1b]/40">|</span>
-            <span className="flex items-center gap-1 text-stone-900 font-semibold">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-stone-900 font-semibold tabular-nums">
+            <span className="flex items-center gap-1" title="Sri Lanka time">
               <Clock size={11} className="text-[#dc2626]" />
-              EST. JULY 2026
+              <span className="text-[#991b1b] font-black">SRI LANKA</span> {zoneText('Asia/Colombo')}
+            </span>
+            <span className="hidden sm:inline text-[#991b1b]/40">|</span>
+            <span className="flex items-center gap-1" title="Palestine time">
+              <Clock size={11} className="text-[#dc2626]" />
+              <span className="text-[#991b1b] font-black">PALESTINE</span> {zoneText('Asia/Gaza')}
             </span>
           </div>
           
@@ -194,6 +214,9 @@ export default function Header({
           <span className="font-bold text-stone-900">{currentDateString}</span>
           <span className="hidden sm:inline tracking-[0.2em] uppercase font-bold text-[#b91c1c]">"EVERYTHING IS CONNECTED. NOTHING IS NEUTRAL."</span>
           <span className="font-bold text-stone-900">FREE INTERACTIVE EDITION</span>
+        </div>
+        <div className="w-full flex justify-end pt-1.5">
+          <span className="text-[10px] font-mono italic font-semibold text-[#991b1b]">Founded in July 2026</span>
         </div>
       </div>
     </header>
