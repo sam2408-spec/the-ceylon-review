@@ -213,7 +213,14 @@ export default function Header({
         <div className="w-full border-t-2 border-b border-[#991b1b] py-1.5 mt-4 flex justify-between text-[10px] font-mono text-stone-600">
           <span className="font-bold text-stone-900">{currentDateString}</span>
           <span className="hidden sm:inline tracking-[0.2em] uppercase font-bold text-[#b91c1c]">"EVERYTHING IS CONNECTED. NOTHING IS NEUTRAL."</span>
-          <span className="font-bold text-stone-900">FREE INTERACTIVE EDITION</span>
+          <a
+            href="mailto:theceylonreview@proton.me?subject=Subscribe%20me%20to%20The%20Ceylon%20Review&body=Please%20add%20this%20email%20address%20to%20The%20Ceylon%20Review%20subscriber%20list."
+            className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors"
+            id="subscribe-btn"
+          >
+            <Mail size={11} />
+            Subscribe
+          </a>
         </div>
         <div className="w-full flex justify-end pt-1.5">
           <span className="text-[10px] font-mono italic font-semibold text-[#991b1b]">Founded in July 2026</span>
