@@ -253,3 +253,43 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     console.warn('Initial seeding could not complete (might require editorial auth):', error);
   }
 }
+
+// ---- Event gallery (photos stored with each entry; see firestore.rules) ----
+export interface GalleryEvent {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  date: string;
+  location: string;
+  createdAt: string;
+}
+
+export function subscribeToEvents(
+  onData: (events: GalleryEvent[]) => void,
+  onError?: (err: Error) => void
+) {
+  return onSnapshot(
+    collection(db, 'events'),
+    (snapshot) => {
+      const loaded = snapshot.docs.map((d) => d.data() as GalleryEvent);
+      loaded.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+      onData(loaded);
+    },
+    (error) => {
+      console.warn('Gallery events could not be loaded:', error);
+      onError?.(error);
+    }
+  );
+}
+
+export async function saveEventToFirestore(event: GalleryEvent): Promise<void> {
+  await Promise.race([
+    setDoc(doc(db, 'events', event.id), event),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 25000)),
+  ]);
+}
+
+export async function deleteEventFromFirestore(id: string): Promise<void> {
+  await deleteDoc(doc(db, 'events', id));
+}

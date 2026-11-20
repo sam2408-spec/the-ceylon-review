@@ -18,6 +18,8 @@ import {
   Eye,
   Check
 } from 'lucide-react';
+import { subscribeToEvents, saveEventToFirestore, deleteEventFromFirestore } from '../firebase';
+import { compressImage } from '../utils/image';
 
 interface VideoItem {
   id: string;
@@ -136,6 +138,19 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     }
     return DEFAULT_EVENTS;
   });
+
+  // Shared gallery stored online (visible to all readers). Sample entries show only until the first real one is added.
+  const [cloudEvents, setCloudEvents] = useState<EventItem[]>([]);
+  const [eventFiles, setEventFiles] = useState<{ name: string; data: string }[]>([]);
+  const [eventBusy, setEventBusy] = useState(false);
+  const [eventError, setEventError] = useState('');
+
+  useEffect(() => {
+    const unsub = subscribeToEvents((list) => setCloudEvents(list as EventItem[]));
+    return () => unsub();
+  }, []);
+
+  const shownEvents = cloudEvents.length > 0 ? cloudEvents : events;
 
   // Lightbox Modal for Gallery Events
   const [activeLightboxImage, setActiveLightboxImage] = useState<EventItem | null>(null);
@@ -273,33 +288,64 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     setShowVideoForm(false);
   };
 
-  // Event Submission Handler
-  const handlePostEvent = (e: React.FormEvent) => {
+  // Photo picker: shrink each chosen photo in the browser
+  const handlePickFiles = async (fileList: FileList | null) => {
+    if (!fileList || fileList.length === 0) return;
+    setEventError('');
+    setEventBusy(true);
+    const picked: { name: string; data: string }[] = [];
+    for (const f of Array.from(fileList).slice(0, 20)) {
+      try {
+        picked.push({ name: f.name, data: await compressImage(f) });
+      } catch {
+        setEventError(`Could not use "${f.name}". Choose a JPG or PNG photo.`);
+      }
+    }
+    setEventFiles(prev => [...prev, ...picked].slice(0, 20));
+    setEventBusy(false);
+  };
+
+  // Event Submission Handler: each photo becomes its own gallery entry, saved online
+  const handlePostEvent = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!eventTitle.trim() || !eventImageInput.trim() || !eventDate.trim() || !eventLocation.trim()) return;
+    if (eventBusy) return;
+    if (!eventTitle.trim() || !eventDate.trim() || !eventLocation.trim()) return;
+    const sources = eventFiles.map(f => f.data);
+    if (sources.length === 0 && eventImageInput.startsWith('http')) sources.push(eventImageInput.trim());
+    if (sources.length === 0) {
+      setEventError('Please choose at least one photo.');
+      return;
+    }
 
-    // Use default Unsplash search if image looks empty or generic
-    const imageUrl = eventImageInput.startsWith('http') 
-      ? eventImageInput 
-      : 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800';
+    setEventBusy(true);
+    setEventError('');
+    const base = Date.now();
+    try {
+      for (let i = 0; i < sources.length; i++) {
+        const id = `evt-${base}-${i}`;
+        await saveEventToFirestore({
+          id,
+          title: sources.length > 1 ? `${eventTitle.trim()} (${i + 1} of ${sources.length})` : eventTitle.trim(),
+          description: eventDesc.trim() || 'Official archival coverage from Ceylon Review public dispatches.',
+          imageUrl: sources[i],
+          date: eventDate.trim(),
+          location: eventLocation.trim(),
+          createdAt: new Date(base + (sources.length - 1 - i)).toISOString()
+        });
+      }
+    } catch (err) {
+      setEventBusy(false);
+      setEventError('Could not save to the gallery. Make sure you are signed in as the editor and that the "events" rule is published in Firebase.');
+      return;
+    }
 
-    const newEvent: EventItem = {
-      id: `evt-${Date.now()}`,
-      title: eventTitle,
-      description: eventDesc || 'Official archival coverage from Ceylon Review public dispatches.',
-      imageUrl: imageUrl,
-      date: eventDate,
-      location: eventLocation
-    };
-
-    setEvents([newEvent, ...events]);
-
-    // Reset Form
     setEventTitle('');
     setEventDesc('');
     setEventImageInput('');
+    setEventFiles([]);
     setEventDate('');
     setEventLocation('');
+    setEventBusy(false);
     setEventSuccess(true);
     setTimeout(() => setEventSuccess(false), 3000);
     setShowEventForm(false);
@@ -310,7 +356,15 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     setVideos(prev => prev.filter(v => v.id !== id));
   };
 
-  const handleDeleteEvent = (id: string) => {
+  const handleDeleteEvent = async (id: string) => {
+    if (cloudEvents.some(ev => ev.id === id)) {
+      try {
+        await deleteEventFromFirestore(id);
+      } catch {
+        setEventError('Could not delete that photo. Make sure you are signed in as the editor.');
+      }
+      return;
+    }
     setEvents(prev => prev.filter(e => e.id !== id));
   };
 
@@ -356,7 +410,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           id="media-tab-events"
         >
           <ImageIcon size={13} />
-          <span>Events Gallery ({events.length})</span>
+          <span>Events Gallery ({shownEvents.length})</span>
         </button>
       </div>
 
@@ -472,7 +526,8 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   </button>
                   <button
                     type="submit"
-                    className="bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-5 rounded shadow transition-all cursor-pointer flex items-center gap-1"
+                    disabled={eventBusy}
+                    className="bg-[#991b1b] hover:bg-[#7f1d1d] disabled:opacity-60 text-white font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-5 rounded shadow transition-all cursor-pointer flex items-center gap-1"
                   >
                     <FileVideo size={11} />
                     Broadcast Now
@@ -587,18 +642,18 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                 Photo dispatches tracking physical workshops, assemblies, and retreats.
               </p>
             </div>
-            <button
+            {isAdmin && <button
               onClick={() => setShowEventForm(!showEventForm)}
               className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-mono text-[11px] font-bold uppercase py-2 px-3.5 rounded transition-all cursor-pointer shadow"
               id="toggle-event-form-btn"
             >
               {showEventForm ? <X size={12} /> : <Plus size={12} />}
-              <span>{showEventForm ? 'Close Portal' : 'Record Gallery Event'}</span>
-            </button>
+              <span>{showEventForm ? 'Close Portal' : 'Upload Photos'}</span>
+            </button>}
           </div>
 
           {/* Collapsible Event Submission Form */}
-          {showEventForm && (
+          {isAdmin && showEventForm && (
             <div className="bg-white border-2 border-[#991b1b]/40 rounded p-6 max-w-2xl mx-auto shadow-2xl animate-in slide-in-from-top-4 duration-200" id="event-submit-form-container">
               <h4 className="font-serif font-black text-base text-stone-900 border-b border-[#991b1b]/30 pb-2 mb-4 uppercase flex items-center gap-1.5">
                 <ImageIcon size={14} className="text-[#991b1b]" />
@@ -621,15 +676,22 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   </div>
                   <div>
                     <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
-                      Image URL (Unsplash or direct URL) *
+                      Photos from your device *
                     </label>
                     <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={e => { handlePickFiles(e.target.files); e.target.value = ''; }}
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2 text-xs text-stone-900 file:mr-3 file:rounded file:border-0 file:bg-[#991b1b] file:text-white file:px-3 file:py-1.5 file:font-mono file:text-[10px] file:font-bold file:uppercase file:cursor-pointer"
+                      id="event-photo-input"
+                    />
+                    <input
                       type="text"
-                      required
-                      placeholder="https://images.unsplash.com/photo-..."
+                      placeholder="…or paste an image link (optional)"
                       value={eventImageInput}
                       onChange={e => setEventImageInput(e.target.value)}
-                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
+                      className="mt-2 w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2 text-[11px] text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
                     />
                   </div>
                 </div>
@@ -676,6 +738,28 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   />
                 </div>
 
+                {eventFiles.length > 0 && (
+                  <div className="flex flex-wrap gap-2" id="event-photo-previews">
+                    {eventFiles.map((f, i) => (
+                      <div key={i} className="relative w-20 h-20 border border-[#991b1b]/40 rounded overflow-hidden">
+                        <img src={f.data} alt={f.name} className="w-full h-full object-cover" />
+                        <button
+                          type="button"
+                          onClick={() => setEventFiles(prev => prev.filter((_, j) => j !== i))}
+                          className="absolute top-0.5 right-0.5 bg-black/70 text-white rounded p-0.5 cursor-pointer"
+                          aria-label={`Remove ${f.name}`}
+                        >
+                          <X size={10} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {eventFiles.length > 1 && (
+                  <p className="font-mono text-[10px] text-stone-600">Each photo becomes its own gallery entry, numbered under this title.</p>
+                )}
+                {eventError && <p role="alert" className="text-xs font-sans font-semibold text-[#991b1b]">{eventError}</p>}
+
                 <div className="flex justify-end gap-2 pt-2">
                   <button
                     type="button"
@@ -689,7 +773,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     className="bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-5 rounded shadow transition-all cursor-pointer flex items-center gap-1"
                   >
                     <ImageIcon size={11} />
-                    Log Event Item
+                    {eventBusy ? 'Working…' : 'Publish to Gallery'}
                   </button>
                 </div>
               </form>
@@ -697,13 +781,13 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           )}
 
           {/* Events Grid */}
-          {events.length === 0 ? (
+          {shownEvents.length === 0 ? (
             <div className="text-center py-20 bg-white border-2 border-dashed border-[#991b1b]/30 rounded" id="no-events-box">
               <p className="font-serif text-lg italic text-stone-700">"No official events currently archived in the photobook."</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-photo-grid">
-              {events.map(item => (
+              {shownEvents.map(item => (
                 <div 
                   key={item.id}
                   onClick={() => setActiveLightboxImage(item)}
