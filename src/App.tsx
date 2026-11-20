@@ -9,6 +9,7 @@ import WriterProfileView from './components/WriterProfileView';
 import BookmarksDrawer from './components/BookmarksDrawer';
 import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
+import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
 import { Shield, Mail, Globe, Play, Film, ExternalLink, HelpCircle, Users, Settings } from 'lucide-react';
@@ -779,50 +780,9 @@ export default function App() {
                   {searchTerm === '' && selectedCategory === 'All' ? (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="editorial-grid-deck">
                       
-                      {/* LEFT COLUMN: Premium PDF Story & Primary Dispatches (Span 8) */}
+                      {/* LEFT COLUMN: news-portal front page (lead story, top stories, latest) */}
                       <div className="lg:col-span-8 space-y-8">
-                        <div>
-                          <div className="border-b-2 border-[#7a1f2b]/30 pb-2 mb-4 flex justify-between items-center">
-                            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#7a1f2b]">Premier Investigations</span>
-                            <span className="font-mono text-[9px] uppercase font-bold text-stone-600">Broadsheet Edition • page A1</span>
-                          </div>
-                          
-                          {/* The primary PDF Article */}
-                          <ArticleCard 
-                            article={filteredArticles[0]} 
-                            author={writers.find(w => w.id === filteredArticles[0].authorId)} 
-                            onReadMore={handleReadMore} 
-                            isBookmarked={bookmarks.includes(filteredArticles[0].id)} 
-                            onToggleBookmark={handleToggleBookmark} 
-                            variant="featured"
-                            isAdmin={effectiveAdminMode}
-                            onDelete={handleDeleteArticle}
-                          />
-                        </div>
-
-                        {/* If secondary dynamic articles exist */}
-                        {filteredArticles.length > 1 && (
-                          <div className="space-y-4">
-                            <div className="border-b-2 border-[#7a1f2b]/30 pb-2 mb-4">
-                              <span className="font-mono text-xs font-bold uppercase tracking-wider text-stone-900">Sovereign Additions stream</span>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              {filteredArticles.slice(1).map(art => (
-                                <ArticleCard 
-                                  key={art.id}
-                                  article={art} 
-                                  author={writers.find(w => w.id === art.authorId)} 
-                                  onReadMore={handleReadMore} 
-                                  isBookmarked={bookmarks.includes(art.id)} 
-                                  onToggleBookmark={handleToggleBookmark} 
-                                  variant="grid"
-                                  isAdmin={effectiveAdminMode}
-                                  onDelete={handleDeleteArticle}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                        <NewsPortal articles={filteredArticles} onOpen={handleReadMore} />
                       </div>
 
                       {/* RIGHT COLUMN: Media Matrix & Video Dossier Sidebar (Span 4) */}
