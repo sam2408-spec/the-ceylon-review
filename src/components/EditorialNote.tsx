@@ -61,13 +61,6 @@ export default function EditorialNote() {
 
           <div className="mt-6 space-y-4 font-sans text-[15px] leading-relaxed text-stone-800">
             <p>
-              Sri Lanka has no shortage of media. It has newspapers that report, broadcasters that transmit, and social
-              feeds that churn without pause. What it has lacked — and what this publication exists to provide — is a
-              space for sustained, rigorous, independent analysis of the systems that govern public life: the laws that
-              constrain or liberate, the institutions that protect or prey, the historical forces that explain why
-              things are as they are and not otherwise.
-            </p>
-            <p>
               The Ceylon Review is an independent publication on justice: law, human rights, and the public affairs that
               decide who is protected and who is left exposed. It is written for readers who want more than a headline
               — who understand that a court ruling is also a political act, that a piece of legislation carries the
