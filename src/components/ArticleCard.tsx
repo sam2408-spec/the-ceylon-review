@@ -31,11 +31,11 @@ export default function ArticleCard({
   
   const getCategoryColor = (cat: string) => {
     switch (cat) {
-      case 'Human Rights': return 'bg-red-50/80 text-red-800 border-red-700/50';
+      case 'Human Rights': return 'bg-[#f8eff1]/80 text-[#6a1a26] border-[#7a1f2b]/50';
       case 'International Law': return 'bg-sky-50/80 text-sky-900 border-sky-700/50';
       case 'Humanitarian': return 'bg-emerald-50/80 text-emerald-800 border-emerald-700/50';
       case 'Community': return 'bg-orange-50/80 text-orange-900 border-orange-700/50';
-      case 'Politics': return 'bg-red-50/80 text-red-800 border-red-700/50';
+      case 'Politics': return 'bg-[#f8eff1]/80 text-[#6a1a26] border-[#7a1f2b]/50';
       case 'Tech': return 'bg-blue-50/80 text-blue-800 border-blue-700/50';
       case 'Science': return 'bg-emerald-50/80 text-emerald-800 border-emerald-700/50';
       case 'Opinion': return 'bg-purple-50/80 text-purple-800 border-purple-700/50';
@@ -59,11 +59,11 @@ export default function ArticleCard({
   if (variant === 'featured') {
     return (
       <article 
-        className="group bg-white border-2 border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden mb-8 transition-all duration-300 flex flex-col lg:flex-row cursor-pointer rounded shadow-xl"
+        className="group bg-white border-2 border-[#7a1f2b]/40 hover:border-[#9b2c3b]/70 select-none overflow-hidden mb-8 transition-all duration-300 flex flex-col lg:flex-row cursor-pointer rounded shadow-xl"
         onClick={() => onReadMore(article)}
         id={`featured-card-${article.id}`}
       >
-        <div className="lg:w-3/5 relative h-64 sm:h-96 w-full shrink-0 border-b lg:border-b-0 lg:border-r border-[#991b1b]/30 overflow-hidden">
+        <div className="lg:w-3/5 relative h-64 sm:h-96 w-full shrink-0 border-b lg:border-b-0 lg:border-r border-[#7a1f2b]/30 overflow-hidden">
           <img 
             src={article.imageUrl || fallbackArticleImage} 
             alt={article.title}
@@ -78,7 +78,7 @@ export default function ArticleCard({
             <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 border rounded uppercase ${getCategoryColor(article.category)}`}>
               {article.category}
             </span>
-            <span className="bg-[#991b1b] text-white border border-[#dc2626] text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase shadow-sm">
+            <span className="bg-[#7a1f2b] text-white border border-[#9b2c3b] text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase shadow-sm">
               Spotlight Story
             </span>
           </div>
@@ -86,15 +86,15 @@ export default function ArticleCard({
           {isAdmin && onDelete && (
             <div className="absolute top-4 right-4 flex gap-2">
               {confirmDelete ? (
-                <div className="flex items-center gap-1.5 bg-red-50/95 text-stone-900 p-1 px-2.5 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                  <span className="font-mono text-[10px] uppercase font-bold text-red-800">Delete story?</span>
+                <div className="flex items-center gap-1.5 bg-[#f8eff1]/95 text-stone-900 p-1 px-2.5 rounded border border-[#9b2c3b] shadow-xl" onClick={(e) => e.stopPropagation()}>
+                  <span className="font-mono text-[10px] uppercase font-bold text-[#6a1a26]">Delete story?</span>
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       onDelete(article.id);
                     }}
-                    className="bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded cursor-pointer uppercase shadow"
+                    className="bg-[#8a2432] hover:bg-[#7a1f2b] text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded cursor-pointer uppercase shadow"
                     id={`confirm-delete-feat-${article.id}`}
                   >
                     Confirm Delete
@@ -117,7 +117,7 @@ export default function ArticleCard({
                     e.stopPropagation();
                     setConfirmDelete(true);
                   }}
-                  className="bg-red-800 hover:bg-red-900 text-white border border-red-900 px-3 py-1.5 rounded shadow-lg cursor-pointer transition-all flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider"
+                  className="bg-[#6a1a26] hover:bg-[#5e1620] text-white border border-[#5e1620] px-3 py-1.5 rounded shadow-lg cursor-pointer transition-all flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider"
                   title="Delete article"
                   id={`delete-feat-${article.id}`}
                 >
@@ -131,7 +131,7 @@ export default function ArticleCard({
 
         <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
           <div>
-            <h2 className="font-serif text-2xl md:text-3.5xl font-black tracking-tight leading-tight text-stone-900 group-hover:text-[#991b1b] transition-colors duration-300">
+            <h2 className="font-serif text-2xl md:text-3.5xl font-black tracking-tight leading-tight text-stone-900 group-hover:text-[#7a1f2b] transition-colors duration-300">
               {article.title}
             </h2>
             <h3 className="font-serif italic text-base text-stone-700 mt-3 leading-relaxed">
@@ -142,14 +142,14 @@ export default function ArticleCard({
             </p>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-[#991b1b]/30 flex flex-col justify-between items-start gap-4">
+          <div className="mt-8 pt-6 border-t border-[#7a1f2b]/30 flex flex-col justify-between items-start gap-4">
             {/* Author */}
             <div className="flex items-center gap-3 min-w-0">
               {(author || article.authorId === 'w1' || article.authorId === 'w-sameera') && (
                 <img 
                   src={author?.avatarUrl || sameeraAvatar} 
                   alt={author?.name || 'Sameera Mahboobdeen'}
-                  className="w-10 h-10 shrink-0 rounded-full object-cover border-2 border-[#991b1b]/50 shadow-md ring-1 ring-red-500/20"
+                  className="w-10 h-10 shrink-0 rounded-full object-cover border-2 border-[#7a1f2b]/50 shadow-md ring-1 ring-[#9b2c3b]/20"
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = sameeraAvatar;
@@ -170,7 +170,7 @@ export default function ArticleCard({
             <div className="flex items-center gap-4 w-full justify-between">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] text-stone-600 whitespace-nowrap">
                 <span className="flex items-center gap-1.5 font-bold whitespace-nowrap">
-                  <Clock size={12} className="text-[#dc2626]" />
+                  <Clock size={12} className="text-[#9b2c3b]" />
                   {article.readTime}
                 </span>
                 <span className="text-gray-500">•</span>
@@ -180,14 +180,14 @@ export default function ArticleCard({
               <div className="flex items-center gap-2">
                 {isAdmin && onDelete && (
                   confirmDelete ? (
-                    <div className="flex items-center gap-1 bg-red-50 border border-red-500 p-1 rounded" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-1 bg-[#f8eff1] border border-[#9b2c3b] p-1 rounded" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
                           onDelete(article.id);
                         }}
-                        className="bg-red-700 hover:bg-red-800 text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
+                        className="bg-[#7a1f2b] hover:bg-[#6a1a26] text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
                       >
                         Confirm
                       </button>
@@ -209,7 +209,7 @@ export default function ArticleCard({
                         e.stopPropagation();
                         setConfirmDelete(true);
                       }}
-                      className="p-2 rounded-sm border border-red-700/50 bg-red-950/80 hover:bg-red-900 text-red-200 cursor-pointer transition-all flex items-center gap-1 font-mono text-[11px] font-bold"
+                      className="p-2 rounded-sm border border-[#7a1f2b]/50 bg-red-950/80 hover:bg-[#5e1620] text-[#e6c3ca] cursor-pointer transition-all flex items-center gap-1 font-mono text-[11px] font-bold"
                       title="Delete article"
                       id={`delete-feat-bottom-${article.id}`}
                     >
@@ -225,13 +225,13 @@ export default function ArticleCard({
                   }}
                   className={`p-2 rounded-sm border cursor-pointer transition-all ${
                     isBookmarked 
-                      ? 'bg-[#991b1b] text-white border-[#dc2626]' 
-                      : 'bg-red-50 hover:bg-red-50 border-[#991b1b]/40 text-stone-900'
+                      ? 'bg-[#7a1f2b] text-white border-[#9b2c3b]' 
+                      : 'bg-[#f8eff1] hover:bg-[#f8eff1] border-[#7a1f2b]/40 text-stone-900'
                   }`}
                   title={isBookmarked ? "Saved" : "Save clipping"}
                   id={`bookmark-feat-${article.id}`}
                 >
-                  <Heart size={14} className={isBookmarked ? "fill-current text-[#dc2626] scale-105" : ""} />
+                  <Heart size={14} className={isBookmarked ? "fill-current text-[#9b2c3b] scale-105" : ""} />
                 </button>
               </div>
             </div>
@@ -245,12 +245,12 @@ export default function ArticleCard({
   if (variant === 'sidebar') {
     return (
       <article 
-        className="group border-b border-[#991b1b]/25 py-4 last:border-b-0 cursor-pointer"
+        className="group border-b border-[#7a1f2b]/25 py-4 last:border-b-0 cursor-pointer"
         onClick={() => onReadMore(article)}
         id={`sidebar-card-${article.id}`}
       >
         <div className="flex justify-between items-center gap-2 text-[10px] font-mono text-stone-600">
-          <span className="text-[#991b1b] uppercase tracking-wider font-extrabold">
+          <span className="text-[#7a1f2b] uppercase tracking-wider font-extrabold">
             {article.category}
           </span>
           <div className="flex items-center gap-2">
@@ -266,7 +266,7 @@ export default function ArticleCard({
                       e.stopPropagation();
                       onDelete(article.id);
                     }}
-                    className="p-1 px-1.5 bg-red-700 text-white text-[9px] font-mono font-bold uppercase rounded cursor-pointer"
+                    className="p-1 px-1.5 bg-[#7a1f2b] text-white text-[9px] font-mono font-bold uppercase rounded cursor-pointer"
                   >
                     Confirm Delete
                   </button>
@@ -288,7 +288,7 @@ export default function ArticleCard({
                     e.stopPropagation();
                     setConfirmDelete(true);
                   }}
-                  className="p-1 text-[#991b1b] hover:text-red-800 hover:bg-red-50/60 rounded transition-colors cursor-pointer"
+                  className="p-1 text-[#7a1f2b] hover:text-[#6a1a26] hover:bg-[#f8eff1]/60 rounded transition-colors cursor-pointer"
                   title="Delete article"
                   id={`delete-sidebar-${article.id}`}
                 >
@@ -298,7 +298,7 @@ export default function ArticleCard({
             )}
           </div>
         </div>
-        <h3 className="font-serif text-sm md:text-base font-bold text-stone-900 mt-1.5 group-hover:text-[#991b1b] transition-colors duration-200 line-clamp-2 leading-snug">
+        <h3 className="font-serif text-sm md:text-base font-bold text-stone-900 mt-1.5 group-hover:text-[#7a1f2b] transition-colors duration-200 line-clamp-2 leading-snug">
           {article.title}
         </h3>
         <p className="font-sans text-xs text-stone-700 mt-2 line-clamp-2 leading-relaxed">
@@ -309,7 +309,7 @@ export default function ArticleCard({
             By {author?.name || 'Staff Writer'}
           </span>
           <span className="font-mono text-stone-600 flex items-center gap-0.5 text-[10px] font-bold">
-            <Clock size={10} className="text-[#dc2626]" />
+            <Clock size={10} className="text-[#9b2c3b]" />
             {article.readTime}
           </span>
         </div>
@@ -320,11 +320,11 @@ export default function ArticleCard({
   // GRID CARD VARIANT (Standard masonry feed layout)
   return (
     <article 
-      className="group bg-white border border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl rounded"
+      className="group bg-white border border-[#7a1f2b]/40 hover:border-[#9b2c3b]/70 select-none overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl rounded"
       onClick={() => onReadMore(article)}
       id={`grid-card-${article.id}`}
     >
-      <div className="relative h-48 w-full border-b border-[#991b1b]/30 overflow-hidden shrink-0">
+      <div className="relative h-48 w-full border-b border-[#7a1f2b]/30 overflow-hidden shrink-0">
         <img 
           src={article.imageUrl || fallbackArticleImage} 
           alt={article.title}
@@ -343,14 +343,14 @@ export default function ArticleCard({
         <div className="absolute top-3 right-3 flex items-center gap-1.5">
           {isAdmin && onDelete && (
             confirmDelete ? (
-              <div className="flex items-center gap-1 bg-red-50/95 text-stone-900 p-1 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-1 bg-[#f8eff1]/95 text-stone-900 p-1 rounded border border-[#9b2c3b] shadow-xl" onClick={(e) => e.stopPropagation()}>
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     onDelete(article.id);
                   }}
-                  className="bg-red-600 hover:bg-red-700 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
+                  className="bg-[#8a2432] hover:bg-[#7a1f2b] text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
                   id={`confirm-delete-grid-${article.id}`}
                 >
                   Confirm Delete
@@ -373,7 +373,7 @@ export default function ArticleCard({
                   e.stopPropagation();
                   setConfirmDelete(true);
                 }}
-                className="p-1.5 rounded-sm border border-red-700/50 bg-red-900/90 hover:bg-red-800 text-white cursor-pointer transition-all shadow flex items-center gap-1 font-mono text-[9px] font-bold uppercase"
+                className="p-1.5 rounded-sm border border-[#7a1f2b]/50 bg-[#5e1620]/90 hover:bg-[#6a1a26] text-white cursor-pointer transition-all shadow flex items-center gap-1 font-mono text-[9px] font-bold uppercase"
                 title="Delete dispatch"
                 id={`delete-grid-${article.id}`}
               >
@@ -389,13 +389,13 @@ export default function ArticleCard({
             }}
             className={`p-1.5 rounded-sm border cursor-pointer transition-all ${
               isBookmarked 
-                ? 'bg-[#991b1b] text-white border-[#dc2626]' 
-                : 'bg-black/80 hover:bg-black border-[#991b1b]/40 text-white'
+                ? 'bg-[#7a1f2b] text-white border-[#9b2c3b]' 
+                : 'bg-black/80 hover:bg-black border-[#7a1f2b]/40 text-white'
             }`}
             title={isBookmarked ? "Saved" : "Save clipping"}
             id={`bookmark-grid-${article.id}`}
           >
-            <Heart size={12} className={isBookmarked ? "fill-current text-[#dc2626]" : ""} />
+            <Heart size={12} className={isBookmarked ? "fill-current text-[#9b2c3b]" : ""} />
           </button>
         </div>
       </div>
@@ -406,7 +406,7 @@ export default function ArticleCard({
             <span>{formatDate(article.publishedAt)}</span>
             <span>{article.readTime}</span>
           </div>
-          <h3 className="font-serif text-base font-bold tracking-tight text-stone-900 group-hover:text-[#991b1b] transition-colors duration-200 leading-snug line-clamp-2">
+          <h3 className="font-serif text-base font-bold tracking-tight text-stone-900 group-hover:text-[#7a1f2b] transition-colors duration-200 leading-snug line-clamp-2">
             {article.title}
           </h3>
           <p className="font-sans text-xs text-stone-700 mt-2 leading-relaxed line-clamp-3">
@@ -414,13 +414,13 @@ export default function ArticleCard({
           </p>
         </div>
 
-        <div className="pt-3 border-t border-[#991b1b]/20 flex items-center justify-between">
+        <div className="pt-3 border-t border-[#7a1f2b]/20 flex items-center justify-between">
           <div className="flex items-center gap-2">
             {(author || article.authorId === 'w1' || article.authorId === 'w-sameera') && (
               <img 
                 src={author?.avatarUrl || sameeraAvatar} 
                 alt={author?.name || 'Sameera Mahboobdeen'}
-                className="w-5 h-5 rounded-full object-cover border border-[#991b1b]/40"
+                className="w-5 h-5 rounded-full object-cover border border-[#7a1f2b]/40"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = sameeraAvatar;
@@ -442,7 +442,7 @@ export default function ArticleCard({
                       e.stopPropagation();
                       onDelete(article.id);
                     }}
-                    className="bg-red-700 hover:bg-red-800 text-white font-mono text-[9px] font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
+                    className="bg-[#7a1f2b] hover:bg-[#6a1a26] text-white font-mono text-[9px] font-bold px-2 py-0.5 rounded cursor-pointer uppercase shadow"
                     id={`footer-confirm-delete-${article.id}`}
                   >
                     Confirm Delete
@@ -465,7 +465,7 @@ export default function ArticleCard({
                     e.stopPropagation();
                     setConfirmDelete(true);
                   }}
-                  className="flex items-center gap-1 text-red-200 hover:text-white bg-red-950/80 hover:bg-red-900 border border-red-700/50 px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase transition-colors cursor-pointer"
+                  className="flex items-center gap-1 text-[#e6c3ca] hover:text-white bg-red-950/80 hover:bg-[#5e1620] border border-[#7a1f2b]/50 px-2 py-0.5 rounded font-mono text-[9px] font-bold uppercase transition-colors cursor-pointer"
                   title="Delete this article permanently"
                   id={`footer-delete-${article.id}`}
                 >
@@ -477,12 +477,12 @@ export default function ArticleCard({
 
             <div className="flex items-center gap-1.5 text-stone-600 font-mono text-[10px] font-bold">
               <span className="flex items-center gap-0.5">
-                <Eye size={11} className="text-[#dc2626]" />
+                <Eye size={11} className="text-[#9b2c3b]" />
                 {article.views}
               </span>
               <span className="text-gray-600">•</span>
               <span className="flex items-center gap-0.5">
-                <MessageSquare size={11} className="text-[#dc2626]" />
+                <MessageSquare size={11} className="text-[#9b2c3b]" />
                 {article.comments.length}
               </span>
             </div>
