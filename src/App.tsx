@@ -1727,7 +1727,7 @@ export default function App() {
               {!currentUser ? (
                 <button
                   onClick={handleEditorSignIn}
-                  className="hover:text-stone-900 cursor-pointer hover:underline uppercase"
+                  className="bg-black text-white hover:bg-stone-800 px-3 py-1.5 rounded font-bold cursor-pointer uppercase tracking-wider transition-colors"
                   id="footer-editor-signin"
                 >
                   EDITORIAL SIGN IN
