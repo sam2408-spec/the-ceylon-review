@@ -223,6 +223,30 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       }
     }
 
+    // One-time content refresh of the PTA article: only replaces the original
+    // version, so any later edits made in the Editorial Desk are never overwritten.
+    try {
+      const ptaRef = doc(db, 'articles', 'art-colonial-law');
+      const ptaSnap = await getDocFromServer(ptaRef);
+      const fresh = INITIAL_ARTICLES.find(a => a.id === 'art-colonial-law');
+      if (fresh && ptaSnap.exists()) {
+        const cur = ptaSnap.data() as Article;
+        if (cur.content?.[0]?.startsWith('There is a word that does more political work')) {
+          await setDoc(ptaRef, {
+            ...cur,
+            title: fresh.title,
+            subtitle: fresh.subtitle,
+            summary: fresh.summary,
+            content: fresh.content,
+            publishedAt: fresh.publishedAt,
+            readTime: fresh.readTime,
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('PTA article refresh skipped:', e);
+    }
+
     const writersSnap = await getDocs(query(collection(db, 'writers')));
     if (writersSnap.empty) {
       for (const w of INITIAL_WRITERS) {
