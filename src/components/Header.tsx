@@ -9,6 +9,7 @@ interface HeaderProps {
   bookmarksCount: number;
   onOpenBookmarks: () => void;
   breakingNews: string;
+  headlines?: { title: string; source: string; link: string }[];
   isAdmin: boolean;
   setIsAdmin: (admin: boolean) => void;
   isAuthorizedEditor?: boolean;
@@ -23,6 +24,7 @@ export default function Header({
   bookmarksCount, 
   onOpenBookmarks,
   breakingNews,
+  headlines = [],
   isAdmin,
   setIsAdmin,
   isAuthorizedEditor = false,
@@ -45,13 +47,46 @@ export default function Header({
   return (
     <header className="border-b-4 border-[#991b1b] bg-white text-stone-900" id="newspaper-header">
       
-      {/* Top Ticker: News Marquee using Cover Colors (Crimson / Deep Black) */}
-      <div className="bg-red-50 text-stone-900 px-4 py-2 flex items-center overflow-hidden text-[11px] font-mono select-none border-b border-[#991b1b]/30" id="ticker-container">
-        <div className="animate-marquee whitespace-nowrap overflow-hidden flex items-center">
-          <span className="mx-4 text-stone-900 font-serif font-bold tracking-wide italic">{breakingNews}</span>
-          <span className="mx-4 text-stone-600">•</span>
-          <span className="mx-4 text-stone-700 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
-          <span className="mx-4 text-stone-600">•</span>
+      {/* Top Ticker: live world flash headlines (falls back to the house line if the feed is unavailable) */}
+      <div className="bg-red-50 text-stone-900 flex items-stretch overflow-hidden text-[11px] font-mono select-none border-b border-[#991b1b]/30" id="ticker-container">
+        <div className="relative z-10 shrink-0 bg-red-50 flex items-center gap-1.5 pl-4 pr-3 py-2 border-r border-[#991b1b]/30 shadow-[6px_0_8px_-4px_rgba(254,242,242,1)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#b91c1c] animate-pulse"></span>
+          <span className="font-black tracking-widest text-[#991b1b] uppercase text-[10px]">World Flash</span>
+        </div>
+        <div className="flex-1 overflow-hidden py-2">
+          <div
+            className="animate-marquee whitespace-nowrap flex items-center"
+            style={{ animationDuration: `${Math.max(40, (headlines.length || 3) * 7)}s` }}
+          >
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex items-center shrink-0" aria-hidden={copy === 1}>
+                {headlines.length > 0 ? (
+                  headlines.map((h, i) => (
+                    <React.Fragment key={`${copy}-${i}`}>
+                      <a
+                        href={h.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mx-4 flex items-center gap-2 hover:underline"
+                        tabIndex={copy === 1 ? -1 : 0}
+                      >
+                        <span className="text-[#991b1b] font-black tracking-widest text-[9px] uppercase">{h.source}</span>
+                        <span className="text-stone-900 font-serif font-bold tracking-wide italic text-[12px]">{h.title}</span>
+                      </a>
+                      <span className="text-stone-400">•</span>
+                    </React.Fragment>
+                  ))
+                ) : (
+                  <>
+                    <span className="mx-4 text-stone-900 font-serif font-bold tracking-wide italic">{breakingNews}</span>
+                    <span className="text-stone-400">•</span>
+                    <span className="mx-4 text-stone-700 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
+                    <span className="text-stone-400">•</span>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

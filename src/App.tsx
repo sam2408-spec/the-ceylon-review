@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Tabs from './components/Tabs';
 import SearchBar from './components/SearchBar';
+import EditorialNote from './components/EditorialNote';
 import ArticleCard from './components/ArticleCard';
 import ArticleDetailModal from './components/ArticleDetailModal';
 import WriterProfileView from './components/WriterProfileView';
@@ -635,6 +636,27 @@ export default function App() {
   const editorName = editorInChief ? editorInChief.name : 'Sameera Mahboobdeen';
   const editorAvatar = editorInChief ? editorInChief.avatarUrl : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400&h=400';
 
+  // World Flash ticker: live headlines from /api/news (refreshed every 5 minutes)
+  const [flashHeadlines, setFlashHeadlines] = useState<{ title: string; source: string; link: string }[]>([]);
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await fetch('/api/news');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!cancelled && Array.isArray(data.items) && data.items.length > 0) {
+          setFlashHeadlines(data.items);
+        }
+      } catch {
+        // Offline or no API (e.g. local dev): the ticker keeps its house line.
+      }
+    };
+    load();
+    const timer = setInterval(load, 5 * 60 * 1000);
+    return () => { cancelled = true; clearInterval(timer); };
+  }, []);
+
   const breakingNewsString = "LEGAL ALERT: \"A CENTURY OF EMERGENCY\" HISTORICAL BROADCAST DISPATCHED BY EXCLUSIVE ANALYSIS FOR JULY 2026";
 
   const isAuthorizedEditor = Boolean(
@@ -676,6 +698,7 @@ export default function App() {
           bookmarksCount={bookmarks.length} 
           onOpenBookmarks={() => setIsBookmarksOpen(true)}
           breakingNews={breakingNewsString}
+          headlines={flashHeadlines}
           isAdmin={effectiveAdminMode}
           setIsAdmin={(val) => {
             if (isAuthorizedEditor) setIsAdminMode(val);
@@ -724,6 +747,9 @@ export default function App() {
             setSelectedCategory={setSelectedCategory}
             resultsCount={filteredArticles.length}
             totalCount={articles.filter(a => activeTab === 'current' ? a.isCurrent : !a.isCurrent).length}
+            writers={writers}
+            articles={articles}
+            onReadArticle={handleReadMore}
           />
         )}
 
@@ -734,6 +760,8 @@ export default function App() {
           {activeTab === 'current' && (
             <div className="max-w-7xl mx-auto px-4 mt-8" id="viewport-current">
               
+              {searchTerm === '' && selectedCategory === 'All' && <EditorialNote />}
+
               {filteredArticles.length === 0 ? (
                 <div className="text-center py-24 border-2 border-dashed border-[#991b1b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
                   <p className="font-serif text-xl italic text-stone-700">"No archived dispatches fell into today's news queries."</p>

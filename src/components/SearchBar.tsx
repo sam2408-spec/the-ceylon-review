@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, RotateCcw, Filter } from 'lucide-react';
-import { Category } from '../types';
+import { Category, Article, Writer } from '../types';
+import WriterArticleMenu from './WriterArticleMenu';
 
 interface SearchBarProps {
   searchTerm: string;
@@ -9,6 +10,9 @@ interface SearchBarProps {
   setSelectedCategory: (category: Category | 'All') => void;
   resultsCount: number;
   totalCount: number;
+  writers: Writer[];
+  articles: Article[];
+  onReadArticle: (article: Article) => void;
 }
 
 export default function SearchBar({
@@ -17,7 +21,10 @@ export default function SearchBar({
   selectedCategory,
   setSelectedCategory,
   resultsCount,
-  totalCount
+  totalCount,
+  writers,
+  articles,
+  onReadArticle
 }: SearchBarProps) {
   const categories: (Category | 'All')[] = ['All', 'Politics', 'Tech', 'Science', 'Opinion', 'Culture', 'Business'];
 
@@ -68,6 +75,8 @@ export default function SearchBar({
                 Reset
               </button>
             )}
+
+            <WriterArticleMenu writers={writers} articles={articles} onReadArticle={onReadArticle} />
 
             <div className="flex items-center gap-1.5 px-3 border border-[#991b1b]/30 bg-red-50 text-stone-700 font-mono text-xs font-bold rounded">
               <Filter size={13} className="text-[#dc2626]" />

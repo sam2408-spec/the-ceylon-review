@@ -16,8 +16,8 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 mt-6" id="editorial-nav-bar">
-      <nav className="border-2 border-[#991b1b]/50 bg-white rounded shadow-md" id="tab-nav-wrapper">
-        <div className="flex justify-center gap-4 sm:gap-12 py-3.5 px-2 overflow-x-auto whitespace-nowrap" id="tabs-inner-list">
+      <nav className="border-2 border-[#7f1d1d] bg-[#991b1b] rounded shadow-md" id="tab-nav-wrapper">
+        <div className="flex justify-start sm:justify-center gap-2 sm:gap-12 py-3 sm:py-3.5 px-2 overflow-x-auto whitespace-nowrap" id="tabs-inner-list">
           {tabs.map((tab) => {
             const IconComponent = tab.icon;
             const isActive = activeTab === tab.id;
@@ -26,10 +26,10 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`
-                  flex items-center gap-2 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold cursor-pointer transition-all duration-200 px-4 py-2 rounded border-2
+                  flex items-center gap-2 text-[10px] sm:text-xs uppercase tracking-[0.1em] sm:tracking-[0.2em] font-bold shrink-0 cursor-pointer transition-all duration-200 px-3 sm:px-4 py-2 rounded border-2
                   ${isActive 
-                    ? 'bg-[#991b1b] text-white border-[#991b1b] shadow-md' 
-                    : 'text-stone-500 hover:text-stone-900 hover:bg-red-50 border-transparent'
+                    ? 'bg-[#6b1414] text-white border-white shadow-inner' 
+                    : 'text-white/85 hover:text-white hover:bg-white/10 border-transparent'
                   }
                 `}
                 id={`tab-btn-${tab.id}`}
@@ -38,7 +38,7 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
                   size={14} 
                   className={`
                     stroke-[2] transition-colors
-                    ${isActive ? 'text-white' : 'text-gray-500'}
+                    text-white
                   `} 
                 />
                 <span>{tab.label}</span>
