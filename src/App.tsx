@@ -657,7 +657,7 @@ export default function App() {
     return () => { cancelled = true; clearInterval(timer); };
   }, []);
 
-  const breakingNewsString = "LEGAL ALERT: \"A CENTURY OF EMERGENCY\" HISTORICAL BROADCAST DISPATCHED BY EXCLUSIVE ANALYSIS FOR JULY 2026";
+  const breakingNewsString = "THE CEYLON REVIEW — LAW, HUMAN RIGHTS & GLOBAL JUSTICE, FROM SRI LANKA";
 
   const isAuthorizedEditor = Boolean(
     currentUser &&
@@ -1538,6 +1538,40 @@ export default function App() {
             </div>
           )}
 
+          {/* ABOUT & CORRECTIONS TAB */}
+          {activeTab === 'about' && (
+            <div id="viewport-about" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
+              <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-12 shadow-xl rounded font-sans text-stone-900">
+                <div className="text-center space-y-2 border-b-2 border-[#991b1b] pb-4 mb-8">
+                  <h2 className="font-serif text-3xl md:text-5xl font-black text-[#991b1b] uppercase tracking-wider">About & Corrections</h2>
+                  <p className="font-mono text-[10px] md:text-xs text-stone-500 uppercase tracking-widest italic">The Ceylon Review, Colombo</p>
+                </div>
+                <div className="space-y-8 text-stone-900 leading-relaxed text-sm md:text-[15px]">
+                  <div className="space-y-2">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Who publishes this</h4>
+                    <p>The Ceylon Review is an independent publication on law, human rights and global justice, founded in July 2026 and edited from Colombo by Sameera Mahboobdeen, Founder and Editorial Director.</p>
+                  </div>
+                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">How we work</h4>
+                    <p>We report facts and attribute them. Where we rely on a court ruling, a statute, a United Nations body or a rights organisation, we say which and link or name the source. Where we could not verify something, we say so, or leave it out. Opinion is labelled as opinion.</p>
+                  </div>
+                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Corrections</h4>
+                    <p>If you believe something we published is wrong, write to <a href="mailto:theceylonreview@proton.me?subject=Correction%20request" className="underline text-red-800 font-bold">theceylonreview@proton.me</a> with the article title, the sentence, and what you say is correct, with a source if you have one. We check every request. When we find an error, we fix it, and for any change that affects meaning we add a dated note to the article saying what was changed.</p>
+                  </div>
+                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Right of reply</h4>
+                    <p>People and organisations named in our reporting may send a response to the same address. We will consider publishing it alongside the article.</p>
+                  </div>
+                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Contact</h4>
+                    <p>Editorial, corrections and column pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 font-bold">theceylonreview@proton.me</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* DISCLAIMER NOTICE TAB */}
           {activeTab === 'disclaimer' && (
             <div id="viewport-disclaimer" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
@@ -1714,13 +1748,14 @@ export default function App() {
           </p>
           
           <div className="bg-black/5 border border-stone-200 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
-            <span className="text-stone-700">Original Broadside Draft Submission:</span>
+            <span className="text-stone-700">Contact and column pitches:</span>
             <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-stone-700">theceylonreview@proton.me</a>
           </div>
 
           <div className="pt-6 border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-stone-600">
             <span>© 2026 THE CEYLON REVIEW PRINT & INTERACTIVE REPRODUCTIONS INC. ALL RIGHTS PRESERVED.</span>
             <span className="flex flex-wrap justify-center gap-4 items-center">
+              <span onClick={() => handleTabChange('about')} className="hover:text-stone-900 cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
               <span onClick={() => handleTabChange('directive')} className="hover:text-stone-900 cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
               <span onClick={() => handleTabChange('privacy')} className="hover:text-stone-900 cursor-pointer hover:underline">PRIVACY DEFENSE</span>
               <span onClick={() => handleTabChange('disclaimer')} className="hover:text-stone-900 cursor-pointer hover:underline">LIABILITY DISCLAIMER</span>
