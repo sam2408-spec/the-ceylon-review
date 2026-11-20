@@ -166,15 +166,15 @@ export default function ArticleDetailModal({
       onClick={onClose}
     >
       <div 
-        className="relative bg-[#141212] border-2 border-[#991b1b] text-[#f5eedc] w-full max-w-4xl max-h-[92vh] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95 duration-200 flex flex-col"
+        className="relative bg-white border-2 border-[#991b1b] text-stone-900 w-full max-w-4xl max-h-[92vh] overflow-y-auto shadow-2xl animate-in fade-in zoom-in-95 duration-200 flex flex-col"
         onClick={(e) => e.stopPropagation()}
         id="reader-panel"
       >
         {/* Top Sticky Bar */}
-        <div className="sticky top-0 bg-[#161313] border-b border-[#991b1b]/40 py-3.5 px-4 md:px-6 flex items-center justify-between z-10 backdrop-blur-md">
+        <div className="sticky top-0 bg-white border-b border-[#991b1b]/40 py-3.5 px-4 md:px-6 flex items-center justify-between z-10 backdrop-blur-md">
           <button 
             onClick={onClose}
-            className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase text-[#f5eedc] hover:text-red-300 transition-colors bg-[#241a1a] hover:bg-[#381c1c] px-3 py-1.5 border border-[#991b1b]/40 cursor-pointer rounded"
+            className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase text-stone-900 hover:text-red-800 transition-colors bg-red-50 hover:bg-red-50 px-3 py-1.5 border border-[#991b1b]/40 cursor-pointer rounded"
             id="close-back-btn"
           >
             <ArrowLeft size={12} />
@@ -189,7 +189,7 @@ export default function ArticleDetailModal({
                 className={`p-1.5 px-3 border cursor-pointer transition-all flex items-center gap-1.5 font-mono text-[11px] font-bold rounded ${
                   isEditing 
                     ? 'bg-[#991b1b] text-white border-[#dc2626] shadow' 
-                    : 'bg-[#241a1a] hover:bg-[#381c1c] text-red-300 border-[#991b1b]/40'
+                    : 'bg-red-50 hover:bg-red-50 text-red-800 border-[#991b1b]/40'
                 }`}
                 id="edit-article-mode-btn"
               >
@@ -200,8 +200,8 @@ export default function ArticleDetailModal({
 
             {isAdmin && onDeleteArticle && (
               confirmDeleteArticle ? (
-                <div className="flex items-center gap-1.5 bg-red-950/80 p-1 px-2 border border-red-500 rounded shadow-sm">
-                  <span className="font-mono text-[10px] font-bold uppercase text-red-200">Permanently delete?</span>
+                <div className="flex items-center gap-1.5 bg-red-50/80 p-1 px-2 border border-red-500 rounded shadow-sm">
+                  <span className="font-mono text-[10px] font-bold uppercase text-red-800">Permanently delete?</span>
                   <button
                     type="button"
                     onClick={() => {
@@ -216,7 +216,7 @@ export default function ArticleDetailModal({
                   <button
                     type="button"
                     onClick={() => setConfirmDeleteArticle(false)}
-                    className="px-1 text-gray-300 hover:text-white font-mono text-[10px] cursor-pointer"
+                    className="px-1 text-stone-600 hover:text-stone-900 font-mono text-[10px] cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -242,7 +242,7 @@ export default function ArticleDetailModal({
                   className={`p-1.5 px-2.5 border border-[#991b1b]/40 cursor-pointer transition-all flex items-center gap-1.5 font-mono text-[11px] font-bold rounded ${
                     isBookmarked 
                       ? 'bg-[#991b1b] text-white border-[#dc2626]' 
-                      : 'bg-[#241a1a] hover:bg-[#381c1c] text-[#f5eedc]'
+                      : 'bg-red-50 hover:bg-red-50 text-stone-900'
                   }`}
                   id="bookmark-reader-toggle"
                 >
@@ -251,7 +251,7 @@ export default function ArticleDetailModal({
                 </button>
                 <button 
                   onClick={handleShare}
-                  className="p-1.5 px-2.5 bg-[#241a1a] border border-[#991b1b]/40 hover:bg-[#381c1c] text-[#f5eedc] font-mono text-[11px] font-bold cursor-pointer rounded"
+                  className="p-1.5 px-2.5 bg-red-50 border border-[#991b1b]/40 hover:bg-red-50 text-stone-900 font-mono text-[11px] font-bold cursor-pointer rounded"
                   title="Copy permanent link to clipboard"
                   id="share-article-btn"
                 >
@@ -262,7 +262,7 @@ export default function ArticleDetailModal({
 
             <button 
               onClick={onClose}
-              className="p-1.5 border border-transparent hover:bg-white/10 rounded cursor-pointer text-[#f5eedc] ml-1"
+              className="p-1.5 border border-transparent hover:bg-black/10 rounded cursor-pointer text-stone-900 ml-1"
               id="close-cross-btn"
             >
               <X size={18} />
@@ -279,12 +279,12 @@ export default function ArticleDetailModal({
 
         {/* SOLEMN EDITING VIEWPORT */}
         {isEditing ? (
-          <form onSubmit={handleSaveEdit} className="p-6 md:p-10 flex-grow space-y-6 bg-[#141212]" id="editorial-board-edit-form">
+          <form onSubmit={handleSaveEdit} className="p-6 md:p-10 flex-grow space-y-6 bg-white" id="editorial-board-edit-form">
             <div className="bg-[#991b1b]/15 border border-[#991b1b]/40 p-4 rounded flex items-start gap-3">
-              <ShieldAlert className="text-red-400 mt-0.5 shrink-0" size={18} />
+              <ShieldAlert className="text-[#991b1b] mt-0.5 shrink-0" size={18} />
               <div>
-                <h3 className="font-serif font-black text-sm text-white uppercase tracking-wider">Sovereign Revision Console</h3>
-                <p className="font-sans text-[11px] text-gray-300 mt-1 leading-normal">
+                <h3 className="font-serif font-black text-sm text-stone-900 uppercase tracking-wider">Sovereign Revision Console</h3>
+                <p className="font-sans text-[11px] text-stone-600 mt-1 leading-normal">
                   Your adjustments represent sovereign editorial correction. These modifications immediately sync and update across all broadcast grids.
                 </p>
               </div>
@@ -294,71 +294,71 @@ export default function ArticleDetailModal({
               {/* Left Column Fields */}
               <div className="space-y-4">
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Article Title</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Article Title</label>
                   <input 
                     type="text" 
                     value={editTitle}
                     onChange={(e) => setEditTitle(e.target.value)}
                     required
-                    className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-[#f5eedc] font-serif text-lg font-bold rounded"
+                    className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-stone-900 font-serif text-lg font-bold rounded"
                     placeholder="Headline title..."
                   />
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Subtitle / Deck</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Subtitle / Deck</label>
                   <input 
                     type="text" 
                     value={editSubtitle}
                     onChange={(e) => setEditSubtitle(e.target.value)}
-                    className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-[#f5eedc] font-serif italic rounded"
+                    className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-stone-900 font-serif italic rounded"
                     placeholder="Secondary deck summary..."
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Category Section</label>
+                    <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Category Section</label>
                     <select 
                       value={editCategory}
                       onChange={(e) => setEditCategory(e.target.value as Category)}
-                      className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-[#f5eedc] rounded font-bold"
+                      className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-stone-900 rounded font-bold"
                     >
                       {categoriesList.map(cat => (
-                        <option key={cat} value={cat} className="bg-[#141212] text-[#f5eedc]">{cat}</option>
+                        <option key={cat} value={cat} className="bg-white text-stone-900">{cat}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Read Dimension</label>
+                    <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Read Dimension</label>
                     <input 
                       type="text" 
                       value={editReadTime}
                       onChange={(e) => setEditReadTime(e.target.value)}
-                      className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-[#f5eedc] font-mono rounded"
+                      className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-stone-900 font-mono rounded"
                       placeholder="e.g. 12 min read"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Illustration Image URL</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Illustration Image URL</label>
                   <input 
                     type="text" 
                     value={editImageUrl}
                     onChange={(e) => setEditImageUrl(e.target.value)}
-                    className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-xs focus:outline-none focus:border-[#dc2626] text-[#f5eedc] font-mono rounded"
+                    className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-xs focus:outline-none focus:border-[#dc2626] text-stone-900 font-mono rounded"
                     placeholder="Image URL link..."
                   />
                 </div>
 
                 {/* Switchers */}
-                <div className="p-4 bg-[#1a1414] border-2 border-[#991b1b]/30 space-y-3 rounded">
+                <div className="p-4 bg-stone-100 border-2 border-[#991b1b]/30 space-y-3 rounded">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-mono font-bold text-white uppercase tracking-wider">Current Broadcast Sheet</p>
-                      <p className="text-[10px] text-gray-400 font-sans">Toggle to push to live Current News or relegate to Archival Ledger.</p>
+                      <p className="text-xs font-mono font-bold text-stone-900 uppercase tracking-wider">Current Broadcast Sheet</p>
+                      <p className="text-[10px] text-stone-500 font-sans">Toggle to push to live Current News or relegate to Archival Ledger.</p>
                     </div>
                     <button
                       type="button"
@@ -373,10 +373,10 @@ export default function ArticleDetailModal({
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between border-t border-white/10 pt-3">
+                  <div className="flex items-center justify-between border-t border-stone-200 pt-3">
                     <div>
-                      <p className="text-xs font-mono font-bold text-white uppercase tracking-wider">Spotlight Front-Page Hero</p>
-                      <p className="text-[10px] text-gray-400 font-sans">Flag this article with premium double-spread layouts.</p>
+                      <p className="text-xs font-mono font-bold text-stone-900 uppercase tracking-wider">Spotlight Front-Page Hero</p>
+                      <p className="text-[10px] text-stone-500 font-sans">Flag this article with premium double-spread layouts.</p>
                     </div>
                     <button
                       type="button"
@@ -396,29 +396,29 @@ export default function ArticleDetailModal({
               {/* Right Column Fields */}
               <div className="flex flex-col space-y-4">
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">Front deck abstract blurb</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">Front deck abstract blurb</label>
                   <textarea 
                     rows={2}
                     value={editSummary}
                     onChange={(e) => setEditSummary(e.target.value)}
                     required
-                    className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-xs focus:outline-none focus:border-[#dc2626] text-[#f5eedc] font-sans rounded"
+                    className="w-full bg-white border-2 border-[#991b1b]/40 p-3 text-xs focus:outline-none focus:border-[#dc2626] text-stone-900 font-sans rounded"
                     placeholder="Short blurb abstraction..."
                   ></textarea>
                 </div>
 
                 <div className="flex-grow flex flex-col">
-                  <label className="block font-mono text-[10px] text-red-300 uppercase tracking-wider mb-1.5 font-bold">
+                  <label className="block font-mono text-[10px] text-red-800 uppercase tracking-wider mb-1.5 font-bold">
                     Article Core Content Paragraphs
                   </label>
-                  <p className="text-[10px] text-gray-400 font-sans mb-1.5 leading-tight">
+                  <p className="text-[10px] text-stone-500 font-sans mb-1.5 leading-tight">
                     Separate individual print paragraphs by placing double blank carriage-returns (empty blank rows) between paragraphs.
                   </p>
                   <textarea 
                     value={editContent}
                     onChange={(e) => setEditContent(e.target.value)}
                     required
-                    className="w-full flex-grow bg-[#0e0c0c] border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-[#ece5d8] font-serif leading-relaxed h-[290px] resize-none rounded"
+                    className="w-full flex-grow bg-white border-2 border-[#991b1b]/40 p-3 text-sm focus:outline-none focus:border-[#dc2626] text-stone-900 font-serif leading-relaxed h-[290px] resize-none rounded"
                     placeholder="Investigative print prose columns..."
                   ></textarea>
                 </div>
@@ -430,7 +430,7 @@ export default function ArticleDetailModal({
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="flex items-center gap-1.5 px-4 py-2 border border-[#991b1b]/40 bg-[#241a1a] hover:bg-[#381c1c] text-[#f5eedc] font-mono text-xs uppercase cursor-pointer rounded"
+                className="flex items-center gap-1.5 px-4 py-2 border border-[#991b1b]/40 bg-red-50 hover:bg-red-50 text-stone-900 font-mono text-xs uppercase cursor-pointer rounded"
               >
                 <RotateCcw size={13} />
                 Discard Revisions
@@ -438,8 +438,8 @@ export default function ArticleDetailModal({
 
               {onDeleteArticle && (
                 confirmDeleteArticle ? (
-                  <div className="flex items-center gap-2 bg-red-950/80 p-1.5 px-3 border border-red-500 rounded">
-                    <span className="font-mono text-xs uppercase font-bold text-red-200">Confirm delete?</span>
+                  <div className="flex items-center gap-2 bg-red-50/80 p-1.5 px-3 border border-red-500 rounded">
+                    <span className="font-mono text-xs uppercase font-bold text-red-800">Confirm delete?</span>
                     <button
                       type="button"
                       onClick={() => {
@@ -453,7 +453,7 @@ export default function ArticleDetailModal({
                     <button
                       type="button"
                       onClick={() => setConfirmDeleteArticle(false)}
-                      className="text-xs text-gray-300 hover:text-white font-mono px-1 cursor-pointer"
+                      className="text-xs text-stone-600 hover:text-stone-900 font-mono px-1 cursor-pointer"
                     >
                       Cancel
                     </button>
@@ -485,36 +485,36 @@ export default function ArticleDetailModal({
             {/* Metadata Grid */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#991b1b]/30">
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="text-[10px] font-mono font-black px-2.5 py-0.5 border-2 border-[#dc2626] bg-[#991b1b]/20 text-red-300 rounded uppercase">
+                <span className="text-[10px] font-mono font-black px-2.5 py-0.5 border-2 border-[#dc2626] bg-[#991b1b]/20 text-red-800 rounded uppercase">
                   {article.category}
                 </span>
-                <span className="text-xs font-mono text-gray-400 flex items-center gap-1.5 font-bold">
-                  <Clock size={13} className="text-red-400" />
+                <span className="text-xs font-mono text-stone-500 flex items-center gap-1.5 font-bold">
+                  <Clock size={13} className="text-[#991b1b]" />
                   {article.readTime}
                 </span>
               </div>
 
-              <div className="text-xs font-mono text-gray-400 flex items-center gap-1.5 font-bold">
-                <Calendar size={13} className="text-red-400" />
+              <div className="text-xs font-mono text-stone-500 flex items-center gap-1.5 font-bold">
+                <Calendar size={13} className="text-[#991b1b]" />
                 <span>Issue Release: {formatDate(article.publishedAt)}</span>
               </div>
             </div>
 
             {/* Editorial Headings */}
             <div className="my-8 text-center md:text-left">
-              <h1 className="font-serif text-3xl md:text-[42px] font-black tracking-tight text-white leading-tight select-all">
+              <h1 className="font-serif text-3xl md:text-[42px] font-black tracking-tight text-stone-900 leading-tight select-all">
                 {article.title}
               </h1>
               {article.subtitle && (
-                <p className="font-serif italic text-base md:text-lg text-white mt-5 leading-relaxed pl-4 border-l-4 border-[#dc2626] text-left">
+                <p className="font-serif italic text-base md:text-lg text-stone-900 mt-5 leading-relaxed pl-4 border-l-4 border-[#dc2626] text-left">
                   {article.subtitle}
                 </p>
               )}
             </div>
 
             {/* Social Sharing Broadsheet Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center p-3 border-y-2 border-[#991b1b]/30 font-mono text-[11px] font-bold text-gray-300 bg-[#181313] justify-between gap-3 mb-8">
-              <span className="uppercase tracking-wider text-red-300">Broadside Social Share:</span>
+            <div className="flex flex-col sm:flex-row sm:items-center p-3 border-y-2 border-[#991b1b]/30 font-mono text-[11px] font-bold text-stone-600 bg-white justify-between gap-3 mb-8">
+              <span className="uppercase tracking-wider text-red-800">Broadside Social Share:</span>
               <div className="flex items-center gap-2 flex-wrap">
                 <a 
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.origin + '?article=' + article.id)}`}
@@ -569,24 +569,24 @@ export default function ArticleDetailModal({
                       }}
                     />
                     <div className="flex-grow md:flex-none">
-                      <p className="font-mono text-[9px] font-black tracking-widest uppercase text-red-400">SOVEREIGN REPORTER</p>
-                      <p className="font-serif font-bold text-base md:text-lg text-white mt-1">{author?.name || editorName}</p>
-                      <p className="font-mono text-[10px] text-gray-300 font-bold">{author?.role || 'Chief Editor'}</p>
+                      <p className="font-mono text-[9px] font-black tracking-widest uppercase text-[#991b1b]">SOVEREIGN REPORTER</p>
+                      <p className="font-serif font-bold text-base md:text-lg text-stone-900 mt-1">{author?.name || editorName}</p>
+                      <p className="font-mono text-[10px] text-stone-600 font-bold">{author?.role || 'Chief Editor'}</p>
                     </div>
-                    <p className="hidden md:block font-sans text-xs text-white/90 leading-relaxed border-t border-[#991b1b]/20 pt-3">
+                    <p className="hidden md:block font-sans text-xs text-stone-700 leading-relaxed border-t border-[#991b1b]/20 pt-3">
                       {author?.bio || editorBio}
                     </p>
                   </div>
                 ) : (
                   <div className="flex flex-row md:flex-col items-center md:items-start text-left space-y-0 md:space-y-3 gap-4 md:gap-0 sticky top-24" id="staff-profile-card">
-                    <div className="w-14 h-14 md:w-20 md:h-20 bg-[#1f1515] border-2 border-[#991b1b]/40 rounded-full flex items-center justify-center text-red-400 font-serif text-xl md:text-2xl font-black shrink-0">
+                    <div className="w-14 h-14 md:w-20 md:h-20 bg-red-50 border-2 border-[#991b1b]/40 rounded-full flex items-center justify-center text-[#991b1b] font-serif text-xl md:text-2xl font-black shrink-0">
                       CR
                     </div>
                     <div className="flex-grow md:flex-none">
-                      <p className="font-mono text-[9px] text-red-400 tracking-wider uppercase font-bold">STAFF REPORT</p>
-                      <p className="font-serif font-bold text-base text-white mt-1">Ceylon Review Staff</p>
+                      <p className="font-mono text-[9px] text-[#991b1b] tracking-wider uppercase font-bold">STAFF REPORT</p>
+                      <p className="font-serif font-bold text-base text-stone-900 mt-1">Ceylon Review Staff</p>
                     </div>
-                    <p className="hidden md:block font-sans text-xs text-white/90 leading-normal border-t border-[#991b1b]/20 pt-3">
+                    <p className="hidden md:block font-sans text-xs text-stone-700 leading-normal border-t border-[#991b1b]/20 pt-3">
                       Sourced through verified official channels, constitutional archives, and public interest dispatches.
                     </p>
                   </div>
@@ -611,13 +611,13 @@ export default function ArticleDetailModal({
                 )}
 
                 {/* Article Editorial text columns */}
-                <div className="font-sans text-white text-[16px] md:text-[17px] leading-relaxed space-y-6 select-text" id="article-paragraphs">
+                <div className="font-sans text-stone-900 text-[16px] md:text-[17px] leading-relaxed space-y-6 select-text" id="article-paragraphs">
                   {article.content.map((paragraph, index) => {
                     // If contains section header like "I. The Colonial Blueprint", render formatted section header instead of standard text block.
                     const isSectionHeader = /^[I|V|X]+\.\s+/.test(paragraph);
                     if (isSectionHeader) {
                       return (
-                        <h4 key={index} className="font-sans font-bold text-lg text-red-400 pt-6 pb-2 border-b-2 border-[#991b1b]/30 uppercase tracking-wide">
+                        <h4 key={index} className="font-sans font-bold text-lg text-[#991b1b] pt-6 pb-2 border-b-2 border-[#991b1b]/30 uppercase tracking-wide">
                           {paragraph}
                         </h4>
                       );
@@ -626,7 +626,7 @@ export default function ArticleDetailModal({
                     // If paragraph is a blockquote (starts with a quotation mark)
                     if (paragraph.startsWith('“') || paragraph.startsWith('"')) {
                       return (
-                        <blockquote key={index} className="border-l-4 border-[#dc2626] pl-5 italic text-white font-serif my-8 text-lg md:text-xl leading-relaxed py-2 bg-[#1f1515] pr-4 rounded-r">
+                        <blockquote key={index} className="border-l-4 border-[#dc2626] pl-5 italic text-stone-900 font-serif my-8 text-lg md:text-xl leading-relaxed py-2 bg-red-50 pr-4 rounded-r">
                           {paragraph}
                         </blockquote>
                       );
@@ -636,9 +636,9 @@ export default function ArticleDetailModal({
                     if (paragraph.startsWith('LEGISLATIVE TIMELINE:')) {
                       const lines = paragraph.split('\n');
                       return (
-                        <div key={index} className="bg-[#090808] text-white border-l-4 border-[#dc2626] p-5 my-8 font-mono text-xs space-y-2 rounded shadow">
+                        <div key={index} className="bg-white text-stone-900 border-l-4 border-[#dc2626] p-5 my-8 font-mono text-xs space-y-2 rounded shadow">
                           {lines.map((line, lidx) => (
-                            <div key={lidx} className={lidx === 0 ? "font-bold text-sm tracking-wider uppercase text-white pb-2 border-b border-white/10" : "pl-2 leading-relaxed"}>
+                            <div key={lidx} className={lidx === 0 ? "font-bold text-sm tracking-wider uppercase text-stone-900 pb-2 border-b border-stone-200" : "pl-2 leading-relaxed"}>
                               {line}
                             </div>
                           ))}
@@ -649,13 +649,13 @@ export default function ArticleDetailModal({
                     // Standard drop cap on first paragraph
                     if (index === 0) {
                       return (
-                        <p key={index} className="first-letter:text-6xl first-letter:font-sans first-letter:font-black first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[#dc2626] first-letter:leading-none leading-relaxed text-white">
+                        <p key={index} className="first-letter:text-6xl first-letter:font-sans first-letter:font-black first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:text-[#dc2626] first-letter:leading-none leading-relaxed text-stone-900">
                           {paragraph}
                         </p>
                       );
                     }
                     return (
-                      <p key={index} className="text-white leading-relaxed">
+                      <p key={index} className="text-stone-900 leading-relaxed">
                         {paragraph}
                       </p>
                     );
@@ -663,7 +663,7 @@ export default function ArticleDetailModal({
                 </div>
 
                 {/* Feedback section - likes block */}
-                <div className="py-5 border-y border-[#991b1b]/30 flex flex-wrap items-center justify-between gap-4 bg-[#1a1414] px-4 rounded" id="feedback-panel">
+                <div className="py-5 border-y border-[#991b1b]/30 flex flex-wrap items-center justify-between gap-4 bg-stone-100 px-4 rounded" id="feedback-panel">
                   <div className="flex items-center gap-4">
                     <button 
                       onClick={handleLike}
@@ -671,35 +671,35 @@ export default function ArticleDetailModal({
                       className={`flex items-center gap-2 px-4 py-2 border font-mono text-[11px] font-extrabold uppercase transition-all cursor-pointer rounded ${
                         hasLiked 
                           ? 'bg-[#991b1b] text-white border-[#dc2626]' 
-                          : 'bg-[#241a1a] hover:bg-[#381c1c] text-[#f5eedc] border-[#991b1b]/40'
+                          : 'bg-red-50 hover:bg-red-50 text-stone-900 border-[#991b1b]/40'
                       }`}
                       id="recommend-article-btn"
                     >
                       <ThumbsUp size={12} />
                       {hasLiked ? 'Recommended' : 'Recommend this Dispatch'}
                     </button>
-                    <span className="font-mono text-xs text-gray-400 font-semibold">
-                      Recommended by <strong className="text-white font-black">{article.likes}</strong> citizens
+                    <span className="font-mono text-xs text-stone-500 font-semibold">
+                      Recommended by <strong className="text-stone-900 font-black">{article.likes}</strong> citizens
                     </span>
                   </div>
-                  <p className="text-[10px] font-mono text-gray-400 uppercase font-bold">ISSUE REGULATOR REPORT 2026</p>
+                  <p className="text-[10px] font-mono text-stone-500 uppercase font-bold">ISSUE REGULATOR REPORT 2026</p>
                 </div>
 
                 {/* Comments block */}
                 <div className="mt-12" id="comments-chamber">
-                  <h3 className="font-serif font-black text-xl text-[#f5eedc] mb-6 flex items-center gap-2 border-b-2 border-[#991b1b]/30 pb-2 uppercase tracking-wide">
+                  <h3 className="font-serif font-black text-xl text-stone-900 mb-6 flex items-center gap-2 border-b-2 border-[#991b1b]/30 pb-2 uppercase tracking-wide">
                     <MessageSquare size={18} className="text-[#dc2626]" />
                     Public Commentary Chambers ({article.comments.length})
                   </h3>
                   
                   {/* Submission contact warning */}
-                  <div className="bg-[#161212] border-l-4 border-[#dc2626] p-4 text-xs text-gray-300 mb-6 leading-relaxed">
+                  <div className="bg-white border-l-4 border-[#dc2626] p-4 text-xs text-stone-600 mb-6 leading-relaxed">
                     <span>Are you looking to broadcast original analytical content? Please yield drafts via securely verified <strong>theceylonreview@proton.me</strong> email. Anonymous community inputs below remain open for moderated critique.</span>
                   </div>
 
                   {/* Add Comment Form */}
-                  <form onSubmit={handleSubmitComment} className="space-y-4 mb-8 bg-[#181313] p-5 rounded border border-[#991b1b]/30">
-                    <h4 className="font-serif font-bold text-xs uppercase tracking-wide text-red-400">Add Your Personal Advisory Commentary</h4>
+                  <form onSubmit={handleSubmitComment} className="space-y-4 mb-8 bg-white p-5 rounded border border-[#991b1b]/30">
+                    <h4 className="font-serif font-bold text-xs uppercase tracking-wide text-[#991b1b]">Add Your Personal Advisory Commentary</h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <input 
                         type="text" 
@@ -707,7 +707,7 @@ export default function ArticleDetailModal({
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        className="bg-[#0e0c0c] border-2 border-[#991b1b]/30 rounded p-2.5 text-xs text-[#f5eedc] focus:outline-none focus:border-[#dc2626] font-bold"
+                        className="bg-white border-2 border-[#991b1b]/30 rounded p-2.5 text-xs text-stone-900 focus:outline-none focus:border-[#dc2626] font-bold"
                       />
                     </div>
                     <textarea 
@@ -716,7 +716,7 @@ export default function ArticleDetailModal({
                       value={commentText}
                       onChange={(e) => setCommentText(e.target.value)}
                       required
-                      className="w-full bg-[#0e0c0c] border-2 border-[#991b1b]/30 rounded p-2.5 text-xs text-[#f5eedc] focus:outline-none focus:border-[#dc2626] resize-none"
+                      className="w-full bg-white border-2 border-[#991b1b]/30 rounded p-2.5 text-xs text-stone-900 focus:outline-none focus:border-[#dc2626] resize-none"
                     ></textarea>
                     <div className="flex justify-end">
                       <button 
@@ -730,7 +730,7 @@ export default function ArticleDetailModal({
                   </form>
 
                   {/* Comments list */}
-                  <div className="space-y-4 bg-[#110e0e] rounded p-4 border border-[#991b1b]/20 max-h-[300px] overflow-y-auto">
+                  <div className="space-y-4 bg-white rounded p-4 border border-[#991b1b]/20 max-h-[300px] overflow-y-auto">
                     {article.comments.length === 0 ? (
                       <p className="text-center font-serif italic text-gray-500 text-xs py-8">"No advisory critical commentary exists on this ledger yet. Be primary observer."</p>
                     ) : (
@@ -738,8 +738,8 @@ export default function ArticleDetailModal({
                         <div key={comment.id} className="border-b border-[#991b1b]/20 pb-3 last:border-b-0 last:pb-0">
                           <div className="flex justify-between items-start">
                             <div>
-                              <span className="font-serif font-bold text-xs text-white block">{comment.author}</span>
-                              <span className="font-mono text-[9px] text-gray-400 block font-bold">
+                              <span className="font-serif font-bold text-xs text-stone-900 block">{comment.author}</span>
+                              <span className="font-mono text-[9px] text-stone-500 block font-bold">
                                 {(() => {
                                   const d = new Date(comment.timestamp);
                                   return isNaN(d.getTime()) ? (comment.timestamp || 'Recently') : d.toLocaleString();
@@ -756,7 +756,7 @@ export default function ArticleDetailModal({
                               </button>
                             )}
                           </div>
-                          <p className="font-sans text-xs text-white mt-1.5 leading-relaxed bg-[#1a1414] p-2 border border-[#991b1b]/20 rounded-sm">{comment.text}</p>
+                          <p className="font-sans text-xs text-stone-900 mt-1.5 leading-relaxed bg-stone-100 p-2 border border-[#991b1b]/20 rounded-sm">{comment.text}</p>
                         </div>
                       ))
                     )}

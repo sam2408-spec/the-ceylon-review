@@ -50,20 +50,20 @@ export default function BookmarksDrawer({
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-md bg-[#141212] border-l-4 border-[#991b1b] h-full p-6 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-250 text-[#f5eedc]"
+        className="w-full max-w-md bg-white border-l-4 border-[#991b1b] h-full p-6 shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-250 text-stone-900"
         onClick={(e) => e.stopPropagation()}
         id="bookmarks-drawer"
       >
         <div>
           {/* Header */}
           <div className="flex items-center justify-between border-b-2 border-[#991b1b] pb-4 mb-6">
-            <h3 className="font-serif text-xl font-black flex items-center gap-2 text-[#f5eedc] uppercase tracking-wide">
+            <h3 className="font-serif text-xl font-black flex items-center gap-2 text-stone-900 uppercase tracking-wide">
               <Heart size={18} className="fill-current text-[#dc2626]" />
               Saved Clippings ({bookmarkedArticles.length})
             </h3>
             <button 
               onClick={onClose}
-              className="p-1 px-2.5 border border-[#991b1b]/50 bg-[#2b1616] hover:bg-[#3d1c1c] text-[#f5eedc] rounded cursor-pointer transition-all font-mono text-[10px] uppercase font-bold"
+              className="p-1 px-2.5 border border-[#991b1b]/50 bg-red-50 hover:bg-red-50 text-stone-900 rounded cursor-pointer transition-all font-mono text-[10px] uppercase font-bold"
               id="close-bookmarks-drawer"
             >
               <X size={14} className="inline mr-0.5" />
@@ -78,8 +78,8 @@ export default function BookmarksDrawer({
                 <div className="w-12 h-12 rounded-full border-2 border-dashed border-[#dc2626]/40 flex items-center justify-center mx-auto mb-4 text-[#dc2626]">
                   <HeartOff size={20} />
                 </div>
-                <h4 className="font-serif font-bold text-sm text-[#f5eedc] mb-2 uppercase">No Clippings Filed</h4>
-                <p className="font-sans text-xs text-gray-400 leading-relaxed">
+                <h4 className="font-serif font-bold text-sm text-stone-900 mb-2 uppercase">No Clippings Filed</h4>
+                <p className="font-sans text-xs text-stone-500 leading-relaxed">
                   Browse dispatches and click hearts on cards. Clippings will reside here for immediate retrieval.
                 </p>
               </div>
@@ -87,16 +87,16 @@ export default function BookmarksDrawer({
               bookmarkedArticles.map((art) => (
                 <div 
                   key={art.id}
-                  className="border border-[#991b1b]/30 p-4 bg-[#1c1818] hover:bg-[#251f1f] transition-all duration-150 relative group rounded shadow-md"
+                  className="border border-[#991b1b]/30 p-4 bg-stone-100 hover:bg-stone-100 transition-all duration-150 relative group rounded shadow-md"
                   id={`bookmark-item-${art.id}`}
                 >
                   <div className="flex justify-between items-start gap-1">
-                    <span className="font-mono text-[9px] text-red-400 uppercase border border-[#991b1b]/40 px-1 bg-[#2a1717] font-bold">
+                    <span className="font-mono text-[9px] text-[#991b1b] uppercase border border-[#991b1b]/40 px-1 bg-red-50 font-bold">
                       {art.category}
                     </span>
                     <button
                       onClick={() => onRemoveBookmark(art.id)}
-                      className="p-1 text-gray-400 hover:text-red-400 transition-colors cursor-pointer"
+                      className="p-1 text-stone-500 hover:text-[#991b1b] transition-colors cursor-pointer"
                       title="Discard clipping"
                       id={`remove-clip-${art.id}`}
                     >
@@ -104,23 +104,23 @@ export default function BookmarksDrawer({
                     </button>
                   </div>
 
-                  <h4 className="font-serif font-bold text-sm text-white mt-1.5 leading-snug line-clamp-2">
+                  <h4 className="font-serif font-bold text-sm text-stone-900 mt-1.5 leading-snug line-clamp-2">
                     {art.title}
                   </h4>
                   
-                  <p className="font-serif italic text-xs text-white/80 mt-1.5">
+                  <p className="font-serif italic text-xs text-stone-700 mt-1.5">
                     Written by {getAuthorName(art.authorId)}
                   </p>
 
                   <div className="flex items-center justify-between mt-3.5 pt-2.5 border-t border-[#991b1b]/20">
-                    <span className="font-mono text-[9px] text-gray-300 flex items-center gap-0.5 font-bold">
-                      <Clock size={10} className="text-red-400" />
+                    <span className="font-mono text-[9px] text-stone-600 flex items-center gap-0.5 font-bold">
+                      <Clock size={10} className="text-[#991b1b]" />
                       {art.readTime}
                     </span>
 
                     <button
                       onClick={() => onReadArticle(art)}
-                      className="text-[10px] font-mono uppercase tracking-wider text-red-400 hover:text-red-200 hover:underline font-bold flex items-center gap-1 cursor-pointer"
+                      className="text-[10px] font-mono uppercase tracking-wider text-[#991b1b] hover:text-red-800 hover:underline font-bold flex items-center gap-1 cursor-pointer"
                       id={`read-clip-${art.id}`}
                     >
                       <BookOpen size={10} />

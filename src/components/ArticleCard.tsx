@@ -31,12 +31,12 @@ export default function ArticleCard({
   
   const getCategoryColor = (cat: string) => {
     switch (cat) {
-      case 'Politics': return 'bg-red-950/80 text-red-300 border-red-700/50';
-      case 'Tech': return 'bg-blue-950/80 text-blue-300 border-blue-700/50';
-      case 'Science': return 'bg-emerald-950/80 text-emerald-300 border-emerald-700/50';
-      case 'Opinion': return 'bg-purple-950/80 text-purple-300 border-purple-700/50';
+      case 'Politics': return 'bg-red-50/80 text-red-800 border-red-700/50';
+      case 'Tech': return 'bg-blue-50/80 text-blue-800 border-blue-700/50';
+      case 'Science': return 'bg-emerald-50/80 text-emerald-800 border-emerald-700/50';
+      case 'Opinion': return 'bg-purple-50/80 text-purple-800 border-purple-700/50';
       case 'Culture': return 'bg-pink-950/80 text-pink-300 border-pink-700/50';
-      case 'Business': return 'bg-amber-950/80 text-amber-300 border-amber-700/50';
+      case 'Business': return 'bg-amber-50/80 text-amber-800 border-amber-700/50';
       default: return 'bg-neutral-900 text-white border-neutral-700';
     }
   };
@@ -55,7 +55,7 @@ export default function ArticleCard({
   if (variant === 'featured') {
     return (
       <article 
-        className="group bg-[#151313] border-2 border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden mb-8 transition-all duration-300 flex flex-col lg:flex-row cursor-pointer rounded shadow-xl"
+        className="group bg-white border-2 border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden mb-8 transition-all duration-300 flex flex-col lg:flex-row cursor-pointer rounded shadow-xl"
         onClick={() => onReadMore(article)}
         id={`featured-card-${article.id}`}
       >
@@ -82,8 +82,8 @@ export default function ArticleCard({
           {isAdmin && onDelete && (
             <div className="absolute top-4 right-4 flex gap-2">
               {confirmDelete ? (
-                <div className="flex items-center gap-1.5 bg-red-950/95 text-white p-1 px-2.5 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                  <span className="font-mono text-[10px] uppercase font-bold text-red-200">Delete story?</span>
+                <div className="flex items-center gap-1.5 bg-red-50/95 text-stone-900 p-1 px-2.5 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                  <span className="font-mono text-[10px] uppercase font-bold text-red-800">Delete story?</span>
                   <button
                     type="button"
                     onClick={(e) => {
@@ -101,7 +101,7 @@ export default function ArticleCard({
                       e.stopPropagation();
                       setConfirmDelete(false);
                     }}
-                    className="text-[10px] font-mono text-gray-300 hover:text-white px-1.5 cursor-pointer"
+                    className="text-[10px] font-mono text-stone-600 hover:text-stone-900 px-1.5 cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -127,13 +127,13 @@ export default function ArticleCard({
 
         <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
           <div>
-            <h2 className="font-serif text-2xl md:text-3.5xl font-black tracking-tight leading-tight text-white group-hover:text-red-400 transition-colors duration-300">
+            <h2 className="font-serif text-2xl md:text-3.5xl font-black tracking-tight leading-tight text-stone-900 group-hover:text-[#991b1b] transition-colors duration-300">
               {article.title}
             </h2>
-            <h3 className="font-serif italic text-base text-white/90 mt-3 leading-relaxed">
+            <h3 className="font-serif italic text-base text-stone-700 mt-3 leading-relaxed">
               {article.subtitle}
             </h3>
-            <p className="font-sans text-xs sm:text-sm text-white/80 mt-4 leading-relaxed line-clamp-3">
+            <p className="font-sans text-xs sm:text-sm text-stone-700 mt-4 leading-relaxed line-clamp-3">
               {article.summary}
             </p>
           </div>
@@ -153,10 +153,10 @@ export default function ArticleCard({
                 />
               )}
               <div>
-                <p className="font-serif font-bold text-sm text-white hover:underline">
+                <p className="font-serif font-bold text-sm text-stone-900 hover:underline">
                   By {author?.name || 'Sameera Mahboobdeen'}
                 </p>
-                <p className="font-mono text-[10px] text-gray-400">
+                <p className="font-mono text-[10px] text-stone-500">
                   {author?.role || 'Chief Editor'}
                 </p>
               </div>
@@ -164,7 +164,7 @@ export default function ArticleCard({
 
             {/* Read Indicators / Saved */}
             <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-              <div className="flex items-center gap-3 font-mono text-[11px] text-gray-300">
+              <div className="flex items-center gap-3 font-mono text-[11px] text-stone-600">
                 <span className="flex items-center gap-1.5 font-bold">
                   <Clock size={12} className="text-[#dc2626]" />
                   {article.readTime}
@@ -176,7 +176,7 @@ export default function ArticleCard({
               <div className="flex items-center gap-2">
                 {isAdmin && onDelete && (
                   confirmDelete ? (
-                    <div className="flex items-center gap-1 bg-red-950 border border-red-500 p-1 rounded" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex items-center gap-1 bg-red-50 border border-red-500 p-1 rounded" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
                         onClick={(e) => {
@@ -193,7 +193,7 @@ export default function ArticleCard({
                           e.stopPropagation();
                           setConfirmDelete(false);
                         }}
-                        className="text-[10px] font-mono text-gray-300 px-1"
+                        className="text-[10px] font-mono text-stone-600 px-1"
                       >
                         ✕
                       </button>
@@ -222,7 +222,7 @@ export default function ArticleCard({
                   className={`p-2 rounded-sm border cursor-pointer transition-all ${
                     isBookmarked 
                       ? 'bg-[#991b1b] text-white border-[#dc2626]' 
-                      : 'bg-[#241a1a] hover:bg-[#381c1c] border-[#991b1b]/40 text-white'
+                      : 'bg-red-50 hover:bg-red-50 border-[#991b1b]/40 text-stone-900'
                   }`}
                   title={isBookmarked ? "Saved" : "Save clipping"}
                   id={`bookmark-feat-${article.id}`}
@@ -284,7 +284,7 @@ export default function ArticleCard({
                     e.stopPropagation();
                     setConfirmDelete(true);
                   }}
-                  className="p-1 text-red-400 hover:text-red-200 hover:bg-red-950/60 rounded transition-colors cursor-pointer"
+                  className="p-1 text-[#991b1b] hover:text-red-800 hover:bg-red-50/60 rounded transition-colors cursor-pointer"
                   title="Delete article"
                   id={`delete-sidebar-${article.id}`}
                 >
@@ -316,7 +316,7 @@ export default function ArticleCard({
   // GRID CARD VARIANT (Standard masonry feed layout)
   return (
     <article 
-      className="group bg-[#151313] border border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl rounded"
+      className="group bg-white border border-[#991b1b]/40 hover:border-[#dc2626]/70 select-none overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-xl rounded"
       onClick={() => onReadMore(article)}
       id={`grid-card-${article.id}`}
     >
@@ -339,7 +339,7 @@ export default function ArticleCard({
         <div className="absolute top-3 right-3 flex items-center gap-1.5">
           {isAdmin && onDelete && (
             confirmDelete ? (
-              <div className="flex items-center gap-1 bg-red-950/95 text-white p-1 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center gap-1 bg-red-50/95 text-stone-900 p-1 rounded border border-red-500 shadow-xl" onClick={(e) => e.stopPropagation()}>
                 <button
                   type="button"
                   onClick={(e) => {
@@ -357,7 +357,7 @@ export default function ArticleCard({
                     e.stopPropagation();
                     setConfirmDelete(false);
                   }}
-                  className="text-[10px] text-gray-300 hover:text-white px-1 cursor-pointer"
+                  className="text-[10px] text-stone-600 hover:text-stone-900 px-1 cursor-pointer"
                 >
                   ✕
                 </button>
@@ -398,14 +398,14 @@ export default function ArticleCard({
 
       <div className="p-4 flex-grow flex flex-col justify-between">
         <div className="mb-4">
-          <div className="font-mono text-[9px] text-gray-400 mb-1.5 flex justify-between font-bold">
+          <div className="font-mono text-[9px] text-stone-500 mb-1.5 flex justify-between font-bold">
             <span>{formatDate(article.publishedAt)}</span>
             <span>{article.readTime}</span>
           </div>
-          <h3 className="font-serif text-base font-bold tracking-tight text-white group-hover:text-red-400 transition-colors duration-200 leading-snug line-clamp-2">
+          <h3 className="font-serif text-base font-bold tracking-tight text-stone-900 group-hover:text-[#991b1b] transition-colors duration-200 leading-snug line-clamp-2">
             {article.title}
           </h3>
-          <p className="font-sans text-xs text-white/80 mt-2 leading-relaxed line-clamp-3">
+          <p className="font-sans text-xs text-stone-700 mt-2 leading-relaxed line-clamp-3">
             {article.summary}
           </p>
         </div>
@@ -423,7 +423,7 @@ export default function ArticleCard({
                 }}
               />
             )}
-            <span className="font-serif text-[11px] font-bold text-white">
+            <span className="font-serif text-[11px] font-bold text-stone-900">
               By {author?.name.split(' ').slice(-1)[0] || 'Sameera'} 
             </span>
           </div>
@@ -449,7 +449,7 @@ export default function ArticleCard({
                       e.stopPropagation();
                       setConfirmDelete(false);
                     }}
-                    className="text-gray-400 text-[10px] px-1 hover:text-white cursor-pointer"
+                    className="text-stone-500 text-[10px] px-1 hover:text-stone-900 cursor-pointer"
                   >
                     ✕
                   </button>
@@ -471,7 +471,7 @@ export default function ArticleCard({
               )
             )}
 
-            <div className="flex items-center gap-1.5 text-gray-300 font-mono text-[10px] font-bold">
+            <div className="flex items-center gap-1.5 text-stone-600 font-mono text-[10px] font-bold">
               <span className="flex items-center gap-0.5">
                 <Eye size={11} className="text-[#dc2626]" />
                 {article.views}

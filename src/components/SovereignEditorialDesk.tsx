@@ -290,61 +290,61 @@ export default function SovereignEditorialDesk({
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-lg bg-[#141212] border-l-4 border-[#991b1b] shadow-2xl flex flex-col font-sans text-white animate-in slide-in-from-right duration-300 h-full"
+        className="w-full max-w-lg bg-white border-l-4 border-[#991b1b] shadow-2xl flex flex-col font-sans text-stone-900 animate-in slide-in-from-right duration-300 h-full"
         onClick={(e) => e.stopPropagation()}
         id="editorial-desk-drawer"
       >
       
       {/* Header Banner */}
-      <div className="bg-[#0f0d0d] text-white p-4 flex items-center justify-between border-b-2 border-[#991b1b]">
+      <div className="bg-white text-stone-900 p-4 flex items-center justify-between border-b-2 border-[#991b1b]">
         <div className="flex items-center gap-2">
-          <Shield size={18} className="text-red-400 animate-pulse" />
+          <Shield size={18} className="text-[#991b1b] animate-pulse" />
           <div>
-            <h2 className="font-serif font-black text-sm uppercase tracking-wider text-white">Sovereign Editor's Desk</h2>
-            <p className="font-mono text-[9px] text-gray-400 uppercase">Interactive Newsroom CMS Control Panel</p>
+            <h2 className="font-serif font-black text-sm uppercase tracking-wider text-stone-900">Sovereign Editor's Desk</h2>
+            <p className="font-mono text-[9px] text-stone-500 uppercase">Interactive Newsroom CMS Control Panel</p>
           </div>
         </div>
         <button 
           onClick={onClose}
-          className="p-1 hover:bg-white/10 rounded cursor-pointer transition-colors text-white"
+          className="p-1 hover:bg-black/10 rounded cursor-pointer transition-colors text-stone-900"
         >
           <X size={18} />
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex bg-[#1a1717] border-b border-[#991b1b]/30 text-xs font-mono">
+      <div className="flex bg-stone-100 border-b border-[#991b1b]/30 text-xs font-mono">
         <button 
           onClick={() => setActiveSubTab('articles')}
-          className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'articles' ? 'bg-[#991b1b] text-white' : 'hover:bg-[#251f1f] text-gray-300'}`}
+          className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'articles' ? 'bg-[#991b1b] text-white' : 'hover:bg-stone-100 text-stone-600'}`}
         >
           Manage Dispatches ({articles.length})
         </button>
         <button 
           onClick={() => setActiveSubTab('writers')}
-          className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'writers' ? 'bg-[#991b1b] text-white' : 'hover:bg-[#251f1f] text-gray-300'}`}
+          className={`flex-1 py-3 text-center border-r border-[#991b1b]/25 font-bold uppercase cursor-pointer ${activeSubTab === 'writers' ? 'bg-[#991b1b] text-white' : 'hover:bg-stone-100 text-stone-600'}`}
         >
           Writers ({writers.length})
         </button>
         <button 
           onClick={() => setActiveSubTab('data')}
-          className={`flex-1 py-3 text-center font-bold uppercase cursor-pointer ${activeSubTab === 'data' ? 'bg-[#991b1b] text-white' : 'hover:bg-[#251f1f] text-gray-300'}`}
+          className={`flex-1 py-3 text-center font-bold uppercase cursor-pointer ${activeSubTab === 'data' ? 'bg-[#991b1b] text-white' : 'hover:bg-stone-100 text-stone-600'}`}
         >
           CMS Backups & Options
         </button>
       </div>
 
       {/* Cloud Firestore Status Banner */}
-      <div className="bg-[#161313] text-white px-4 py-2 text-xs border-b border-[#991b1b]/30 flex items-center justify-between">
+      <div className="bg-white text-stone-900 px-4 py-2 text-xs border-b border-[#991b1b]/30 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Cloud size={13} className={currentUser ? "text-emerald-400" : "text-amber-400"} />
+          <Cloud size={13} className={currentUser ? "text-emerald-800" : "text-amber-800"} />
           <div className="font-mono text-[10px]">
             {currentUser ? (
-              <span className="text-emerald-300">
+              <span className="text-emerald-800">
                 Live Cloud Sync Active: <strong>{currentUser.email}</strong>
               </span>
             ) : (
-              <span className="text-gray-300">
+              <span className="text-stone-600">
                 Cloud Sync: Local offline cache active.
               </span>
             )}
@@ -354,7 +354,7 @@ export default function SovereignEditorialDesk({
           onSignOutGoogle && (
             <button
               onClick={onSignOutGoogle}
-              className="text-[9px] font-mono text-red-400 hover:text-red-300 underline cursor-pointer"
+              className="text-[9px] font-mono text-[#991b1b] hover:text-red-800 underline cursor-pointer"
             >
               Sign Out
             </button>
@@ -380,8 +380,8 @@ export default function SovereignEditorialDesk({
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[#991b1b]/30">
               <div>
-                <h3 className="font-serif font-black text-sm uppercase tracking-wide text-white">Live Dispatch Hierarchy</h3>
-                <p className="font-mono text-[9px] text-gray-300">Top article (Index 0) is dynamically FEATURED</p>
+                <h3 className="font-serif font-black text-sm uppercase tracking-wide text-stone-900">Live Dispatch Hierarchy</h3>
+                <p className="font-mono text-[9px] text-stone-600">Top article (Index 0) is dynamically FEATURED</p>
               </div>
               <button
                 onClick={() => setShowNewArticleForm(!showNewArticleForm)}
@@ -394,18 +394,18 @@ export default function SovereignEditorialDesk({
 
             {/* COMPOSE NEW DISPATCH ACCORDION / FORM */}
             {showNewArticleForm && (
-              <form onSubmit={handleCreateArticle} className="p-4 bg-[#181515] border-2 border-[#991b1b]/40 rounded space-y-3 animate-in fade-in duration-200">
+              <form onSubmit={handleCreateArticle} className="p-4 bg-white border-2 border-[#991b1b]/40 rounded space-y-3 animate-in fade-in duration-200">
                 <div className="flex items-center justify-between border-b border-[#991b1b]/30 pb-2">
-                  <h4 className="font-serif font-black text-xs uppercase tracking-wider text-red-400 flex items-center gap-1.5">
+                  <h4 className="font-serif font-black text-xs uppercase tracking-wider text-[#991b1b] flex items-center gap-1.5">
                     <FileText size={13} />
                     <span>Publish Weekly Dispatch</span>
                   </h4>
-                  <span className="font-mono text-[9px] text-gray-300">Auto-publishes to current edition</span>
+                  <span className="font-mono text-[9px] text-stone-600">Auto-publishes to current edition</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Dispatch Title *
                     </label>
                     <input 
@@ -414,12 +414,12 @@ export default function SovereignEditorialDesk({
                       value={newTitle} 
                       onChange={e => setNewTitle(e.target.value)}
                       placeholder="e.g. Sovereign Debt Realignment: The Treasury Gazette Breakdown"
-                      className="w-full text-xs font-serif font-bold p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-serif font-bold p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Deck / Subtitle
                     </label>
                     <input 
@@ -427,45 +427,45 @@ export default function SovereignEditorialDesk({
                       value={newSubtitle} 
                       onChange={e => setNewSubtitle(e.target.value)}
                       placeholder="A comprehensive breakdown of legislative compromises and international oversight."
-                      className="w-full text-xs font-sans p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-sans p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Desk Category
                     </label>
                     <select 
                       value={newCategory} 
                       onChange={e => setNewCategory(e.target.value as Category)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
-                      <option value="Politics" className="bg-[#1e1b1b] text-white">Politics</option>
-                      <option value="Opinion" className="bg-[#1e1b1b] text-white">Opinion</option>
-                      <option value="Business" className="bg-[#1e1b1b] text-white">Business</option>
-                      <option value="Culture" className="bg-[#1e1b1b] text-white">Culture</option>
-                      <option value="Tech" className="bg-[#1e1b1b] text-white">Tech</option>
-                      <option value="Science" className="bg-[#1e1b1b] text-white">Science</option>
+                      <option value="Politics" className="bg-stone-100 text-stone-900">Politics</option>
+                      <option value="Opinion" className="bg-stone-100 text-stone-900">Opinion</option>
+                      <option value="Business" className="bg-stone-100 text-stone-900">Business</option>
+                      <option value="Culture" className="bg-stone-100 text-stone-900">Culture</option>
+                      <option value="Tech" className="bg-stone-100 text-stone-900">Tech</option>
+                      <option value="Science" className="bg-stone-100 text-stone-900">Science</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Byline Author
                     </label>
                     <select 
                       value={newAuthorId} 
                       onChange={e => setNewAuthorId(e.target.value)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
                       {writers.map(w => (
-                        <option key={w.id} value={w.id} className="bg-[#1e1b1b] text-white">{w.name} ({w.role})</option>
+                        <option key={w.id} value={w.id} className="bg-stone-100 text-stone-900">{w.name} ({w.role})</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Est. Read Time
                     </label>
                     <input 
@@ -473,12 +473,12 @@ export default function SovereignEditorialDesk({
                       value={newReadTime} 
                       onChange={e => setNewReadTime(e.target.value)}
                       placeholder="e.g. 5 min read"
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Cover Image URL
                     </label>
                     <input 
@@ -486,12 +486,12 @@ export default function SovereignEditorialDesk({
                       value={newImageUrl} 
                       onChange={e => setNewImageUrl(e.target.value)}
                       placeholder="https://images.unsplash.com/..."
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Summary (Lead Broadsheet Hook)
                     </label>
                     <textarea 
@@ -499,12 +499,12 @@ export default function SovereignEditorialDesk({
                       value={newSummary} 
                       onChange={e => setNewSummary(e.target.value)}
                       placeholder="Brief 2-sentence summary that appears on front page article cards..."
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Full Article Body * (Separate paragraphs with double Enter)
                     </label>
                     <textarea 
@@ -513,12 +513,12 @@ export default function SovereignEditorialDesk({
                       value={newContent} 
                       onChange={e => setNewContent(e.target.value)}
                       placeholder="Write or paste full article dispatch text here. Each blank line between paragraphs will format automatically into newspaper editorial sections."
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div className="md:col-span-2 flex items-center gap-6 pt-1">
-                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-white">
+                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-stone-900">
                       <input 
                         type="checkbox" 
                         checked={newIsCurrent} 
@@ -528,7 +528,7 @@ export default function SovereignEditorialDesk({
                       <span>Publish to Current News Stream</span>
                     </label>
 
-                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-white">
+                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-stone-900">
                       <input 
                         type="checkbox" 
                         checked={newIsFeatured} 
@@ -544,7 +544,7 @@ export default function SovereignEditorialDesk({
                   <button 
                     type="button" 
                     onClick={() => setShowNewArticleForm(false)}
-                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-[#1e1b1b] text-gray-300 hover:bg-[#2b2424] hover:text-white cursor-pointer border border-[#991b1b]/40"
+                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-stone-100 text-stone-600 hover:bg-stone-100 hover:text-stone-900 cursor-pointer border border-[#991b1b]/40"
                   >
                     Cancel
                   </button>
@@ -561,16 +561,16 @@ export default function SovereignEditorialDesk({
 
             {/* EDIT DISPATCH FORM */}
             {editingArticleId && (
-              <form onSubmit={handleSaveEditArticle} className="p-4 bg-[#181515] border-2 border-[#991b1b] rounded space-y-3 animate-in fade-in duration-200">
+              <form onSubmit={handleSaveEditArticle} className="p-4 bg-white border-2 border-[#991b1b] rounded space-y-3 animate-in fade-in duration-200">
                 <div className="flex items-center justify-between border-b border-[#991b1b]/30 pb-2">
-                  <h4 className="font-serif font-black text-xs uppercase tracking-wider text-red-400 flex items-center gap-1.5">
+                  <h4 className="font-serif font-black text-xs uppercase tracking-wider text-[#991b1b] flex items-center gap-1.5">
                     <Edit3 size={13} />
                     <span>Edit Dispatch Details</span>
                   </h4>
                   <button 
                     type="button" 
                     onClick={() => setEditingArticleId(null)}
-                    className="p-1 text-gray-400 hover:text-white cursor-pointer"
+                    className="p-1 text-stone-500 hover:text-stone-900 cursor-pointer"
                   >
                     <X size={14} />
                   </button>
@@ -578,7 +578,7 @@ export default function SovereignEditorialDesk({
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Dispatch Title *
                     </label>
                     <input 
@@ -586,51 +586,51 @@ export default function SovereignEditorialDesk({
                       required 
                       value={editTitle} 
                       onChange={e => setEditTitle(e.target.value)}
-                      className="w-full text-xs font-serif font-bold p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-serif font-bold p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Subtitle / Deck Line
                     </label>
                     <input 
                       type="text" 
                       value={editSubtitle} 
                       onChange={e => setEditSubtitle(e.target.value)}
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Beat Category *
                     </label>
                     <select 
                       value={editCategory} 
                       onChange={e => setEditCategory(e.target.value as Category)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
-                      <option value="Politics" className="bg-[#1e1b1b] text-white">Politics</option>
-                      <option value="Tech" className="bg-[#1e1b1b] text-white">Tech</option>
-                      <option value="Science" className="bg-[#1e1b1b] text-white">Science</option>
-                      <option value="Opinion" className="bg-[#1e1b1b] text-white">Opinion</option>
-                      <option value="Culture" className="bg-[#1e1b1b] text-white">Culture</option>
-                      <option value="Business" className="bg-[#1e1b1b] text-white">Business</option>
+                      <option value="Politics" className="bg-stone-100 text-stone-900">Politics</option>
+                      <option value="Tech" className="bg-stone-100 text-stone-900">Tech</option>
+                      <option value="Science" className="bg-stone-100 text-stone-900">Science</option>
+                      <option value="Opinion" className="bg-stone-100 text-stone-900">Opinion</option>
+                      <option value="Culture" className="bg-stone-100 text-stone-900">Culture</option>
+                      <option value="Business" className="bg-stone-100 text-stone-900">Business</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Assigned Byline *
                     </label>
                     <select 
                       value={editAuthorId} 
                       onChange={e => setEditAuthorId(e.target.value)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
                       {writers.map(w => (
-                        <option key={w.id} value={w.id} className="bg-[#1e1b1b] text-white">
+                        <option key={w.id} value={w.id} className="bg-stone-100 text-stone-900">
                           {w.name} ({w.role})
                         </option>
                       ))}
@@ -638,43 +638,43 @@ export default function SovereignEditorialDesk({
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Estimated Read Duration
                     </label>
                     <input 
                       type="text" 
                       value={editReadTime} 
                       onChange={e => setEditReadTime(e.target.value)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Header Feature Image URL
                     </label>
                     <input 
                       type="url" 
                       value={editImageUrl} 
                       onChange={e => setEditImageUrl(e.target.value)}
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Summary / Abstract Preview
                     </label>
                     <textarea 
                       rows={2}
                       value={editSummary} 
                       onChange={e => setEditSummary(e.target.value)}
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Full Article Body * (Separate paragraphs with double Enter)
                     </label>
                     <textarea 
@@ -682,12 +682,12 @@ export default function SovereignEditorialDesk({
                       required
                       value={editContent} 
                       onChange={e => setEditContent(e.target.value)}
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     />
                   </div>
 
                   <div className="md:col-span-2 flex items-center gap-6 pt-1">
-                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-white">
+                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-stone-900">
                       <input 
                         type="checkbox" 
                         checked={editIsCurrent} 
@@ -697,7 +697,7 @@ export default function SovereignEditorialDesk({
                       <span>Active in Current News (Uncheck to Archive)</span>
                     </label>
 
-                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-white">
+                    <label className="flex items-center gap-2 cursor-pointer font-mono text-[10px] font-bold text-stone-900">
                       <input 
                         type="checkbox" 
                         checked={editIsFeatured} 
@@ -713,7 +713,7 @@ export default function SovereignEditorialDesk({
                   <button 
                     type="button" 
                     onClick={() => setEditingArticleId(null)}
-                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-[#1e1b1b] text-gray-300 hover:bg-[#2b2424] hover:text-white cursor-pointer border border-[#991b1b]/40"
+                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-stone-100 text-stone-600 hover:bg-stone-100 hover:text-stone-900 cursor-pointer border border-[#991b1b]/40"
                   >
                     Cancel
                   </button>
@@ -732,7 +732,7 @@ export default function SovereignEditorialDesk({
               {articles.map((art, idx) => (
                 <div 
                   key={art.id} 
-                  className={`p-3 bg-[#181515] border border-[#991b1b]/35 rounded hover:bg-[#221c1c] transition-all flex items-center justify-between gap-3 text-white ${idx === 1 ? 'ring-2 ring-red-700/60 bg-red-950/20' : ''}`}
+                  className={`p-3 bg-white border border-[#991b1b]/35 rounded hover:bg-stone-100 transition-all flex items-center justify-between gap-3 text-stone-900 ${idx === 1 ? 'ring-2 ring-red-700/60 bg-red-50/20' : ''}`}
                 >
                   <div className="flex-grow min-w-0">
                     <div className="flex items-center gap-2 mb-1">
@@ -740,7 +740,7 @@ export default function SovereignEditorialDesk({
                         #{idx + 1}
                       </span>
                       {idx === 0 && (
-                        <span className="font-mono text-[9px] font-black uppercase text-amber-300 bg-amber-950/80 border border-amber-500/50 px-1 rounded">
+                        <span className="font-mono text-[9px] font-black uppercase text-amber-800 bg-amber-50/80 border border-amber-500/50 px-1 rounded">
                           ★ Featured
                         </span>
                       )}
@@ -749,14 +749,14 @@ export default function SovereignEditorialDesk({
                           📌 Second Slot
                         </span>
                       )}
-                      <span className="font-mono text-[9px] font-semibold text-red-300 uppercase">
+                      <span className="font-mono text-[9px] font-semibold text-red-800 uppercase">
                         {art.category}
                       </span>
                     </div>
-                    <h4 className="font-serif font-bold text-xs truncate leading-snug text-white">
+                    <h4 className="font-serif font-bold text-xs truncate leading-snug text-stone-900">
                       {art.title}
                     </h4>
-                    <p className="font-sans text-[10px] text-gray-300 truncate mt-0.5">
+                    <p className="font-sans text-[10px] text-stone-600 truncate mt-0.5">
                       By {writers.find(w => w.id === art.authorId)?.name || 'Unknown Author'} • {art.publishedAt}
                     </p>
                   </div>
@@ -766,7 +766,7 @@ export default function SovereignEditorialDesk({
                     {/* Quick Edit */}
                     <button 
                       onClick={() => handleStartEditArticle(art)}
-                      className="p-1 border border-[#991b1b]/40 rounded bg-[#1e1b1b] hover:bg-[#2c2222] cursor-pointer text-red-400 hover:text-white"
+                      className="p-1 border border-[#991b1b]/40 rounded bg-stone-100 hover:bg-stone-100 cursor-pointer text-[#991b1b] hover:text-stone-900"
                       title="Edit Dispatch Details"
                     >
                       <Edit3 size={12} />
@@ -775,7 +775,7 @@ export default function SovereignEditorialDesk({
                     <button 
                       onClick={() => handleMoveArticle(idx, 'up')}
                       disabled={idx === 0}
-                      className={`p-1 border border-[#991b1b]/40 rounded bg-[#1e1b1b] hover:bg-[#2c2222] text-gray-300 hover:text-white cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed`}
+                      className={`p-1 border border-[#991b1b]/40 rounded bg-stone-100 hover:bg-stone-100 text-stone-600 hover:text-stone-900 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed`}
                       title="Move Dispatch Up"
                     >
                       <ArrowUp size={12} />
@@ -784,15 +784,15 @@ export default function SovereignEditorialDesk({
                     <button 
                       onClick={() => handleMoveArticle(idx, 'down')}
                       disabled={idx === articles.length - 1}
-                      className={`p-1 border border-[#991b1b]/40 rounded bg-[#1e1b1b] hover:bg-[#2c2222] text-gray-300 hover:text-white cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed`}
+                      className={`p-1 border border-[#991b1b]/40 rounded bg-stone-100 hover:bg-stone-100 text-stone-600 hover:text-stone-900 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed`}
                       title="Move Dispatch Down"
                     >
                       <ArrowDown size={12} />
                     </button>
                     {/* Delete */}
                     {deletingArticleId === art.id ? (
-                      <div className="flex items-center gap-1 bg-red-950/90 p-0.5 px-1.5 border border-red-600 rounded">
-                        <span className="text-[9px] font-mono font-bold text-red-200">Delete?</span>
+                      <div className="flex items-center gap-1 bg-red-50/90 p-0.5 px-1.5 border border-red-600 rounded">
+                        <span className="text-[9px] font-mono font-bold text-red-800">Delete?</span>
                         <button
                           type="button"
                           onClick={() => {
@@ -806,7 +806,7 @@ export default function SovereignEditorialDesk({
                         <button
                           type="button"
                           onClick={() => setDeletingArticleId(null)}
-                          className="text-[9px] text-gray-400 hover:text-white cursor-pointer px-0.5"
+                          className="text-[9px] text-stone-500 hover:text-stone-900 cursor-pointer px-0.5"
                         >
                           ✕
                         </button>
@@ -815,7 +815,7 @@ export default function SovereignEditorialDesk({
                       <button 
                         type="button"
                         onClick={() => setDeletingArticleId(art.id)}
-                        className="p-1 border border-red-700/50 text-red-400 rounded bg-red-950/60 hover:bg-red-950 cursor-pointer"
+                        className="p-1 border border-red-700/50 text-[#991b1b] rounded bg-red-50/60 hover:bg-red-50 cursor-pointer"
                         title="Delete Dispatch"
                       >
                         <Trash2 size={12} />
@@ -826,7 +826,7 @@ export default function SovereignEditorialDesk({
               ))}
             </div>
 
-            <p className="text-[10px] font-sans text-gray-400 leading-normal italic text-center pt-2">
+            <p className="text-[10px] font-sans text-stone-500 leading-normal italic text-center pt-2">
               Note: To edit the full text, categories, or summary of any article, simply click the "Modify Article" button when reading it in standard view!
             </p>
           </div>
@@ -837,8 +837,8 @@ export default function SovereignEditorialDesk({
           <div className="space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[#991b1b]/30">
               <div>
-                <h3 className="font-serif font-black text-sm uppercase tracking-wide text-white">Journalists Directory</h3>
-                <p className="font-mono text-[9px] text-gray-300">Authorized editorial voices</p>
+                <h3 className="font-serif font-black text-sm uppercase tracking-wide text-stone-900">Journalists Directory</h3>
+                <p className="font-mono text-[9px] text-stone-600">Authorized editorial voices</p>
               </div>
               <button
                 onClick={() => setShowNewWriterForm(!showNewWriterForm)}
@@ -851,15 +851,15 @@ export default function SovereignEditorialDesk({
 
             {/* REGISTER NEW JOURNALIST FORM */}
             {showNewWriterForm && (
-              <form onSubmit={handleCreateWriter} className="p-4 bg-[#181515] border-2 border-[#991b1b]/40 rounded space-y-3 animate-in fade-in duration-200">
-                <h4 className="font-serif font-black text-xs uppercase tracking-wider text-red-400 flex items-center gap-1.5 border-b border-[#991b1b]/30 pb-2">
+              <form onSubmit={handleCreateWriter} className="p-4 bg-white border-2 border-[#991b1b]/40 rounded space-y-3 animate-in fade-in duration-200">
+                <h4 className="font-serif font-black text-xs uppercase tracking-wider text-[#991b1b] flex items-center gap-1.5 border-b border-[#991b1b]/30 pb-2">
                   <UserPlus size={13} />
                   <span>New Staff / Contributing Reporter</span>
                 </h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Full Name *
                     </label>
                     <input 
@@ -868,12 +868,12 @@ export default function SovereignEditorialDesk({
                       value={newWriterName} 
                       onChange={e => setNewWriterName(e.target.value)}
                       placeholder="e.g. Priyantha Jayasuriya"
-                      className="w-full text-xs font-serif font-bold p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-serif font-bold p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Desk Role *
                     </label>
                     <input 
@@ -882,12 +882,12 @@ export default function SovereignEditorialDesk({
                       value={newWriterRole} 
                       onChange={e => setNewWriterRole(e.target.value)}
                       placeholder="e.g. Senior Parliamentary Reporter"
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Biographical Dossier
                     </label>
                     <textarea 
@@ -895,12 +895,12 @@ export default function SovereignEditorialDesk({
                       value={newWriterBio} 
                       onChange={e => setNewWriterBio(e.target.value)}
                       placeholder="Brief reporting background, focus beats, past coverage..."
-                      className="w-full text-xs font-serif p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-serif p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Avatar Photo URL
                     </label>
                     <input 
@@ -908,12 +908,12 @@ export default function SovereignEditorialDesk({
                       value={newWriterAvatar} 
                       onChange={e => setNewWriterAvatar(e.target.value)}
                       placeholder="https://images.unsplash.com/..."
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] font-bold uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[9px] font-bold uppercase text-red-800 mb-1">
                       Contact Email
                     </label>
                     <input 
@@ -921,7 +921,7 @@ export default function SovereignEditorialDesk({
                       value={newWriterEmail} 
                       onChange={e => setNewWriterEmail(e.target.value)}
                       placeholder="journalist@ceylonreview.com"
-                      className="w-full text-xs font-mono p-2 bg-[#1e1b1b] text-white border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
+                      className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500 placeholder-gray-500"
                     />
                   </div>
                 </div>
@@ -930,7 +930,7 @@ export default function SovereignEditorialDesk({
                   <button 
                     type="button" 
                     onClick={() => setShowNewWriterForm(false)}
-                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-[#1e1b1b] text-gray-300 hover:bg-[#2b2424] hover:text-white cursor-pointer border border-[#991b1b]/40"
+                    className="px-3 py-1.5 font-mono text-[10px] font-bold uppercase rounded bg-stone-100 text-stone-600 hover:bg-stone-100 hover:text-stone-900 cursor-pointer border border-[#991b1b]/40"
                   >
                     Cancel
                   </button>
@@ -949,25 +949,25 @@ export default function SovereignEditorialDesk({
               {writers.map((writer) => {
                 const count = articles.filter(a => a.authorId === writer.id).length;
                 return (
-                  <div key={writer.id} className="p-3 bg-[#181515] border border-[#991b1b]/35 rounded flex items-center justify-between gap-3 text-white">
+                  <div key={writer.id} className="p-3 bg-white border border-[#991b1b]/35 rounded flex items-center justify-between gap-3 text-stone-900">
                     <div className="flex items-center gap-3">
                       <img 
                         src={writer.avatarUrl} 
                         alt={writer.name} 
-                        className="w-9 h-9 rounded-full object-cover border border-[#991b1b]/40 shrink-0 bg-zinc-900"
+                        className="w-9 h-9 rounded-full object-cover border border-[#991b1b]/40 shrink-0 bg-stone-100"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150&h=150';
                         }}
                       />
                       <div>
-                        <h4 className="font-serif font-bold text-xs text-white">
+                        <h4 className="font-serif font-bold text-xs text-stone-900">
                           {writer.name}
                         </h4>
-                        <p className="font-mono text-[9px] text-red-400 font-bold uppercase mt-0.5">
+                        <p className="font-mono text-[9px] text-[#991b1b] font-bold uppercase mt-0.5">
                           {writer.role}
                         </p>
-                        <p className="font-sans text-[10px] text-gray-300">
+                        <p className="font-sans text-[10px] text-stone-600">
                           {count} publication{count !== 1 ? 's' : ''} • Joined {writer.joinedDate}
                         </p>
                       </div>
@@ -975,8 +975,8 @@ export default function SovereignEditorialDesk({
 
                     {writer.id !== 'w-sameera' && onDeleteWriter && (
                       deletingWriterId === writer.id ? (
-                        <div className="flex items-center gap-1 bg-red-950/90 p-1 px-2 border border-red-600 rounded">
-                          <span className="text-[9px] font-mono font-bold text-red-200">Delete?</span>
+                        <div className="flex items-center gap-1 bg-red-50/90 p-1 px-2 border border-red-600 rounded">
+                          <span className="text-[9px] font-mono font-bold text-red-800">Delete?</span>
                           <button
                             type="button"
                             onClick={() => {
@@ -990,7 +990,7 @@ export default function SovereignEditorialDesk({
                           <button
                             type="button"
                             onClick={() => setDeletingWriterId(null)}
-                            className="text-[9px] text-gray-400 hover:text-white cursor-pointer px-1"
+                            className="text-[9px] text-stone-500 hover:text-stone-900 cursor-pointer px-1"
                           >
                             ✕
                           </button>
@@ -999,7 +999,7 @@ export default function SovereignEditorialDesk({
                         <button
                           type="button"
                           onClick={() => setDeletingWriterId(writer.id)}
-                          className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-950/60 rounded transition-colors cursor-pointer"
+                          className="p-1.5 text-[#991b1b] hover:text-red-800 hover:bg-red-50/60 rounded transition-colors cursor-pointer"
                           title={`Delete profile for ${writer.name}`}
                         >
                           <Trash2 size={14} />
@@ -1011,7 +1011,7 @@ export default function SovereignEditorialDesk({
               })}
             </div>
 
-            <p className="text-[10px] font-sans text-gray-400 leading-normal italic text-center pt-2">
+            <p className="text-[10px] font-sans text-stone-500 leading-normal italic text-center pt-2">
               Note: You can add new writers or edit their full profile descriptions (bio, email, avatar, and credentials) directly inside the main "Reporters" tab while in active Editor Mode!
             </p>
           </div>
@@ -1022,11 +1022,11 @@ export default function SovereignEditorialDesk({
           <div className="space-y-6">
             
             {/* Import / Export CMS backups */}
-            <div className="bg-[#181515] border-2 border-[#991b1b]/40 p-4 rounded space-y-4">
-              <h3 className="font-serif font-black text-sm uppercase tracking-wide border-b border-[#991b1b]/30 pb-1.5 text-white">
+            <div className="bg-white border-2 border-[#991b1b]/40 p-4 rounded space-y-4">
+              <h3 className="font-serif font-black text-sm uppercase tracking-wide border-b border-[#991b1b]/30 pb-1.5 text-stone-900">
                 Site Data CMS Portability
               </h3>
-              <p className="font-sans text-xs text-gray-300 leading-normal">
+              <p className="font-sans text-xs text-stone-600 leading-normal">
                 Because this website is fully offline-capable, all your live additions, reorderings, and revisions are securely kept in your local browser cache. 
                 Use these tools to **backup** or **publish** your edits across different machines!
               </p>
@@ -1045,7 +1045,7 @@ export default function SovereignEditorialDesk({
                 {/* Import Backup JSON Button */}
                 <button
                   onClick={triggerFileInput}
-                  className="flex items-center justify-center gap-1.5 p-2.5 bg-[#1e1b1b] hover:bg-[#2c2222] text-white font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer border border-[#991b1b]/40 shadow-sm transition-all"
+                  className="flex items-center justify-center gap-1.5 p-2.5 bg-stone-100 hover:bg-stone-100 text-stone-900 font-mono text-[10px] font-bold uppercase tracking-wider rounded cursor-pointer border border-[#991b1b]/40 shadow-sm transition-all"
                   title="Load articles and writers from a JSON file"
                 >
                   <Upload size={12} />
@@ -1064,33 +1064,33 @@ export default function SovereignEditorialDesk({
 
               {/* Import status display */}
               {importError && (
-                <div className="p-3 bg-red-950/80 border border-red-600 rounded text-red-200 text-[11px] leading-normal flex gap-1.5 items-start">
-                  <AlertTriangle size={14} className="shrink-0 mt-0.5 text-red-400" />
+                <div className="p-3 bg-red-50/80 border border-red-600 rounded text-red-800 text-[11px] leading-normal flex gap-1.5 items-start">
+                  <AlertTriangle size={14} className="shrink-0 mt-0.5 text-[#991b1b]" />
                   <span>{importError}</span>
                 </div>
               )}
 
               {importSuccess && (
-                <div className="p-3 bg-emerald-950/80 border border-emerald-600 rounded text-emerald-200 text-[11px] font-bold flex gap-1.5 items-center">
-                  <Check size={14} className="shrink-0 text-emerald-400" />
+                <div className="p-3 bg-emerald-50/80 border border-emerald-600 rounded text-emerald-800 text-[11px] font-bold flex gap-1.5 items-center">
+                  <Check size={14} className="shrink-0 text-emerald-800" />
                   <span>Site content imported and updated successfully!</span>
                 </div>
               )}
             </div>
 
             {/* Reset site state */}
-            <div className="p-4 bg-red-950/30 border-2 border-red-900/50 rounded space-y-3">
-              <h3 className="font-serif font-black text-sm uppercase tracking-wide text-red-200 flex items-center gap-1.5">
-                <AlertTriangle size={15} className="text-red-400" />
+            <div className="p-4 bg-red-50/30 border-2 border-red-900/50 rounded space-y-3">
+              <h3 className="font-serif font-black text-sm uppercase tracking-wide text-red-800 flex items-center gap-1.5">
+                <AlertTriangle size={15} className="text-[#991b1b]" />
                 <span>Reset Sovereign Archives</span>
               </h3>
-              <p className="font-sans text-xs text-red-300/80 leading-normal">
+              <p className="font-sans text-xs text-red-800 leading-normal">
                 Want to erase all browser-side additions, comments, likes, and profile adjustments and restore the Ceylon Review back to the factory-fresh broadsheet?
               </p>
 
               {showConfirmReset ? (
                 <div className="space-y-2 pt-2 animate-in fade-in duration-200">
-                  <p className="font-mono text-[10px] text-red-300 font-extrabold uppercase">
+                  <p className="font-mono text-[10px] text-red-800 font-extrabold uppercase">
                     ⚠ WARNING: This deletes your edits permanently! Proceed?
                   </p>
                   <div className="flex gap-2">
@@ -1105,7 +1105,7 @@ export default function SovereignEditorialDesk({
                     </button>
                     <button
                       onClick={() => setShowConfirmReset(false)}
-                      className="flex-1 py-1.5 bg-[#1e1b1b] hover:bg-[#2b2424] text-gray-300 font-mono text-[9px] font-bold uppercase rounded cursor-pointer border border-[#991b1b]/40"
+                      className="flex-1 py-1.5 bg-stone-100 hover:bg-stone-100 text-stone-600 font-mono text-[9px] font-bold uppercase rounded cursor-pointer border border-[#991b1b]/40"
                     >
                       Cancel
                     </button>
@@ -1128,7 +1128,7 @@ export default function SovereignEditorialDesk({
       </div>
 
       {/* Control Panel Footer */}
-      <div className="bg-[#0f0d0d] text-gray-400 p-3 border-t border-[#991b1b]/30 text-center font-mono text-[9px] uppercase font-bold tracking-wider">
+      <div className="bg-white text-stone-500 p-3 border-t border-[#991b1b]/30 text-center font-mono text-[9px] uppercase font-bold tracking-wider">
         The Ceylon Review • Designed for Editorial Integrity
       </div>
 

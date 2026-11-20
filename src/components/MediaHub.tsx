@@ -318,16 +318,16 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     <div className="max-w-7xl mx-auto px-4 mt-8 pb-12 select-text animate-in fade-in duration-300" id="viewport-media-desk">
       
       {/* Intro Editorial Section */}
-      <div className="text-center bg-[#141212] border-2 border-[#991b1b]/40 rounded p-6 md:p-8 mb-8 shadow-xl" id="media-editorial-stamp">
-        <div className="flex justify-center items-center gap-2 text-red-400 mb-2 font-mono text-xs font-bold uppercase tracking-wider">
+      <div className="text-center bg-white border-2 border-[#991b1b]/40 rounded p-6 md:p-8 mb-8 shadow-xl" id="media-editorial-stamp">
+        <div className="flex justify-center items-center gap-2 text-[#991b1b] mb-2 font-mono text-xs font-bold uppercase tracking-wider">
           <Film size={14} />
           <span>Sovereign Broadcast & Visual Archive</span>
           <Sparkles size={12} className="animate-pulse" />
         </div>
-        <h2 className="font-serif text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+        <h2 className="font-serif text-3xl md:text-4xl font-black text-stone-900 uppercase tracking-tight">
           MULTIMEDIA PRESS ROOM
         </h2>
-        <p className="font-sans text-xs md:text-sm text-gray-300 max-w-2xl mx-auto mt-2 leading-relaxed">
+        <p className="font-sans text-xs md:text-sm text-stone-600 max-w-2xl mx-auto mt-2 leading-relaxed">
           Access public briefings, digital source protection guides, panel broadcasts, and physical archives tracking regional and global constitutional safeguards.
         </p>
       </div>
@@ -339,7 +339,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-4 py-2 border-2 transition-all cursor-pointer rounded ${
             activeMediaTab === 'videos'
               ? 'bg-[#991b1b] text-white border-red-500 shadow-md font-bold'
-              : 'bg-[#161313] border-[#991b1b]/30 text-gray-300 hover:text-white hover:bg-[#221c1c]'
+              : 'bg-white border-[#991b1b]/30 text-stone-600 hover:text-stone-900 hover:bg-stone-100'
           }`}
           id="media-tab-videos"
         >
@@ -351,7 +351,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-4 py-2 border-2 transition-all cursor-pointer rounded ${
             activeMediaTab === 'events'
               ? 'bg-[#991b1b] text-white border-red-500 shadow-md font-bold'
-              : 'bg-[#161313] border-[#991b1b]/30 text-gray-300 hover:text-white hover:bg-[#221c1c]'
+              : 'bg-white border-[#991b1b]/30 text-stone-600 hover:text-stone-900 hover:bg-stone-100'
           }`}
           id="media-tab-events"
         >
@@ -362,12 +362,12 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
       {/* Notification Success Toast */}
       {(videoSuccess || eventSuccess) && (
-        <div className="bg-red-950/80 text-white border-2 border-red-600 p-4 mb-6 rounded flex items-center justify-between shadow-lg" id="submit-toast-alert">
+        <div className="bg-red-50/80 text-stone-900 border-2 border-red-600 p-4 mb-6 rounded flex items-center justify-between shadow-lg" id="submit-toast-alert">
           <div className="flex items-center gap-2">
             <Check size={16} className="bg-red-900 text-red-200 rounded-full p-0.5" />
             <span className="font-mono text-xs font-bold uppercase">Dispatch successfully published to local ledger!</span>
           </div>
-          <button onClick={() => { setVideoSuccess(false); setEventSuccess(false); }} className="text-white/60 hover:text-white cursor-pointer">
+          <button onClick={() => { setVideoSuccess(false); setEventSuccess(false); }} className="text-stone-600 hover:text-stone-900 cursor-pointer">
             <X size={14} />
           </button>
         </div>
@@ -399,14 +399,14 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
           {/* Collapsible Video Submission Form */}
           {showVideoForm && (
-            <div className="bg-[#161313] border-2 border-[#991b1b]/40 rounded p-6 max-w-2xl mx-auto shadow-2xl animate-in slide-in-from-top-4 duration-200" id="video-submit-form-container">
-              <h4 className="font-serif font-black text-base text-white border-b border-[#991b1b]/30 pb-2 mb-4 uppercase flex items-center gap-1.5">
-                <Video size={14} className="text-red-400" />
+            <div className="bg-white border-2 border-[#991b1b]/40 rounded p-6 max-w-2xl mx-auto shadow-2xl animate-in slide-in-from-top-4 duration-200" id="video-submit-form-container">
+              <h4 className="font-serif font-black text-base text-stone-900 border-b border-[#991b1b]/30 pb-2 mb-4 uppercase flex items-center gap-1.5">
+                <Video size={14} className="text-[#991b1b]" />
                 Post New Broadcast Dispatch
               </h4>
               <form onSubmit={handlePostVideo} className="space-y-4">
                 <div>
-                  <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                  <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                     Video Title *
                   </label>
                   <input
@@ -415,11 +415,11 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     placeholder="Enter analytical title..."
                     value={videoTitle}
                     onChange={e => setVideoTitle(e.target.value)}
-                    className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500 font-bold"
+                    className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500 font-bold"
                   />
                 </div>
                 <div>
-                  <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                  <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                     Summary/Description
                   </label>
                   <textarea
@@ -427,12 +427,12 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     placeholder="Record key concepts, panel guests, or statutory timeline references..."
                     value={videoDesc}
                     onChange={e => setVideoDesc(e.target.value)}
-                    className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500 resize-none font-sans"
+                    className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500 resize-none font-sans"
                   />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="md:col-span-2">
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Platform Embed or Watch Link *
                     </label>
                     <input
@@ -441,32 +441,32 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       placeholder="e.g. https://www.youtube.com/watch?v=..."
                       value={videoUrlInput}
                       onChange={e => setVideoUrlInput(e.target.value)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
                     />
                   </div>
                   <div>
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Default Platform
                     </label>
                     <select
                       value={videoPlatform}
                       onChange={e => setVideoPlatform(e.target.value as any)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white focus:outline-none focus:border-red-500 font-bold"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 focus:outline-none focus:border-red-500 font-bold"
                     >
-                      <option value="YouTube" className="bg-[#1e1b1b] text-white">YouTube</option>
-                      <option value="Vimeo" className="bg-[#1e1b1b] text-white">Vimeo</option>
-                      <option value="Other" className="bg-[#1e1b1b] text-white">Direct Video / MP4 Link</option>
+                      <option value="YouTube" className="bg-stone-100 text-stone-900">YouTube</option>
+                      <option value="Vimeo" className="bg-stone-100 text-stone-900">Vimeo</option>
+                      <option value="Other" className="bg-stone-100 text-stone-900">Direct Video / MP4 Link</option>
                     </select>
                   </div>
                 </div>
-                <p className="text-[10px] font-sans text-gray-400 italic">
+                <p className="text-[10px] font-sans text-stone-500 italic">
                   * Note: Real video IDs will be automatically extracted and loaded in our interactive, frame-compliant players.
                 </p>
                 <div className="flex justify-end gap-2 pt-2">
                   <button
                     type="button"
                     onClick={() => setShowVideoForm(false)}
-                    className="bg-[#1e1b1b] border border-[#991b1b]/40 text-gray-300 font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-4 rounded hover:bg-[#2b2525] hover:text-white cursor-pointer"
+                    className="bg-stone-100 border border-[#991b1b]/40 text-stone-600 font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-4 rounded hover:bg-stone-100 hover:text-stone-900 cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -484,8 +484,8 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
           {/* Video Grid */}
           {videos.length === 0 ? (
-            <div className="text-center py-20 bg-[#141212] border-2 border-dashed border-[#991b1b]/30 rounded" id="no-videos-box">
-              <p className="font-serif text-lg italic text-white/90">"No broadcasting recordings currently logged in the ledger."</p>
+            <div className="text-center py-20 bg-white border-2 border-dashed border-[#991b1b]/30 rounded" id="no-videos-box">
+              <p className="font-serif text-lg italic text-stone-700">"No broadcasting recordings currently logged in the ledger."</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6" id="video-dispatches-grid">
@@ -494,7 +494,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                 return (
                   <div 
                     key={video.id} 
-                    className="bg-[#141212] border-2 border-[#991b1b]/35 rounded-md overflow-hidden flex flex-col justify-between hover:border-red-500/60 shadow-xl transition-all duration-300"
+                    className="bg-white border-2 border-[#991b1b]/35 rounded-md overflow-hidden flex flex-col justify-between hover:border-red-500/60 shadow-xl transition-all duration-300"
                     id={`video-card-${video.id}`}
                   >
                     {/* Embedded Frame or Dynamic Overlay */}
@@ -509,14 +509,14 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                           referrerPolicy="no-referrer"
                         />
                       ) : (
-                        <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-zinc-950 text-white text-center">
-                          <Play size={32} className="text-red-400 mb-2 animate-pulse" />
+                        <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-zinc-950 text-stone-900 text-center">
+                          <Play size={32} className="text-[#991b1b] mb-2 animate-pulse" />
                           <p className="font-mono text-[10px] uppercase font-bold tracking-wider mb-1">Direct External Source Link</p>
                           <a 
                             href={video.videoUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs text-red-400 hover:text-red-300 hover:underline font-serif mt-1 font-bold"
+                            className="inline-flex items-center gap-1.5 text-xs text-[#991b1b] hover:text-red-800 hover:underline font-serif mt-1 font-bold"
                           >
                             <span>Launch Feed</span>
                             <ExternalLink size={10} />
@@ -524,7 +524,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                         </div>
                       )}
                       {/* Platform Badging */}
-                      <span className="absolute top-2 left-2 bg-[#141110]/90 border border-[#991b1b]/50 text-white text-[9px] font-mono px-2 py-0.5 rounded uppercase font-bold select-none">
+                      <span className="absolute top-2 left-2 bg-white/90 border border-[#991b1b]/50 text-stone-900 text-[9px] font-mono px-2 py-0.5 rounded uppercase font-bold select-none">
                         {video.platform}
                       </span>
                     </div>
@@ -533,33 +533,33 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     <div className="p-4 flex-grow flex flex-col justify-between">
                       <div className="space-y-2">
                         <div className="flex justify-between items-start gap-2">
-                          <h4 className="font-serif font-black text-sm text-white leading-snug hover:text-red-400 transition-colors">
+                          <h4 className="font-serif font-black text-sm text-stone-900 leading-snug hover:text-[#991b1b] transition-colors">
                             {video.title}
                           </h4>
                           {isAdmin && (
                             <button
                               onClick={() => handleDeleteVideo(video.id)}
-                              className="text-red-400 hover:text-red-300 bg-red-950/60 p-1 rounded border border-red-800/60 cursor-pointer"
+                              className="text-[#991b1b] hover:text-red-800 bg-red-50/60 p-1 rounded border border-red-800/60 cursor-pointer"
                               title="Delete Video from list"
                             >
                               <Trash2 size={12} />
                             </button>
                           )}
                         </div>
-                        <p className="font-sans text-xs text-white/80 leading-relaxed line-clamp-3">
+                        <p className="font-sans text-xs text-stone-700 leading-relaxed line-clamp-3">
                           {video.description}
                         </p>
                       </div>
 
                       {/* Footer Actions */}
-                      <div className="mt-4 pt-3 border-t border-[#991b1b]/25 flex justify-between items-center text-[10px] font-mono text-gray-300">
+                      <div className="mt-4 pt-3 border-t border-[#991b1b]/25 flex justify-between items-center text-[10px] font-mono text-stone-600">
                         <span className="font-bold">{video.publishedAt}</span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleLikeVideo(video.id)}
-                            className="flex items-center gap-1 bg-[#1e1b1b] hover:bg-[#2c2222] px-2.5 py-1 rounded border border-[#991b1b]/35 cursor-pointer transition-colors text-white"
+                            className="flex items-center gap-1 bg-stone-100 hover:bg-stone-100 px-2.5 py-1 rounded border border-[#991b1b]/35 cursor-pointer transition-colors text-stone-900"
                           >
-                            <ThumbsUp size={10} className="text-red-400" />
+                            <ThumbsUp size={10} className="text-[#991b1b]" />
                             <span>{video.likes} Recommended</span>
                           </button>
                         </div>
@@ -580,10 +580,10 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           {/* Action Header & Toggle Form */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#991b1b]/30 pb-4" id="events-section-header">
             <div>
-              <h3 className="font-serif font-black text-xl text-white uppercase">
+              <h3 className="font-serif font-black text-xl text-stone-900 uppercase">
                 Archival Event Dispatch Logs
               </h3>
-              <p className="font-sans text-xs text-gray-300 mt-0.5">
+              <p className="font-sans text-xs text-stone-600 mt-0.5">
                 Photo dispatches tracking physical workshops, assemblies, and retreats.
               </p>
             </div>
@@ -599,15 +599,15 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
           {/* Collapsible Event Submission Form */}
           {showEventForm && (
-            <div className="bg-[#161313] border-2 border-[#991b1b]/40 rounded p-6 max-w-2xl mx-auto shadow-2xl animate-in slide-in-from-top-4 duration-200" id="event-submit-form-container">
-              <h4 className="font-serif font-black text-base text-white border-b border-[#991b1b]/30 pb-2 mb-4 uppercase flex items-center gap-1.5">
-                <ImageIcon size={14} className="text-red-400" />
+            <div className="bg-white border-2 border-[#991b1b]/40 rounded p-6 max-w-2xl mx-auto shadow-2xl animate-in slide-in-from-top-4 duration-200" id="event-submit-form-container">
+              <h4 className="font-serif font-black text-base text-stone-900 border-b border-[#991b1b]/30 pb-2 mb-4 uppercase flex items-center gap-1.5">
+                <ImageIcon size={14} className="text-[#991b1b]" />
                 Record New Gallery Event
               </h4>
               <form onSubmit={handlePostEvent} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Event Title *
                     </label>
                     <input
@@ -616,11 +616,11 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       placeholder="e.g. Sovereign Press Meeting..."
                       value={eventTitle}
                       onChange={e => setEventTitle(e.target.value)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500 font-bold"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500 font-bold"
                     />
                   </div>
                   <div>
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Image URL (Unsplash or direct URL) *
                     </label>
                     <input
@@ -629,14 +629,14 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       placeholder="https://images.unsplash.com/photo-..."
                       value={eventImageInput}
                       onChange={e => setEventImageInput(e.target.value)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Event Date *
                     </label>
                     <input
@@ -645,11 +645,11 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       placeholder="e.g. June 24, 2026..."
                       value={eventDate}
                       onChange={e => setEventDate(e.target.value)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
                     />
                   </div>
                   <div>
-                    <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                    <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                       Location / Chambers *
                     </label>
                     <input
@@ -658,13 +658,13 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       placeholder="e.g. Kandy Botanical Sanctuary..."
                       value={eventLocation}
                       onChange={e => setEventLocation(e.target.value)}
-                      className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500"
+                      className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] font-black uppercase text-red-300 mb-1">
+                  <label className="block font-mono text-[10px] font-black uppercase text-red-800 mb-1">
                     Event Description / Notes
                   </label>
                   <textarea
@@ -672,7 +672,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                     placeholder="Provide context, agenda items, or outcomes of this meeting..."
                     value={eventDesc}
                     onChange={e => setEventDesc(e.target.value)}
-                    className="w-full bg-[#1e1b1b] border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500 resize-none font-sans"
+                    className="w-full bg-stone-100 border-2 border-[#991b1b]/35 rounded p-2.5 text-xs text-stone-900 placeholder-gray-500 focus:outline-none focus:border-red-500 resize-none font-sans"
                   />
                 </div>
 
@@ -680,7 +680,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   <button
                     type="button"
                     onClick={() => setShowEventForm(false)}
-                    className="bg-[#1e1b1b] border border-[#991b1b]/40 text-gray-300 font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-4 rounded hover:bg-[#2b2525] hover:text-white cursor-pointer"
+                    className="bg-stone-100 border border-[#991b1b]/40 text-stone-600 font-mono text-[10px] font-bold uppercase tracking-wider py-2 px-4 rounded hover:bg-stone-100 hover:text-stone-900 cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -698,8 +698,8 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
           {/* Events Grid */}
           {events.length === 0 ? (
-            <div className="text-center py-20 bg-[#141212] border-2 border-dashed border-[#991b1b]/30 rounded" id="no-events-box">
-              <p className="font-serif text-lg italic text-white/90">"No official events currently archived in the photobook."</p>
+            <div className="text-center py-20 bg-white border-2 border-dashed border-[#991b1b]/30 rounded" id="no-events-box">
+              <p className="font-serif text-lg italic text-stone-700">"No official events currently archived in the photobook."</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-photo-grid">
@@ -707,7 +707,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                 <div 
                   key={item.id}
                   onClick={() => setActiveLightboxImage(item)}
-                  className="bg-[#141212] border-2 border-[#991b1b]/35 rounded overflow-hidden flex flex-col justify-between hover:border-red-500/60 hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                  className="bg-white border-2 border-[#991b1b]/35 rounded overflow-hidden flex flex-col justify-between hover:border-red-500/60 hover:shadow-xl transition-all duration-300 group cursor-pointer"
                   id={`event-card-${item.id}`}
                 >
                   {/* Photo Container */}
@@ -722,8 +722,8 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       }}
                     />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="flex items-center gap-1 bg-[#141212] text-white text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-sm border border-red-500/50 shadow font-bold">
-                        <Eye size={11} className="text-red-400" />
+                      <span className="flex items-center gap-1 bg-white text-stone-900 text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-sm border border-red-500/50 shadow font-bold">
+                        <Eye size={11} className="text-[#991b1b]" />
                         View Archive Image
                       </span>
                     </div>
@@ -733,7 +733,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                   <div className="p-4 flex-grow flex flex-col justify-between">
                     <div className="space-y-2">
                       <div className="flex justify-between items-start gap-2">
-                        <h4 className="font-serif font-black text-sm text-white group-hover:text-red-400 transition-colors leading-snug">
+                        <h4 className="font-serif font-black text-sm text-stone-900 group-hover:text-[#991b1b] transition-colors leading-snug">
                           {item.title}
                         </h4>
                         {isAdmin && (
@@ -742,26 +742,26 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                               e.stopPropagation();
                               handleDeleteEvent(item.id);
                             }}
-                            className="text-red-400 hover:text-red-300 bg-red-950/60 p-1 rounded border border-red-800/60 cursor-pointer"
+                            className="text-[#991b1b] hover:text-red-800 bg-red-50/60 p-1 rounded border border-red-800/60 cursor-pointer"
                             title="Delete Event Log"
                           >
                             <Trash2 size={12} />
                           </button>
                         )}
                       </div>
-                      <p className="font-sans text-xs text-white/80 leading-relaxed line-clamp-3">
+                      <p className="font-sans text-xs text-stone-700 leading-relaxed line-clamp-3">
                         {item.description}
                       </p>
                     </div>
 
                     {/* Metadata indicators */}
-                    <div className="mt-4 pt-3 border-t border-[#991b1b]/25 space-y-1.5 text-[10px] font-mono text-gray-300 font-bold">
+                    <div className="mt-4 pt-3 border-t border-[#991b1b]/25 space-y-1.5 text-[10px] font-mono text-stone-600 font-bold">
                       <div className="flex items-center gap-1.5">
-                        <Calendar size={11} className="text-red-400" />
+                        <Calendar size={11} className="text-[#991b1b]" />
                         <span>{item.date}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <MapPin size={11} className="text-red-400" />
+                        <MapPin size={11} className="text-[#991b1b]" />
                         <span className="truncate">{item.location}</span>
                       </div>
                     </div>
@@ -782,13 +782,13 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
         >
           <div 
             onClick={e => e.stopPropagation()}
-            className="bg-[#141212] border-4 border-[#991b1b] max-w-4xl w-full rounded-md shadow-2xl relative overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+            className="bg-white border-4 border-[#991b1b] max-w-4xl w-full rounded-md shadow-2xl relative overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
             id="gallery-lightbox-card"
           >
             {/* Close Button */}
             <button 
               onClick={() => setActiveLightboxImage(null)}
-              className="absolute top-2 right-2 z-10 bg-[#1e1b1b] text-white p-2 rounded-full hover:bg-[#991b1b] transition-colors cursor-pointer border border-[#991b1b]/50"
+              className="absolute top-2 right-2 z-10 bg-stone-100 text-white p-2 rounded-full hover:bg-[#991b1b] transition-colors cursor-pointer border border-[#991b1b]/50"
               title="Close Image Chamber"
             >
               <X size={16} />
@@ -808,29 +808,29 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
             </div>
 
             {/* Info details Column */}
-            <div className="md:w-2/5 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-[#141212]">
+            <div className="md:w-2/5 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-white">
               <div className="space-y-4">
                 <span className="font-mono text-[9px] bg-[#991b1b] text-white px-2 py-0.5 rounded font-black uppercase tracking-widest inline-block shadow">
                   Sovereign Press Council Archive
                 </span>
                 
-                <h3 className="font-serif font-black text-xl md:text-2xl text-white uppercase tracking-normal leading-tight">
+                <h3 className="font-serif font-black text-xl md:text-2xl text-stone-900 uppercase tracking-normal leading-tight">
                   {activeLightboxImage.title}
                 </h3>
                 
-                <p className="font-sans text-xs md:text-sm text-white/90 leading-relaxed">
+                <p className="font-sans text-xs md:text-sm text-stone-700 leading-relaxed">
                   {activeLightboxImage.description}
                 </p>
               </div>
 
               {/* Meta indicators */}
-              <div className="mt-8 pt-4 border-t-2 border-[#991b1b]/30 space-y-2 text-xs font-mono text-gray-300 font-bold">
+              <div className="mt-8 pt-4 border-t-2 border-[#991b1b]/30 space-y-2 text-xs font-mono text-stone-600 font-bold">
                 <div className="flex items-center gap-2">
-                  <Calendar size={13} className="text-red-400 shrink-0" />
+                  <Calendar size={13} className="text-[#991b1b] shrink-0" />
                   <span>Logged Date: {activeLightboxImage.date}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MapPin size={13} className="text-red-400 shrink-0" />
+                  <MapPin size={13} className="text-[#991b1b] shrink-0" />
                   <span>Sovereign Chamber: {activeLightboxImage.location}</span>
                 </div>
               </div>
