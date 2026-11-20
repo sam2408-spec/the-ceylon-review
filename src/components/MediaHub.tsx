@@ -380,10 +380,10 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           {/* Action Header & Toggle Form */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-[#991b1b]/30 pb-4" id="videos-section-header">
             <div>
-              <h3 className="font-serif font-black text-xl text-white uppercase">
+              <h3 className="font-serif font-black text-xl text-stone-900 uppercase">
                 Curated Analytical Broadcasts
               </h3>
-              <p className="font-sans text-xs text-gray-300 mt-0.5">
+              <p className="font-sans text-xs text-stone-600 mt-0.5">
                 Constitutional timelines, media protections, and press-freedom panels.
               </p>
             </div>

@@ -257,8 +257,8 @@ export default function WriterProfileView({
       {/* Overview Header */}
       <div className="border-b-2 border-[#991b1b] pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="font-serif text-3xl font-black text-white tracking-tight uppercase">The Ceylon Writers' Guild</h2>
-          <p className="font-sans text-xs sm:text-sm text-gray-300 mt-1.5 font-medium">
+          <h2 className="font-serif text-3xl font-black text-stone-900 tracking-tight uppercase">The Ceylon Writers' Guild</h2>
+          <p className="font-sans text-xs sm:text-sm text-stone-600 mt-1.5 font-medium">
             Meet our independent columnists, research correspondents, and local truth-seekers, or file analytical drafts.
           </p>
         </div>
@@ -648,7 +648,7 @@ export default function WriterProfileView({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="journalists-grid-split">
         {/* LEFT COLUMN: Contributor list */}
         <div className="lg:col-span-4 space-y-4">
-          <h3 className="font-mono text-[10px] font-black text-red-400 uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 mb-4">
+          <h3 className="font-mono text-[10px] font-black text-[#991b1b] uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 mb-4">
             Masthead Directory
           </h3>
 

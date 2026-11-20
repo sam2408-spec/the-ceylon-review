@@ -6,7 +6,7 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
-  --color-paper-bg: #0c0a0a;
+  --color-paper-bg: #ffffff;
   --color-paper-dark: #050505;
   --color-paper-card: #151313;
   --color-paper-field: #1e1919;
@@ -18,7 +18,7 @@
 }
 
 body {
-  background-color: #0c0a0a;
+  background-color: #ffffff;
   color: #f5eedc;
   font-family: var(--font-sans);
 }

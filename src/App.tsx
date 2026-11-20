@@ -669,7 +669,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0c0a0a] text-[#f5eedc] flex flex-col justify-between" id="newspaper-workspace">
+    <div className="min-h-screen bg-white text-[#f5eedc] flex flex-col justify-between" id="newspaper-workspace">
       <div>
         {/* Broadside Header */}
         <Header 
@@ -775,8 +775,8 @@ export default function App() {
                       <div className="lg:col-span-8 space-y-8">
                         <div>
                           <div className="border-b-2 border-[#991b1b]/30 pb-2 mb-4 flex justify-between items-center">
-                            <span className="font-mono text-xs font-bold uppercase tracking-wider text-red-400">Premier Investigations</span>
-                            <span className="font-mono text-[9px] uppercase font-bold text-gray-300">Broadsheet Edition • page A1</span>
+                            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#991b1b]">Premier Investigations</span>
+                            <span className="font-mono text-[9px] uppercase font-bold text-stone-600">Broadsheet Edition • page A1</span>
                           </div>
                           
                           {/* The primary PDF Article */}
@@ -796,7 +796,7 @@ export default function App() {
                         {filteredArticles.length > 1 && (
                           <div className="space-y-4">
                             <div className="border-b-2 border-[#991b1b]/30 pb-2 mb-4">
-                              <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">Sovereign Additions stream</span>
+                              <span className="font-mono text-xs font-bold uppercase tracking-wider text-stone-900">Sovereign Additions stream</span>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               {filteredArticles.slice(1).map(art => (
@@ -1074,7 +1074,7 @@ export default function App() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="past-archive-layout">
                   {/* Left Column */}
                   <div className="lg:col-span-8 space-y-6">
-                    <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-white">
+                    <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-stone-900">
                       Historical Ledger Releases
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1107,7 +1107,7 @@ export default function App() {
                     </div>
 
                     <div className="space-y-4">
-                      <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-white">
+                      <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-stone-900">
                         Active Current Coverage
                       </h3>
                       <div className="divide-y divide-[#991b1b]/20 space-y-2">

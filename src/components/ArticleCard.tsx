@@ -245,8 +245,8 @@ export default function ArticleCard({
         onClick={() => onReadMore(article)}
         id={`sidebar-card-${article.id}`}
       >
-        <div className="flex justify-between items-center gap-2 text-[10px] font-mono text-gray-300">
-          <span className="text-red-400 uppercase tracking-wider font-extrabold">
+        <div className="flex justify-between items-center gap-2 text-[10px] font-mono text-stone-600">
+          <span className="text-[#991b1b] uppercase tracking-wider font-extrabold">
             {article.category}
           </span>
           <div className="flex items-center gap-2">
@@ -272,7 +272,7 @@ export default function ArticleCard({
                       e.stopPropagation();
                       setConfirmDelete(false);
                     }}
-                    className="text-gray-400 text-[10px] px-1 hover:text-white"
+                    className="text-stone-500 text-[10px] px-1 hover:text-stone-900"
                   >
                     ✕
                   </button>
@@ -294,17 +294,17 @@ export default function ArticleCard({
             )}
           </div>
         </div>
-        <h3 className="font-serif text-sm md:text-base font-bold text-white mt-1.5 group-hover:text-red-400 transition-colors duration-200 line-clamp-2 leading-snug">
+        <h3 className="font-serif text-sm md:text-base font-bold text-stone-900 mt-1.5 group-hover:text-[#991b1b] transition-colors duration-200 line-clamp-2 leading-snug">
           {article.title}
         </h3>
-        <p className="font-sans text-xs text-white/80 mt-2 line-clamp-2 leading-relaxed">
+        <p className="font-sans text-xs text-stone-700 mt-2 line-clamp-2 leading-relaxed">
           {article.summary}
         </p>
         <div className="flex items-center justify-between mt-3 text-[11px]">
-          <span className="font-serif italic text-white/90">
+          <span className="font-serif italic text-stone-800">
             By {author?.name || 'Staff Writer'}
           </span>
-          <span className="font-mono text-gray-300 flex items-center gap-0.5 text-[10px] font-bold">
+          <span className="font-mono text-stone-600 flex items-center gap-0.5 text-[10px] font-bold">
             <Clock size={10} className="text-[#dc2626]" />
             {article.readTime}
           </span>
