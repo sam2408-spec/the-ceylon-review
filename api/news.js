@@ -9,6 +9,9 @@ const FEEDS = [
   { source: 'MIDDLE EAST EYE', url: 'https://www.middleeasteye.net/rss' },
 ];
 
+// Skip sport, weather/UK local, lifestyle and video-clip items: the ticker is for world news.
+const SKIP_LINK = /\/(sport|sports|football|uk-news|lifeandstyle|culture|film|music|fashion|travel|video)\//i;
+
 const PER_FEED = 5;
 const MAX_ITEMS = 16;
 
@@ -38,7 +41,7 @@ export function parseFeed(xml, source) {
     const title = pick(block, 'title');
     const link = pick(block, 'link');
     const date = Date.parse(pick(block, 'pubDate') || pick(block, 'dc:date')) || 0;
-    if (!title || !/^https?:\/\//.test(link)) continue;
+    if (!title || !/^https?:\/\//.test(link) || SKIP_LINK.test(link)) continue;
     items.push({ title, link, source, time: date });
   }
   return items.sort((a, b) => b.time - a.time).slice(0, PER_FEED);
