@@ -48,7 +48,7 @@ export default function WriterArticleMenu({ writers, articles, onReadArticle }: 
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="h-full flex items-center gap-1.5 px-3 py-2.5 border border-[#991b1b]/50 bg-[#991b1b] hover:bg-[#7f1d1d] text-white font-mono text-xs font-bold rounded cursor-pointer whitespace-nowrap"
+        className="h-full flex items-center gap-1.5 px-3 py-2.5 border border-[#7a1f2b]/50 bg-[#7a1f2b] hover:bg-[#5e1620] text-white font-mono text-xs font-bold rounded cursor-pointer whitespace-nowrap"
         id="read-by-writer-btn"
       >
         <PenLine size={13} />
@@ -59,16 +59,16 @@ export default function WriterArticleMenu({ writers, articles, onReadArticle }: 
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-full mt-2 z-40 w-[min(24rem,calc(100vw-2rem))] max-h-[60vh] overflow-y-auto bg-white border-2 border-[#991b1b]/50 rounded shadow-2xl"
+          className="absolute right-0 top-full mt-2 z-40 w-[min(24rem,calc(100vw-2rem))] max-h-[60vh] overflow-y-auto bg-white border-2 border-[#7a1f2b]/50 rounded shadow-2xl"
         >
           {groups.length === 0 ? (
             <p className="p-4 text-xs font-mono text-stone-600">No articles published yet.</p>
           ) : (
             groups.map(({ writer, items }) => (
-              <div key={writer.id} className="border-b border-[#991b1b]/20 last:border-b-0">
-                <div className="sticky top-0 flex items-center justify-between gap-2 px-4 py-2 bg-red-50 border-b border-[#991b1b]/20">
+              <div key={writer.id} className="border-b border-[#7a1f2b]/20 last:border-b-0">
+                <div className="sticky top-0 flex items-center justify-between gap-2 px-4 py-2 bg-[#f8eff1] border-b border-[#7a1f2b]/20">
                   <span className="font-serif font-black text-sm text-stone-900">{writer.name}</span>
-                  <span className="font-mono text-[10px] font-bold text-[#991b1b] uppercase">
+                  <span className="font-mono text-[10px] font-bold text-[#7a1f2b] uppercase">
                     {items.length} {items.length === 1 ? 'article' : 'articles'}
                   </span>
                 </div>
@@ -82,7 +82,7 @@ export default function WriterArticleMenu({ writers, articles, onReadArticle }: 
                           setOpen(false);
                           onReadArticle(article);
                         }}
-                        className="w-full text-left px-4 py-2.5 font-serif text-sm text-stone-800 hover:bg-red-50 hover:text-[#991b1b] cursor-pointer border-b border-stone-100 last:border-b-0"
+                        className="w-full text-left px-4 py-2.5 font-serif text-sm text-stone-800 hover:bg-[#f8eff1] hover:text-[#7a1f2b] cursor-pointer border-b border-stone-100 last:border-b-0"
                       >
                         {article.title}
                       </button>

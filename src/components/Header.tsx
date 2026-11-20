@@ -64,13 +64,13 @@ export default function Header({
   };
 
   return (
-    <header className="border-b-4 border-[#991b1b] bg-white text-stone-900" id="newspaper-header">
+    <header className="border-b-4 border-[#7a1f2b] bg-white text-stone-900" id="newspaper-header">
       
       {/* Top Ticker: live world flash headlines (falls back to the house line if the feed is unavailable) */}
-      <div className="bg-red-50 text-stone-900 flex items-stretch overflow-hidden text-[11px] font-mono select-none border-b border-[#991b1b]/30" id="ticker-container">
-        <div className="relative z-10 shrink-0 bg-red-50 flex items-center gap-1.5 pl-4 pr-3 py-2 border-r border-[#991b1b]/30 shadow-[6px_0_8px_-4px_rgba(254,242,242,1)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#b91c1c] animate-pulse"></span>
-          <span className="font-black tracking-widest text-[#991b1b] uppercase text-[10px]">World Flash</span>
+      <div className="bg-[#14264a] text-white flex items-stretch overflow-hidden text-[11px] font-mono select-none border-b border-[#0c1a36]" id="ticker-container">
+        <div className="relative z-10 shrink-0 bg-[#7a1f2b] flex items-center gap-1.5 pl-4 pr-3 py-2 border-r border-[#0c1a36]">
+          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <span className="font-black tracking-widest text-white uppercase text-[10px]">World Flash</span>
         </div>
         <div className="flex-1 overflow-hidden py-2">
           <div
@@ -89,18 +89,18 @@ export default function Header({
                         className="mx-4 flex items-center gap-2 hover:underline"
                         tabIndex={copy === 1 ? -1 : 0}
                       >
-                        <span className="text-[#991b1b] font-black tracking-widest text-[9px] uppercase">{h.source}</span>
-                        <span className="text-stone-900 font-serif font-bold tracking-wide italic text-[12px]">{h.title}</span>
+                        <span className="text-[#f3b6c0] font-black tracking-widest text-[9px] uppercase">{h.source}</span>
+                        <span className="text-white font-serif font-bold tracking-wide italic text-[12px]">{h.title}</span>
                       </a>
-                      <span className="text-stone-400">•</span>
+                      <span className="text-white/40">•</span>
                     </React.Fragment>
                   ))
                 ) : (
                   <>
-                    <span className="mx-4 text-stone-900 font-serif font-bold tracking-wide italic">{breakingNews}</span>
-                    <span className="text-stone-400">•</span>
-                    <span className="mx-4 text-stone-700 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
-                    <span className="text-stone-400">•</span>
+                    <span className="mx-4 text-white font-serif font-bold tracking-wide italic">{breakingNews}</span>
+                    <span className="text-white/40">•</span>
+                    <span className="mx-4 text-white/80 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
+                    <span className="text-white/40">•</span>
                   </>
                 )}
               </div>
@@ -113,23 +113,23 @@ export default function Header({
       <div className="max-w-7xl mx-auto px-6 py-6 md:py-8 text-center flex flex-col items-center justify-center relative" id="header-identity">
         
         {/* Metabar: Volume / Slogan / Actions */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-center border-b border-[#991b1b]/30 pb-4 mb-4 text-[10px] font-mono text-stone-600 gap-3">
+        <div className="w-full flex flex-col md:flex-row justify-between items-center border-b border-[#7a1f2b]/30 pb-4 mb-4 text-[10px] font-mono text-stone-600 gap-3">
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-3 text-stone-900 font-semibold tabular-nums">
             <span className="flex items-center gap-1" title="Sri Lanka time">
-              <Clock size={11} className="text-[#dc2626]" />
-              <span className="text-[#991b1b] font-black">SRI LANKA</span> {zoneText('Asia/Colombo')}
+              <Clock size={11} className="text-[#9b2c3b]" />
+              <span className="text-[#7a1f2b] font-black">SRI LANKA</span> {zoneText('Asia/Colombo')}
             </span>
-            <span className="hidden sm:inline text-[#991b1b]/40">|</span>
+            <span className="hidden sm:inline text-[#7a1f2b]/40">|</span>
             <span className="flex items-center gap-1" title="Palestine time">
-              <Clock size={11} className="text-[#dc2626]" />
-              <span className="text-[#991b1b] font-black">PALESTINE</span> {zoneText('Asia/Gaza')}
+              <Clock size={11} className="text-[#9b2c3b]" />
+              <span className="text-[#7a1f2b] font-black">PALESTINE</span> {zoneText('Asia/Gaza')}
             </span>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-3">
             
             {/* Contact Email Highlighted */}
-            <div className="hidden lg:flex items-center gap-1 bg-stone-100 text-stone-900 border border-[#991b1b]/30 px-2.5 py-1 rounded" title="Submit Article drafts">
+            <div className="hidden lg:flex items-center gap-1 bg-stone-100 text-stone-900 border border-[#7a1f2b]/30 px-2.5 py-1 rounded" title="Submit Article drafts">
               <Mail size={10} className="text-stone-700" />
               <span>Submit: <a href="mailto:theceylonreview@proton.me" className="underline font-bold hover:text-stone-900">theceylonreview@proton.me</a></span>
             </div>
@@ -144,7 +144,7 @@ export default function Header({
                   {onSignOutGoogle && (
                     <button 
                       onClick={onSignOutGoogle}
-                      className="ml-1 text-[#991b1b] hover:text-red-800 underline cursor-pointer"
+                      className="ml-1 text-[#7a1f2b] hover:text-[#6a1a26] underline cursor-pointer"
                       title="Sign Out"
                     >
                       Logout
@@ -160,8 +160,8 @@ export default function Header({
                     onClick={handleToggleAdmin}
                     className={`flex items-center gap-1.5 px-3 py-1 border rounded transition-all font-mono text-[10px] font-bold uppercase cursor-pointer ${
                       isAdmin 
-                        ? 'bg-[#991b1b] text-white border-[#dc2626] shadow-md ring-1 ring-red-500/40' 
-                        : 'bg-stone-100 hover:bg-stone-100 border-[#991b1b]/40 text-stone-900'
+                        ? 'bg-[#7a1f2b] text-white border-[#9b2c3b] shadow-md ring-1 ring-[#9b2c3b]/40' 
+                        : 'bg-stone-100 hover:bg-stone-100 border-[#7a1f2b]/40 text-stone-900'
                     }`}
                     title="Toggle Editor Mode"
                     id="admin-security-toggle"
@@ -177,7 +177,7 @@ export default function Header({
 
             <button
               onClick={onOpenBookmarks}
-              className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] border border-red-700 text-white px-3 py-1 rounded transition-all font-sans text-[10px] font-bold uppercase cursor-pointer shadow"
+              className="flex items-center gap-1.5 bg-[#7a1f2b] hover:bg-[#8a2432] border border-[#7a1f2b] text-white px-3 py-1 rounded transition-all font-sans text-[10px] font-bold uppercase cursor-pointer shadow"
               id="bookmarks-btn"
             >
               <Heart size={10} className="fill-current text-stone-900" />
@@ -195,26 +195,26 @@ export default function Header({
           <div className="flex flex-col md:flex-row items-center gap-3 md:gap-5">
             <RotatingEarth size={120} showLabels={false} className="shrink-0" />
             <div className="flex items-center gap-3 sm:gap-4">
-              <div className="hidden sm:block w-6 md:w-8 h-[2px] bg-[#dc2626]" />
+              <div className="hidden sm:block w-6 md:w-8 h-[2px] bg-[#9b2c3b]" />
               <h1 className="font-serif text-4xl sm:text-5xl md:text-7xl font-black tracking-tight text-stone-900 uppercase leading-none">
                 the ceylon review
               </h1>
-              <div className="hidden sm:block w-6 md:w-8 h-[2px] bg-[#dc2626]" />
+              <div className="hidden sm:block w-6 md:w-8 h-[2px] bg-[#9b2c3b]" />
             </div>
           </div>
-          <p className="font-mono text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] text-[#b91c1c] mt-2.5 uppercase font-extrabold text-center">
+          <p className="font-mono text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] text-[#8a2432] mt-2.5 uppercase font-extrabold text-center">
             Law, Human Rights & Global Justice • Independent Ceylon Perspectives
           </p>
         </div>
 
         {/* Double-Border Column Line */}
-        <div className="w-full border-t-2 border-b border-[#991b1b] py-1.5 mt-4 flex justify-between text-[10px] font-mono text-stone-600">
+        <div className="w-full border-t-2 border-b border-[#7a1f2b] py-1.5 mt-4 flex justify-between text-[10px] font-mono text-stone-600">
           <span className="font-bold text-stone-900">{currentDateString}</span>
-          <span className="hidden sm:inline tracking-[0.2em] uppercase font-bold text-[#b91c1c]">"EVERYTHING IS CONNECTED. NOTHING IS NEUTRAL."</span>
+          <span className="hidden sm:inline tracking-[0.2em] uppercase font-bold text-[#8a2432]">"EVERYTHING IS CONNECTED. NOTHING IS NEUTRAL."</span>
           <button
             type="button"
             onClick={() => setShowSubscribe(true)}
-            className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 bg-[#7a1f2b] hover:bg-[#8a2432] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
             id="subscribe-btn"
           >
             <Mail size={11} />
@@ -222,7 +222,7 @@ export default function Header({
           </button>
         </div>
         <div className="w-full flex justify-end pt-1.5">
-          <span className="text-[10px] font-mono italic font-semibold text-[#991b1b]">Founded in July 2026</span>
+          <span className="text-[10px] font-mono italic font-semibold text-[#7a1f2b]">Founded in July 2026</span>
         </div>
       </div>
       {showSubscribe && <SubscribeModal onClose={() => setShowSubscribe(false)} />}

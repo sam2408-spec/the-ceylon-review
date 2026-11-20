@@ -61,7 +61,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="subscribe-title"
-        className="relative w-full max-w-md bg-white rounded border-2 border-[#991b1b] shadow-2xl p-6"
+        className="relative w-full max-w-md bg-white rounded border-2 border-[#7a1f2b] shadow-2xl p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -81,7 +81,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
             </p>
             <button
               onClick={onClose}
-              className="mt-5 bg-[#991b1b] hover:bg-[#b91c1c] text-white font-sans font-bold text-xs uppercase tracking-wider px-5 py-2 rounded cursor-pointer"
+              className="mt-5 bg-[#7a1f2b] hover:bg-[#8a2432] text-white font-sans font-bold text-xs uppercase tracking-wider px-5 py-2 rounded cursor-pointer"
             >
               Close
             </button>
@@ -94,11 +94,11 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
             <p className="font-sans text-sm text-stone-700 mt-2">
               Get new dispatches by email. We never sell or share your address, and you can unsubscribe at any time.
             </p>
-            <label htmlFor="subscribe-email" className="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#991b1b] mt-4 mb-1">
+            <label htmlFor="subscribe-email" className="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#7a1f2b] mt-4 mb-1">
               Email address
             </label>
             <div className="relative">
-              <Mail size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#991b1b]" />
+              <Mail size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#7a1f2b]" />
               <input
                 id="subscribe-email"
                 ref={inputRef}
@@ -111,7 +111,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
                   if (status === 'error') setStatus('idle');
                 }}
                 placeholder="you@example.com"
-                className="w-full border-2 border-[#991b1b]/40 focus:border-[#dc2626] focus:outline-none rounded pl-9 pr-3 py-2.5 text-sm font-sans text-stone-900 placeholder-gray-500"
+                className="w-full border-2 border-[#7a1f2b]/40 focus:border-[#9b2c3b] focus:outline-none rounded pl-9 pr-3 py-2.5 text-sm font-sans text-stone-900 placeholder-gray-500"
               />
             </div>
             <input
@@ -125,7 +125,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
               className="absolute opacity-0 pointer-events-none h-0 w-0"
             />
             {status === 'error' && (
-              <p role="alert" className="mt-2 text-xs font-sans font-semibold text-[#991b1b]">
+              <p role="alert" className="mt-2 text-xs font-sans font-semibold text-[#7a1f2b]">
                 {message}{' '}
                 {message.startsWith('We could not') && (
                   <a href={FALLBACK_MAIL} className="underline">Subscribe by email instead</a>
@@ -135,7 +135,7 @@ export default function SubscribeModal({ onClose }: SubscribeModalProps) {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="mt-4 w-full bg-[#991b1b] hover:bg-[#b91c1c] disabled:opacity-70 text-white font-sans font-bold text-xs uppercase tracking-wider py-2.5 rounded cursor-pointer transition-colors"
+              className="mt-4 w-full bg-[#7a1f2b] hover:bg-[#8a2432] disabled:opacity-70 text-white font-sans font-bold text-xs uppercase tracking-wider py-2.5 rounded cursor-pointer transition-colors"
             >
               {status === 'sending' ? 'Subscribing…' : 'Subscribe'}
             </button>

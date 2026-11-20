@@ -9,6 +9,7 @@ import WriterProfileView from './components/WriterProfileView';
 import BookmarksDrawer from './components/BookmarksDrawer';
 import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
+import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
 import { Shield, Mail, Globe, Play, Film, ExternalLink, HelpCircle, Users, Settings } from 'lucide-react';
@@ -763,11 +764,11 @@ export default function App() {
               {searchTerm === '' && selectedCategory === 'All' && <EditorialNote />}
 
               {filteredArticles.length === 0 ? (
-                <div className="text-center py-24 border-2 border-dashed border-[#991b1b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
+                <div className="text-center py-24 border-2 border-dashed border-[#7a1f2b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
                   <p className="font-serif text-xl italic text-stone-700">"No archived dispatches fell into today's news queries."</p>
                   <button 
                     onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
-                    className="mt-6 font-mono text-xs font-bold uppercase tracking-widest bg-[#991b1b] text-white px-4 py-2 hover:bg-[#7f1d1d] transition-colors cursor-pointer rounded"
+                    className="mt-6 font-mono text-xs font-bold uppercase tracking-widest bg-[#7a1f2b] text-white px-4 py-2 hover:bg-[#5e1620] transition-colors cursor-pointer rounded"
                   >
                     Reset Catalogue Query
                   </button>
@@ -779,73 +780,32 @@ export default function App() {
                   {searchTerm === '' && selectedCategory === 'All' ? (
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="editorial-grid-deck">
                       
-                      {/* LEFT COLUMN: Premium PDF Story & Primary Dispatches (Span 8) */}
+                      {/* LEFT COLUMN: news-portal front page (lead story, top stories, latest) */}
                       <div className="lg:col-span-8 space-y-8">
-                        <div>
-                          <div className="border-b-2 border-[#991b1b]/30 pb-2 mb-4 flex justify-between items-center">
-                            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#991b1b]">Premier Investigations</span>
-                            <span className="font-mono text-[9px] uppercase font-bold text-stone-600">Broadsheet Edition • page A1</span>
-                          </div>
-                          
-                          {/* The primary PDF Article */}
-                          <ArticleCard 
-                            article={filteredArticles[0]} 
-                            author={writers.find(w => w.id === filteredArticles[0].authorId)} 
-                            onReadMore={handleReadMore} 
-                            isBookmarked={bookmarks.includes(filteredArticles[0].id)} 
-                            onToggleBookmark={handleToggleBookmark} 
-                            variant="featured"
-                            isAdmin={effectiveAdminMode}
-                            onDelete={handleDeleteArticle}
-                          />
-                        </div>
-
-                        {/* If secondary dynamic articles exist */}
-                        {filteredArticles.length > 1 && (
-                          <div className="space-y-4">
-                            <div className="border-b-2 border-[#991b1b]/30 pb-2 mb-4">
-                              <span className="font-mono text-xs font-bold uppercase tracking-wider text-stone-900">Sovereign Additions stream</span>
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              {filteredArticles.slice(1).map(art => (
-                                <ArticleCard 
-                                  key={art.id}
-                                  article={art} 
-                                  author={writers.find(w => w.id === art.authorId)} 
-                                  onReadMore={handleReadMore} 
-                                  isBookmarked={bookmarks.includes(art.id)} 
-                                  onToggleBookmark={handleToggleBookmark} 
-                                  variant="grid"
-                                  isAdmin={effectiveAdminMode}
-                                  onDelete={handleDeleteArticle}
-                                />
-                              ))}
-                            </div>
-                          </div>
-                        )}
+                        <NewsPortal articles={filteredArticles} onOpen={handleReadMore} />
                       </div>
 
                       {/* RIGHT COLUMN: Media Matrix & Video Dossier Sidebar (Span 4) */}
-                      <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l-2 border-[#991b1b]/30 pt-8 lg:pt-0 lg:pl-8 space-y-8">
+                      <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l-2 border-[#7a1f2b]/30 pt-8 lg:pt-0 lg:pl-8 space-y-8">
                         
                         {/* 1. SECURE SUBMISSION CALLOUT BOX */}
-                        <div className="bg-white text-stone-900 border-l-4 border-[#dc2626] p-5 rounded shadow-lg border border-[#991b1b]/30">
+                        <div className="bg-white text-stone-900 border-l-4 border-[#9b2c3b] p-5 rounded shadow-lg border border-[#7a1f2b]/30">
                           <h4 className="font-serif font-black text-sm text-stone-900 mb-2 uppercase tracking-wide flex items-center gap-2">
-                            <Mail size={14} className="text-[#991b1b]" />
+                            <Mail size={14} className="text-[#7a1f2b]" />
                             Submit a Column
                           </h4>
                           <p className="font-sans text-[11px] text-stone-700 leading-relaxed mb-4">
                             The Ceylon Review considers sourced writing on law, human rights and public affairs. Every claim must be checked before publication. Send a short pitch to theceylonreview@proton.me.
                           </p>
-                          <div className="bg-red-50 p-2 text-center rounded border border-[#991b1b]/40 font-mono text-[11px] font-bold">
-                            Pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 hover:text-stone-900">theceylonreview@proton.me</a>
+                          <div className="bg-[#f8eff1] p-2 text-center rounded border border-[#7a1f2b]/40 font-mono text-[11px] font-bold">
+                            Pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-[#6a1a26] hover:text-stone-900">theceylonreview@proton.me</a>
                           </div>
                         </div>
 
                         {/* 2. GLOBAL DISPATCH & OCCUPIED LANDS SOVEREIGNTY MATRIX */}
-                        <div className="bg-white border-2 border-[#991b1b]/40 p-5 rounded shadow-lg">
-                          <h4 className="font-serif font-black text-base text-stone-900 pb-2 border-b border-[#991b1b]/30 mb-4 uppercase tracking-wide flex items-center gap-1.5">
-                            <Globe size={15} className="text-[#dc2626]" />
+                        <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">
+                          <h4 className="font-serif font-black text-base text-stone-900 pb-2 border-b border-[#7a1f2b]/30 mb-4 uppercase tracking-wide flex items-center gap-1.5">
+                            <Globe size={15} className="text-[#9b2c3b]" />
                             Global Rights & Sovereignty Matrix
                           </h4>
                           <p className="text-[11px] font-sans text-stone-700 leading-normal mb-4">
@@ -854,48 +814,48 @@ export default function App() {
 
                           <div className="space-y-4">
                             {/* Al Jazeera Live Webcast Header Banner */}
-                            <div className="bg-[#580a0a]/5 border border-[#580a0a]/15 p-2.5 rounded flex items-center justify-between gap-2">
+                            <div className="bg-[#4a1019]/5 border border-[#4a1019]/15 p-2.5 rounded flex items-center justify-between gap-2">
                               <div className="flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-                                <span className="font-mono text-[10px] font-bold text-[#5c1313] uppercase">Live Broadcast News</span>
+                                <span className="w-2 h-2 rounded-full bg-[#8a2432] animate-pulse" />
+                                <span className="font-mono text-[10px] font-bold text-[#5e1620] uppercase">Live Broadcast News</span>
                               </div>
                               <a 
                                 href="https://www.aljazeera.com/live" 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="font-mono text-[9px] font-bold uppercase underline text-[#580a0a] hover:text-[#731212] flex items-center gap-0.5"
+                                className="font-mono text-[9px] font-bold uppercase underline text-[#4a1019] hover:text-[#731212] flex items-center gap-0.5"
                               >
                                 Watch Al Jazeera Live <ExternalLink size={8} />
                               </a>
                             </div>
 
                             {/* Palestine Section */}
-                            <div className="border-b border-[#580a0a]/10 pb-2.5">
+                            <div className="border-b border-[#4a1019]/10 pb-2.5">
                               <div className="flex items-center justify-between mb-1.5">
-                                <p className="text-[10px] font-mono text-[#580a0a] font-black uppercase tracking-wider">🇵🇸 Occupied Palestine</p>
-                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-[#580a0a]/10 text-[#580a0a] rounded uppercase">Ground Reality</span>
+                                <p className="text-[10px] font-mono text-[#4a1019] font-black uppercase tracking-wider">🇵🇸 Occupied Palestine</p>
+                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-[#4a1019]/10 text-[#4a1019] rounded uppercase">Ground Reality</span>
                               </div>
                               <ul className="space-y-1 text-xs font-serif font-semibold">
                                 <li>
-                                  <a href="https://www.aljazeera.com/where/palestine/" target="_blank" rel="noopener noreferrer" className="hover:text-[#580a0a] flex items-center justify-between group py-0.5">
+                                  <a href="https://www.aljazeera.com/where/palestine/" target="_blank" rel="noopener noreferrer" className="hover:text-[#4a1019] flex items-center justify-between group py-0.5">
                                     <span>Al Jazeera Palestine Hub (Live Feed)</span>
                                     <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="https://mondoweiss.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#580a0a] flex items-center justify-between group py-0.5">
+                                  <a href="https://mondoweiss.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#4a1019] flex items-center justify-between group py-0.5">
                                     <span>Mondoweiss (Sovereign Perspective)</span>
                                     <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="https://www.palestinechronicle.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#580a0a] flex items-center justify-between group py-0.5">
+                                  <a href="https://www.palestinechronicle.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#4a1019] flex items-center justify-between group py-0.5">
                                     <span>Palestine Chronicle (Civilian Gazettes)</span>
                                     <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="https://www.middleeasteye.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#580a0a] flex items-center justify-between group py-0.5">
+                                  <a href="https://www.middleeasteye.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#4a1019] flex items-center justify-between group py-0.5">
                                     <span>Middle East Eye (West Asia Truth Focus)</span>
                                     <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
                                   </a>
@@ -904,10 +864,10 @@ export default function App() {
                             </div>
 
                             {/* Sudan Section */}
-                            <div className="border-b border-[#991b1b]/20 pb-2.5">
+                            <div className="border-b border-[#7a1f2b]/20 pb-2.5">
                               <div className="flex items-center justify-between mb-1.5">
-                                <p className="text-[10px] font-mono text-red-800 font-black uppercase tracking-wider">🇸🇩 Sudan Sovereignty</p>
-                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-red-50 text-red-800 border border-red-800/40 rounded uppercase">Resistance</span>
+                                <p className="text-[10px] font-mono text-[#6a1a26] font-black uppercase tracking-wider">🇸🇩 Sudan Sovereignty</p>
+                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-[#f8eff1] text-[#6a1a26] border border-[#6a1a26]/40 rounded uppercase">Resistance</span>
                               </div>
                               <ul className="space-y-1 text-xs font-serif font-semibold text-stone-600">
                                 <li>
@@ -932,10 +892,10 @@ export default function App() {
                             </div>
 
                             {/* Congo Section */}
-                            <div className="border-b border-[#991b1b]/20 pb-2.5">
+                            <div className="border-b border-[#7a1f2b]/20 pb-2.5">
                               <div className="flex items-center justify-between mb-1.5">
-                                <p className="text-[10px] font-mono text-red-800 font-black uppercase tracking-wider">🇨🇩 Congo & Goma Reports</p>
-                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-red-50 text-red-800 border border-red-800/40 rounded uppercase">Anti-Exploitation</span>
+                                <p className="text-[10px] font-mono text-[#6a1a26] font-black uppercase tracking-wider">🇨🇩 Congo & Goma Reports</p>
+                                <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 bg-[#f8eff1] text-[#6a1a26] border border-[#6a1a26]/40 rounded uppercase">Anti-Exploitation</span>
                               </div>
                               <ul className="space-y-1 text-xs font-serif font-semibold text-stone-600">
                                 <li>
@@ -958,38 +918,13 @@ export default function App() {
                                 </li>
                               </ul>
                             </div>
-
-                            {/* Global High-Integrity Press Section */}
-                            <div>
-                              <p className="text-[10px] font-mono text-red-800 font-black uppercase tracking-wider mb-1.5">🌎 Global Press Outlets</p>
-                              <ul className="space-y-1 text-xs font-serif font-semibold text-stone-600">
-                                <li>
-                                  <a href="https://www.nytimes.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>The New York Times (International)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://www.theguardian.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>The Guardian (Global Analysis)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://www.reuters.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>Reuters (Global Wire Stream)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
                           </div>
                         </div>
 
                         {/* 3. AUDIO VISUAL DOSSIERS: PEOPLE POWER VIDEOS */}
-                        <div className="bg-white border-2 border-[#991b1b]/40 p-5 rounded shadow-lg">
-                          <h4 className="font-serif font-black text-base text-stone-900 pb-2 border-b border-[#991b1b]/30 mb-4 uppercase tracking-wide flex items-center gap-1.5">
-                            <Film size={15} className="text-[#dc2626]" />
+                        <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">
+                          <h4 className="font-serif font-black text-base text-stone-900 pb-2 border-b border-[#7a1f2b]/30 mb-4 uppercase tracking-wide flex items-center gap-1.5">
+                            <Film size={15} className="text-[#9b2c3b]" />
                             People Power Dossier
                           </h4>
                           <p className="text-[11px] font-sans text-stone-700 leading-normal mb-4">
@@ -999,7 +934,7 @@ export default function App() {
                           {/* Video Links */}
                           <div className="space-y-4">
                             <div className="space-y-2">
-                              <p className="font-mono text-[9px] text-[#991b1b] font-black uppercase">• GLOBAL MASS ACTION: PEOPLE'S DISPATCH</p>
+                              <p className="font-mono text-[9px] text-[#7a1f2b] font-black uppercase">• GLOBAL MASS ACTION: PEOPLE'S DISPATCH</p>
                               <p className="text-[11px] text-stone-700 font-sans leading-relaxed">
                                 International media project highlighting global grassroots mobilizations, union direct actions, and massive popular demonstrations standing in solidarity against genocide and military occupation.
                               </p>
@@ -1007,15 +942,15 @@ export default function App() {
                                 href="https://peoplesdispatch.org" 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#991b1b]/20 hover:bg-[#991b1b]/40 text-red-800 border border-[#991b1b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#7a1f2b]/20 hover:bg-[#7a1f2b]/40 text-[#6a1a26] border border-[#7a1f2b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
                               >
                                 <span>Access Movement Portal</span>
                                 <ExternalLink size={10} />
                               </a>
                             </div>
 
-                            <div className="space-y-2 border-t border-[#991b1b]/20 pt-4">
-                              <p className="font-mono text-[9px] text-[#991b1b] font-black uppercase">• INDEPENDENT DISPATCH: THE ELECTRONIC INTIFADA</p>
+                            <div className="space-y-2 border-t border-[#7a1f2b]/20 pt-4">
+                              <p className="font-mono text-[9px] text-[#7a1f2b] font-black uppercase">• INDEPENDENT DISPATCH: THE ELECTRONIC INTIFADA</p>
                               <p className="text-[11px] text-stone-700 font-sans leading-relaxed">
                                 Live news feeds, independent investigative broadcasts, and deep structural analysis of West Asian and global solidarity movements.
                               </p>
@@ -1023,7 +958,7 @@ export default function App() {
                                 href="https://electronicintifada.net" 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#991b1b]/20 hover:bg-[#991b1b]/40 text-red-800 border border-[#991b1b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#7a1f2b]/20 hover:bg-[#7a1f2b]/40 text-[#6a1a26] border border-[#7a1f2b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
                               >
                                 <span>Access News Portal</span>
                                 <ExternalLink size={10} />
@@ -1038,7 +973,7 @@ export default function App() {
                   ) : (
                     // Filtered Catalogue view grid
                     <div className="space-y-6">
-                      <h3 className="font-mono text-xs font-bold uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-stone-900">
+                      <h3 className="font-mono text-xs font-bold uppercase tracking-widest border-b border-[#7a1f2b]/30 pb-2 text-stone-900">
                         Filtered Dispatches in Ceylon Stream
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1069,11 +1004,11 @@ export default function App() {
           {activeTab === 'past' && (
             <div className="max-w-7xl mx-auto px-4 mt-8" id="viewport-past">
               {filteredArticles.length === 0 ? (
-                <div className="text-center py-24 border-2 border-dashed border-[#991b1b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
+                <div className="text-center py-24 border-2 border-dashed border-[#7a1f2b]/35 bg-white rounded max-w-4xl mx-auto" id="fallback-no-match">
                   <p className="font-serif text-xl italic text-stone-600">"Our archival books do not house releases matching these constraints."</p>
                   <button 
                     onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
-                    className="mt-6 font-mono text-xs font-bold uppercase tracking-widest bg-[#991b1b] text-white px-4 py-2 hover:bg-[#dc2626] transition-colors cursor-pointer rounded"
+                    className="mt-6 font-mono text-xs font-bold uppercase tracking-widest bg-[#7a1f2b] text-white px-4 py-2 hover:bg-[#9b2c3b] transition-colors cursor-pointer rounded"
                   >
                     Reset Catalogue Query
                   </button>
@@ -1082,7 +1017,7 @@ export default function App() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="past-archive-layout">
                   {/* Left Column */}
                   <div className="lg:col-span-8 space-y-6">
-                    <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-stone-900">
+                    <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#7a1f2b]/30 pb-2 text-stone-900">
                       Historical Ledger Releases
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1103,22 +1038,22 @@ export default function App() {
                   </div>
 
                   {/* Right Column */}
-                  <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l-2 border-[#991b1b]/30 pt-8 lg:pt-0 lg:pl-8 space-y-6 animate-in fade-in duration-300">
-                    <div className="bg-white border-2 border-[#991b1b]/40 p-5 rounded shadow-lg">
+                  <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l-2 border-[#7a1f2b]/30 pt-8 lg:pt-0 lg:pl-8 space-y-6 animate-in fade-in duration-300">
+                    <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">
                       <h4 className="font-serif font-black text-sm text-stone-900 mb-2 uppercase tracking-wide">Archival Ledger Advisory</h4>
                       <p className="font-sans text-xs text-stone-700 leading-relaxed mb-4">
                         Archive records cover investigative, societal trends, and historical legal commentaries of past years. Dispatches remain fully open to academic critique and commentaries.
                       </p>
-                      <div className="text-xs font-mono text-red-800 flex items-center gap-1 font-bold">
+                      <div className="text-xs font-mono text-[#6a1a26] flex items-center gap-1 font-bold">
                         <span>Total copies in library: {articles.filter(a => !a.isCurrent).length} items</span>
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 text-stone-900">
+                      <h3 className="font-mono text-xs font-black uppercase tracking-widest border-b border-[#7a1f2b]/30 pb-2 text-stone-900">
                         Active Current Coverage
                       </h3>
-                      <div className="divide-y divide-[#991b1b]/20 space-y-2">
+                      <div className="divide-y divide-[#7a1f2b]/20 space-y-2">
                         {articles.filter(a => a.isCurrent).slice(0, 3).map(art => (
                           <ArticleCard 
                             key={art.id}
@@ -1149,8 +1084,8 @@ export default function App() {
                     onClick={() => setIsAdminMode(!isAdminMode)}
                     className={`flex items-center gap-1.5 font-mono text-[10px] font-black uppercase py-1 px-2 border-2 transition-all cursor-pointer rounded ${
                       effectiveAdminMode 
-                        ? 'bg-[#991b1b] text-white border-red-500 shadow-md' 
-                        : 'bg-stone-100 border-[#991b1b]/40 text-stone-600 hover:text-stone-900 hover:bg-stone-100'
+                        ? 'bg-[#7a1f2b] text-white border-[#9b2c3b] shadow-md' 
+                        : 'bg-stone-100 border-[#7a1f2b]/40 text-stone-600 hover:text-stone-900 hover:bg-stone-100'
                     }`}
                     id="admin-moderator-desk"
                   >
@@ -1180,10 +1115,10 @@ export default function App() {
           {/* PRIVACY DEFENSE POLICY TAB */}
           {activeTab === 'privacy' && (
             <div id="viewport-privacy" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
-              <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
+              <div className="bg-white border-2 border-[#7a1f2b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
                 {/* Header Stamp */}
-                <div className="text-center space-y-3 border-b-2 border-[#991b1b] pb-6 mb-8">
-                  <span className="font-mono text-xs font-black tracking-[0.2em] text-[#991b1b] uppercase">
+                <div className="text-center space-y-3 border-b-2 border-[#7a1f2b] pb-6 mb-8">
+                  <span className="font-mono text-xs font-black tracking-[0.2em] text-[#7a1f2b] uppercase">
                     The Ceylon Review
                   </span>
                   <p className="font-mono text-[9px] text-stone-500 tracking-widest uppercase italic leading-none">
@@ -1198,7 +1133,7 @@ export default function App() {
                     Digital Newsroom Operations — Source Protection, Data Security & Editorial Safety
                   </p>
                   
-                  <div className="pt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-mono text-stone-500 font-bold uppercase border-t border-[#991b1b]/30 mt-4">
+                  <div className="pt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-mono text-stone-500 font-bold uppercase border-t border-[#7a1f2b]/30 mt-4">
                     <span>Effective Date: June 2026</span>
                     <span>•</span>
                     <span>Version 1.0</span>
@@ -1212,7 +1147,7 @@ export default function App() {
                   
                   {/* SECTION 1 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       1. Preamble & Editorial Commitment
                     </h4>
                     <p>
@@ -1225,14 +1160,14 @@ export default function App() {
 
                   {/* SECTION 2 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       2. Source Protection
                     </h4>
                     <p>
                       The protection of confidential sources is an absolute editorial obligation. No source who communicates with The Ceylon Review under an expectation of confidentiality shall be identified, exposed, or placed at risk through any act or omission by this publication.
                     </p>
                     
-                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#991b1b]/30">
+                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#7a1f2b]/30">
                       <div className="space-y-2">
                         <h5 className="font-serif font-bold text-base text-stone-900">
                           2.1 Operational Principles
@@ -1264,14 +1199,14 @@ export default function App() {
 
                   {/* SECTION 3 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       3. Digital Security Standards
                     </h4>
                     <p>
                       All staff, contributors, and freelancers working with The Ceylon Review are required to adhere to the following minimum digital security standards.
                     </p>
                     
-                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#991b1b]/30">
+                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#7a1f2b]/30">
                       <div className="space-y-2">
                         <h5 className="font-serif font-bold text-base text-stone-900">
                           3.1 Device & Account Security
@@ -1310,7 +1245,7 @@ export default function App() {
 
                   {/* SECTION 4 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       4. Reader Data & Website Privacy
                     </h4>
                     <p>
@@ -1327,14 +1262,14 @@ export default function App() {
 
                   {/* SECTION 5 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       5. Legal Threat Response & Anti-SLAPP Protocol
                     </h4>
                     <p>
                       The Ceylon Review recognises that legal intimidation — including Strategic Lawsuits Against Public Participation (SLAPPs) — is increasingly weaponised against independent media in Sri Lanka and globally. This section establishes protocols for responding to legal threats without compromising editorial integrity or source safety.
                     </p>
                     
-                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#991b1b]/30">
+                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#7a1f2b]/30">
                       <div className="space-y-2">
                         <h5 className="font-serif font-bold text-base text-stone-900">
                           5.1 Upon Receipt of a Legal Threat or Demand
@@ -1361,7 +1296,7 @@ export default function App() {
 
                   {/* SECTION 6 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       6. Physical & Operational Safety
                     </h4>
                     <p>
@@ -1378,7 +1313,7 @@ export default function App() {
 
                   {/* SECTION 7 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       7. Contributor Obligations & Training
                     </h4>
                     <p>
@@ -1394,7 +1329,7 @@ export default function App() {
 
                   {/* SECTION 8 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       8. Governing Legal & Ethical Framework
                     </h4>
                     <p>
@@ -1411,7 +1346,7 @@ export default function App() {
 
                   {/* SECTION 9 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       9. Policy Review
                     </h4>
                     <p>
@@ -1422,11 +1357,11 @@ export default function App() {
                 </div>
 
                 {/* Footer Signature Block */}
-                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#991b1b]/30 text-center font-mono">
+                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#7a1f2b]/30 text-center font-mono">
                   <p className="text-xs text-stone-500">This policy is issued under the authority of the Chief Editor, The Ceylon Review.</p>
-                  <p className="font-serif text-lg font-black text-[#991b1b] mt-2">{editorName} — Founder & Chief Editor</p>
+                  <p className="font-serif text-lg font-black text-[#7a1f2b] mt-2">{editorName} — Founder & Chief Editor</p>
                   <p className="text-[10px] text-stone-500 mt-1">The Ceylon Review | June 2026</p>
-                  <div className="w-12 h-[2px] bg-[#991b1b] mx-auto mt-4" />
+                  <div className="w-12 h-[2px] bg-[#7a1f2b] mx-auto mt-4" />
                   <p className="text-[9px] text-stone-500 italic mt-3 tracking-wider">
                     The Ceylon Review — Everything is connected. Nothing is neutral.
                   </p>
@@ -1438,10 +1373,10 @@ export default function App() {
           {/* REGULATORY DIRECTIVE TAB */}
           {activeTab === 'directive' && (
             <div id="viewport-directive" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
-              <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
+              <div className="bg-white border-2 border-[#7a1f2b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
                 {/* Header Stamp */}
-                <div className="text-center space-y-3 border-b-2 border-[#991b1b] pb-6 mb-8">
-                  <span className="font-mono text-xs font-black tracking-[0.2em] text-[#991b1b] uppercase">
+                <div className="text-center space-y-3 border-b-2 border-[#7a1f2b] pb-6 mb-8">
+                  <span className="font-mono text-xs font-black tracking-[0.2em] text-[#7a1f2b] uppercase">
                     The Ceylon Review
                   </span>
                   <p className="font-mono text-[9px] text-stone-500 tracking-widest uppercase italic leading-none">
@@ -1456,7 +1391,7 @@ export default function App() {
                     Sovereign Press Compliance — Constitutional Safeguards, Editorial Independence & Universal Recourse
                   </p>
                   
-                  <div className="pt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-mono text-stone-500 font-bold uppercase border-t border-[#991b1b]/30 mt-4">
+                  <div className="pt-4 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-mono text-stone-500 font-bold uppercase border-t border-[#7a1f2b]/30 mt-4">
                     <span>Effective Date: June 2026</span>
                     <span>•</span>
                     <span>Document Reference: SRD-2026-V1</span>
@@ -1470,7 +1405,7 @@ export default function App() {
                   
                   {/* SECTION 1 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       1. Constitutional Authority & Scope
                     </h4>
                     <p>
@@ -1483,13 +1418,13 @@ export default function App() {
 
                   {/* SECTION 2 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       2. Code of Editorial Conduct
                     </h4>
                     <p>
                       Our primary allegiance is to the truth and the public interest. Every investigative dispatch and legal opinion published on our grids must adhere to the highest international standards of verification.
                     </p>
-                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#991b1b]/30">
+                    <div className="pl-4 md:pl-6 space-y-4 border-l-2 border-[#7a1f2b]/30">
                       <div className="space-y-2">
                         <h5 className="font-serif font-bold text-base text-stone-900">
                           2.1 Verification & Cross-Referencing
@@ -1511,7 +1446,7 @@ export default function App() {
 
                   {/* SECTION 3 */}
                   <div className="space-y-4">
-                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#991b1b]/30 pb-1.5 text-[#991b1b]">
+                    <h4 className="font-serif text-lg md:text-xl font-bold border-b border-[#7a1f2b]/30 pb-1.5 text-[#7a1f2b]">
                       3. Right of Correction & Public Recourse
                     </h4>
                     <p>
@@ -1525,11 +1460,11 @@ export default function App() {
                 </div>
 
                 {/* Footer Signature Block */}
-                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#991b1b]/30 text-center font-mono">
+                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#7a1f2b]/30 text-center font-mono">
                   <p className="text-xs text-stone-500">This directive is issued under the authority of the Sovereign Editorial Council.</p>
-                  <p className="font-serif text-lg font-black text-[#991b1b] mt-2">{editorName} — Founder & Chief Editor</p>
+                  <p className="font-serif text-lg font-black text-[#7a1f2b] mt-2">{editorName} — Founder & Chief Editor</p>
                   <p className="text-[10px] text-stone-500 mt-1">The Ceylon Review | June 2026</p>
-                  <div className="w-12 h-[2px] bg-[#991b1b] mx-auto mt-4" />
+                  <div className="w-12 h-[2px] bg-[#7a1f2b] mx-auto mt-4" />
                   <p className="text-[9px] text-stone-500 italic mt-3 tracking-wider">
                     The Ceylon Review — Everything is connected. Nothing is neutral.
                   </p>
@@ -1541,31 +1476,31 @@ export default function App() {
           {/* ABOUT & CORRECTIONS TAB */}
           {activeTab === 'about' && (
             <div id="viewport-about" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
-              <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-12 shadow-xl rounded font-sans text-stone-900">
-                <div className="text-center space-y-2 border-b-2 border-[#991b1b] pb-4 mb-8">
-                  <h2 className="font-serif text-3xl md:text-5xl font-black text-[#991b1b] uppercase tracking-wider">About & Corrections</h2>
+              <div className="bg-white border-2 border-[#7a1f2b]/40 p-6 md:p-12 shadow-xl rounded font-sans text-stone-900">
+                <div className="text-center space-y-2 border-b-2 border-[#7a1f2b] pb-4 mb-8">
+                  <h2 className="font-serif text-3xl md:text-5xl font-black text-[#7a1f2b] uppercase tracking-wider">About & Corrections</h2>
                   <p className="font-mono text-[10px] md:text-xs text-stone-500 uppercase tracking-widest italic">The Ceylon Review, Colombo</p>
                 </div>
                 <div className="space-y-8 text-stone-900 leading-relaxed text-sm md:text-[15px]">
                   <div className="space-y-2">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Who publishes this</h4>
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">Who publishes this</h4>
                     <p>The Ceylon Review is an independent publication on law, human rights and global justice, founded in July 2026 and edited from Colombo by Sameera Mahboobdeen, Founder and Editorial Director.</p>
                   </div>
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">How we work</h4>
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">How we work</h4>
                     <p>We report facts and attribute them. Where we rely on a court ruling, a statute, a United Nations body or a rights organisation, we say which and link or name the source. Where we could not verify something, we say so, or leave it out. Opinion is labelled as opinion.</p>
                   </div>
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Corrections</h4>
-                    <p>If you believe something we published is wrong, write to <a href="mailto:theceylonreview@proton.me?subject=Correction%20request" className="underline text-red-800 font-bold">theceylonreview@proton.me</a> with the article title, the sentence, and what you say is correct, with a source if you have one. We check every request. When we find an error, we fix it, and for any change that affects meaning we add a dated note to the article saying what was changed.</p>
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">Corrections</h4>
+                    <p>If you believe something we published is wrong, write to <a href="mailto:theceylonreview@proton.me?subject=Correction%20request" className="underline text-[#6a1a26] font-bold">theceylonreview@proton.me</a> with the article title, the sentence, and what you say is correct, with a source if you have one. We check every request. When we find an error, we fix it, and for any change that affects meaning we add a dated note to the article saying what was changed.</p>
                   </div>
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Right of reply</h4>
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">Right of reply</h4>
                     <p>People and organisations named in our reporting may send a response to the same address. We will consider publishing it alongside the article.</p>
                   </div>
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">Contact</h4>
-                    <p>Editorial, corrections and column pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 font-bold">theceylonreview@proton.me</a></p>
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">Contact</h4>
+                    <p>Editorial, corrections and column pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-[#6a1a26] font-bold">theceylonreview@proton.me</a></p>
                   </div>
                 </div>
               </div>
@@ -1575,10 +1510,10 @@ export default function App() {
           {/* DISCLAIMER NOTICE TAB */}
           {activeTab === 'disclaimer' && (
             <div id="viewport-disclaimer" className="max-w-4xl mx-auto px-4 mt-8 animate-fade-in">
-              <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
+              <div className="bg-white border-2 border-[#7a1f2b]/40 p-6 md:p-12 relative shadow-xl rounded select-all font-sans text-stone-900">
                 {/* Header Stamp */}
-                <div className="text-center space-y-2 border-b-2 border-[#991b1b] pb-4 mb-8">
-                  <h2 className="font-serif text-3xl md:text-5xl font-black text-[#991b1b] uppercase tracking-wider">
+                <div className="text-center space-y-2 border-b-2 border-[#7a1f2b] pb-4 mb-8">
+                  <h2 className="font-serif text-3xl md:text-5xl font-black text-[#7a1f2b] uppercase tracking-wider">
                     THE CEYLON REVIEW
                   </h2>
                   <h3 className="font-sans text-lg md:text-xl font-bold text-stone-900 tracking-widest uppercase">
@@ -1594,7 +1529,7 @@ export default function App() {
                   
                   {/* GENERAL */}
                   <div className="space-y-2">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       GENERAL
                     </h4>
                     <p className="text-justify">
@@ -1603,8 +1538,8 @@ export default function App() {
                   </div>
 
                   {/* EDITORIAL INDEPENDENCE */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       EDITORIAL INDEPENDENCE
                     </h4>
                     <p className="text-justify">
@@ -1613,8 +1548,8 @@ export default function App() {
                   </div>
 
                   {/* OPINION & COMMENTARY */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       OPINION & COMMENTARY
                     </h4>
                     <p className="text-justify">
@@ -1623,8 +1558,8 @@ export default function App() {
                   </div>
 
                   {/* REPORTING ON SENSITIVE ISSUES */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       REPORTING ON SENSITIVE ISSUES
                     </h4>
                     <p className="text-justify">
@@ -1636,8 +1571,8 @@ export default function App() {
                   </div>
 
                   {/* NO INCITEMENT */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       NO INCITEMENT
                     </h4>
                     <p className="text-justify">
@@ -1646,18 +1581,18 @@ export default function App() {
                   </div>
 
                   {/* ACCURACY & CORRECTIONS */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       ACCURACY & CORRECTIONS
                     </h4>
                     <p className="text-justify">
-                      While we strive for accuracy in all our reporting, The Ceylon Review does not warrant that all information published is complete, current, or free from error. We are committed to issuing corrections transparently and promptly when errors are identified. Readers who identify factual inaccuracies are encouraged to contact us at <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 hover:text-stone-900">theceylonreview@proton.me</a>.
+                      While we strive for accuracy in all our reporting, The Ceylon Review does not warrant that all information published is complete, current, or free from error. We are committed to issuing corrections transparently and promptly when errors are identified. Readers who identify factual inaccuracies are encouraged to contact us at <a href="mailto:theceylonreview@proton.me" className="underline text-[#6a1a26] hover:text-stone-900">theceylonreview@proton.me</a>.
                     </p>
                   </div>
 
                   {/* THIRD-PARTY LINKS & SOURCES */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       THIRD-PARTY LINKS & SOURCES
                     </h4>
                     <p className="text-justify">
@@ -1666,8 +1601,8 @@ export default function App() {
                   </div>
 
                   {/* USER-GENERATED CONTENT & COMMENTS */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       USER-GENERATED CONTENT & COMMENTS
                     </h4>
                     <p className="text-justify">
@@ -1676,8 +1611,8 @@ export default function App() {
                   </div>
 
                   {/* NO PROFESSIONAL ADVICE */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       NO PROFESSIONAL ADVICE
                     </h4>
                     <p className="text-justify">
@@ -1686,8 +1621,8 @@ export default function App() {
                   </div>
 
                   {/* INTELLECTUAL PROPERTY */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       INTELLECTUAL PROPERTY
                     </h4>
                     <p className="text-justify">
@@ -1696,8 +1631,8 @@ export default function App() {
                   </div>
 
                   {/* JURISDICTION */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       JURISDICTION
                     </h4>
                     <p className="text-justify">
@@ -1706,8 +1641,8 @@ export default function App() {
                   </div>
 
                   {/* CHANGES TO THIS DISCLAIMER */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       CHANGES TO THIS DISCLAIMER
                     </h4>
                     <p className="text-justify">
@@ -1716,20 +1651,20 @@ export default function App() {
                   </div>
 
                   {/* CONTACT */}
-                  <div className="space-y-2 pt-2 border-t border-[#991b1b]/20">
-                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#991b1b] uppercase">
+                  <div className="space-y-2 pt-2 border-t border-[#7a1f2b]/20">
+                    <h4 className="font-sans text-xs font-black tracking-[0.1em] text-[#7a1f2b] uppercase">
                       CONTACT
                     </h4>
                     <p className="text-justify">
-                      For queries, corrections, or legal correspondence, please contact us at: Email: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 hover:text-stone-900">theceylonreview@proton.me</a>
+                      For queries, corrections, or legal correspondence, please contact us at: Email: <a href="mailto:theceylonreview@proton.me" className="underline text-[#6a1a26] hover:text-stone-900">theceylonreview@proton.me</a>
                     </p>
                   </div>
 
                 </div>
 
                 {/* Footer Centerpiece Tagline */}
-                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#991b1b]/30 text-center font-serif">
-                  <p className="italic text-base md:text-lg font-black text-[#991b1b] tracking-wide">
+                <div className="mt-12 pt-6 border-t-2 border-dashed border-[#7a1f2b]/30 text-center font-serif">
+                  <p className="italic text-base md:text-lg font-black text-[#7a1f2b] tracking-wide">
                     The Ceylon Review — Everything Is Connected. Nothing Is Neutral.
                   </p>
                 </div>
@@ -1740,29 +1675,29 @@ export default function App() {
       </div>
 
       {/* Broadside Footer */}
-      <footer className="bg-white text-stone-900 border-t-4 border-[#580a0a] py-12 select-all" id="newspaper-footer">
+      <footer className="bg-[#14264a] text-white border-t-4 border-[#7a1f2b] py-12 select-all" id="newspaper-footer">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
-          <h2 className="font-serif text-3xl font-black tracking-widest text-stone-900 uppercase">THE CEYLON REVIEW</h2>
-          <p className="text-[11px] font-mono text-stone-600 tracking-[0.25em] max-w-2xl mx-auto leading-normal uppercase">
+          <h2 className="font-serif text-3xl font-black tracking-widest text-white uppercase">THE CEYLON REVIEW</h2>
+          <p className="text-[11px] font-mono text-white/70 tracking-[0.25em] max-w-2xl mx-auto leading-normal uppercase">
             INDEPENDENT JOURNALISM • ANALYTICAL JURISPRUDENCE • COMMITTED TO ABSOLUTE TRUTH & SOVEREIGN PEOPLES
           </p>
           
-          <div className="bg-black/5 border border-stone-200 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
-            <span className="text-stone-700">Contact and column pitches:</span>
-            <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-stone-700">theceylonreview@proton.me</a>
+          <div className="bg-white/10 border border-white/15 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
+            <span className="text-white/80">Contact and column pitches:</span>
+            <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-white/80">theceylonreview@proton.me</a>
           </div>
 
-          <div className="pt-6 border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-stone-600">
+          <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-white/70">
             <span>© 2026 THE CEYLON REVIEW PRINT & INTERACTIVE REPRODUCTIONS INC. ALL RIGHTS PRESERVED.</span>
             <span className="flex flex-wrap justify-center gap-4 items-center">
-              <span onClick={() => handleTabChange('about')} className="hover:text-stone-900 cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
-              <span onClick={() => handleTabChange('directive')} className="hover:text-stone-900 cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
-              <span onClick={() => handleTabChange('privacy')} className="hover:text-stone-900 cursor-pointer hover:underline">PRIVACY DEFENSE</span>
-              <span onClick={() => handleTabChange('disclaimer')} className="hover:text-stone-900 cursor-pointer hover:underline">LIABILITY DISCLAIMER</span>
+              <span onClick={() => handleTabChange('about')} className="hover:text-white cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
+              <span onClick={() => handleTabChange('directive')} className="hover:text-white cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
+              <span onClick={() => handleTabChange('privacy')} className="hover:text-white cursor-pointer hover:underline">PRIVACY DEFENSE</span>
+              <span onClick={() => handleTabChange('disclaimer')} className="hover:text-white cursor-pointer hover:underline">LIABILITY DISCLAIMER</span>
               {!currentUser ? (
                 <button
                   onClick={handleEditorSignIn}
-                  className="bg-black text-white hover:bg-stone-800 px-3 py-1.5 rounded font-bold cursor-pointer uppercase tracking-wider transition-colors"
+                  className="bg-white text-[#14264a] hover:bg-stone-200 px-3 py-1.5 rounded font-bold cursor-pointer uppercase tracking-wider transition-colors"
                   id="footer-editor-signin"
                 >
                   EDITORIAL SIGN IN
@@ -1770,7 +1705,7 @@ export default function App() {
               ) : !isAuthorizedEditor ? (
                 <button
                   onClick={signOutEditor}
-                  className="hover:text-stone-900 cursor-pointer hover:underline uppercase"
+                  className="hover:text-white cursor-pointer hover:underline uppercase"
                 >
                   SIGN OUT
                 </button>
@@ -1840,7 +1775,7 @@ export default function App() {
       {effectiveAdminMode && (
         <button
           onClick={() => setIsEditorialDeskOpen(true)}
-          className="fixed bottom-6 right-6 z-40 bg-[#991b1b] hover:bg-[#b91c1c] text-[#f5eedc] p-3.5 rounded-full shadow-2xl flex items-center gap-2 font-mono text-[10px] font-black uppercase border-2 border-[#d4af37] cursor-pointer hover:scale-105 transition-all group"
+          className="fixed bottom-6 right-6 z-40 bg-[#7a1f2b] hover:bg-[#8a2432] text-[#f5eedc] p-3.5 rounded-full shadow-2xl flex items-center gap-2 font-mono text-[10px] font-black uppercase border-2 border-[#d4af37] cursor-pointer hover:scale-105 transition-all group"
           id="floating-cms-desk-trigger"
           title="Open Sovereign Editorial CMS Panel"
         >
@@ -1853,8 +1788,8 @@ export default function App() {
 
       {/* Visual In-App Notification Toast */}
       {toastNotification && (
-        <div className="fixed bottom-6 left-6 z-50 bg-white text-stone-900 border-2 border-[#b91c1c] p-4 rounded shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom duration-200 max-w-md ring-1 ring-[#d4af37]/30">
-          <div className="p-2 bg-[#991b1b] text-white rounded shrink-0">
+        <div className="fixed bottom-6 left-6 z-50 bg-white text-stone-900 border-2 border-[#8a2432] p-4 rounded shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom duration-200 max-w-md ring-1 ring-[#d4af37]/30">
+          <div className="p-2 bg-[#7a1f2b] text-white rounded shrink-0">
             <Shield size={16} />
           </div>
           <div>

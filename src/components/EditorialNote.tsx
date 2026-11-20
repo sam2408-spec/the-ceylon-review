@@ -5,9 +5,10 @@ const STORAGE_KEY = 'the_ceylon_review_note_folded';
 
 function readFolded(): boolean {
   try {
-    return localStorage.getItem(STORAGE_KEY) === 'true';
+    const v = localStorage.getItem(STORAGE_KEY);
+    return v === null ? true : v === 'true';
   } catch {
-    return false;
+    return true;
   }
 }
 
@@ -26,12 +27,12 @@ export default function EditorialNote() {
 
   return (
     <section
-      className="mb-8 bg-white border-2 border-[#991b1b]/40 border-l-4 border-l-[#991b1b] rounded shadow-md"
+      className="mb-8 bg-white border-2 border-[#7a1f2b]/40 border-l-4 border-l-[#7a1f2b] rounded shadow-md"
       id="editorial-note-why-we-exist"
       aria-labelledby="editorial-note-title"
     >
-      <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-[#991b1b]/25 bg-red-50">
-        <span className="flex items-center gap-2 font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#991b1b]">
+      <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-[#7a1f2b]/25 bg-[#f8eff1]">
+        <span className="flex items-center gap-2 font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#7a1f2b]">
           <BookOpen size={14} />
           Editorial Note: Why We Exist
         </span>
@@ -40,7 +41,7 @@ export default function EditorialNote() {
           onClick={toggle}
           aria-expanded={!folded}
           aria-controls="editorial-note-body"
-          className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase text-stone-700 border border-[#991b1b]/40 bg-white hover:bg-red-50 px-2.5 py-1 rounded cursor-pointer"
+          className="flex items-center gap-1 font-mono text-[10px] font-bold uppercase text-stone-700 border border-[#7a1f2b]/40 bg-white hover:bg-[#f8eff1] px-2.5 py-1 rounded cursor-pointer"
         >
           {folded ? 'Read Note' : 'Fold Note'}
           {folded ? <ChevronDown size={12} /> : <ChevronUp size={12} />}
@@ -55,7 +56,7 @@ export default function EditorialNote() {
           >
             The Ceylon Review — A Note on Why We Exist
           </h2>
-          <p className="mt-4 border-l-4 border-[#dc2626] pl-4 font-serif italic text-lg sm:text-xl text-[#991b1b] leading-snug">
+          <p className="mt-4 border-l-4 border-[#9b2c3b] pl-4 font-serif italic text-lg sm:text-xl text-[#7a1f2b] leading-snug">
             There is no shortage of commentary. What is in short supply is accountability.
           </p>
 
@@ -93,12 +94,12 @@ export default function EditorialNote() {
             </p>
           </div>
 
-          <p className="mt-6 flex items-center gap-2 font-mono text-xs font-black uppercase tracking-wider text-[#991b1b]">
+          <p className="mt-6 flex items-center gap-2 font-mono text-xs font-black uppercase tracking-wider text-[#7a1f2b]">
             <Sparkles size={14} />
             Everything is connected. Nothing is neutral.
           </p>
 
-          <div className="mt-6 pt-4 border-t border-[#991b1b]/25 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div className="mt-6 pt-4 border-t border-[#7a1f2b]/25 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
             <p className="font-mono text-[10px] uppercase tracking-widest text-stone-500">
               Ceylon Editorial Desk Gazette • Vol. I No. I
             </p>
