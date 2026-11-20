@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import worldCountries from '../data/countries.json';
 
 interface RotatingEarthProps {
   size?: number;
@@ -8,88 +9,28 @@ interface RotatingEarthProps {
 
 type LonLat = [number, number];
 
-// Simplified cartographic continent & island polygons [longitude, latitude]
-const LANDMASSES: LonLat[][] = [
-  // North America
-  [
-    [-168, 65], [-162, 70], [-140, 70], [-125, 72], [-95, 74], [-80, 70],
-    [-65, 62], [-55, 52], [-66, 44], [-75, 35], [-81, 25], [-83, 30],
-    [-90, 29], [-97, 26], [-96, 19], [-88, 21], [-83, 14], [-78, 8],
-    [-84, 9], [-92, 15], [-105, 20], [-112, 28], [-117, 32], [-124, 40],
-    [-125, 49], [-136, 58], [-152, 60], [-164, 55], [-168, 65]
-  ],
-  // Greenland
-  [
-    [-52, 60], [-42, 60], [-32, 68], [-18, 76], [-25, 82], [-50, 82],
-    [-68, 77], [-56, 68], [-52, 60]
-  ],
-  // South America
-  [
-    [-78, 9], [-72, 12], [-62, 10], [-50, 1], [-35, -6], [-38, -14],
-    [-40, -22], [-48, -28], [-53, -34], [-62, -41], [-66, -50], [-68, -55],
-    [-74, -52], [-73, -42], [-71, -30], [-70, -18], [-77, -12], [-81, -5],
-    [-78, 2], [-78, 9]
-  ],
-  // Europe (continental + Iberia + Italy + Scandinavia)
-  [
-    [-9, 37], [-9, 43], [-2, 43], [-4, 48], [2, 51], [8, 54], [10, 57],
-    [5, 60], [10, 65], [18, 70], [28, 71], [40, 68], [55, 68], [60, 62],
-    [50, 52], [44, 43], [36, 45], [29, 41], [24, 38], [22, 37], [19, 40],
-    [16, 38], [13, 42], [9, 44], [5, 43], [0, 39], [-5, 36], [-9, 37]
-  ],
-  // Great Britain & Ireland
-  [
-    [-6, 50], [-5, 55], [-3, 58], [-1, 56], [1, 52], [-2, 50], [-6, 50]
-  ],
-  // Africa
-  [
-    [-6, 36], [10, 37], [12, 33], [24, 32], [32, 31], [34, 27], [38, 20],
-    [43, 12], [51, 12], [48, 4], [41, -2], [40, -11], [35, -20], [32, -27],
-    [26, -34], [18, -34], [14, -22], [12, -12], [9, -1], [8, 4], [2, 6],
-    [-8, 5], [-14, 10], [-17, 15], [-16, 22], [-10, 30], [-6, 36]
-  ],
-  // Madagascar
-  [
-    [44, -25], [47, -25], [50, -15], [49, -12], [44, -17], [44, -25]
-  ],
-  // Asia + Arabian Peninsula + India + Southeast Asia
-  [
-    [35, 36], [42, 41], [52, 40], [58, 48], [60, 62], [75, 72], [105, 76],
-    [140, 72], [175, 66], [164, 56], [142, 54], [135, 44], [128, 35],
-    [122, 39], [121, 31], [116, 23], [108, 20], [109, 12], [104, 2],
-    [100, 5], [98, 14], [91, 22], [85, 20], [80, 13], [77.5, 8.1],
-    [73, 18], [68, 23], [60, 25], [56, 26], [51, 24], [56, 22], [59, 21],
-    [53, 16], [44, 13], [39, 21], [35, 29], [35, 36]
-  ],
-  // Japan
-  [
-    [130, 32], [135, 34], [141, 38], [145, 44], [140, 42], [136, 36], [130, 32]
-  ],
-  // Indonesia / Sumatra & Java & Borneo
-  [
-    [95, 5], [105, -2], [106, -7], [114, -8], [104, -6], [95, 5]
-  ],
-  [
-    [109, 2], [118, 5], [117, -3], [110, -3], [109, 2]
-  ],
-  // Australia
-  [
-    [114, -22], [123, -17], [131, -12], [137, -13], [142, -11], [146, -18],
-    [153, -27], [150, -36], [141, -38], [134, -34], [124, -34], [115, -34],
-    [113, -26], [114, -22]
-  ]
+// Gaza Strip (hand-traced); the West Bank comes from the country dataset below.
+const GAZA_POLY: LonLat[] = [
+  [34.27, 31.22], [34.22, 31.30], [34.37, 31.55], [34.49, 31.60],
+  [34.57, 31.55], [34.27, 31.22]
 ];
 
-// Dedicated highlighted landmasses for Sri Lanka & Palestine
-const SRI_LANKA_POLY: LonLat[] = [
-  [80.0, 9.8], [80.8, 9.4], [81.8, 7.8], [81.6, 6.2],
-  [80.4, 5.9], [79.8, 7.0], [79.7, 8.6], [80.0, 9.8]
+interface CountryShape {
+  n: string;
+  i: string;
+  r: LonLat[][];
+}
+const COUNTRIES = (worldCountries as CountryShape[]).filter(c => c.n !== 'Antarctica');
+const PALESTINE_RINGS: LonLat[][] = [
+  ...COUNTRIES.filter(c => c.n === 'Palestine').flatMap(c => c.r),
+  GAZA_POLY,
 ];
-
-const PALESTINE_POLY: LonLat[] = [
-  [34.2, 31.3], [35.1, 33.1], [35.6, 33.1], [35.5, 31.2],
-  [34.9, 29.5], [34.2, 31.3]
-];
+const SRI_LANKA_RINGS: LonLat[][] = COUNTRIES.filter(c => c.n === 'Sri Lanka').flatMap(c => c.r);
+// Every other country shimmers on its own rhythm
+const OTHER_COUNTRIES = COUNTRIES.filter(c => c.n !== 'Palestine' && c.n !== 'Sri Lanka').map((c, idx) => ({
+  ...c,
+  phase: ((idx * 2654435761) % 1000) / 1000 * Math.PI * 2,
+}));
 
 const BEACONS: {
   name: string;
@@ -397,14 +338,17 @@ export default function RotatingEarth({
         ctx.stroke();
       }
 
-      // Draw world continents
-      ctx.fillStyle = '#2d6a4f';
-      ctx.strokeStyle = '#52b788';
-      ctx.lineWidth = Math.max(0.6, size * 0.007);
-      for (const poly of LANDMASSES) {
-        if (drawPolygon(poly, lambda0, cx, cy, r)) {
-          ctx.fill();
-          ctx.stroke();
+      // Draw every country; each one blinks softly on its own rhythm
+      ctx.lineWidth = Math.max(0.5, size * 0.006);
+      for (const c of OTHER_COUNTRIES) {
+        const shimmer = (Math.sin(elapsedSec * 2.1 + c.phase) + 1) / 2;
+        ctx.fillStyle = `rgb(${Math.round(36 + shimmer * 40)}, ${Math.round(100 + shimmer * 70)}, ${Math.round(76 + shimmer * 50)})`;
+        ctx.strokeStyle = `rgba(110, 220, 170, ${0.45 + shimmer * 0.4})`;
+        for (const ring of c.r) {
+          if (drawPolygon(ring, lambda0, cx, cy, r)) {
+            ctx.fill();
+            ctx.stroke();
+          }
         }
       }
 
@@ -412,15 +356,39 @@ export default function RotatingEarth({
       const blinkWave = (Math.sin(elapsedSec * 5.2) + 1) / 2;
 
       // Highlight Palestine & Sri Lanka landmasses with blinking crimson/white outline
-      const highlightFill = `rgba(239, 68, 68, ${0.55 + blinkWave * 0.45})`;
-      const highlightStroke = `rgba(255, 255, 255, ${0.65 + blinkWave * 0.35})`;
-      for (const special of [SRI_LANKA_POLY, PALESTINE_POLY]) {
-        if (drawPolygon(special, lambda0, cx, cy, r)) {
-          ctx.fillStyle = highlightFill;
-          ctx.fill();
-          ctx.strokeStyle = highlightStroke;
-          ctx.lineWidth = Math.max(0.9, size * 0.011);
-          ctx.stroke();
+      // Sri Lanka: steady crimson blink. Palestine: the brightest, fastest blink on the globe.
+      const palBlink = (Math.sin(elapsedSec * 7.5) + 1) / 2;
+      const specials: { rings: LonLat[][]; fill: string; stroke: string; width: number; glow: number }[] = [
+        {
+          rings: SRI_LANKA_RINGS,
+          fill: `rgba(239, 68, 68, ${0.55 + blinkWave * 0.4})`,
+          stroke: `rgba(255, 255, 255, ${0.65 + blinkWave * 0.35})`,
+          width: Math.max(0.9, size * 0.011),
+          glow: 0,
+        },
+        {
+          rings: PALESTINE_RINGS,
+          fill: palBlink > 0.5 ? `rgba(255, 255, 255, ${0.75 + palBlink * 0.25})` : `rgba(255, 40, 40, 1)`,
+          stroke: `rgba(255, 255, 255, 1)`,
+          width: Math.max(1.4, size * 0.016),
+          glow: Math.max(6, size * 0.12) * (0.4 + palBlink * 0.6),
+        },
+      ];
+      for (const sp of specials) {
+        for (const ring of sp.rings) {
+          if (drawPolygon(ring, lambda0, cx, cy, r)) {
+            ctx.save();
+            if (sp.glow > 0) {
+              ctx.shadowColor = '#ff2a2a';
+              ctx.shadowBlur = sp.glow;
+            }
+            ctx.fillStyle = sp.fill;
+            ctx.fill();
+            ctx.strokeStyle = sp.stroke;
+            ctx.lineWidth = sp.width;
+            ctx.stroke();
+            ctx.restore();
+          }
         }
       }
 
