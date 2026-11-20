@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Clock, Heart, Lock, Unlock, Mail, Cloud, LogIn, LogOut, CheckCircle2 } from 'lucide-react';
 import { User } from 'firebase/auth';
 import RotatingEarth from './RotatingEarth';
+import SubscribeModal from './SubscribeModal';
 
 interface HeaderProps {
   activeTab: string;
@@ -32,6 +33,7 @@ export default function Header({
   onSignInGoogle,
   onSignOutGoogle
 }: HeaderProps) {
+  const [showSubscribe, setShowSubscribe] = useState(false);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 1000);
@@ -213,19 +215,21 @@ export default function Header({
         <div className="w-full border-t-2 border-b border-[#991b1b] py-1.5 mt-4 flex justify-between text-[10px] font-mono text-stone-600">
           <span className="font-bold text-stone-900">{currentDateString}</span>
           <span className="hidden sm:inline tracking-[0.2em] uppercase font-bold text-[#b91c1c]">"EVERYTHING IS CONNECTED. NOTHING IS NEUTRAL."</span>
-          <a
-            href="mailto:theceylonreview@proton.me?subject=Subscribe%20me%20to%20The%20Ceylon%20Review&body=Please%20add%20this%20email%20address%20to%20The%20Ceylon%20Review%20subscriber%20list."
-            className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors"
+          <button
+            type="button"
+            onClick={() => setShowSubscribe(true)}
+            className="flex items-center gap-1.5 bg-[#991b1b] hover:bg-[#b91c1c] text-white px-3 py-0.5 rounded font-sans font-bold uppercase tracking-wider transition-colors cursor-pointer"
             id="subscribe-btn"
           >
             <Mail size={11} />
             Subscribe
-          </a>
+          </button>
         </div>
         <div className="w-full flex justify-end pt-1.5">
           <span className="text-[10px] font-mono italic font-semibold text-[#991b1b]">Founded in July 2026</span>
         </div>
       </div>
+      {showSubscribe && <SubscribeModal onClose={() => setShowSubscribe(false)} />}
     </header>
   );
 }

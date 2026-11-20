@@ -254,3 +254,10 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
   }
 }
 
+
+// Newsletter subscription (public create-only; see firestore.rules)
+export async function addSubscriber(email: string): Promise<void> {
+  const clean = email.trim().toLowerCase();
+  const id = clean.replace(/[^a-z0-9]/g, '_').slice(0, 128);
+  await setDoc(doc(db, 'subscribers', id), { email: clean, subscribedAt: new Date().toISOString() });
+}

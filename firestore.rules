@@ -93,5 +93,20 @@ service cloud.firestore {
       allow list: if isEditorialAdmin();
       allow create, update, delete: if isValidId(adminId) && isEditorialAdmin();
     }
+
+    // Newsletter subscribers: anyone may add an address (re-submitting the same address is harmless); only the editor can read or remove them
+    match /subscribers/{subscriberId} {
+      allow get, list: if isEditorialAdmin();
+      allow create: if isValidId(subscriberId) &&
+        incoming().keys().hasOnly(['email', 'subscribedAt']) &&
+        incoming().email is string && incoming().email.size() <= 200 &&
+        incoming().email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$') &&
+        incoming().subscribedAt is string && incoming().subscribedAt.size() <= 64;
+      allow update: if isValidId(subscriberId) &&
+        incoming().keys().hasOnly(['email', 'subscribedAt']) &&
+        incoming().email == existing().email &&
+        incoming().subscribedAt is string && incoming().subscribedAt.size() <= 64;
+      allow delete: if isEditorialAdmin();
+    }
   }
 }
