@@ -126,10 +126,6 @@ export default function Header({
             </span>
           </div>
           
-          <div className="hidden md:block italic font-serif text-[#b91c1c] text-xs font-semibold">
-            "Everything is connected. Nothing is neutral."
-          </div>
-
           <div className="flex flex-wrap items-center justify-center gap-3">
             
             {/* Contact Email Highlighted */}
