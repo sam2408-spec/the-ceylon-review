@@ -832,13 +832,13 @@ export default function App() {
                         <div className="bg-white text-stone-900 border-l-4 border-[#dc2626] p-5 rounded shadow-lg border border-[#991b1b]/30">
                           <h4 className="font-serif font-black text-sm text-stone-900 mb-2 uppercase tracking-wide flex items-center gap-2">
                             <Mail size={14} className="text-[#991b1b]" />
-                            Broadside Column Proposals
+                            Submit a Column
                           </h4>
                           <p className="font-sans text-[11px] text-stone-700 leading-relaxed mb-4">
-                            Are you seeking to air verified independent reporting on constitutional affairs or regional politics? We recruit high-fidelity columns safely.
+                            The Ceylon Review considers sourced writing on law, human rights and public affairs. Every claim must be checked before publication. Send a short pitch to theceylonreview@proton.me.
                           </p>
                           <div className="bg-red-50 p-2 text-center rounded border border-[#991b1b]/40 font-mono text-[11px] font-bold">
-                            Submission Desk: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 hover:text-stone-900">theceylonreview@proton.me</a>
+                            Pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-red-800 hover:text-stone-900">theceylonreview@proton.me</a>
                           </div>
                         </div>
 
