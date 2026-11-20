@@ -257,8 +257,8 @@ export default function WriterProfileView({
       {/* Overview Header */}
       <div className="border-b-2 border-[#991b1b] pb-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="font-serif text-3xl font-black text-white tracking-tight uppercase">The Ceylon Writers' Guild</h2>
-          <p className="font-sans text-xs sm:text-sm text-gray-300 mt-1.5 font-medium">
+          <h2 className="font-serif text-3xl font-black text-stone-900 tracking-tight uppercase">The Ceylon Writers' Guild</h2>
+          <p className="font-sans text-xs sm:text-sm text-stone-600 mt-1.5 font-medium">
             Meet our independent columnists, research correspondents, and local truth-seekers, or file analytical drafts.
           </p>
         </div>
@@ -283,7 +283,7 @@ export default function WriterProfileView({
                   setIsAddingWriter(!isAddingWriter);
                   setIsComposing(false);
                 }}
-                className="flex items-center gap-1.5 border-2 border-[#991b1b]/40 hover:bg-[#991b1b]/20 bg-[#171414] text-white px-4 py-2 font-mono text-xs font-bold uppercase transition-all cursor-pointer rounded shadow"
+                className="flex items-center gap-1.5 border-2 border-[#991b1b]/40 hover:bg-[#991b1b]/20 bg-white text-stone-900 px-4 py-2 font-mono text-xs font-bold uppercase transition-all cursor-pointer rounded shadow"
                 id="toggle-add-reporter-btn"
               >
                 <User size={13} />
@@ -291,8 +291,8 @@ export default function WriterProfileView({
               </button>
             </>
           ) : (
-            <div className="bg-[#141212] border-2 border-dashed border-[#991b1b]/40 text-gray-300 p-2 px-3 rounded text-[10px] sm:text-xs font-mono max-w-sm font-semibold">
-              <span>Independent column inquiries may be submitted to <a href="mailto:theceylonreview@proton.me" className="underline text-white">theceylonreview@proton.me</a>.</span>
+            <div className="bg-white border-2 border-dashed border-[#991b1b]/40 text-stone-600 p-2 px-3 rounded text-[10px] sm:text-xs font-mono max-w-sm font-semibold">
+              <span>Independent column inquiries may be submitted to <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900">theceylonreview@proton.me</a>.</span>
             </div>
           )}
         </div>
@@ -300,47 +300,47 @@ export default function WriterProfileView({
 
       {/* Slide-downs for notifications */}
       {publishSuccess && (
-        <div className="bg-red-950/70 text-red-200 border-2 border-red-600 p-4 mb-6 font-mono text-xs font-bold rounded flex items-center gap-2 animate-pulse">
-          <CheckCircle size={16} className="text-red-400" />
+        <div className="bg-red-50/70 text-red-800 border-2 border-red-600 p-4 mb-6 font-mono text-xs font-bold rounded flex items-center gap-2 animate-pulse">
+          <CheckCircle size={16} className="text-[#991b1b]" />
           SUCCESS: Exclusive Article has been filed, typeset, and dynamically added to current Ceylon Review issues!
         </div>
       )}
 
       {writerSuccess && (
-        <div className="bg-red-950/70 text-red-200 border-2 border-red-600 p-4 mb-6 font-mono text-xs font-bold rounded flex items-center gap-2 animate-pulse">
-          <CheckCircle size={16} className="text-red-400" />
+        <div className="bg-red-50/70 text-red-800 border-2 border-red-600 p-4 mb-6 font-mono text-xs font-bold rounded flex items-center gap-2 animate-pulse">
+          <CheckCircle size={16} className="text-[#991b1b]" />
           SUCCESS: Contributor record verified. Dynamic credential emails registered and attached to masthead database.
         </div>
       )}
 
       {/* COMPOSING SUBMISSION FORM */}
       {isComposing && isAdmin && (
-        <div className="bg-[#151313] border-2 border-[#991b1b] p-6 mb-10 shadow-2xl rounded animate-in slide-in-from-top duration-350" id="compose-container">
-          <h3 className="font-serif text-lg font-black border-b border-[#991b1b]/30 pb-3 mb-6 flex items-center gap-2 text-white uppercase">
-            <Feather size={16} className="text-red-400" />
+        <div className="bg-white border-2 border-[#991b1b] p-6 mb-10 shadow-2xl rounded animate-in slide-in-from-top duration-350" id="compose-container">
+          <h3 className="font-serif text-lg font-black border-b border-[#991b1b]/30 pb-3 mb-6 flex items-center gap-2 text-stone-900 uppercase">
+            <Feather size={16} className="text-[#991b1b]" />
             File Exclusive Live Coverage
           </h3>
 
           <form onSubmit={handlePublishArticle} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="author-select">Correspondent Byline</label>
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="author-select">Correspondent Byline</label>
                 <select
                   id="author-select"
                   value={selectedWriterId}
                   onChange={(e) => setSelectedWriterId(e.target.value)}
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
                   required
                 >
                   <option value="">-- Choose Assigned Contributor --</option>
                   {writers.map(w => (
-                    <option key={w.id} value={w.id} className="bg-[#1e1b1b] text-white">{w.name} ({w.role})</option>
+                    <option key={w.id} value={w.id} className="bg-stone-100 text-stone-900">{w.name} ({w.role})</option>
                   ))}
                 </select>
               </div>
 
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="article-title">Headline</label>
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="article-title">Headline</label>
                 <input
                   type="text"
                   id="article-title"
@@ -348,40 +348,40 @@ export default function WriterProfileView({
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Headline..."
                   required
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-serif font-bold text-lg placeholder-gray-500"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-serif font-bold text-lg placeholder-gray-500"
                 />
               </div>
 
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="article-subtitle">Sub-Headline / Deck</label>
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="article-subtitle">Sub-Headline / Deck</label>
                 <input
                   type="text"
                   id="article-subtitle"
                   value={subtitle}
                   onChange={(e) => setSubtitle(e.target.value)}
                   placeholder="Secondary abstract..."
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-serif italic placeholder-gray-500"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-serif italic placeholder-gray-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="article-category">News Column</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="article-category">News Column</label>
                   <select
                     id="article-category"
                     value={category}
                     onChange={(e) => setCategory(e.target.value as Category)}
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
                     required
                   >
                     {categoryOptions.map(cat => (
-                      <option key={cat} value={cat} className="bg-[#1e1b1b] text-white">{cat}</option>
+                      <option key={cat} value={cat} className="bg-stone-100 text-stone-900">{cat}</option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="article-readtime">Estimated Read Time</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="article-readtime">Estimated Read Time</label>
                   <input
                     type="number"
                     id="article-readtime"
@@ -389,14 +389,14 @@ export default function WriterProfileView({
                     max={30}
                     value={readTimeMinutes}
                     onChange={(e) => setReadTimeMinutes(parseInt(e.target.value))}
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="image-keywords-input">
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="image-keywords-input">
                   Illustrative Image Theme (Keyword)
                 </label>
                 <input
@@ -405,14 +405,14 @@ export default function WriterProfileView({
                   value={imageKeyword}
                   onChange={(e) => setImageKeyword(e.target.value)}
                   placeholder="Filter: politics, science, tea, ceylon, coffee, war"
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none font-mono text-xs rounded placeholder-gray-500"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none font-mono text-xs rounded placeholder-gray-500"
                 />
               </div>
             </div>
 
             <div className="flex flex-col justify-between">
               <div className="flex-grow flex flex-col mb-4">
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="article-paragraphs-area">
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="article-paragraphs-area">
                   Coverage Narrative (Double Enter to separate paragraphs)
                 </label>
                 <textarea
@@ -422,7 +422,7 @@ export default function WriterProfileView({
                   value={contentRaw}
                   onChange={(e) => setContentRaw(e.target.value)}
                   placeholder="Narrative prose..."
-                  className="w-full flex-grow bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-3 text-sm focus:border-red-500 focus:outline-none font-sans leading-relaxed h-[220px] rounded placeholder-gray-500"
+                  className="w-full flex-grow bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-3 text-sm focus:border-red-500 focus:outline-none font-sans leading-relaxed h-[220px] rounded placeholder-gray-500"
                 ></textarea>
               </div>
 
@@ -430,7 +430,7 @@ export default function WriterProfileView({
                 <button
                   type="button"
                   onClick={() => setIsComposing(false)}
-                  className="px-4 py-2 border-2 border-[#991b1b]/40 text-gray-300 bg-[#1f1b1b] hover:bg-[#2c2626] hover:text-white font-mono text-xs uppercase cursor-pointer rounded"
+                  className="px-4 py-2 border-2 border-[#991b1b]/40 text-stone-600 bg-stone-100 hover:bg-stone-100 hover:text-stone-900 font-mono text-xs uppercase cursor-pointer rounded"
                 >
                   Cancel
                 </button>
@@ -449,16 +449,16 @@ export default function WriterProfileView({
 
       {/* ACCREDIT REPORTER FORM */}
       {isAddingWriter && isAdmin && (
-        <div className="bg-[#151313] border-2 border-[#991b1b] p-6 mb-10 shadow-2xl rounded animate-in slide-in-from-top duration-350" id="add-writer-sandbox">
-          <h3 className="font-serif text-lg font-black border-b border-[#991b1b]/30 pb-3 mb-6 flex items-center gap-2 text-white uppercase">
-            <PlusCircle size={16} className="text-red-400" />
+        <div className="bg-white border-2 border-[#991b1b] p-6 mb-10 shadow-2xl rounded animate-in slide-in-from-top duration-350" id="add-writer-sandbox">
+          <h3 className="font-serif text-lg font-black border-b border-[#991b1b]/30 pb-3 mb-6 flex items-center gap-2 text-stone-900 uppercase">
+            <PlusCircle size={16} className="text-[#991b1b]" />
             Accredit New Correspondent Credentials
           </h3>
 
           <form onSubmit={handleCreateWriter} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-name">Correspondent Name</label>
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-name">Correspondent Name</label>
                 <input
                   type="text"
                   id="reg-name"
@@ -466,12 +466,12 @@ export default function WriterProfileView({
                   onChange={(e) => setWriterName(e.target.value)}
                   placeholder="E.g., Sameera Mahboobdeen"
                   required
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold placeholder-gray-500"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold placeholder-gray-500"
                 />
               </div>
 
               <div>
-                <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-role">Editorial Beat / Specialization</label>
+                <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-role">Editorial Beat / Specialization</label>
                 <input
                   type="text"
                   id="reg-role"
@@ -479,45 +479,45 @@ export default function WriterProfileView({
                   onChange={(e) => setWriterRole(e.target.value)}
                   placeholder="E.g., Senior Legal Correspondent"
                   required
-                  className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold placeholder-gray-500"
+                  className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded font-bold placeholder-gray-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-loc">Location Hub</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-loc">Location Hub</label>
                   <input
                     type="text"
                     id="reg-loc"
                     value={writerLocation}
                     onChange={(e) => setWriterLocation(e.target.value)}
                     placeholder="E.g., Colombo, Sri Lanka"
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-tw">Social Handle</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-tw">Social Handle</label>
                   <input
                     type="text"
                     id="reg-tw"
                     value={writerTwitter}
                     onChange={(e) => setWriterTwitter(e.target.value)}
                     placeholder="@sameera_reports"
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
                   />
                 </div>
               </div>
 
               {/* Correspondent Portrait Upload */}
-              <div className="border-2 border-[#991b1b]/30 p-4 bg-[#1a1717] rounded">
-                <span className="block font-mono text-[10px] text-red-300 uppercase mb-2 font-black">
+              <div className="border-2 border-[#991b1b]/30 p-4 bg-stone-100 rounded">
+                <span className="block font-mono text-[10px] text-red-800 uppercase mb-2 font-black">
                   Correspondent Photo / Portrait
                 </span>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                   {/* Circle Preview */}
-                  <div className="w-16 h-16 rounded-full border-2 border-[#991b1b] bg-zinc-900 overflow-hidden shrink-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full border-2 border-[#991b1b] bg-stone-100 overflow-hidden shrink-0 flex items-center justify-center">
                     {writerAvatar ? (
                       <img 
                         src={writerAvatar} 
@@ -542,13 +542,13 @@ export default function WriterProfileView({
                     }}
                     className={`flex-grow w-full border-2 border-dashed rounded p-3 text-center transition-all cursor-pointer ${
                       isDragOverAvatar
-                        ? 'border-red-500 bg-red-950/30'
-                        : 'border-[#991b1b]/40 hover:border-red-500 hover:bg-[#251e1e] py-4'
+                        ? 'border-red-500 bg-red-50/30'
+                        : 'border-[#991b1b]/40 hover:border-red-500 hover:bg-stone-100 py-4'
                     }`}
                     onClick={() => document.getElementById('avatar-file-input')?.click()}
                   >
-                    <Upload size={14} className="mx-auto text-red-400 mb-1" />
-                    <span className="block text-[9px] font-mono uppercase text-gray-300 font-bold">
+                    <Upload size={14} className="mx-auto text-[#991b1b] mb-1" />
+                    <span className="block text-[9px] font-mono uppercase text-stone-600 font-bold">
                       {isDragOverAvatar ? 'Drop File Here' : 'Drag profile picture or click'}
                     </span>
                     <input
@@ -567,7 +567,7 @@ export default function WriterProfileView({
 
                 {/* Preset library fallback */}
                 <div className="mt-4 border-t border-[#991b1b]/20 pt-3">
-                  <span className="block text-[8px] font-mono text-gray-400 uppercase mb-2 font-bold">
+                  <span className="block text-[8px] font-mono text-stone-500 uppercase mb-2 font-bold">
                     Or select pre-set editorial portraits:
                   </span>
                   <div className="flex gap-2.5 overflow-x-auto pb-1 max-w-full">
@@ -582,13 +582,13 @@ export default function WriterProfileView({
                         key={idx}
                         type="button"
                         onClick={() => setWriterAvatar(preset.url)}
-                        className={`flex items-center gap-1.5 px-2 py-1 bg-[#151313] hover:bg-[#251f1f] border rounded transition-all shrink-0 ${
-                          writerAvatar === preset.url ? 'border-red-500 bg-red-950/40 scale-[1.03]' : 'border-[#991b1b]/30'
+                        className={`flex items-center gap-1.5 px-2 py-1 bg-white hover:bg-stone-100 border rounded transition-all shrink-0 ${
+                          writerAvatar === preset.url ? 'border-red-500 bg-red-50/40 scale-[1.03]' : 'border-[#991b1b]/30'
                         }`}
                         title={`Select Preset: ${preset.name}`}
                       >
                         <img src={preset.url} alt={preset.name} className="w-5 h-5 rounded-full object-cover" />
-                        <span className="text-[8px] font-mono font-bold text-gray-300">{preset.name}</span>
+                        <span className="text-[8px] font-mono font-bold text-stone-600">{preset.name}</span>
                       </button>
                     ))}
                   </div>
@@ -599,26 +599,26 @@ export default function WriterProfileView({
             <div className="flex flex-col justify-between">
               <div className="space-y-4 mb-4">
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-email">Newsroom Email</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-email">Newsroom Email</label>
                   <input
                     type="email"
                     id="reg-email"
                     value={writerEmail}
                     onChange={(e) => setWriterEmail(e.target.value)}
                     placeholder="s.mahboobdeen@ceylon-review.com"
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded placeholder-gray-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-mono text-[10px] text-red-300 uppercase mb-1.5 font-black" htmlFor="reg-bio">Journalist Biography</label>
+                  <label className="block font-mono text-[10px] text-red-800 uppercase mb-1.5 font-black" htmlFor="reg-bio">Journalist Biography</label>
                   <textarea
                     id="reg-bio"
                     rows={4}
                     value={writerBio}
                     onChange={(e) => setWriterBio(e.target.value)}
                     placeholder="E.g., Investigative historian focusing on Indian Ocean shipping lines and Ceylon trade jurisprudence."
-                    className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded resize-y placeholder-gray-500"
+                    className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded resize-y placeholder-gray-500"
                   ></textarea>
                 </div>
               </div>
@@ -627,7 +627,7 @@ export default function WriterProfileView({
                 <button
                   type="button"
                   onClick={() => setIsAddingWriter(false)}
-                  className="px-4 py-2 border-2 border-[#991b1b]/40 text-gray-300 bg-[#1f1b1b] hover:bg-[#2c2626] hover:text-white font-mono text-xs uppercase cursor-pointer rounded"
+                  className="px-4 py-2 border-2 border-[#991b1b]/40 text-stone-600 bg-stone-100 hover:bg-stone-100 hover:text-stone-900 font-mono text-xs uppercase cursor-pointer rounded"
                 >
                   Cancel
                 </button>
@@ -648,20 +648,20 @@ export default function WriterProfileView({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8" id="journalists-grid-split">
         {/* LEFT COLUMN: Contributor list */}
         <div className="lg:col-span-4 space-y-4">
-          <h3 className="font-mono text-[10px] font-black text-red-400 uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 mb-4">
+          <h3 className="font-mono text-[10px] font-black text-[#991b1b] uppercase tracking-widest border-b border-[#991b1b]/30 pb-2 mb-4">
             Masthead Directory
           </h3>
 
           <div className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-3 pb-3 lg:pb-0" id="reporters-badges-horizontal">
             {writers.length === 0 ? (
-              <div className="w-full bg-[#141212] border-2 border-dashed border-[#991b1b]/30 p-5 text-center rounded font-serif italic text-xs text-gray-300 leading-relaxed">
+              <div className="w-full bg-white border-2 border-dashed border-[#991b1b]/30 p-5 text-center rounded font-serif italic text-xs text-stone-600 leading-relaxed">
                 No accredited correspondents currently registered under the Ceylon Review guild.
                 {isAdmin ? (
-                  <p className="mt-2 font-mono text-[9px] not-italic font-bold uppercase text-red-400">
+                  <p className="mt-2 font-mono text-[9px] not-italic font-bold uppercase text-[#991b1b]">
                     Click "Accredit Contributor" above to commission new reporters.
                   </p>
                 ) : (
-                  <p className="mt-2 font-mono text-[9px] not-italic font-bold uppercase text-red-400">
+                  <p className="mt-2 font-mono text-[9px] not-italic font-bold uppercase text-[#991b1b]">
                     Toggle Sovereign Desk Authorization to register profiles.
                   </p>
                 )}
@@ -677,8 +677,8 @@ export default function WriterProfileView({
                     className={`
                       w-64 lg:w-full flex items-center gap-3.5 p-3.5 border-2 text-left cursor-pointer transition-all duration-200 shrink-0 select-none rounded`
                       + (isSelected 
-                        ? ' bg-[#991b1b] text-white border-red-500 shadow-lg font-bold' 
-                        : ' bg-[#141212] text-white border-[#991b1b]/30 hover:bg-[#1f1a1a] hover:border-red-500/60'
+                        ? ' bg-red-50 text-stone-900 border-[#991b1b] shadow-lg font-bold' 
+                        : ' bg-white text-stone-900 border-[#991b1b]/30 hover:bg-stone-100 hover:border-red-500/60'
                       )
                     }
                     id={`mast-reporter-btn-${writer.id}`}
@@ -686,15 +686,15 @@ export default function WriterProfileView({
                     <img 
                       src={writer.avatarUrl} 
                       alt={writer.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-red-500/60 bg-zinc-900 shrink-0 shadow-sm"
+                      className="w-12 h-12 rounded-full object-cover border-2 border-red-500/60 bg-stone-100 shrink-0 shadow-sm"
                       referrerPolicy="no-referrer"
                     />
                     <div className="overflow-hidden">
-                      <h4 className="font-serif font-black text-sm sm:text-base leading-tight truncate text-white">{writer.name}</h4>
-                      <p className={`font-mono text-[10px] truncate mt-0.5 ${isSelected ? 'text-white/90' : 'text-gray-400'}`}>
+                      <h4 className="font-serif font-black text-sm sm:text-base leading-tight truncate text-stone-900">{writer.name}</h4>
+                      <p className={`font-mono text-[10px] truncate mt-0.5 ${isSelected ? 'text-stone-700' : 'text-stone-500'}`}>
                         {writer.role}
                       </p>
-                      <p className={`font-sans text-[10px] mt-1.5 font-black uppercase tracking-wider ${isSelected ? 'text-white underline' : 'text-red-400'}`}>
+                      <p className={`font-sans text-[10px] mt-1.5 font-black uppercase tracking-wider ${isSelected ? 'text-stone-900 underline' : 'text-[#991b1b]'}`}>
                         {writtenCount} Column{writtenCount === 1 ? '' : 's'} Filed
                       </p>
                     </div>
@@ -708,13 +708,13 @@ export default function WriterProfileView({
         {/* RIGHT COLUMN: Profile details */}
         <div className="lg:col-span-8">
           {selectedWriter ? (
-            <div className="bg-[#141212] border-2 border-[#991b1b]/40 p-6 md:p-8 relative shadow-2xl rounded text-white" id="writer-details-view">
+            <div className="bg-white border-2 border-[#991b1b]/40 p-6 md:p-8 relative shadow-2xl rounded text-stone-900" id="writer-details-view">
               {/* Header Badge & Edit Triggers */}
-              <div className="absolute top-0 right-0 flex items-center bg-[#1e1b1b] select-none border-b border-l border-[#991b1b]/30 text-white rounded-bl">
+              <div className="absolute top-0 right-0 flex items-center bg-stone-100 select-none border-b border-l border-[#991b1b]/30 text-stone-900 rounded-bl">
                 {isAdmin && !isEditingProfile && (
                   <button
                     onClick={startEditingProfile}
-                    className="flex items-center gap-1.5 font-mono text-[9px] font-black px-3 py-1.5 uppercase hover:bg-red-950/60 border-r border-[#991b1b]/30 text-red-400 transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 font-mono text-[9px] font-black px-3 py-1.5 uppercase hover:bg-red-50/60 border-r border-[#991b1b]/30 text-[#991b1b] transition-colors cursor-pointer"
                     title="Edit writer profile details manually"
                   >
                     <Edit3 size={10} />
@@ -723,8 +723,8 @@ export default function WriterProfileView({
                 )}
                 {isAdmin && !isEditingProfile && selectedWriter.id !== 'w-sameera' && onDeleteWriter && (
                   confirmDeleteWriter ? (
-                    <div className="flex items-center gap-1 bg-red-950/80 p-0.5 px-2 border-r border-red-700">
-                      <span className="font-mono text-[9px] font-bold text-red-200 uppercase">Delete profile?</span>
+                    <div className="flex items-center gap-1 bg-red-50/80 p-0.5 px-2 border-r border-red-700">
+                      <span className="font-mono text-[9px] font-bold text-red-800 uppercase">Delete profile?</span>
                       <button
                         type="button"
                         onClick={() => {
@@ -738,7 +738,7 @@ export default function WriterProfileView({
                       <button
                         type="button"
                         onClick={() => setConfirmDeleteWriter(false)}
-                        className="text-[9px] text-gray-400 hover:text-white font-mono px-1 cursor-pointer"
+                        className="text-[9px] text-stone-500 hover:text-stone-900 font-mono px-1 cursor-pointer"
                       >
                         ✕
                       </button>
@@ -747,7 +747,7 @@ export default function WriterProfileView({
                     <button
                       type="button"
                       onClick={() => setConfirmDeleteWriter(true)}
-                      className="flex items-center gap-1.5 font-mono text-[9px] font-black px-3 py-1.5 uppercase hover:bg-red-950/60 border-r border-[#991b1b]/30 text-red-400 transition-colors cursor-pointer"
+                      className="flex items-center gap-1.5 font-mono text-[9px] font-black px-3 py-1.5 uppercase hover:bg-red-50/60 border-r border-[#991b1b]/30 text-[#991b1b] transition-colors cursor-pointer"
                       title="Delete contributor profile"
                     >
                       <Trash2 size={10} />
@@ -755,7 +755,7 @@ export default function WriterProfileView({
                     </button>
                   )
                 )}
-                <div className="font-mono text-[9px] font-black px-3 py-1.5 uppercase text-red-400">
+                <div className="font-mono text-[9px] font-black px-3 py-1.5 uppercase text-[#991b1b]">
                   {selectedWriter.id === 'w-sameera' ? '★ Editor-in-Chief & Founder' : 'Staff Profile'}
                 </div>
               </div>
@@ -764,11 +764,11 @@ export default function WriterProfileView({
                 /* MANUAL PROFILE EDITOR VIEW */
                 <form onSubmit={handleSaveProfileEdit} className="space-y-6 pt-4">
                   <div className="border-b-2 border-dashed border-[#991b1b]/30 pb-4 mb-4">
-                    <h4 className="font-serif text-base font-black text-white uppercase flex items-center gap-1.5">
-                      <Edit3 size={14} className="text-red-400" />
+                    <h4 className="font-serif text-base font-black text-stone-900 uppercase flex items-center gap-1.5">
+                      <Edit3 size={14} className="text-[#991b1b]" />
                       Modify Correspondent Profile Record
                     </h4>
-                    <p className="font-sans text-[10px] text-gray-400 mt-1">
+                    <p className="font-sans text-[10px] text-stone-500 mt-1">
                       Manually adjust biography, credential details, and photo registry for {selectedWriter.name}.
                     </p>
                   </div>
@@ -787,7 +787,7 @@ export default function WriterProfileView({
                           }
                         }}
                         className={`w-24 h-24 rounded-full border-2 overflow-hidden relative group transition-all shrink-0 ${
-                          isDragOverEditAvatar ? 'border-red-500 scale-105 shadow-md bg-red-950/30' : 'border-[#991b1b]/40 bg-[#1e1b1b]'
+                          isDragOverEditAvatar ? 'border-red-500 scale-105 shadow-md bg-red-50/30' : 'border-[#991b1b]/40 bg-stone-100'
                         }`}
                       >
                         {editAvatar ? (
@@ -803,15 +803,15 @@ export default function WriterProfileView({
                           className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer text-center p-1"
                           onClick={() => document.getElementById('edit-avatar-file-input')?.click()}
                         >
-                          <Camera size={16} className="text-white animate-pulse" />
-                          <span className="text-[7px] font-mono text-white/90 uppercase tracking-wider mt-1">Upload Photo</span>
+                          <Camera size={16} className="text-stone-900 animate-pulse" />
+                          <span className="text-[7px] font-mono text-stone-700 uppercase tracking-wider mt-1">Upload Photo</span>
                         </div>
                       </div>
                       
                       <button
                         type="button"
                         onClick={() => document.getElementById('edit-avatar-file-input')?.click()}
-                        className="text-[10px] font-mono uppercase font-black text-red-400 hover:underline"
+                        className="text-[10px] font-mono uppercase font-black text-[#991b1b] hover:underline"
                       >
                         Upload custom
                       </button>
@@ -831,53 +831,53 @@ export default function WriterProfileView({
                     <div className="flex-grow space-y-4 w-full">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block font-mono text-[9px] text-red-300 uppercase mb-1 font-black">Full Name</label>
+                          <label className="block font-mono text-[9px] text-red-800 uppercase mb-1 font-black">Full Name</label>
                           <input 
                             type="text" 
                             value={editName} 
                             onChange={(e) => setEditName(e.target.value)}
                             required
-                            className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2 text-sm focus:border-red-500 focus:outline-none rounded font-bold" 
+                            className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2 text-sm focus:border-red-500 focus:outline-none rounded font-bold" 
                           />
                         </div>
                         <div>
-                          <label className="block font-mono text-[9px] text-red-300 uppercase mb-1 font-black">Editorial Beat / Specialization</label>
+                          <label className="block font-mono text-[9px] text-red-800 uppercase mb-1 font-black">Editorial Beat / Specialization</label>
                           <input 
                             type="text" 
                             value={editRole} 
                             onChange={(e) => setEditRole(e.target.value)}
                             required
-                            className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2 text-sm focus:border-red-500 focus:outline-none rounded font-bold" 
+                            className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2 text-sm focus:border-red-500 focus:outline-none rounded font-bold" 
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                          <label className="block font-mono text-[9px] text-red-300 uppercase mb-1">Newsroom Email</label>
+                          <label className="block font-mono text-[9px] text-red-800 uppercase mb-1">Newsroom Email</label>
                           <input 
                             type="email" 
                             value={editEmail} 
                             onChange={(e) => setEditEmail(e.target.value)}
-                            className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
+                            className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
                           />
                         </div>
                         <div>
-                          <label className="block font-mono text-[9px] text-red-300 uppercase mb-1">Location Hub</label>
+                          <label className="block font-mono text-[9px] text-red-800 uppercase mb-1">Location Hub</label>
                           <input 
                             type="text" 
                             value={editLocation} 
                             onChange={(e) => setEditLocation(e.target.value)}
-                            className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
+                            className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
                           />
                         </div>
                         <div>
-                          <label className="block font-mono text-[9px] text-red-300 uppercase mb-1">Social Handle</label>
+                          <label className="block font-mono text-[9px] text-red-800 uppercase mb-1">Social Handle</label>
                           <input 
                             type="text" 
                             value={editTwitter} 
                             onChange={(e) => setEditTwitter(e.target.value)}
-                            className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
+                            className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2 text-xs focus:border-red-500 focus:outline-none rounded" 
                           />
                         </div>
                       </div>
@@ -885,18 +885,18 @@ export default function WriterProfileView({
                   </div>
 
                   <div>
-                    <label className="block font-mono text-[9px] text-red-300 uppercase mb-1.5 font-black">Journalist Biography</label>
+                    <label className="block font-mono text-[9px] text-red-800 uppercase mb-1.5 font-black">Journalist Biography</label>
                     <textarea 
                       value={editBio} 
                       onChange={(e) => setEditBio(e.target.value)}
                       rows={3}
-                      className="w-full bg-[#1e1b1b] text-white border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded resize-y" 
+                      className="w-full bg-stone-100 text-stone-900 border-2 border-[#991b1b]/40 p-2.5 text-sm focus:border-red-500 focus:outline-none rounded resize-y" 
                     />
                   </div>
 
                   {/* Preset library fallback for editing */}
                   <div className="border-t border-[#991b1b]/20 pt-4">
-                    <span className="block text-[8px] font-mono text-gray-400 uppercase mb-2 font-bold">
+                    <span className="block text-[8px] font-mono text-stone-500 uppercase mb-2 font-bold">
                       Or select from editorial placeholder portraits:
                     </span>
                     <div className="flex gap-2.5 overflow-x-auto pb-1 max-w-full">
@@ -911,12 +911,12 @@ export default function WriterProfileView({
                           key={idx}
                           type="button"
                           onClick={() => setEditAvatar(preset.url)}
-                          className={`flex items-center gap-1.5 px-2.5 py-1 bg-[#1a1717] hover:bg-[#251f1f] border-2 rounded transition-all shrink-0 ${
-                            editAvatar === preset.url ? 'border-red-500 bg-red-950/40 scale-[1.03]' : 'border-[#991b1b]/30'
+                          className={`flex items-center gap-1.5 px-2.5 py-1 bg-stone-100 hover:bg-stone-100 border-2 rounded transition-all shrink-0 ${
+                            editAvatar === preset.url ? 'border-red-500 bg-red-50/40 scale-[1.03]' : 'border-[#991b1b]/30'
                           }`}
                         >
                           <img src={preset.url} alt={idx.toString()} className="w-5 h-5 rounded-full object-cover" />
-                          <span className="font-mono text-[8.5px] font-bold text-gray-300">{preset.name}</span>
+                          <span className="font-mono text-[8.5px] font-bold text-stone-600">{preset.name}</span>
                         </button>
                       ))}
                     </div>
@@ -925,8 +925,8 @@ export default function WriterProfileView({
                   <div className="flex flex-col sm:flex-row justify-between items-center gap-3 border-t border-[#991b1b]/20 pt-4">
                     {selectedWriter.id !== 'w-sameera' && onDeleteWriter ? (
                       confirmDeleteWriter ? (
-                        <div className="flex items-center gap-1.5 bg-red-950/90 p-1 px-3 border border-red-600 rounded self-start sm:self-auto">
-                          <span className="font-mono text-xs font-bold text-red-200 uppercase">Confirm delete?</span>
+                        <div className="flex items-center gap-1.5 bg-red-50/90 p-1 px-3 border border-red-600 rounded self-start sm:self-auto">
+                          <span className="font-mono text-xs font-bold text-red-800 uppercase">Confirm delete?</span>
                           <button
                             type="button"
                             onClick={() => {
@@ -941,7 +941,7 @@ export default function WriterProfileView({
                           <button
                             type="button"
                             onClick={() => setConfirmDeleteWriter(false)}
-                            className="text-xs text-gray-400 hover:text-white font-mono px-1 cursor-pointer"
+                            className="text-xs text-stone-500 hover:text-stone-900 font-mono px-1 cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -950,14 +950,14 @@ export default function WriterProfileView({
                         <button
                           type="button"
                           onClick={() => setConfirmDeleteWriter(true)}
-                          className="px-3 py-2 border border-red-700/60 text-red-400 hover:bg-red-950/50 font-mono text-xs uppercase rounded cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
+                          className="px-3 py-2 border border-red-700/60 text-[#991b1b] hover:bg-red-50/50 font-mono text-xs uppercase rounded cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
                         >
                           <Trash2 size={12} />
                           Delete Contributor
                         </button>
                       )
                     ) : (
-                      <span className="font-mono text-[9px] font-bold uppercase text-red-400 tracking-wider">
+                      <span className="font-mono text-[9px] font-bold uppercase text-[#991b1b] tracking-wider">
                         ★ Principal Masthead Record
                       </span>
                     )}
@@ -966,7 +966,7 @@ export default function WriterProfileView({
                       <button
                         type="button"
                         onClick={() => setIsEditingProfile(false)}
-                        className="px-4 py-2 border-2 border-[#991b1b]/40 text-gray-300 bg-[#1e1b1b] hover:bg-[#2b2525] hover:text-white font-mono text-xs uppercase rounded cursor-pointer"
+                        className="px-4 py-2 border-2 border-[#991b1b]/40 text-stone-600 bg-stone-100 hover:bg-stone-100 hover:text-stone-900 font-mono text-xs uppercase rounded cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -987,51 +987,51 @@ export default function WriterProfileView({
                     <img 
                       src={selectedWriter.avatarUrl} 
                       alt={selectedWriter.name} 
-                      className="w-24 h-24 rounded-full object-cover border-2 border-red-500/70 shadow-lg shrink-0 bg-zinc-900"
+                      className="w-24 h-24 rounded-full object-cover border-2 border-red-500/70 shadow-lg shrink-0 bg-stone-100"
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400&h=400';
                       }}
                     />
                     <div className="text-center sm:text-left space-y-1.5 flex-grow">
-                      <h3 className="font-serif text-2xl md:text-3xl font-black text-white leading-tight select-all">{selectedWriter.name}</h3>
-                      <p className="font-mono text-xs font-black text-red-400 tracking-widest uppercase">{selectedWriter.role}</p>
+                      <h3 className="font-serif text-2xl md:text-3xl font-black text-stone-900 leading-tight select-all">{selectedWriter.name}</h3>
+                      <p className="font-mono text-xs font-black text-[#991b1b] tracking-widest uppercase">{selectedWriter.role}</p>
                       
                       {/* Contact Indicators */}
-                      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1.5 pt-2.5 text-xs font-mono text-gray-300 font-bold">
-                        <a href={`mailto:${selectedWriter.email}`} className="flex items-center gap-1 hover:text-red-400 hover:underline">
-                          <Mail size={12} className="text-red-400" />
+                      <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1.5 pt-2.5 text-xs font-mono text-stone-600 font-bold">
+                        <a href={`mailto:${selectedWriter.email}`} className="flex items-center gap-1 hover:text-[#991b1b] hover:underline">
+                          <Mail size={12} className="text-[#991b1b]" />
                           {selectedWriter.email}
                         </a>
                         <span>•</span>
                         <span className="flex items-center gap-1" title="Correspondent Location">
-                          <MapPin size={12} className="text-red-400" />
+                          <MapPin size={12} className="text-[#991b1b]" />
                           {selectedWriter.location}
                         </span>
                         <span>•</span>
-                        <span className="text-gray-400">Joined: {selectedWriter.joinedDate}</span>
+                        <span className="text-stone-500">Joined: {selectedWriter.joinedDate}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Biography */}
-                  <div className="mb-8 max-w-2xl bg-[#1e1b1b] p-4 border-l-4 border-red-600 rounded-r shadow-inner">
-                    <h4 className="font-mono text-[9px] text-red-300 tracking-widest uppercase mb-2 font-black">Correspondent Bio</h4>
-                    <p className="font-sans text-sm md:text-base text-white leading-relaxed italic select-all">
+                  <div className="mb-8 max-w-2xl bg-stone-100 p-4 border-l-4 border-red-600 rounded-r shadow-inner">
+                    <h4 className="font-mono text-[9px] text-red-800 tracking-widest uppercase mb-2 font-black">Correspondent Bio</h4>
+                    <p className="font-sans text-sm md:text-base text-stone-900 leading-relaxed italic select-all">
                       "{selectedWriter.bio}"
                     </p>
                   </div>
 
                   {/* Portfolio columns list */}
                   <div>
-                    <h4 className="font-mono text-[10px] font-black text-red-400 tracking-widest uppercase border-b border-[#991b1b]/30 pb-2 mb-4 flex justify-between">
+                    <h4 className="font-mono text-[10px] font-black text-[#991b1b] tracking-widest uppercase border-b border-[#991b1b]/30 pb-2 mb-4 flex justify-between">
                       <span>Author Dispatch Index ({writerArticles.length})</span>
-                      <span className="text-gray-400">THE CEYLON REVIEW PRINT REPRODUCTIONS</span>
+                      <span className="text-stone-500">THE CEYLON REVIEW PRINT REPRODUCTIONS</span>
                     </h4>
 
                     <div className="space-y-4">
                       {writerArticles.length === 0 ? (
-                        <div className="border border-dashed border-[#991b1b]/40 px-4 py-8 text-center text-sm italic text-gray-300 rounded font-serif bg-[#181515]">
+                        <div className="border border-dashed border-[#991b1b]/40 px-4 py-8 text-center text-sm italic text-stone-600 rounded font-serif bg-white">
                           This journalist has not dispatched any articles to the Ceylon Review feeds yet.
                         </div>
                       ) : (
@@ -1039,7 +1039,7 @@ export default function WriterProfileView({
                           <div 
                             key={art.id}
                             onClick={() => onReadArticle(art)}
-                            className="group border border-[#991b1b]/30 p-4 bg-[#181515] hover:bg-[#221c1c] hover:border-red-500/60 transition-colors duration-150 cursor-pointer rounded flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm"
+                            className="group border border-[#991b1b]/30 p-4 bg-white hover:bg-stone-100 hover:border-red-500/60 transition-colors duration-150 cursor-pointer rounded flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shadow-sm"
                             id={`portfolio-item-${art.id}`}
                           >
                             <div>
@@ -1047,17 +1047,17 @@ export default function WriterProfileView({
                                 <span className="text-[9px] font-mono uppercase bg-red-950/80 group-hover:bg-red-900/90 text-red-300 font-bold px-2 py-0.5 border border-red-800/40 transition-colors rounded">
                                   {art.category}
                                 </span>
-                                <span className="font-mono text-[10px] text-gray-300 font-bold">{art.publishedAt}</span>
+                                <span className="font-mono text-[10px] text-stone-600 font-bold">{art.publishedAt}</span>
                               </div>
-                              <h5 className="font-serif font-bold text-base text-white group-hover:text-red-400 transition-colors">
+                              <h5 className="font-serif font-bold text-base text-stone-900 group-hover:text-[#991b1b] transition-colors">
                                 {art.title}
                               </h5>
-                              <p className="font-sans text-xs text-white/80 mt-1 line-clamp-2">
+                              <p className="font-sans text-xs text-stone-700 mt-1 line-clamp-2">
                                 {art.summary}
                               </p>
                             </div>
 
-                            <div className="flex items-center gap-1.5 self-end md:self-auto shrink-0 font-mono text-[11px] font-bold text-red-400 group-hover:text-red-300 group-hover:underline">
+                            <div className="flex items-center gap-1.5 self-end md:self-auto shrink-0 font-mono text-[11px] font-bold text-[#991b1b] group-hover:text-red-800 group-hover:underline">
                               <span>Read Article</span>
                               <ArrowRight size={11} className="transition-transform group-hover:translate-x-1" />
                             </div>
@@ -1070,7 +1070,7 @@ export default function WriterProfileView({
               )}
             </div>
           ) : (
-            <div className="border-2 border-dashed border-[#991b1b]/40 p-12 text-center text-gray-300 rounded font-serif italic bg-[#141212]">
+            <div className="border-2 border-dashed border-[#991b1b]/40 p-12 text-center text-stone-600 rounded font-serif italic bg-white">
               Please select or commission a correspondent from the masthead column to view their active portfolios.
             </div>
           )}
