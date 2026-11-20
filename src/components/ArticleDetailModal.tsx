@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Article, Writer, Comment, Category } from '../types';
+import { Article, Writer, Comment, Category, CATEGORIES } from '../types';
 
 const sameeraAvatar = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400&h=400';
 const fallbackArticleImage = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=630';
@@ -157,7 +157,7 @@ export default function ArticleDetailModal({
     });
   };
 
-  const categoriesList: Category[] = ['Politics', 'Tech', 'Science', 'Opinion', 'Culture', 'Business'];
+  const categoriesList: Category[] = [...CATEGORIES];
 
   return (
     <div 

@@ -1,4 +1,16 @@
-export type Category = 'Politics' | 'Tech' | 'Science' | 'Opinion' | 'Culture' | 'Business';
+export const CATEGORIES = [
+  'Human Rights',
+  'International Law',
+  'Humanitarian',
+  'Community',
+  'Politics',
+  'Opinion',
+  'Culture',
+  'Business',
+  'Science',
+  'Tech',
+] as const;
+export type Category = (typeof CATEGORIES)[number];
 
 export interface Comment {
   id: string;

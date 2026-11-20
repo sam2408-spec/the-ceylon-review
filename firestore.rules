@@ -41,7 +41,7 @@ service cloud.firestore {
         data.content is list && data.content.size() > 0 && data.content.size() <= 500 && data.content[0] is string &&
         data.authorId is string && data.authorId.size() > 0 && data.authorId.size() <= 128 &&
         data.publishedAt is string && data.publishedAt.size() <= 64 &&
-        data.category is string && data.category in ['Politics', 'Tech', 'Science', 'Opinion', 'Culture', 'Business'] &&
+        data.category is string && data.category.size() > 0 && data.category.size() <= 60 &&
         (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 500000)) &&
         (!('readTime' in data) || (data.readTime is string && data.readTime.size() <= 64)) &&
         (!('isCurrent' in data) || data.isCurrent is bool) &&

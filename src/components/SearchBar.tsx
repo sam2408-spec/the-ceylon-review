@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, RotateCcw, Filter } from 'lucide-react';
-import { Category, Article, Writer } from '../types';
+import { Category, Article, Writer, CATEGORIES } from '../types';
 import WriterArticleMenu from './WriterArticleMenu';
 
 interface SearchBarProps {
@@ -26,7 +26,7 @@ export default function SearchBar({
   articles,
   onReadArticle
 }: SearchBarProps) {
-  const categories: (Category | 'All')[] = ['All', 'Politics', 'Tech', 'Science', 'Opinion', 'Culture', 'Business'];
+  const categories: (Category | 'All')[] = ['All', ...CATEGORIES];
 
   const handleReset = () => {
     setSearchTerm('');

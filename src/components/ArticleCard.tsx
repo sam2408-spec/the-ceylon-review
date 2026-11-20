@@ -31,6 +31,10 @@ export default function ArticleCard({
   
   const getCategoryColor = (cat: string) => {
     switch (cat) {
+      case 'Human Rights': return 'bg-red-50/80 text-red-800 border-red-700/50';
+      case 'International Law': return 'bg-sky-50/80 text-sky-900 border-sky-700/50';
+      case 'Humanitarian': return 'bg-emerald-50/80 text-emerald-800 border-emerald-700/50';
+      case 'Community': return 'bg-orange-50/80 text-orange-900 border-orange-700/50';
       case 'Politics': return 'bg-red-50/80 text-red-800 border-red-700/50';
       case 'Tech': return 'bg-blue-50/80 text-blue-800 border-blue-700/50';
       case 'Science': return 'bg-emerald-50/80 text-emerald-800 border-emerald-700/50';

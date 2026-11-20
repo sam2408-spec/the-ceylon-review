@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Article, Writer, Category } from '../types';
+import { Article, Writer, Category, CATEGORIES } from '../types';
 import { Mail, MapPin, Feather, PlusCircle, CheckCircle, User, ArrowRight, NotebookPen, Tag, Upload, Camera, Edit3, Check, X, Globe, Trash2 } from 'lucide-react';
 
 interface WriterProfileViewProps {
@@ -70,7 +70,7 @@ export default function WriterProfileView({
   const [isDragOverEditAvatar, setIsDragOverEditAvatar] = useState(false);
   const [confirmDeleteWriter, setConfirmDeleteWriter] = useState(false);
 
-  const categoryOptions: Category[] = ['Politics', 'Tech', 'Science', 'Opinion', 'Culture', 'Business'];
+  const categoryOptions: Category[] = [...CATEGORIES];
 
   const selectedWriter = writers.find(w => w.id === selectedWriterId) || writers[0];
   const activeWriterId = selectedWriter?.id || 'w-sameera';

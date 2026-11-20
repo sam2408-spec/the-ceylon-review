@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Article, Writer, Category } from '../types';
+import { Article, Writer, Category, CATEGORIES } from '../types';
 import { 
   Shield, ArrowUp, ArrowDown, Trash2, Plus, FileText, 
   Download, Upload, RotateCcw, Edit3, X, Check, AlertTriangle, 
@@ -440,12 +440,9 @@ export default function SovereignEditorialDesk({
                       onChange={e => setNewCategory(e.target.value as Category)}
                       className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
-                      <option value="Politics" className="bg-stone-100 text-stone-900">Politics</option>
-                      <option value="Opinion" className="bg-stone-100 text-stone-900">Opinion</option>
-                      <option value="Business" className="bg-stone-100 text-stone-900">Business</option>
-                      <option value="Culture" className="bg-stone-100 text-stone-900">Culture</option>
-                      <option value="Tech" className="bg-stone-100 text-stone-900">Tech</option>
-                      <option value="Science" className="bg-stone-100 text-stone-900">Science</option>
+                      {CATEGORIES.map(c => (
+                        <option key={c} value={c} className="bg-stone-100 text-stone-900">{c}</option>
+                      ))}
                     </select>
                   </div>
 
@@ -611,12 +608,9 @@ export default function SovereignEditorialDesk({
                       onChange={e => setEditCategory(e.target.value as Category)}
                       className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#991b1b]/40 rounded focus:outline-none focus:ring-1 focus:ring-red-500"
                     >
-                      <option value="Politics" className="bg-stone-100 text-stone-900">Politics</option>
-                      <option value="Tech" className="bg-stone-100 text-stone-900">Tech</option>
-                      <option value="Science" className="bg-stone-100 text-stone-900">Science</option>
-                      <option value="Opinion" className="bg-stone-100 text-stone-900">Opinion</option>
-                      <option value="Culture" className="bg-stone-100 text-stone-900">Culture</option>
-                      <option value="Business" className="bg-stone-100 text-stone-900">Business</option>
+                      {CATEGORIES.map(c => (
+                        <option key={c} value={c} className="bg-stone-100 text-stone-900">{c}</option>
+                      ))}
                     </select>
                   </div>
 
