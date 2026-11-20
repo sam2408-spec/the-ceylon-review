@@ -67,10 +67,10 @@ export default function Header({
     <header className="border-b-4 border-[#7a1f2b] bg-white text-stone-900" id="newspaper-header">
       
       {/* Top Ticker: live world flash headlines (falls back to the house line if the feed is unavailable) */}
-      <div className="bg-[#f8eff1] text-stone-900 flex items-stretch overflow-hidden text-[11px] font-mono select-none border-b border-[#7a1f2b]/30" id="ticker-container">
-        <div className="relative z-10 shrink-0 bg-[#f8eff1] flex items-center gap-1.5 pl-4 pr-3 py-2 border-r border-[#7a1f2b]/30 shadow-[6px_0_8px_-4px_rgba(254,242,242,1)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#8a2432] animate-pulse"></span>
-          <span className="font-black tracking-widest text-[#7a1f2b] uppercase text-[10px]">World Flash</span>
+      <div className="bg-[#14264a] text-white flex items-stretch overflow-hidden text-[11px] font-mono select-none border-b border-[#0c1a36]" id="ticker-container">
+        <div className="relative z-10 shrink-0 bg-[#7a1f2b] flex items-center gap-1.5 pl-4 pr-3 py-2 border-r border-[#0c1a36]">
+          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <span className="font-black tracking-widest text-white uppercase text-[10px]">World Flash</span>
         </div>
         <div className="flex-1 overflow-hidden py-2">
           <div
@@ -89,18 +89,18 @@ export default function Header({
                         className="mx-4 flex items-center gap-2 hover:underline"
                         tabIndex={copy === 1 ? -1 : 0}
                       >
-                        <span className="text-[#7a1f2b] font-black tracking-widest text-[9px] uppercase">{h.source}</span>
-                        <span className="text-stone-900 font-serif font-bold tracking-wide italic text-[12px]">{h.title}</span>
+                        <span className="text-[#f3b6c0] font-black tracking-widest text-[9px] uppercase">{h.source}</span>
+                        <span className="text-white font-serif font-bold tracking-wide italic text-[12px]">{h.title}</span>
                       </a>
-                      <span className="text-stone-400">•</span>
+                      <span className="text-white/40">•</span>
                     </React.Fragment>
                   ))
                 ) : (
                   <>
-                    <span className="mx-4 text-stone-900 font-serif font-bold tracking-wide italic">{breakingNews}</span>
-                    <span className="text-stone-400">•</span>
-                    <span className="mx-4 text-stone-700 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
-                    <span className="text-stone-400">•</span>
+                    <span className="mx-4 text-white font-serif font-bold tracking-wide italic">{breakingNews}</span>
+                    <span className="text-white/40">•</span>
+                    <span className="mx-4 text-white/80 uppercase font-bold tracking-widest">THE CEYLON REVIEW PRINT</span>
+                    <span className="text-white/40">•</span>
                   </>
                 )}
               </div>

@@ -5,9 +5,10 @@ const STORAGE_KEY = 'the_ceylon_review_note_folded';
 
 function readFolded(): boolean {
   try {
-    return localStorage.getItem(STORAGE_KEY) === 'true';
+    const v = localStorage.getItem(STORAGE_KEY);
+    return v === null ? true : v === 'true';
   } catch {
-    return false;
+    return true;
   }
 }
 

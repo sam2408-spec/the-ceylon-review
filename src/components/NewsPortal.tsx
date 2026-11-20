@@ -24,7 +24,7 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
         <button
           type="button"
           onClick={() => onOpen(lead)}
-          className="w-full relative block text-left overflow-hidden rounded group cursor-pointer min-h-[320px] md:min-h-[440px]"
+          className="w-full relative block text-left overflow-hidden rounded group cursor-pointer min-h-[320px] md:min-h-[440px] bg-gradient-to-br from-[#14264a] via-[#2a2250] to-[#7a1f2b] shadow-lg"
           id="portal-lead"
         >
           <img
@@ -32,7 +32,9 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
             alt=""
             referrerPolicy="no-referrer"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = fallbackImage;
+              const img = e.target as HTMLImageElement;
+              if (img.src !== fallbackImage) img.src = fallbackImage;
+              else img.style.display = 'none';
             }}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
@@ -96,13 +98,15 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
                 onClick={() => onOpen(a)}
                 className="text-left group cursor-pointer"
               >
-                <div className="aspect-[16/10] overflow-hidden rounded bg-stone-200">
+                <div className="aspect-[16/10] overflow-hidden rounded bg-gradient-to-br from-[#14264a] to-[#7a1f2b]">
                   <img
                     src={a.imageUrl || fallbackImage}
                     alt=""
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = fallbackImage;
+                      const img = e.target as HTMLImageElement;
+                      if (img.src !== fallbackImage) img.src = fallbackImage;
+                      else img.style.display = 'none';
                     }}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
@@ -121,6 +125,14 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
           </div>
         </section>
       )}
+      <section className="rounded bg-[#14264a] text-white px-6 py-8 md:px-10 md:py-10 border-l-8 border-[#7a1f2b]" id="portal-quote">
+        <p className="font-serif text-2xl md:text-3xl font-bold leading-snug">
+          There is no shortage of commentary. What is in short supply is accountability.
+        </p>
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/70">
+          Law, human rights and global justice, reported from Sri Lanka
+        </p>
+      </section>
     </div>
   );
 }

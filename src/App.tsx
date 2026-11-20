@@ -918,31 +918,6 @@ export default function App() {
                                 </li>
                               </ul>
                             </div>
-
-                            {/* Global High-Integrity Press Section */}
-                            <div>
-                              <p className="text-[10px] font-mono text-[#6a1a26] font-black uppercase tracking-wider mb-1.5">🌎 Global Press Outlets</p>
-                              <ul className="space-y-1 text-xs font-serif font-semibold text-stone-600">
-                                <li>
-                                  <a href="https://www.nytimes.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>The New York Times (International)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://www.theguardian.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>The Guardian (Global Analysis)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="https://www.reuters.com" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 flex items-center justify-between group py-0.5">
-                                    <span>Reuters (Global Wire Stream)</span>
-                                    <ExternalLink size={10} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
                           </div>
                         </div>
 
@@ -1700,29 +1675,29 @@ export default function App() {
       </div>
 
       {/* Broadside Footer */}
-      <footer className="bg-white text-stone-900 border-t-4 border-[#4a1019] py-12 select-all" id="newspaper-footer">
+      <footer className="bg-[#14264a] text-white border-t-4 border-[#7a1f2b] py-12 select-all" id="newspaper-footer">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
-          <h2 className="font-serif text-3xl font-black tracking-widest text-stone-900 uppercase">THE CEYLON REVIEW</h2>
-          <p className="text-[11px] font-mono text-stone-600 tracking-[0.25em] max-w-2xl mx-auto leading-normal uppercase">
+          <h2 className="font-serif text-3xl font-black tracking-widest text-white uppercase">THE CEYLON REVIEW</h2>
+          <p className="text-[11px] font-mono text-white/70 tracking-[0.25em] max-w-2xl mx-auto leading-normal uppercase">
             INDEPENDENT JOURNALISM • ANALYTICAL JURISPRUDENCE • COMMITTED TO ABSOLUTE TRUTH & SOVEREIGN PEOPLES
           </p>
           
-          <div className="bg-black/5 border border-stone-200 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
-            <span className="text-stone-700">Contact and column pitches:</span>
-            <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-stone-700">theceylonreview@proton.me</a>
+          <div className="bg-white/10 border border-white/15 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
+            <span className="text-white/80">Contact and column pitches:</span>
+            <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-white/80">theceylonreview@proton.me</a>
           </div>
 
-          <div className="pt-6 border-t border-stone-200 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-stone-600">
+          <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-white/70">
             <span>© 2026 THE CEYLON REVIEW PRINT & INTERACTIVE REPRODUCTIONS INC. ALL RIGHTS PRESERVED.</span>
             <span className="flex flex-wrap justify-center gap-4 items-center">
-              <span onClick={() => handleTabChange('about')} className="hover:text-stone-900 cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
-              <span onClick={() => handleTabChange('directive')} className="hover:text-stone-900 cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
-              <span onClick={() => handleTabChange('privacy')} className="hover:text-stone-900 cursor-pointer hover:underline">PRIVACY DEFENSE</span>
-              <span onClick={() => handleTabChange('disclaimer')} className="hover:text-stone-900 cursor-pointer hover:underline">LIABILITY DISCLAIMER</span>
+              <span onClick={() => handleTabChange('about')} className="hover:text-white cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
+              <span onClick={() => handleTabChange('directive')} className="hover:text-white cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
+              <span onClick={() => handleTabChange('privacy')} className="hover:text-white cursor-pointer hover:underline">PRIVACY DEFENSE</span>
+              <span onClick={() => handleTabChange('disclaimer')} className="hover:text-white cursor-pointer hover:underline">LIABILITY DISCLAIMER</span>
               {!currentUser ? (
                 <button
                   onClick={handleEditorSignIn}
-                  className="bg-black text-white hover:bg-stone-800 px-3 py-1.5 rounded font-bold cursor-pointer uppercase tracking-wider transition-colors"
+                  className="bg-white text-[#14264a] hover:bg-stone-200 px-3 py-1.5 rounded font-bold cursor-pointer uppercase tracking-wider transition-colors"
                   id="footer-editor-signin"
                 >
                   EDITORIAL SIGN IN
@@ -1730,7 +1705,7 @@ export default function App() {
               ) : !isAuthorizedEditor ? (
                 <button
                   onClick={signOutEditor}
-                  className="hover:text-stone-900 cursor-pointer hover:underline uppercase"
+                  className="hover:text-white cursor-pointer hover:underline uppercase"
                 >
                   SIGN OUT
                 </button>
