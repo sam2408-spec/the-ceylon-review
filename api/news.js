@@ -4,15 +4,21 @@
 
 const FEEDS = [
   { source: 'AL JAZEERA', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
-  { source: 'BBC WORLD', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
-  { source: 'THE GUARDIAN', url: 'https://www.theguardian.com/world/rss' },
   { source: 'MIDDLE EAST EYE', url: 'https://www.middleeasteye.net/rss' },
+  { source: 'THE NEW HUMANITARIAN', url: 'https://www.thenewhumanitarian.org/rss.xml' },
+  { source: 'MONDOWEISS', url: 'https://mondoweiss.net/feed/' },
+  { source: 'DEMOCRACY NOW', url: 'https://www.democracynow.org/democracynow.rss' },
 ];
+
+// The ticker only carries justice and humanitarian coverage: Palestine and Israel's
+// war and occupation, Congo, Sudan, the Rohingya, and rights, law and accountability.
+const TOPIC =
+  /\b(gaza|palestin\w*|israel\w*|west bank|occupation|zionis\w*|netanyahu|idf|hamas|flotilla|lebanon|congo|drc|kivu|goma|m23|sudan\w*|darfur|khartoum|el[- ]fasher|rsf|rohingya|myanmar|rakhine|cox'?s bazar|genocide|war crimes?|icc|icj|international (criminal )?court|human rights|humanitarian|famine|starv\w*|refugee\w*|displace\w*|apartheid|sanctions|accountab\w*|justice|aid convoy|ceasefire|detention|torture|extrajudicial|terrorism law|anti-terror\w*)\b/i;
 
 // Skip sport, weather/UK local, lifestyle and video-clip items: the ticker is for world news.
 const SKIP_LINK = /\/(sport|sports|football|uk-news|lifeandstyle|culture|film|music|fashion|travel|video)\//i;
 
-const PER_FEED = 5;
+const PER_FEED = 6;
 const MAX_ITEMS = 16;
 
 function decode(text) {
@@ -42,6 +48,7 @@ export function parseFeed(xml, source) {
     const link = pick(block, 'link');
     const date = Date.parse(pick(block, 'pubDate') || pick(block, 'dc:date')) || 0;
     if (!title || !/^https?:\/\//.test(link) || SKIP_LINK.test(link)) continue;
+    if (!TOPIC.test(title)) continue;
     items.push({ title, link, source, time: date });
   }
   return items.sort((a, b) => b.time - a.time).slice(0, PER_FEED);
