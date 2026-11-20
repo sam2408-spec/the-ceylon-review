@@ -715,18 +715,18 @@ export default function App() {
 
         {/* Editor Authority Banner */}
         {effectiveAdminMode && (
-          <div className="bg-[#991b1b] text-white px-4 py-2 border-b border-red-900/50 shadow-md select-none" id="editor-privileges-banner">
+          <div className="bg-[#007A3D] text-white px-4 py-2 border-b border-[#005a2c] shadow-md select-none" id="editor-privileges-banner">
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs font-mono gap-2">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span className="font-bold uppercase tracking-wider text-stone-700">Editor Authority Active:</span>
-                <span className="text-stone-700">Full deletion & modification privileges are active directly across the page.</span>
+                <span className="font-bold uppercase tracking-wider text-white">Editor Authority Active:</span>
+                <span className="text-white">Full deletion & modification privileges are active directly across the page.</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-stone-700 font-bold hidden md:inline">{currentUser?.email}</span>
+                <span className="text-white font-bold hidden md:inline">{currentUser?.email}</span>
                 <button
                   onClick={() => setIsEditorialDeskOpen(true)}
-                  className="bg-black hover:bg-neutral-900 text-[#ebdcb9] border border-[#d4af37]/40 px-3 py-1 rounded text-[10px] font-bold uppercase cursor-pointer transition-colors shadow"
+                  className="bg-[#00582b] hover:bg-[#004522] text-white border border-white px-3 py-1 rounded text-[10px] font-bold uppercase cursor-pointer transition-colors shadow"
                 >
                   Open Editorial Desk
                 </button>
