@@ -68,22 +68,42 @@ export default function EditorialNote() {
               things are as they are and not otherwise.
             </p>
             <p>
-              The Ceylon Review is an independent publication covering law, politics, human rights, and public affairs.
-              It is written for readers who want more than a headline — who understand that a court ruling is also a
-              political act, that a piece of legislation carries the weight of its colonial origins, that what is called
-              security is sometimes the name given to impunity.
+              The Ceylon Review is an independent publication on justice: law, human rights, and the public affairs that
+              decide who is protected and who is left exposed. It is written for readers who want more than a headline
+              — who understand that a court ruling is also a political act, that a piece of legislation carries the
+              weight of its colonial origins, that what is called security is sometimes the name given to impunity.
             </p>
+            <div>
+              <p className="font-bold text-stone-900">What we report on</p>
+              <ul className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1.5 list-disc pl-5 marker:text-[#991b1b]" id="editorial-note-scope">
+                <li>Human rights and civil liberties</li>
+                <li>Law, courts and constitutional safeguards</li>
+                <li>Community and social issues, and the rights of minorities, women, children and workers</li>
+                <li>International humanitarian crises, from Palestine to every place where civilians are under fire</li>
+                <li>Humanitarian aid, and the obstruction of it</li>
+                <li>International law and accountability: the laws of war, the UN, the ICJ and the ICC</li>
+                <li>Global justice for the oppressed, and the unfinished struggles against colonialism and occupation</li>
+                <li>Truth, reconciliation and transitional justice, including the missing and the disappeared</li>
+                <li>Press freedom, the right to information and digital rights</li>
+                <li>Refugees, migration and displaced people</li>
+                <li>Climate and environmental justice</li>
+                <li>Economic and labour justice, and the history that explains them</li>
+              </ul>
+            </div>
             <p>
               We write from Sri Lanka, and we write about Sri Lanka. But we do not write only for Sri Lanka. The
               dynamics we examine — emergency law that outlasts its emergency, counter-terrorism frameworks that
-              criminalise dissent, the slow violence of institutional indifference — are not unique to this island. They
-              are the unfinished business of the postcolonial world.
+              criminalise dissent, the slow violence of institutional indifference, the starvation and bombing of
+              civilians — are not unique to this island. They are the unfinished business of the postcolonial world.
             </p>
             <p>
               <strong className="font-bold text-stone-900">A note on the publication name.</strong> Ceylon is a colonial
-              designation, and we use it deliberately. Not in nostalgia for empire, but as a reminder that the systems
-              we scrutinise did not emerge from nowhere. They were designed, exported, inherited, and in many cases,
-              preserved with care. Understanding the present requires naming the past accurately.
+              name, and we use it deliberately. This island was colonised three times — by the Portuguese, the Dutch and
+              the British — across more than four centuries, and its people resisted each of them until independence in
+              1948. We carry the name not in nostalgia for empire but as a claim: those who know what it is to be ruled
+              without consent, and to fight for freedom, have standing to speak for justice wherever people are denied
+              it. The systems we scrutinise did not emerge from nowhere. They were designed, exported, inherited, and in
+              many cases preserved with care. Understanding the present requires naming the past accurately.
             </p>
             <p>
               We are committed to factual rigour, legal precision, and the kind of intellectual honesty that does not

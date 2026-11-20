@@ -207,7 +207,7 @@ export default function Header({
             </div>
           </div>
           <p className="font-mono text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.25em] sm:tracking-[0.35em] text-[#b91c1c] mt-2.5 uppercase font-extrabold text-center">
-            Law, Society & Public Affairs • Independent Ceylon Perspectives
+            Law, Human Rights & Global Justice • Independent Ceylon Perspectives
           </p>
         </div>
 
