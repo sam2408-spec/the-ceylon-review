@@ -1,4 +1,5 @@
 import React from 'react';
+import { BAND_QUOTES, BAND_INTERVAL_MS } from '../data/quotes';
 import { Article } from '../types';
 
 const fallbackImage =
@@ -143,14 +144,46 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
           </div>
         </section>
       )}
-      <section className="rounded bg-[#14264a] text-white px-6 py-8 md:px-10 md:py-10 border-l-8 border-[#7a1f2b]" id="portal-quote">
-        <p className="font-serif text-2xl md:text-3xl font-bold leading-snug">
-          There is no shortage of commentary. What is in short supply is accountability.
-        </p>
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/70">
-          Law, human rights and global justice, reported from Sri Lanka
-        </p>
-      </section>
+      <QuoteBand />
     </div>
+  );
+}
+
+// Blue statement band: a new quote every five minutes, in rotation. The slot is taken from the
+// clock, so every visitor sees the same quote at the same time.
+function QuoteBand() {
+  const slot = () => Math.floor(Date.now() / BAND_INTERVAL_MS);
+  const [n, setN] = React.useState(slot);
+  React.useEffect(() => {
+    const wait = BAND_INTERVAL_MS - (Date.now() % BAND_INTERVAL_MS);
+    let every: ReturnType<typeof setInterval> | undefined;
+    const first = setTimeout(() => {
+      setN(slot());
+      every = setInterval(() => setN(slot()), BAND_INTERVAL_MS);
+    }, wait);
+    return () => {
+      clearTimeout(first);
+      if (every) clearInterval(every);
+    };
+  }, []);
+  const q = BAND_QUOTES[n % BAND_QUOTES.length];
+  return (
+    <section className="rounded bg-[#14264a] text-white px-6 py-8 md:px-10 md:py-10 border-l-8 border-[#7a1f2b]" id="portal-quote">
+      <div key={n} className="animate-[fadein_.8s_ease]">
+        <p className="font-serif text-2xl md:text-3xl font-bold leading-snug">
+          {q.by ? `“${q.text}”` : q.text}
+        </p>
+        {q.by && (
+          <p className="mt-4 font-serif text-lg text-white/90">
+            {q.by}
+          </p>
+        )}
+        {q.source && (
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/70">
+            {q.source}
+          </p>
+        )}
+      </div>
+    </section>
   );
 }
