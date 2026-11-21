@@ -252,13 +252,21 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers') continue;
-        const flag = 'seeded:' + art.id;
+        const flag = 'seeded2:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
         const ref = doc(db, 'articles', art.id);
         const snap = await getDocFromServer(ref);
-        if (!snap.exists()) await setDoc(ref, art);
+        if (!snap.exists()) {
+          await setDoc(ref, art);
+        } else {
+          // Replace the first draft only; later edits in the Editorial Desk are kept.
+          const cur = snap.data() as Article;
+          if (cur.content?.[0]?.startsWith('On Friday 20 November, after more than four months')) {
+            await setDoc(ref, { ...cur, title: art.title, subtitle: art.subtitle, summary: art.summary, content: art.content });
+          }
+        }
         try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
       }
     } catch (e) {
