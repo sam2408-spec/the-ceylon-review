@@ -6,7 +6,6 @@ const FEEDS = [
   { source: 'AL JAZEERA', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
   { source: 'MIDDLE EAST EYE', url: 'https://www.middleeasteye.net/rss' },
   { source: 'MONDOWEISS', url: 'https://mondoweiss.net/feed/' },
-  { source: 'PALESTINE CHRONICLE', url: 'https://www.palestinechronicle.com/feed/' },
   { source: 'ELECTRONIC INTIFADA', url: 'https://electronicintifada.net/rss.xml' },
   { source: 'DEMOCRACY NOW', url: 'https://www.democracynow.org/democracynow.rss' },
 ];
