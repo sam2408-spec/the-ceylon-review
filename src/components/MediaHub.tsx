@@ -700,7 +700,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                           className="w-full h-full"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
-                          referrerPolicy="no-referrer"
+                          referrerPolicy="strict-origin-when-cross-origin"
                         />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-zinc-950 text-stone-900 text-center">
@@ -939,7 +939,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                       src={item.imageUrl} 
                       alt={set.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800';
                       }}
@@ -1037,7 +1037,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
                 src={activeLightboxImage.imageUrl} 
                 alt={activeLightboxImage.title}
                 className="w-full h-full object-contain max-h-[80vh]"
-                referrerPolicy="no-referrer"
+                referrerPolicy="strict-origin-when-cross-origin"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=800';
                 }}
