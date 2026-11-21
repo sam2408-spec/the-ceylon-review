@@ -633,7 +633,7 @@ export default function ArticleDetailModal({
                     }
 
                     // If legislative timelines
-                    if (/^[A-Z ]*TIMELINE:/.test(paragraph)) {
+                    if (/^[A-Z0-9 ,()&'’-]+:\n/.test(paragraph)) {
                       const lines = paragraph.split('\n');
                       return (
                         <div key={index} className="bg-white text-stone-900 border-l-4 border-[#9b2c3b] p-5 my-8 font-mono text-xs space-y-2 rounded shadow">
