@@ -245,7 +245,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: 'w-sameera',
     publishedAt: 'June 26, 2026',
     category: 'Politics',
-    imageUrl: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1200&h=630',
+    imageUrl: '/images/hasbara-flag.jpg',
     readTime: '11 min read',
     isCurrent: true,
     likes: 0,

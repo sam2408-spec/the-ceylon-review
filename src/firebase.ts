@@ -305,6 +305,20 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       console.warn('PTA photo add skipped:', e);
     }
 
+    // Hasbara article cover: swap the stock photo for the supplied image once; a custom cover is left alone.
+    try {
+      const hRef = doc(db, 'articles', 'art-manufactured-silence');
+      const hSnap = await getDocFromServer(hRef);
+      if (hSnap.exists()) {
+        const h = hSnap.data() as Article;
+        if (h.imageUrl && h.imageUrl.includes('images.unsplash.com')) {
+          await setDoc(hRef, { ...h, imageUrl: '/images/hasbara-flag.jpg' });
+        }
+      }
+    } catch (e) {
+      console.warn('Hasbara cover update skipped:', e);
+    }
+
     const writersSnap = await getDocs(query(collection(db, 'writers')));
     if (writersSnap.empty) {
       for (const w of INITIAL_WRITERS) {
