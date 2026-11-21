@@ -12,6 +12,8 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
   const [caption, setCaption] = useState('');
   const [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false);
+  const [showContact, setShowContact] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => subscribeToAds(setAds), []);
 
@@ -94,13 +96,45 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
         </div>
       )}
 
-      <a
-        href={`mailto:${ADVERTISE_EMAIL}?subject=${subject}&body=${body}`}
-        className="mt-4 block text-center bg-[#14264a] hover:bg-[#0c1a36] text-white font-sans text-xs font-bold uppercase tracking-widest py-2.5 rounded transition-colors"
+      <button
+        type="button"
+        onClick={() => setShowContact((v) => !v)}
+        className="mt-4 block w-full text-center bg-[#14264a] hover:bg-[#0c1a36] text-white font-sans text-xs font-bold uppercase tracking-widest py-2.5 rounded transition-colors cursor-pointer"
         id="work-with-us"
       >
         Advertise here
-      </a>
+      </button>
+      {showContact && (
+        <div className="mt-3 border border-stone-300 rounded bg-stone-50 p-3 text-center space-y-2">
+          <p className="font-sans text-[11px] text-stone-700 leading-snug">
+            To advertise, write to us with who you are and what you want to promote.
+          </p>
+          <p className="font-mono text-xs font-bold text-stone-900 break-all select-all">{ADVERTISE_EMAIL}</p>
+          <div className="flex gap-2 justify-center flex-wrap">
+            <a
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${ADVERTISE_EMAIL}&su=${subject}&body=${body}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] font-bold uppercase tracking-wider bg-[#7a1f2b] text-white px-3 py-1.5 rounded"
+            >
+              Open in Gmail
+            </a>
+            <a
+              href={`mailto:${ADVERTISE_EMAIL}?subject=${subject}&body=${body}`}
+              className="text-[11px] font-bold uppercase tracking-wider border border-stone-400 text-stone-800 px-3 py-1.5 rounded"
+            >
+              Other email app
+            </a>
+            <button
+              type="button"
+              onClick={() => { try { navigator.clipboard.writeText(ADVERTISE_EMAIL); setCopied(true); } catch { /* ignore */ } }}
+              className="text-[11px] font-bold uppercase tracking-wider border border-stone-400 text-stone-800 px-3 py-1.5 rounded cursor-pointer"
+            >
+              {copied ? 'Copied' : 'Copy address'}
+            </button>
+          </div>
+        </div>
+      )}
       <p className="mt-2 text-center font-sans text-[10px] text-stone-500 leading-snug">
         Advertisers have no say over our reporting.
       </p>
