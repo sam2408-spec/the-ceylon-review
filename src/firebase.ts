@@ -252,7 +252,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers') continue;
-        const flag = 'seeded5:' + art.id;
+        const flag = 'seeded6:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -263,7 +263,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
         } else {
           // Replace the first draft only; later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
-          if (cur.imageUrl?.includes('photo-1589829545856')) {
+          if (cur.imageUrl?.includes('chambers-mistranslation')) {
             await setDoc(ref, { ...cur, imageUrl: art.imageUrl });
             cur.imageUrl = art.imageUrl;
           }

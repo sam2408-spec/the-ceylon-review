@@ -69,7 +69,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: 'w-sameera',
     publishedAt: 'November 21, 2026',
     category: 'Human Rights',
-    imageUrl: '/images/chambers-mistranslation.svg',
+    imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=1200&h=630',
     readTime: '9 min read',
     isCurrent: true,
     isFeatured: true,
