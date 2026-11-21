@@ -252,7 +252,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods') continue;
-        const flag = 'seeded12:' + art.id;
+        const flag = 'seeded13:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -264,7 +264,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
           // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
           if (art.id === 'art-gaza-floods') {
-            if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('I could only read'))) {
+            if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('I could only read') || c.includes('(Al Jazeera)') || c.includes('LEGISLATIVE TIMELINE: THE FIRST'))) {
               await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
             }
             try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
