@@ -11,6 +11,7 @@ import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
 import PartnerPanel from './components/PartnerPanel';
 import SocialHandles from './components/SocialHandles';
+import GazaColumn from './components/GazaColumn';
 import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
@@ -791,6 +792,8 @@ export default function App() {
                       {/* RIGHT COLUMN: Media Matrix & Video Dossier Sidebar (Span 4) */}
                       <div className="lg:col-span-4 border-t lg:border-t-0 lg:border-l-2 border-[#7a1f2b]/30 pt-8 lg:pt-0 lg:pl-8 space-y-8">
                         
+                        <GazaColumn />
+
                         {/* 1. SECURE SUBMISSION CALLOUT BOX */}
                         <div className="bg-white text-stone-900 border-l-4 border-[#9b2c3b] p-5 rounded shadow-lg border border-[#7a1f2b]/30">
                           <h4 className="font-serif font-black text-sm text-stone-900 mb-2 uppercase tracking-wide flex items-center gap-2">
