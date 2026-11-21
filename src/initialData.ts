@@ -174,7 +174,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: 'w-sameera',
     publishedAt: 'November 21, 2026',
     category: 'Politics',
-    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=630',
+    imageUrl: '/images/psta-protest-parliament.jpg',
     readTime: '6 min read',
     isCurrent: true,
     likes: 0,

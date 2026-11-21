@@ -123,6 +123,22 @@ function withPublishedCovers(a: Article): Article {
   if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
     return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
   }
+  if (a.id === 'art-colonial-law') {
+    let out = a;
+    const marker = '[[image:/images/psta-protest-parliament.jpg|A march near Parliament in Colombo on 4 November 2026. One placard reads “PSTA: Military Given Police Power.”]]';
+    if (!a.content.some((c) => c.includes('psta-protest-parliament'))) {
+      const i = a.content.findIndex((c) => c.startsWith('The Daily FT reported on 19 August'));
+      if (i >= 0) {
+        const content = [...a.content];
+        content.splice(i + 1, 0, marker);
+        out = { ...out, content };
+      }
+    }
+    if (out.imageUrl?.includes('images.unsplash.com')) {
+      out = { ...out, imageUrl: '/images/psta-protest-parliament.jpg' };
+    }
+    return out;
+  }
   return a;
 }
 
