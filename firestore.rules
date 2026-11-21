@@ -112,5 +112,25 @@ service cloud.firestore {
       allow create, update: if isValidId(eventId) && isValidEvent(incoming()) && incoming().id == eventId && isEditorialAdmin();
       allow delete: if isValidId(eventId) && isEditorialAdmin();
     }
+
+    // Shared video dispatches (public, editor-only changes)
+    function isValidVideo(data) {
+      return data.keys().hasAll(['id', 'title', 'videoUrl', 'platform', 'publishedAt', 'likes', 'createdAt']) &&
+        data.keys().hasOnly(['id', 'title', 'description', 'videoUrl', 'platform', 'publishedAt', 'likes', 'createdAt']) &&
+        data.id is string && data.id.size() > 0 && data.id.size() <= 128 &&
+        data.title is string && data.title.size() > 0 && data.title.size() <= 300 &&
+        (!('description' in data) || (data.description is string && data.description.size() <= 5000)) &&
+        data.videoUrl is string && data.videoUrl.size() > 0 && data.videoUrl.size() <= 2000 &&
+        data.platform in ['YouTube', 'Vimeo', 'Other'] &&
+        data.publishedAt is string && data.publishedAt.size() <= 100 &&
+        data.likes is number && data.likes >= 0 &&
+        data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    match /videos/{videoId} {
+      allow get, list: if true;
+      allow create, update: if isValidId(videoId) && isValidVideo(incoming()) && incoming().id == videoId && isEditorialAdmin();
+      allow delete: if isValidId(videoId) && isEditorialAdmin();
+    }
   }
 }
