@@ -65,6 +65,30 @@ service cloud.firestore {
         (!('joinedDate' in data) || (data.joinedDate is string && data.joinedDate.size() <= 64));
     }
 
+    // What an ordinary (signed-out) reader may change on an article: add one like, add one view,
+    // or add one new comment at the top. Nothing else, and existing comments can never be edited.
+    function isValidComment(c) {
+      return c is map &&
+        c.keys().hasAll(['id', 'author', 'text', 'timestamp']) &&
+        c.keys().hasOnly(['id', 'author', 'text', 'timestamp']) &&
+        c.id is string && c.id.size() > 0 && c.id.size() <= 64 &&
+        c.author is string && c.author.size() > 0 && c.author.size() <= 100 &&
+        c.text is string && c.text.size() > 0 && c.text.size() <= 2000 &&
+        c.timestamp is string && c.timestamp.size() <= 64;
+    }
+
+    function isValidReaderChange() {
+      let changed = incoming().diff(existing()).affectedKeys();
+      return changed.hasOnly(['likes', 'views', 'comments']) &&
+        (!('likes' in changed) || incoming().likes == existing().get('likes', 0) + 1) &&
+        (!('views' in changed) || incoming().views == existing().get('views', 0) + 1) &&
+        (!('comments' in changed) || (
+          incoming().comments.size() == existing().get('comments', []).size() + 1 &&
+          isValidComment(incoming().comments[0]) &&
+          incoming().comments[1:incoming().comments.size()] == existing().get('comments', [])
+        ));
+    }
+
     // Articles Collection (Public investigative reporting)
     match /articles/{articleId} {
       allow get: if isValidId(articleId);
@@ -72,7 +96,7 @@ service cloud.firestore {
       allow create: if isValidId(articleId) && isValidArticle(incoming()) && incoming().id == articleId && isEditorialAdmin();
       allow update: if isValidId(articleId) && isValidArticle(incoming()) && incoming().id == existing().id && (
         (isEditorialAdmin() && incoming().diff(existing()).affectedKeys().hasOnly(['title', 'subtitle', 'summary', 'content', 'authorId', 'publishedAt', 'category', 'imageUrl', 'readTime', 'isCurrent', 'isFeatured', 'likes', 'views', 'comments'])) ||
-        incoming().diff(existing()).affectedKeys().hasOnly(['likes', 'views', 'comments'])
+        isValidReaderChange()
       );
       allow delete: if isValidId(articleId) && isEditorialAdmin();
     }
