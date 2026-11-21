@@ -623,6 +623,19 @@ export default function ArticleDetailModal({
                       );
                     }
 
+                    // Inline photo: [[image:/path.jpg|caption|credit]]
+                    if (paragraph.startsWith('[[image:')) {
+                      const [src, caption, credit] = paragraph.slice(8, -2).split('|');
+                      return (
+                        <figure key={index} className="my-8">
+                          <img src={src} alt={caption || ''} loading="lazy" className="w-full rounded border border-stone-300 shadow" />
+                          <figcaption className="mt-2 text-sm text-stone-600 leading-snug">
+                            {caption}{credit ? <span className="block text-xs text-stone-500 mt-0.5">{credit}</span> : null}
+                          </figcaption>
+                        </figure>
+                      );
+                    }
+
                     // If paragraph is a blockquote (starts with a quotation mark)
                     if (paragraph.startsWith('“') || paragraph.startsWith('"')) {
                       return (
