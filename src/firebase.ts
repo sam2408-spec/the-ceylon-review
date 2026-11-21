@@ -359,3 +359,34 @@ export async function saveVideoToFirestore(video: SharedVideo): Promise<void> {
 export async function deleteVideoFromFirestore(id: string): Promise<void> {
   await deleteDoc(doc(db, 'videos', id));
 }
+
+
+// ---- Sponsor advertisements (visible to every reader, editor-only changes) ----
+export interface SharedAd {
+  id: string;
+  sponsor: string;
+  image: string;
+  link: string;
+  caption?: string;
+  createdAt: string;
+}
+
+export function subscribeToAds(onData: (ads: SharedAd[]) => void) {
+  return onSnapshot(
+    collection(db, 'ads'),
+    (snapshot) => {
+      const loaded = snapshot.docs.map((d) => d.data() as SharedAd);
+      loaded.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+      onData(loaded);
+    },
+    (error) => console.warn('Ads could not be loaded:', error)
+  );
+}
+
+export async function saveAdToFirestore(ad: SharedAd): Promise<void> {
+  await setDoc(doc(db, 'ads', ad.id), ad);
+}
+
+export async function deleteAdFromFirestore(id: string): Promise<void> {
+  await deleteDoc(doc(db, 'ads', id));
+}
