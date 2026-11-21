@@ -623,6 +623,15 @@ export default function ArticleDetailModal({
                       );
                     }
 
+                    // Closing note and sources: small italic type
+                    if (paragraph.startsWith('This article reports')) {
+                      return (
+                        <p key={index} className="text-xs italic text-stone-600 leading-relaxed border-t border-stone-300 pt-4 mt-8">
+                          {paragraph}
+                        </p>
+                      );
+                    }
+
                     // Inline photo: [[image:/path.jpg|caption|credit]]
                     if (paragraph.startsWith('[[image:')) {
                       const [src, caption, credit] = paragraph.slice(8, -2).split('|');
