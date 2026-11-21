@@ -10,6 +10,7 @@ import BookmarksDrawer from './components/BookmarksDrawer';
 import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
 import PartnerPanel from './components/PartnerPanel';
+import SocialHandles from './components/SocialHandles';
 import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
@@ -784,6 +785,7 @@ export default function App() {
                       {/* LEFT COLUMN: news-portal front page (lead story, top stories, latest) */}
                       <div className="lg:col-span-8 space-y-8">
                         <NewsPortal articles={filteredArticles} onOpen={handleReadMore} />
+                        <SocialHandles />
                       </div>
 
                       {/* RIGHT COLUMN: Media Matrix & Video Dossier Sidebar (Span 4) */}
