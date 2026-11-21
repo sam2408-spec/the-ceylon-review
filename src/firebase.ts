@@ -251,8 +251,8 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     // per browser, so an article the editor later deletes is not brought back.
     try {
       for (const art of INITIAL_ARTICLES) {
-        if (art.id !== 'art-fergie-chambers') continue;
-        const flag = 'seeded6:' + art.id;
+        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods') continue;
+        const flag = 'seeded7:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -261,8 +261,9 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
         if (!snap.exists()) {
           await setDoc(ref, art);
         } else {
-          // Replace the first draft only; later edits in the Editorial Desk are kept.
+          // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
+          if (art.id !== 'art-fergie-chambers') { try { localStorage.setItem(flag, '1'); } catch { /* ignore */ } continue; }
           if (cur.imageUrl?.includes('chambers-mistranslation')) {
             await setDoc(ref, { ...cur, imageUrl: art.imageUrl });
             cur.imageUrl = art.imageUrl;
