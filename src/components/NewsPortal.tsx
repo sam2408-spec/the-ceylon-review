@@ -60,20 +60,38 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
             <h3 className="font-sans text-xs font-black uppercase tracking-[0.18em] text-[#7a1f2b] border-b-2 border-[#7a1f2b] pb-2 mb-1">
               Top stories
             </h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 divide-y md:divide-y-0 divide-stone-200">
+            <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 mt-4">
               {rail.map((a) => (
-                <li key={a.id} className="md:border-b md:border-stone-200">
+                <li key={a.id}>
                   <button
                     type="button"
                     onClick={() => onOpen(a)}
-                    className="w-full text-left py-3 group cursor-pointer"
+                    className="w-full text-left group cursor-pointer"
                   >
-                    <span className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#7a1f2b]">
+                    <div className="aspect-[16/10] overflow-hidden rounded bg-gradient-to-br from-[#14264a] to-[#7a1f2b]">
+                      <img
+                        src={a.imageUrl || fallbackImage}
+                        alt=""
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          if (img.src !== fallbackImage) img.src = fallbackImage;
+                          else img.style.display = 'none';
+                        }}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    <span className="block mt-3 font-sans text-[10px] font-bold uppercase tracking-widest text-[#7a1f2b]">
                       {a.category}
                     </span>
-                    <span className="block font-serif text-lg font-bold text-stone-900 leading-snug group-hover:underline">
+                    <span className="block font-serif text-xl font-bold text-stone-900 leading-snug group-hover:underline">
                       {a.title}
                     </span>
+                    {(a.subtitle || a.summary) && (
+                      <span className="block font-sans text-sm text-stone-600 leading-snug mt-1 line-clamp-2">
+                        {a.subtitle || a.summary}
+                      </span>
+                    )}
                     <span className="block font-mono text-[10px] uppercase tracking-wider text-stone-500 mt-1">
                       {a.publishedAt}
                     </span>

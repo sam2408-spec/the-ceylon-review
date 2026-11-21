@@ -947,7 +947,7 @@ export default function App() {
                                 rel="noopener noreferrer" 
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#7a1f2b]/20 hover:bg-[#7a1f2b]/40 text-[#6a1a26] border border-[#7a1f2b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
                               >
-                                <span>Access Movement Portal</span>
+                                <span>People's Dispatch</span>
                                 <ExternalLink size={10} />
                               </a>
                             </div>
@@ -963,7 +963,7 @@ export default function App() {
                                 rel="noopener noreferrer" 
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#7a1f2b]/20 hover:bg-[#7a1f2b]/40 text-[#6a1a26] border border-[#7a1f2b]/40 text-[10px] font-mono tracking-wider uppercase font-black transition-all rounded mt-1 shadow-sm"
                               >
-                                <span>Access News Portal</span>
+                                <span>Electronic Intifada</span>
                                 <ExternalLink size={10} />
                               </a>
                             </div>
