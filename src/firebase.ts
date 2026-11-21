@@ -252,7 +252,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers') continue;
-        const flag = 'seeded4:' + art.id;
+        const flag = 'seeded5:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -263,6 +263,10 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
         } else {
           // Replace the first draft only; later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
+          if (cur.imageUrl?.includes('photo-1589829545856')) {
+            await setDoc(ref, { ...cur, imageUrl: art.imageUrl });
+            cur.imageUrl = art.imageUrl;
+          }
           if ((cur.content?.[0]?.startsWith('On 18 November the United States Justice Department sent') || cur.content?.[0]?.startsWith('On Friday 20 November, after more than four months')) && !cur.content.some(c => c.includes('WHAT HE FUNDED IN GAZA'))) {
             await setDoc(ref, { ...cur, title: art.title, subtitle: art.subtitle, summary: art.summary, content: art.content });
           }
