@@ -87,19 +87,12 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
             </div>
           ))}
         </div>
-      ) : (
-        <div className="border-2 border-dashed border-stone-300 rounded p-6 text-center bg-stone-50">
-          <p className="font-serif text-lg font-bold text-stone-800 leading-snug">Your message here</p>
-          <p className="font-sans text-[11px] text-stone-600 mt-1">
-            Reach readers who follow law, rights and public affairs in Sri Lanka.
-          </p>
-        </div>
-      )}
+      ) : null}
 
       <button
         type="button"
         onClick={() => setShowContact((v) => !v)}
-        className="mt-4 block w-full text-center bg-[#14264a] hover:bg-[#0c1a36] text-white font-sans text-xs font-bold uppercase tracking-widest py-2.5 rounded transition-colors cursor-pointer"
+        className={`${ads.length > 0 ? "mt-4" : "mt-0"} block w-full text-center bg-[#14264a] hover:bg-[#0c1a36] text-white font-sans text-xs font-bold uppercase tracking-widest py-2.5 rounded transition-colors cursor-pointer`}
         id="work-with-us"
       >
         Advertise here
