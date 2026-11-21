@@ -284,6 +284,27 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       console.warn('New article seeding skipped:', e);
     }
 
+    // Add the 4 November protest photo to the PTA article once, keeping any later edits.
+    try {
+      const ptaRef2 = doc(db, 'articles', 'art-colonial-law');
+      const ptaSnap2 = await getDocFromServer(ptaRef2);
+      const freshPta = INITIAL_ARTICLES.find(a => a.id === 'art-colonial-law');
+      const marker = freshPta?.content.find(c => c.startsWith('[[image:/images/psta-protest'));
+      if (ptaSnap2.exists() && marker) {
+        const cur2 = ptaSnap2.data() as Article;
+        if (!cur2.content?.some(c => c.includes('psta-protest-parliament'))) {
+          const at = cur2.content.findIndex(c => c.startsWith('The Daily FT reported'));
+          if (at >= 0) {
+            const next = [...cur2.content];
+            next.splice(at + 1, 0, marker);
+            await setDoc(ptaRef2, { ...cur2, content: next });
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('PTA photo add skipped:', e);
+    }
+
     const writersSnap = await getDocs(query(collection(db, 'writers')));
     if (writersSnap.empty) {
       for (const w of INITIAL_WRITERS) {
