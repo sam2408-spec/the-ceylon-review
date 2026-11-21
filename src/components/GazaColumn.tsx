@@ -53,7 +53,7 @@ export default function GazaColumn() {
         <h3 className="font-serif text-xl font-black text-stone-900 leading-none">From Gaza</h3>
       </div>
       <p className="font-sans text-[11px] text-stone-500 mb-3">
-        Latest reports from Al Jazeera, Middle East Eye, Mondoweiss, Electronic Intifada and Democracy Now. Each headline opens the publisher's page.
+        Latest reports from independent and international news sites. Each headline opens the publisher's page.
       </p>
 
       {state === 'loading' && <p className="font-sans text-xs text-stone-500">Loading the latest reports…</p>}
@@ -83,6 +83,23 @@ export default function GazaColumn() {
           ))}
         </ul>
       )}
+
+      <a
+        href="https://www.litigating4palestine.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group mt-3 block rounded border border-[#007A3D]/30 bg-[#007A3D]/5 p-3"
+      >
+        <span className="font-mono text-[9px] uppercase tracking-widest text-[#007A3D] font-bold">
+          Legal resource
+        </span>
+        <span className="block font-serif text-[15px] font-bold text-stone-900 leading-snug group-hover:underline">
+          Litigating for Palestine <ExternalLink size={11} className="inline text-stone-400" />
+        </span>
+        <span className="block font-sans text-[11px] text-stone-600 mt-0.5">
+          A legal accountability toolkit for holding individuals, states and corporations accountable under international law.
+        </span>
+      </a>
     </div>
   );
 }

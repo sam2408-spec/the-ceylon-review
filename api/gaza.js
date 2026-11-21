@@ -15,8 +15,9 @@ const GAZA =
 
 const SKIP_LINK = /\/(sport|sports|football|lifeandstyle|culture|film|music|fashion|travel|video)\//i;
 
-const PER_FEED = 5;
-const MAX_ITEMS = 14;
+// At most two headlines per publisher, so no single site fills the column.
+const PER_FEED = 2;
+const MAX_ITEMS = 12;
 
 function decode(text) {
   return text
@@ -74,7 +75,7 @@ export default async function handler(req, res) {
   const items = all
     .sort((a, b) => b.time - a.time)
     .filter((it) => {
-      const key = it.title.toLowerCase();
+      const key = it.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ').slice(0, 8).join(' ');
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
