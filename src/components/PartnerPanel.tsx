@@ -22,11 +22,39 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
     'Hello,\n\nI would like to advertise on The Ceylon Review.\n\nName / organisation:\nWhat you want to promote:\nPreferred dates:\n\nThank you.'
   );
 
+  const onPickFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!/^image\/(jpeg|png|webp)$/.test(file.type)) { setMsg('Please choose a JPG, PNG or WebP picture.'); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const maxW = 800;
+        const scale = Math.min(1, maxW / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        if (!ctx) { setMsg('Could not read the picture.'); return; }
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        setImage(canvas.toDataURL('image/jpeg', 0.82));
+        setMsg('');
+      };
+      img.onerror = () => setMsg('Could not read the picture.');
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const add = async (e: React.FormEvent) => {
     e.preventDefault();
     setMsg('');
     if (!sponsor.trim()) return setMsg('Enter the sponsor name.');
-    if (!/^https:\/\//i.test(image.trim())) return setMsg('Image address must start with https://');
+    if (!image.trim()) return setMsg('Choose a picture or paste an image address.');
+    if (!/^(https:\/\/|data:image\/)/i.test(image.trim())) return setMsg('Image address must start with https://');
     if (!/^https:\/\//i.test(link.trim())) return setMsg('Link must start with https://');
     setBusy(true);
     try {
@@ -136,7 +164,12 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
         <form onSubmit={add} className="mt-4 pt-4 border-t border-stone-200 space-y-2" id="support-admin-form">
           <p className="font-mono text-[10px] uppercase tracking-wider text-[#7a1f2b] font-bold">Editor: add a sponsor</p>
           <input value={sponsor} onChange={(e) => setSponsor(e.target.value)} placeholder="Sponsor name" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
-          <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image address (https://…)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
+          <label className="block text-[11px] text-stone-600">Picture from your computer</label>
+          <input type="file" accept="image/png,image/jpeg,image/webp" onChange={onPickFile} className="w-full text-xs" />
+          {image.startsWith('data:image/') && <img src={image} alt="Preview" className="w-full rounded border border-stone-200" />}
+          {!image.startsWith('data:image/') && (
+            <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="…or paste an image address (https://…)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
+          )}
           <input value={link} onChange={(e) => setLink(e.target.value)} placeholder="Where the ad links to (https://…)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
           <input value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Short caption (optional)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
           <button type="submit" disabled={busy} className="w-full bg-[#7a1f2b] hover:bg-[#5e1620] text-white text-xs font-bold uppercase tracking-widest py-2 rounded cursor-pointer disabled:opacity-60">
