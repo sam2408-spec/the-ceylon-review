@@ -623,6 +623,37 @@ export default function ArticleDetailModal({
                       );
                     }
 
+                    // Flow chart: "FLOWCHART: Title" then one "date — event" per line
+                    if (paragraph.startsWith('FLOWCHART:')) {
+                      const [head, ...rows] = paragraph.split('\n');
+                      const title = head.replace('FLOWCHART:', '').trim();
+                      const steps = rows.filter(Boolean).map((r) => {
+                        const k = r.indexOf(' — ');
+                        return k === -1 ? { date: '', text: r } : { date: r.slice(0, k), text: r.slice(k + 3) };
+                      });
+                      return (
+                        <div key={index} className="my-8 rounded border border-stone-300 bg-[#f8eff1] p-5 md:p-6">
+                          <div className="font-sans font-bold text-sm uppercase tracking-wider text-[#7a1f2b] mb-4">{title}</div>
+                          <ol className="list-none p-0 m-0">
+                            {steps.map((st, si) => (
+                              <li key={si} className="flex flex-col items-center">
+                                <div className="w-full max-w-xl rounded border-l-4 border-[#7a1f2b] bg-white shadow-sm p-4">
+                                  {st.date && <div className="font-mono text-xs font-bold uppercase tracking-wide text-[#7a1f2b] mb-1">{st.date}</div>}
+                                  <div className="text-[15px] leading-snug text-stone-900">{st.text}</div>
+                                </div>
+                                {si < steps.length - 1 && (
+                                  <div aria-hidden="true" className="flex flex-col items-center py-1 text-[#7a1f2b]">
+                                    <div className="w-px h-4 bg-[#7a1f2b]" />
+                                    <div className="text-xs leading-none">▼</div>
+                                  </div>
+                                )}
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                      );
+                    }
+
                     // Closing note and sources: small italic type
                     if (paragraph.startsWith('This article reports')) {
                       return (
