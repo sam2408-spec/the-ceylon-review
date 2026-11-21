@@ -64,6 +64,7 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
     e.preventDefault();
     setMsg('');
     if (!sponsor.trim()) return setMsg('Enter the sponsor name.');
+    if (caption.trim().length > 300) return setMsg(`Caption is ${caption.trim().length} characters. Please keep it to 300 or fewer.`);
     if (!image.trim()) return setMsg('Choose a picture or paste an image address.');
     if (!/^(https:\/\/|data:image\/)/i.test(image.trim())) return setMsg('Image address must start with https://');
     setBusy(true);
@@ -181,7 +182,7 @@ export default function PartnerPanel({ isAdmin = false }: { isAdmin?: boolean })
             <input value={image} onChange={(e) => setImage(e.target.value)} placeholder="…or paste an image address (https://…)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
           )}
           <input value={link} onChange={(e) => setLink(e.target.value)} placeholder="Link (optional), e.g. veridian.lk" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
-          <input value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Short caption (optional)" className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
+          <input value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Short caption (optional, max 300 characters)" maxLength={300} className="w-full border border-stone-300 rounded px-2 py-1.5 text-xs" />
           <button type="submit" disabled={busy} className="w-full bg-[#7a1f2b] hover:bg-[#5e1620] text-white text-xs font-bold uppercase tracking-widest py-2 rounded cursor-pointer disabled:opacity-60">
             {busy ? 'Saving…' : 'Add sponsor'}
           </button>
