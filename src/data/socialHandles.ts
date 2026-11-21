@@ -11,6 +11,7 @@ export const SOCIAL_GROUPS: SocialGroup[] = [
     handles: [
       { handle: 'globalsumudflotilla', name: 'Global Sumud Flotilla' },
       { handle: 'sumudnusantaraofficial', name: 'Sumud Nusantara' },
+      { handle: 'srilanka_globalsumud', name: 'Sri Lanka Global Sumud' },
       { handle: 'freepalestinesl', name: 'FreePalestineSL' },
     ],
   },
