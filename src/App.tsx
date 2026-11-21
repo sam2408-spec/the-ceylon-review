@@ -9,7 +9,7 @@ import WriterProfileView from './components/WriterProfileView';
 import BookmarksDrawer from './components/BookmarksDrawer';
 import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
-import AdPanel from './components/AdPanel';
+import PartnerPanel from './components/PartnerPanel';
 import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
@@ -803,7 +803,7 @@ export default function App() {
                           </div>
                         </div>
 
-                        <AdPanel />
+                        <PartnerPanel />
 
                         {/* 2. GLOBAL DISPATCH & OCCUPIED LANDS SOVEREIGNTY MATRIX */}
                         <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">

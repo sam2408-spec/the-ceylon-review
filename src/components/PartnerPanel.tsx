@@ -3,14 +3,14 @@ import React from 'react';
 const ADVERTISE_EMAIL = 'theceylonreview@proton.me';
 
 // Sidebar advertisement panel with an "Advertise here" button.
-export default function AdPanel() {
+export default function PartnerPanel() {
   const subject = encodeURIComponent('Advertising enquiry - The Ceylon Review');
   const body = encodeURIComponent(
     'Hello,\n\nI would like to advertise on The Ceylon Review.\n\nName / organisation:\nWhat you want to promote:\nPreferred dates:\n\nThank you.'
   );
 
   return (
-    <div className="bg-white border border-stone-300 rounded shadow-lg p-4" id="ad-panel">
+    <div className="bg-white border border-stone-300 rounded shadow-lg p-4" id="support-box">
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-stone-500 mb-3 text-center">
         Advertisement
       </p>
@@ -23,7 +23,7 @@ export default function AdPanel() {
       <a
         href={`mailto:${ADVERTISE_EMAIL}?subject=${subject}&body=${body}`}
         className="mt-4 block text-center bg-[#14264a] hover:bg-[#0c1a36] text-white font-sans text-xs font-bold uppercase tracking-widest py-2.5 rounded transition-colors"
-        id="advertise-here"
+        id="work-with-us"
       >
         Advertise here
       </a>
