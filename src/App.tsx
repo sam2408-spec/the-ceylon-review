@@ -803,7 +803,7 @@ export default function App() {
                           </div>
                         </div>
 
-                        <PartnerPanel />
+                        <PartnerPanel isAdmin={effectiveAdminMode} />
 
                         {/* 2. GLOBAL DISPATCH & OCCUPIED LANDS SOVEREIGNTY MATRIX */}
                         <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">
