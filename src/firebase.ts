@@ -252,7 +252,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods') continue;
-        const flag = 'seeded9:' + art.id;
+        const flag = 'seeded10:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -264,7 +264,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
           // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
           if (art.id === 'art-gaza-floods') {
-            if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('Photo used with permission.'))) {
+            if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('I could only read'))) {
               await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
             }
             try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
@@ -274,7 +274,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
             await setDoc(ref, { ...cur, imageUrl: art.imageUrl });
             cur.imageUrl = art.imageUrl;
           }
-          if ((cur.content?.[0]?.startsWith('On 18 November the United States Justice Department sent') || cur.content?.[0]?.startsWith('On Friday 20 November, after more than four months')) && !cur.content.some(c => c.includes('WHAT HE FUNDED IN GAZA'))) {
+          if (cur.content?.some(c => c.includes('Craig Murray') || c.includes('Fairness requires one more fact') || c.startsWith('On 18 November the United States Justice Department sent') || c.startsWith('On Friday 20 November, after more than four months'))) {
             await setDoc(ref, { ...cur, title: art.title, subtitle: art.subtitle, summary: art.summary, content: art.content });
           }
         }
