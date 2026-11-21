@@ -252,7 +252,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods') continue;
-        const flag = 'seeded10:' + art.id;
+        const flag = 'seeded11:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -274,7 +274,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
             await setDoc(ref, { ...cur, imageUrl: art.imageUrl });
             cur.imageUrl = art.imageUrl;
           }
-          if (cur.content?.some(c => c.includes('Craig Murray') || c.includes('Fairness requires one more fact') || c.startsWith('On 18 November the United States Justice Department sent') || c.startsWith('On Friday 20 November, after more than four months'))) {
+          if (cur.content?.length === 1 && cur.content[0].startsWith('Lost in Translation')) {
             await setDoc(ref, { ...cur, title: art.title, subtitle: art.subtitle, summary: art.summary, content: art.content });
           }
         }
