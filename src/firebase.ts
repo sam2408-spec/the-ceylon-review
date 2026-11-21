@@ -116,6 +116,16 @@ export async function signOutEditor(): Promise<void> {
 }
 
 // Real-time Firestore Subscriptions
+// Covers supplied after the articles were first stored. Applied for every visitor, so the new
+// image shows without anyone having to sign in as editor. A cover the editor has set herself
+// (anything other than the original stock photo) is never touched.
+function withPublishedCovers(a: Article): Article {
+  if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
+    return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
+  }
+  return a;
+}
+
 export function subscribeToArticles(
   onData: (articles: Article[]) => void,
   onError?: (err: Error) => void
@@ -127,7 +137,7 @@ export function subscribeToArticles(
       if (!snapshot.empty) {
         const loaded: Article[] = [];
         snapshot.forEach((d) => {
-          loaded.push(d.data() as Article);
+          loaded.push(withPublishedCovers(d.data() as Article));
         });
         onData(loaded);
       } else {
