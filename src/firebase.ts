@@ -317,3 +317,45 @@ export async function saveEventToFirestore(event: GalleryEvent): Promise<void> {
 export async function deleteEventFromFirestore(id: string): Promise<void> {
   await deleteDoc(doc(db, 'events', id));
 }
+
+
+// ---- Shared video dispatches (visible to every reader, editor-only changes) ----
+export interface SharedVideo {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  platform: 'YouTube' | 'Vimeo' | 'Other';
+  publishedAt: string;
+  likes: number;
+  createdAt: string;
+}
+
+export function subscribeToVideos(
+  onData: (videos: SharedVideo[]) => void,
+  onError?: (err: Error) => void
+) {
+  return onSnapshot(
+    collection(db, 'videos'),
+    (snapshot) => {
+      const loaded = snapshot.docs.map((d) => d.data() as SharedVideo);
+      loaded.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+      onData(loaded);
+    },
+    (error) => {
+      console.warn('Videos could not be loaded:', error);
+      onError?.(error);
+    }
+  );
+}
+
+export async function saveVideoToFirestore(video: SharedVideo): Promise<void> {
+  await Promise.race([
+    setDoc(doc(db, 'videos', video.id), video),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 25000)),
+  ]);
+}
+
+export async function deleteVideoFromFirestore(id: string): Promise<void> {
+  await deleteDoc(doc(db, 'videos', id));
+}

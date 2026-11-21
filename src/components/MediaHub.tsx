@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Video, 
   Image as ImageIcon, 
@@ -20,7 +20,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
-import { subscribeToEvents, saveEventToFirestore, deleteEventFromFirestore } from '../firebase';
+import { subscribeToEvents, saveEventToFirestore, deleteEventFromFirestore, subscribeToVideos, saveVideoToFirestore, deleteVideoFromFirestore } from '../firebase';
 import { compressImage } from '../utils/image';
 
 interface VideoItem {
@@ -175,6 +175,47 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
     return () => unsub();
   }, []);
 
+  // Shared videos stored online so phones and computers show the same list.
+  // The device's own saved list is used only until the first shared one exists.
+  const [cloudVideos, setCloudVideos] = useState<VideoItem[]>([]);
+  const [cloudVideosLoaded, setCloudVideosLoaded] = useState(false);
+  const [videoError, setVideoError] = useState('');
+  const [likeDelta, setLikeDelta] = useState<Record<string, number>>(() => {
+    try { return JSON.parse(localStorage.getItem('ceylon_review_video_likes') || '{}'); } catch { return {}; }
+  });
+  useEffect(() => {
+    const unsub = subscribeToVideos(
+      (list) => { setCloudVideos(list as VideoItem[]); setCloudVideosLoaded(true); },
+      () => setCloudVideosLoaded(true)
+    );
+    return () => unsub();
+  }, []);
+  const usingCloudVideos = cloudVideos.length > 0;
+  const shownVideos: VideoItem[] = usingCloudVideos
+    ? cloudVideos.map(v => ({ ...v, likes: (v.likes || 0) + (likeDelta[v.id] || 0) }))
+    : videos;
+
+  // One-time hand-over: when the editor opens the page and nothing is shared yet,
+  // publish the list this browser already holds so every device shows the same videos.
+  const migratedRef = useRef(false);
+  useEffect(() => {
+    if (!isAdmin || !cloudVideosLoaded || usingCloudVideos || migratedRef.current || videos.length === 0) return;
+    migratedRef.current = true;
+    const base = Date.now();
+    videos.forEach((v, i) => {
+      saveVideoToFirestore({
+        id: v.id,
+        title: v.title,
+        description: v.description || '',
+        videoUrl: v.videoUrl,
+        platform: v.platform,
+        publishedAt: v.publishedAt,
+        likes: v.likes || 0,
+        createdAt: new Date(base + (videos.length - 1 - i)).toISOString(),
+      }).catch((err) => console.warn('Could not share video list yet:', err));
+    });
+  }, [isAdmin, cloudVideosLoaded, usingCloudVideos, videos]);
+
   const shownEvents = cloudEvents.length > 0 ? cloudEvents : events;
   const sets = groupIntoSets(shownEvents);
 
@@ -286,6 +327,14 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
   // Likes Interaction
   const handleLikeVideo = (id: string) => {
+    if (usingCloudVideos) {
+      setLikeDelta(prev => {
+        const next = { ...prev, [id]: (prev[id] || 0) + 1 };
+        try { localStorage.setItem('ceylon_review_video_likes', JSON.stringify(next)); } catch { /* ignore */ }
+        return next;
+      });
+      return;
+    }
     setVideos(prev => 
       prev.map(v => v.id === id ? { ...v, likes: v.likes + 1 } : v)
     );
@@ -318,7 +367,12 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
       likes: 0
     };
 
-    setVideos([newVideo, ...videos]);
+    setVideoError('');
+    saveVideoToFirestore({ ...newVideo, createdAt: new Date().toISOString() }).catch((err) => {
+      console.warn('Video could not be shared:', err);
+      setVideoError('The video was added on this device only. It could not be shared online. Check that you are signed in as editor and that the latest Firestore rules are published.');
+      setVideos(prev => [newVideo, ...prev]);
+    });
     
     // Reset Form
     setVideoTitle('');
@@ -395,6 +449,12 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
 
   // Deletion Handlers
   const handleDeleteVideo = (id: string) => {
+    if (usingCloudVideos) {
+      deleteVideoFromFirestore(id).catch((err) => {
+        console.warn('Video could not be deleted:', err);
+        setVideoError('The video could not be removed. Check that you are signed in as editor.');
+      });
+    }
     setVideos(prev => prev.filter(v => v.id !== id));
   };
 
@@ -472,7 +532,7 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           id="media-tab-videos"
         >
           <Video size={13} />
-          <span>Video Dispatches ({videos.length})</span>
+          <span>Video Dispatches ({shownVideos.length})</span>
         </button>
         <button
           onClick={() => setActiveMediaTab('events')}
@@ -489,6 +549,11 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
       </div>
 
       {/* Notification Success Toast */}
+      {videoError && (
+        <div className="max-w-3xl mx-auto mb-4 bg-amber-50 border border-amber-400 text-amber-900 text-xs font-sans px-4 py-3 rounded" id="video-error-note">
+          {videoError}
+        </div>
+      )}
       {(videoSuccess || eventSuccess) && (
         <div className="bg-[#f8eff1]/80 text-stone-900 border-2 border-[#8a2432] p-4 mb-6 rounded flex items-center justify-between shadow-lg" id="submit-toast-alert">
           <div className="flex items-center gap-2">
@@ -612,13 +677,13 @@ export default function MediaHub({ isAdmin }: MediaHubProps) {
           )}
 
           {/* Video Grid */}
-          {videos.length === 0 ? (
+          {shownVideos.length === 0 ? (
             <div className="text-center py-20 bg-white border-2 border-dashed border-[#7a1f2b]/30 rounded" id="no-videos-box">
               <p className="font-serif text-lg italic text-stone-700">"No broadcasting recordings currently logged in the ledger."</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6" id="video-dispatches-grid">
-              {videos.map(video => {
+              {shownVideos.map(video => {
                 const embedSrc = getEmbedUrl(video.videoUrl, video.platform);
                 return (
                   <div 
