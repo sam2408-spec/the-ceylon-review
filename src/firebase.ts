@@ -247,6 +247,24 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       console.warn('PTA article refresh skipped:', e);
     }
 
+    // One-time add of newer articles: created only when missing, and only once
+    // per browser, so an article the editor later deletes is not brought back.
+    try {
+      for (const art of INITIAL_ARTICLES) {
+        if (art.id !== 'art-fergie-chambers') continue;
+        const flag = 'seeded:' + art.id;
+        let done = false;
+        try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
+        if (done) continue;
+        const ref = doc(db, 'articles', art.id);
+        const snap = await getDocFromServer(ref);
+        if (!snap.exists()) await setDoc(ref, art);
+        try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
+      }
+    } catch (e) {
+      console.warn('New article seeding skipped:', e);
+    }
+
     const writersSnap = await getDocs(query(collection(db, 'writers')));
     if (writersSnap.empty) {
       for (const w of INITIAL_WRITERS) {
