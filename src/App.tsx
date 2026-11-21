@@ -9,7 +9,6 @@ import WriterProfileView from './components/WriterProfileView';
 import BookmarksDrawer from './components/BookmarksDrawer';
 import MediaHub from './components/MediaHub';
 import SovereignEditorialDesk from './components/SovereignEditorialDesk';
-import AdPanel from './components/AdPanel';
 import NewsPortal from './components/NewsPortal';
 import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
 import { Article, Writer, Category } from './types';
@@ -802,8 +801,6 @@ export default function App() {
                             Pitches: <a href="mailto:theceylonreview@proton.me" className="underline text-[#6a1a26] hover:text-stone-900">theceylonreview@proton.me</a>
                           </div>
                         </div>
-
-                        <AdPanel isAdmin={effectiveAdminMode} />
 
                         {/* 2. GLOBAL DISPATCH & OCCUPIED LANDS SOVEREIGNTY MATRIX */}
                         <div className="bg-white border-2 border-[#7a1f2b]/40 p-5 rounded shadow-lg">
