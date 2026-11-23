@@ -8,6 +8,7 @@ export const REGIONS = [
   { id: 'syria', label: 'Syria' },
   { id: 'lebanon', label: 'Lebanon' },
   { id: 'cuba', label: 'Cuba' },
+  { id: 'yemen', label: 'Yemen' },
   { id: 'world', label: 'World' },
 ] as const;
 
@@ -21,6 +22,7 @@ const KEYWORDS: Record<Exclude<RegionId, 'world'>, RegExp> = {
   syria: /\b(syria\w*|damascus|aleppo|idlib)\b/i,
   lebanon: /\b(lebanon|lebanese|beirut|hezbollah)\b/i,
   cuba: /\b(cuba\w*|havana)\b/i,
+  yemen: /\b(yemen\w*|houthi\w*|sanaa|hodeidah|aden)\b/i,
 };
 
 // Fixed tags for the articles published so far; editors can set their own in the Editorial Desk.

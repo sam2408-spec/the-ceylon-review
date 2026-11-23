@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
-import { FLASH_ITEMS, FLASH_MAX_AGE_DAYS } from '../data/flash';
+import { ChevronLeft, ChevronRight, ExternalLink, Pause, Play } from 'lucide-react';
+import { FlashItem, manualFlash } from '../data/flash';
 
 const ROTATE_MS = 7000;
 
-function colomboToday(): string {
-  // en-CA gives YYYY-MM-DD
-  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Colombo' });
-}
-
-function ageInDays(date: string): number {
-  return Math.round((Date.parse(colomboToday()) - Date.parse(date)) / 86400000);
+export function colomboToday(): string {
+  return new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Colombo' }); // YYYY-MM-DD
 }
 
 function niceDate(date: string): string {
@@ -19,15 +14,21 @@ function niceDate(date: string): string {
   });
 }
 
-// Rotating "flash news from Gaza" panel. Moves on by itself, pauses on hover or focus,
-// and has buttons and dots for keyboard and touch use.
-export default function FlashCarousel() {
-  const items = FLASH_ITEMS.filter((i) => ageInDays(i.date) >= 0 && ageInDays(i.date) <= FLASH_MAX_AGE_DAYS);
+interface FlashCarouselProps {
+  items: FlashItem[];
+  tag: string; // small word under "Flash", e.g. "Gaza"
+}
+
+// Rotating flash-news panel. Moves on by itself, pauses on hover or focus, and has buttons
+// and dots for keyboard and touch use. Maroon with white lettering.
+export function FlashPanel({ items, tag }: FlashCarouselProps) {
   const [index, setIndex] = useState(0);
   const [hover, setHover] = useState(false);
   const [paused, setPaused] = useState(false);
   const reduced =
     typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  useEffect(() => { setIndex(0); }, [tag, items.length]);
 
   useEffect(() => {
     if (items.length < 2 || hover || paused || reduced) return;
@@ -42,7 +43,7 @@ export default function FlashCarousel() {
 
   return (
     <section
-      aria-label="Flash news from Gaza"
+      aria-label={`Flash news: ${tag}`}
       className="border-2 border-[#5e1620] bg-[#7a1f2b] text-white rounded shadow-sm overflow-hidden"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -55,15 +56,21 @@ export default function FlashCarousel() {
           <span className="font-mono text-[10px] font-black tracking-[0.2em] uppercase flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Flash
           </span>
-          <span className="font-mono text-[9px] tracking-widest uppercase opacity-90 mt-0.5">Gaza</span>
+          <span className="font-mono text-[9px] tracking-widest uppercase opacity-90 mt-0.5">{tag}</span>
         </div>
 
         <div className="flex-1 px-4 py-3 min-h-[92px]" aria-live={hover || paused ? 'polite' : 'off'}>
           <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white/85">
-            {item.label} · {niceDate(item.date)}
+            {item.label}
           </p>
-          <p key={i} className="font-serif text-base sm:text-lg font-bold leading-snug text-white mt-1 animate-[fadein_.6s_ease]">
-            {item.text}
+          <p key={`${tag}-${i}`} className="font-serif text-base sm:text-lg font-bold leading-snug text-white mt-1 animate-[fadein_.6s_ease]">
+            {item.link ? (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                {item.text} <ExternalLink size={12} className="inline opacity-70" />
+              </a>
+            ) : (
+              item.text
+            )}
           </p>
         </div>
 
@@ -75,7 +82,7 @@ export default function FlashCarousel() {
               <button type="button" onClick={() => go(1)} aria-label="Next flash" className="p-1 rounded hover:bg-white/15 cursor-pointer text-white"><ChevronRight size={16} /></button>
             </div>
             <div className="flex items-center gap-1" role="tablist" aria-label="Flash items">
-              {items.map((_, n) => (
+              {items.slice(0, 12).map((_, n) => (
                 <button
                   key={n}
                   type="button"
@@ -92,4 +99,10 @@ export default function FlashCarousel() {
       </div>
     </section>
   );
+}
+
+// Front page: the typed-in Gaza flashes.
+export default function FlashCarousel() {
+  const items = manualFlash('palestine', colomboToday());
+  return <FlashPanel items={items} tag="Gaza" />;
 }

@@ -2,6 +2,8 @@
 // Newest first. Update this list each day; only items whose date is today or within
 // FLASH_MAX_AGE_DAYS are shown, so old flashes drop off by themselves.
 export interface FlashItem {
+  region?: string; // region tab id; defaults to 'palestine'
+  link?: string; // opens the original report
   date: string; // YYYY-MM-DD (Sri Lanka date)
   label: string; // heading shown on the card
   text: string;
@@ -28,3 +30,13 @@ export const FLASH_ITEMS: FlashItem[] = [
     text: 'One Palestinian was injured by Israeli army gunfire near the Asdaa City area, northwest of Khan Younis.',
   },
 ];
+
+// Items typed in above for a region (default: Palestine), still within their date window.
+export function manualFlash(region: string, today: string): FlashItem[] {
+  const dayMs = 86400000;
+  return FLASH_ITEMS.filter((i) => {
+    if ((i.region || 'palestine') !== region) return false;
+    const age = Math.round((Date.parse(today) - Date.parse(i.date)) / dayMs);
+    return age >= 0 && age <= FLASH_MAX_AGE_DAYS;
+  });
+}

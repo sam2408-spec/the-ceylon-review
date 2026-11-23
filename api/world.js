@@ -13,6 +13,7 @@ const REGIONS = {
   syria: GOOGLE('Syria OR Damascus'),
   lebanon: GOOGLE('Lebanon OR Beirut'),
   cuba: GOOGLE('Cuba OR Havana'),
+  yemen: GOOGLE('Yemen OR Sanaa OR Houthi OR Hodeidah'),
 };
 
 const WORLD_FEEDS = [

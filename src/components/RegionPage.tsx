@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Article } from '../types';
 import { REGIONS, articleRegions } from '../data/regions';
+import { FlashPanel, colomboToday } from './FlashCarousel';
+import { manualFlash, FlashItem } from '../data/flash';
 
 interface Headline { title: string; link: string; source: string; publishedAt: string | null }
 
@@ -45,6 +47,16 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
   }, [regionId]);
 
   if (!region) return null;
+  // Flash carousel: items typed in for this region first, then the newest live headlines.
+  const flashItems: FlashItem[] = [
+    ...manualFlash(regionId, colomboToday()),
+    ...headlines.slice(0, 8).map((h) => ({
+      date: colomboToday(),
+      label: `${h.source}${h.publishedAt ? ` · ${ago(h.publishedAt)}` : ''}`,
+      text: h.title,
+      link: h.link,
+    })),
+  ];
   const mine = articles.filter((a) => regionId === 'world' || articleRegions(a).includes(regionId as never));
   const ours = regionId === 'world' ? articles.filter((a) => articleRegions(a).includes('world' as never)) : mine;
 
@@ -56,6 +68,12 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
           {regionId === 'world' ? 'The world news column' : `Our reporting and the latest news from ${region.label}`}
         </p>
       </div>
+
+      {flashItems.length > 0 && (
+        <div className="mb-8">
+          <FlashPanel items={flashItems} tag={region.label} />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <section className="lg:col-span-8" aria-label={`${region.label} reporting`}>
