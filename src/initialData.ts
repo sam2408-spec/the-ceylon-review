@@ -45,7 +45,7 @@ export const INITIAL_ARTICLES: Article[] = [
       "The organisers thank Sameera Mahboobdeen for guiding the session with care, The Fearless Space for hosting, and everyone who attended.",
       "This article reports an event held on 22 November 2026, as described by its organisers, and published figures from the sources named. Sources: The Sunflower Circle, account of the fundraiser at The Fearless Space (22 November 2026); OCHA oPt, “Humanitarian Situation Report: Heavy Rains in the Gaza Strip” (8 November 2026)."
 ],
-    authorId: 'w-sameera',
+    authorId: 'w-1795423643302',
     publishedAt: 'November 23, 2026',
     category: 'Community',
     imageUrl: '/images/fundraiser/table-from-above.jpg',

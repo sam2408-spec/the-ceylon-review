@@ -123,6 +123,9 @@ function withPublishedCovers(a: Article): Article {
   if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
     return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
   }
+  if (a.id === 'art-sunflower-circle-fundraiser' && a.authorId === 'w-sameera') {
+    a = { ...a, authorId: 'w-1795423643302' };
+  }
   if (a.id === 'art-sunflower-circle-fundraiser' && !a.content?.some((c) => c.includes('images/fundraiser/session-under-way'))) {
     const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
     if (fresh) return { ...a, imageUrl: fresh.imageUrl, content: fresh.content };
@@ -282,7 +285,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser') continue;
-        const flag = 'seeded17:' + art.id;
+        const flag = 'seeded18:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -294,6 +297,10 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
           // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
           if (art.id === 'art-sunflower-circle-fundraiser') {
+            if (cur.authorId === 'w-sameera') {
+              await setDoc(ref, { ...cur, authorId: art.authorId });
+              cur.authorId = art.authorId;
+            }
             if (!cur.content?.some(c => c.includes('images/fundraiser/session-under-way'))) {
               await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
             }
