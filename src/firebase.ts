@@ -282,7 +282,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser') continue;
-        const flag = 'seeded16:' + art.id;
+        const flag = 'seeded17:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -301,6 +301,19 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
             continue;
           }
           if (art.id === 'art-gaza-floods') {
+            // Targeted corrections that keep any other edits made in the Editorial Desk.
+            if (cur.content?.some(c => c.includes('All agree on five deaths at the sandbank collapse.') && !c.includes('took place on Sunday 8 November')) || cur.content?.some(c => c.includes('Al Jazeera reports.'))) {
+              const fresh = art.content.find(c => c.includes('All agree on five deaths at the sandbank collapse.'));
+              const freshSrc = art.content.find(c => c.startsWith('This article reports'));
+              const next = cur.content.map(c => {
+                if (c.includes('All agree on five deaths at the sandbank collapse.') && !c.includes('took place on Sunday 8 November') && fresh) return fresh;
+                if (c.includes('Al Jazeera reports.')) return c.replace('Al Jazeera reports.', 'it is reported.');
+                if (c.startsWith('This article reports') && !c.includes('Euronews') && freshSrc) return freshSrc;
+                return c;
+              });
+              await setDoc(ref, { ...cur, content: next });
+              cur.content = next;
+            }
             if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('I could only read') || c.includes('(Al Jazeera)') || c.includes('LEGISLATIVE TIMELINE: THE FIRST') || c.startsWith('TIMELINE: THE FIRST'))) {
               await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
             }
