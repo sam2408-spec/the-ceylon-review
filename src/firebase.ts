@@ -155,6 +155,9 @@ function applyRevision(a: Article): Article {
 
 function withPublishedCovers(a: Article): Article {
   a = applyRevision(a);
+  if (a.id === 'art-rohingya-genocide-icj' && !a.imageUrl) {
+    a = { ...a, imageUrl: '/images/rohingya-judgment-cover.jpg' };
+  }
   if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
     return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
   }

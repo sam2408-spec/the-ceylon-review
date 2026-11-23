@@ -17,6 +17,7 @@ const DEFAULT_IMAGE = SITE + '/icon-512.png';
 const COVER_OVERRIDES = {
   'art-manufactured-silence': '/images/hasbara-flag.jpg',
   'art-colonial-law': '/images/psta-protest-parliament.jpg',
+  'art-rohingya-genocide-icj': '/images/rohingya-judgment-cover.jpg',
 };
 
 const esc = (s) =>

@@ -384,7 +384,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: "w-sameera",
     publishedAt: "November 23, 2026",
     category: "International Law",
-    imageUrl: "",
+    imageUrl: "/images/rohingya-judgment-cover.jpg",
     readTime: "8 min read",
     isCurrent: true,
     isFeatured: false,
