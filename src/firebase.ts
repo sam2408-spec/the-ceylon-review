@@ -130,11 +130,20 @@ function withPublishedCovers(a: Article): Article {
     const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
     if (fresh) return { ...a, imageUrl: fresh.imageUrl, content: fresh.content };
   }
-  if (a.id === 'art-saleh-aljafarawi' && a.content?.some((c) => c.startsWith('The Gaza Government Media Office is part of the administration'))) {
-    const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id)?.content.find((c) => c.startsWith('Whichever count is used'));
-    if (fresh) {
-      a = { ...a, content: a.content.map((c) => (c.startsWith('The Gaza Government Media Office is part of the administration') ? fresh : c)) };
-    }
+  if (a.id === 'art-saleh-aljafarawi' && a.content?.some((c) => c.includes('Hamas') || c.startsWith('The Gaza Government Media Office is part of the administration'))) {
+    // Replace earlier wording of specific paragraphs with the current text (matched by opening words).
+    const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id)?.content ?? [];
+    a = {
+      ...a,
+      content: a.content.map((c) => {
+        const old = c.includes('Hamas') || c.startsWith('The Gaza Government Media Office is part of the administration');
+        if (!old) return c;
+        if (c.startsWith('The Gaza Government Media Office is part of the administration')) {
+          return fresh.find((f) => f.startsWith('Whichever count is used')) ?? c;
+        }
+        return fresh.find((f) => f.slice(0, 30) === c.slice(0, 30)) ?? c;
+      }),
+    };
   }
   if (a.id === 'art-saleh-aljafarawi' && !a.imageUrl) {
     const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
@@ -305,7 +314,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi') continue;
-        const flag = 'seeded20:' + art.id;
+        const flag = 'seeded21:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
