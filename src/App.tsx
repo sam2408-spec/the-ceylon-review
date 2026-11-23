@@ -1747,6 +1747,9 @@ export default function App() {
             <a href="mailto:theceylonreview@proton.me" className="underline text-stone-900 font-bold hover:text-white/80">theceylonreview@proton.me</a>
           </div>
 
+          <p id="funding-disclaimer" className="text-[11px] font-mono text-white/75 max-w-2xl mx-auto leading-relaxed italic">
+            Funding disclaimer: The Ceylon Review is not funded by any individual or organisation other than its founder, Sameera Mahboobdeen.          </p>
+
           <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-white/70">
             <span>© 2026 THE CEYLON REVIEW PRINT & INTERACTIVE REPRODUCTIONS INC. ALL RIGHTS PRESERVED.</span>
             <span className="flex flex-wrap justify-center gap-4 items-center">
