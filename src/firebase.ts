@@ -123,6 +123,10 @@ function withPublishedCovers(a: Article): Article {
   if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
     return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
   }
+  if (a.id === 'art-sunflower-circle-fundraiser' && !a.content?.some((c) => c.includes('images/fundraiser'))) {
+    const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
+    if (fresh) return { ...a, imageUrl: fresh.imageUrl, content: fresh.content };
+  }
   if (a.id === 'art-colonial-law') {
     let out = a;
     const marker = '[[image:/images/psta-protest-parliament.jpg|A march near Parliament in Colombo on 4 November 2026. One placard reads “PSTA: Military Given Police Power.”]]';
@@ -278,7 +282,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser') continue;
-        const flag = 'seeded14:' + art.id;
+        const flag = 'seeded15:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -289,6 +293,13 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
         } else {
           // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
+          if (art.id === 'art-sunflower-circle-fundraiser') {
+            if (!cur.content?.some(c => c.includes('images/fundraiser'))) {
+              await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
+            }
+            try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
+            continue;
+          }
           if (art.id === 'art-gaza-floods') {
             if (!cur.content?.some(c => c.startsWith('[[image:')) || cur.content.some(c => c.includes('I could only read') || c.includes('(Al Jazeera)') || c.includes('LEGISLATIVE TIMELINE: THE FIRST') || c.startsWith('TIMELINE: THE FIRST'))) {
               await setDoc(ref, { ...cur, imageUrl: art.imageUrl, content: art.content });
