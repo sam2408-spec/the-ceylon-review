@@ -59,13 +59,14 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
   ];
   const mine = articles.filter((a) => regionId === 'world' || articleRegions(a).includes(regionId as never));
   const ours = regionId === 'world' ? articles.filter((a) => articleRegions(a).includes('world' as never)) : mine;
+  const hasOurs = ours.length > 0;
 
   return (
     <div className="max-w-7xl mx-auto px-4 mt-8" id={`viewport-region-${regionId}`}>
       <div className="border-b-2 border-[#7a1f2b] pb-3 mb-6">
         <h2 className="font-serif text-3xl md:text-4xl font-black text-[#14264a]">{region.label}</h2>
         <p className="font-mono text-[11px] uppercase tracking-widest text-stone-600 mt-1">
-          {regionId === 'world' ? 'The world news column' : `Our reporting and the latest news from ${region.label}`}
+          {regionId === 'world' ? 'The world news column' : `Latest news in ${region.label}`}
         </p>
       </div>
 
@@ -75,16 +76,12 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <section className="lg:col-span-8" aria-label={`${region.label} reporting`}>
-          <h3 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-[#7a1f2b] mb-4">
-            From The Ceylon Review
-          </h3>
-          {ours.length === 0 ? (
-            <p className="font-serif italic text-stone-700 border border-dashed border-[#7a1f2b]/35 rounded p-6 bg-white">
-              No Ceylon Review reporting from {region.label} has been published yet. The latest headlines are listed alongside.
-            </p>
-          ) : (
+      <div className={hasOurs ? 'grid grid-cols-1 lg:grid-cols-12 gap-8' : ''}>
+        {hasOurs && (
+          <section className="lg:col-span-8" aria-label={`${region.label} features and analysis`}>
+            <h3 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-[#7a1f2b] mb-4">
+              Features and analysis from The Ceylon Review
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {ours.map((a) => (
                 <button
@@ -105,19 +102,19 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
                 </button>
               ))}
             </div>
-          )}
-        </section>
+          </section>
+        )}
 
-        <aside className="lg:col-span-4 lg:border-l-2 lg:border-[#7a1f2b]/30 lg:pl-8" aria-label={`${region.label} headlines`}>
+        <aside className={hasOurs ? 'lg:col-span-4 lg:border-l-2 lg:border-[#7a1f2b]/30 lg:pl-8' : ''} aria-label={`${region.label} headlines`}>
           <h3 className="font-mono text-xs font-black uppercase tracking-[0.2em] text-[#7a1f2b] mb-4">
-            {regionId === 'world' ? 'World headlines' : `Latest from ${region.label}`}
+            {regionId === 'world' ? 'World headlines' : `Latest news in ${region.label}`}
           </h3>
           {state === 'loading' && <p className="font-mono text-xs text-stone-500">Loading headlines…</p>}
           {state === 'error' && <p className="font-mono text-xs text-stone-500">Headlines are unavailable right now. Please try again shortly.</p>}
           {state === 'ok' && headlines.length === 0 && <p className="font-mono text-xs text-stone-500">No headlines found right now.</p>}
-          <ul className="divide-y divide-stone-200">
+          <ul className={`divide-y divide-stone-200 ${hasOurs ? '' : 'md:grid md:grid-cols-2 md:gap-x-10 md:divide-y-0'}`}>
             {headlines.map((h, i) => (
-              <li key={i} className="py-3">
+              <li key={i} className={`py-3 ${hasOurs ? '' : 'md:border-b md:border-stone-200'}`}>
                 <a href={h.link} target="_blank" rel="noopener noreferrer" className="block group">
                   <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#7a1f2b]">
                     {h.source}{h.publishedAt ? ` · ${ago(h.publishedAt)}` : ''}

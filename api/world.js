@@ -24,6 +24,9 @@ const WORLD_FEEDS = [
   { source: 'UN News', url: 'https://news.un.org/feed/subscribe/en/news/all/rss.xml' },
 ];
 
+// This is an English-language site: skip headlines and outlets written in other scripts.
+const NON_LATIN = /[\u0370-\u1FFF\u2E80-\uFFEF]/;
+
 const SKIP_LINK = /\/(sport|sports|football|lifeandstyle|culture|film|music|fashion|travel|video)\//i;
 
 function decode(text) {
@@ -56,6 +59,7 @@ export function parseFeed(xml, fallbackSource, limit) {
     if (source && title.endsWith(' - ' + source)) title = title.slice(0, -(source.length + 3));
     const time = Date.parse(pick(block, 'pubDate') || pick(block, 'dc:date')) || 0;
     if (!title || !/^https?:\/\//.test(link) || SKIP_LINK.test(link)) continue;
+    if (NON_LATIN.test(title) || NON_LATIN.test(source)) continue;
     items.push({ title, link, source, time });
   }
   return items.sort((a, b) => b.time - a.time).slice(0, limit);
