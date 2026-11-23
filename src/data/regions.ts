@@ -27,6 +27,7 @@ const KEYWORDS: Record<Exclude<RegionId, 'world'>, RegExp> = {
 const KNOWN: Record<string, RegionId[]> = {
   'art-fergie-chambers': ['palestine'],
   'art-gaza-floods': ['palestine'],
+  'art-saleh-aljafarawi': ['palestine'],
   'art-manufactured-silence': ['palestine'],
   'art-colonial-law': ['sri-lanka'],
   'art-sunflower-circle-fundraiser': ['sri-lanka', 'palestine'],
