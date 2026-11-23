@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Tabs from './components/Tabs';
 import SearchBar from './components/SearchBar';
@@ -344,17 +344,19 @@ export default function App() {
     };
   }, []);
 
-  // Handle URL article parameters for deep linking
+  // Handle URL article parameters for deep linking. Runs whenever the article list
+  // changes until the linked article is found (the list loads after first render).
+  const deepLinkOpened = useRef(false);
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const paramArticleId = params.get('article');
-    if (paramArticleId) {
-      const art = articles.find(a => a.id === paramArticleId);
-      if (art) {
-        setSelectedArticle(art);
-      }
+    if (deepLinkOpened.current) return;
+    const paramArticleId = new URLSearchParams(window.location.search).get('article');
+    if (!paramArticleId) { deepLinkOpened.current = true; return; }
+    const art = articles.find(a => a.id === paramArticleId);
+    if (art) {
+      deepLinkOpened.current = true;
+      setSelectedArticle(art);
     }
-  }, []);
+  }, [articles]);
 
   // --- Article Interaction Handlers ---
   const handleToggleBookmark = (e: React.MouseEvent | undefined, articleId: string) => {

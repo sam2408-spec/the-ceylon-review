@@ -108,9 +108,29 @@ export default function ArticleDetailModal({
   const handleShare = () => {
     const currentUrl = window.location.href.split('?')[0];
     const shareableLink = `${currentUrl}?article=${article.id}`;
-    navigator.clipboard.writeText(shareableLink);
-    setSharedToast(true);
-    setTimeout(() => setSharedToast(false), 2500);
+    const done = () => {
+      setSharedToast(true);
+      setTimeout(() => setSharedToast(false), 2500);
+    };
+    const fallback = () => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = shareableLink;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) done(); else window.prompt('Copy this link:', shareableLink);
+      } catch {
+        window.prompt('Copy this link:', shareableLink);
+      }
+    };
+    try {
+      if (navigator.clipboard?.writeText) navigator.clipboard.writeText(shareableLink).then(done, fallback);
+      else fallback();
+    } catch { fallback(); }
   };
 
   const handleSubmitComment = (e: React.FormEvent) => {
