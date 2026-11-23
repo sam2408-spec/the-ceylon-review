@@ -1,8 +1,8 @@
 import { Article } from '../types';
 
 export const REGIONS = [
-  { id: 'palestine', label: 'Palestine' },
   { id: 'sri-lanka', label: 'Sri Lanka' },
+  { id: 'palestine', label: 'Palestine' },
   { id: 'sudan', label: 'Sudan' },
   { id: 'congo', label: 'Congo' },
   { id: 'syria', label: 'Syria' },
