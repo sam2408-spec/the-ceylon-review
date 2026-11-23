@@ -1738,9 +1738,6 @@ export default function App() {
       <footer className="bg-[#14264a] text-white border-t-4 border-[#7a1f2b] py-12 select-all" id="newspaper-footer">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
           <h2 className="font-serif text-3xl font-black tracking-widest text-white uppercase">THE CEYLON REVIEW</h2>
-          <p className="text-[11px] font-mono text-white/70 tracking-[0.25em] max-w-2xl mx-auto leading-normal uppercase">
-            INDEPENDENT JOURNALISM • ANALYTICAL JURISPRUDENCE • COMMITTED TO ABSOLUTE TRUTH & SOVEREIGN PEOPLES
-          </p>
           
           <div className="bg-white/10 border border-white/15 p-3 max-w-lg mx-auto rounded text-xs font-mono text-center flex flex-col sm:flex-row items-center justify-center gap-2">
             <span className="text-white/80">Contact and column pitches:</span>
