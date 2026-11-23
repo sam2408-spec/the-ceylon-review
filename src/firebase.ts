@@ -130,6 +130,10 @@ function withPublishedCovers(a: Article): Article {
     const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
     if (fresh) return { ...a, imageUrl: fresh.imageUrl, content: fresh.content };
   }
+  if (a.id === 'art-saleh-aljafarawi' && !a.imageUrl) {
+    const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
+    if (fresh?.imageUrl) return { ...a, imageUrl: fresh.imageUrl };
+  }
   if (a.id === 'art-colonial-law') {
     let out = a;
     const marker = '[[image:/images/psta-protest-parliament.jpg|A march near Parliament in Colombo on 4 November 2026. One placard reads “PSTA: Military Given Police Power.”]]';
@@ -295,7 +299,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi') continue;
-        const flag = 'seeded18:' + art.id;
+        const flag = 'seeded19:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
@@ -306,6 +310,12 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
         } else {
           // Replace the first draft only (Chambers article); later edits in the Editorial Desk are kept.
           const cur = snap.data() as Article;
+          if (art.id === 'art-saleh-aljafarawi') {
+            const next = withPublishedCovers(cur);
+            if (next !== cur) await setDoc(ref, next);
+            try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
+            continue;
+          }
           if (art.id === 'art-sunflower-circle-fundraiser') {
             if (cur.authorId === 'w-sameera') {
               await setDoc(ref, { ...cur, authorId: art.authorId });

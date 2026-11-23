@@ -49,7 +49,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: 'w-sameera',
     publishedAt: 'November 23, 2026',
     category: 'Human Rights',
-    imageUrl: '',
+    imageUrl: '/images/saleh-aljafarawi-tribute.jpg',
     readTime: '5 min read',
     isCurrent: true,
     isFeatured: false,
