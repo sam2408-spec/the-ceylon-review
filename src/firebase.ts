@@ -145,6 +145,15 @@ function withPublishedCovers(a: Article): Article {
       }),
     };
   }
+  if (a.id === 'art-saleh-aljafarawi' && !a.content?.some((c) => c.includes('Palestinian resistance'))) {
+    const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id)?.content.find((c) => c.includes('Palestinian resistance'));
+    const i = a.content.findIndex((c) => c.startsWith('For the families of those killed'));
+    if (fresh && i >= 0) {
+      const content = [...a.content];
+      content.splice(i, 0, fresh);
+      a = { ...a, content };
+    }
+  }
   if (a.id === 'art-saleh-aljafarawi' && !a.imageUrl) {
     const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
     if (fresh?.imageUrl) return { ...a, imageUrl: fresh.imageUrl };
@@ -314,7 +323,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     try {
       for (const art of INITIAL_ARTICLES) {
         if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi') continue;
-        const flag = 'seeded21:' + art.id;
+        const flag = 'seeded22:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
         if (done) continue;
