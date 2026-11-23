@@ -119,7 +119,40 @@ export async function signOutEditor(): Promise<void> {
 // Covers supplied after the articles were first stored. Applied for every visitor, so the new
 // image shows without anyone having to sign in as editor. A cover the editor has set herself
 // (anything other than the original stock photo) is never touched.
+// Legal-review revisions (23 Nov 2026). Applied whenever a stored copy still carries wording that
+// was removed; once the editor saves or the seed writes the revised text, the marker is gone and
+// later edits in the Editorial Desk are left alone.
+const REVISION_MARKERS: Record<string, string[]> = {
+  'art-manufactured-silence': ['Hamas is ISIS', 'online hate campaigns', 'None of this is conspiracy'],
+  'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
+  'art-gaza-floods': ['run by Hamas', 'blames Hamas'],
+  'art-saleh-aljafarawi': ['Many reports say he was shot', 'Wikipedia (biographical'],
+  'art-sovereign-debt-default': ['K. Ratnayake', 'SC/FR 212/2022'],
+  'art-galle-face-precedents': ['Section 77 of the Police Ordinance'],
+  'art-surveillance-shadows': ['Telecommunications Regulatory Commission Act'],
+};
+function applyRevision(a: Article): Article {
+  const markers = REVISION_MARKERS[a.id];
+  if (!markers) return a;
+  const stored = JSON.stringify(a);
+  if (!markers.some((m) => stored.includes(m))) return a;
+  const fresh = INITIAL_ARTICLES.find((x) => x.id === a.id);
+  if (!fresh) return a;
+  return {
+    ...a,
+    title: fresh.title,
+    subtitle: fresh.subtitle,
+    summary: fresh.summary,
+    content: fresh.content,
+    publishedAt: fresh.publishedAt,
+    likes: fresh.likes,
+    views: fresh.views,
+    comments: fresh.comments,
+  };
+}
+
 function withPublishedCovers(a: Article): Article {
+  a = applyRevision(a);
   if (a.id === 'art-manufactured-silence' && a.imageUrl?.includes('images.unsplash.com')) {
     return { ...a, imageUrl: '/images/hasbara-flag.jpg' };
   }
@@ -224,7 +257,18 @@ export function subscribeToWriters(
       if (!snapshot.empty) {
         const loaded: Writer[] = [];
         snapshot.forEach((d) => {
-          loaded.push(d.data() as Writer);
+          const w = d.data() as Writer;
+          // Placeholder contact details and stock photo that were never the editor's own.
+          if (w.id === 'w-sameera') {
+            loaded.push({
+              ...w,
+              email: w.email === 'sameera.m@ceylonreview.com' ? 'theceylonreview@proton.me' : w.email,
+              twitter: w.twitter === '@sameera_mahb' ? '' : w.twitter,
+              avatarUrl: w.avatarUrl?.includes('photo-1534528741775') ? '' : w.avatarUrl,
+            });
+          } else {
+            loaded.push(w);
+          }
         });
         onData(loaded);
       } else {
@@ -316,6 +360,27 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       }
     } catch (e) {
       console.warn('PTA article refresh skipped:', e);
+    }
+
+    // Write the legal-review revisions back to Firestore (once per browser, editor only).
+    try {
+      for (const art of INITIAL_ARTICLES) {
+        if (!REVISION_MARKERS[art.id]) continue;
+        const flag = 'rev23:' + art.id;
+        let done = false;
+        try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
+        if (done) continue;
+        const ref = doc(db, 'articles', art.id);
+        const snap = await getDocFromServer(ref);
+        if (snap.exists()) {
+          const cur = snap.data() as Article;
+          const next = applyRevision(cur);
+          if (next !== cur) await setDoc(ref, next);
+        }
+        try { localStorage.setItem(flag, '1'); } catch { /* ignore */ }
+      }
+    } catch (e) {
+      console.warn('Revision write-back skipped:', e);
     }
 
     // One-time add of newer articles: created only when missing, and only once

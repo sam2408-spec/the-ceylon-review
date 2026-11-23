@@ -1455,8 +1455,6 @@ export default function App() {
                     <span>Effective Date: June 2026</span>
                     <span>•</span>
                     <span>Document Reference: SRD-2026-V1</span>
-                    <span>•</span>
-                    <span>Endorsed by the Sovereign Editorial Council</span>
                   </div>
                 </div>
 
@@ -1469,10 +1467,10 @@ export default function App() {
                       1. Constitutional Authority & Scope
                     </h4>
                     <p>
-                      This Regulatory Directive is issued by the Sovereign Editorial Council of The Ceylon Review. It outlines the regulatory obligations, constitutional references, and civil accountability metrics under which this publication exercises its journalism.
+                      This Regulatory Directive is issued by the editor of The Ceylon Review. It outlines the regulatory obligations, constitutional references, and civil accountability metrics under which this publication exercises its journalism.
                     </p>
                     <p>
-                      The Ceylon Review operates in absolute compliance with Section 14(1)(a) of the Constitution of the Democratic Socialist Republic of Sri Lanka, which secures the freedom of speech, expression, and publication. We reject any administrative pre-censorship or unconstitutional licensing regimes that impair the public's inherent right to access clean, uncorrupted, and critical information.
+                      The Ceylon Review exercises the freedom of speech, expression and publication secured by Article 14(1)(a) of the Constitution of the Democratic Socialist Republic of Sri Lanka. We reject any administrative pre-censorship or unconstitutional licensing regimes that impair the public's inherent right to access clean, uncorrupted, and critical information.
                     </p>
                   </div>
 
@@ -1490,7 +1488,7 @@ export default function App() {
                           2.1 Verification & Cross-Referencing
                         </h5>
                         <p>
-                          No serious allegation of state corruption, legislative malpractice, or structural human rights abuse shall be broadcast without meticulous cross-referencing against primary sources, including judicial dockets, parliamentary registers, and certified archives.
+                          Serious allegations of state corruption, legislative malpractice, or structural human rights abuse are published only after cross-referencing against primary or published sources, and are attributed to those sources.
                         </p>
                       </div>
                       <div className="space-y-2">
@@ -1521,7 +1519,7 @@ export default function App() {
 
                 {/* Footer Signature Block */}
                 <div className="mt-12 pt-6 border-t-2 border-dashed border-[#7a1f2b]/30 text-center font-mono">
-                  <p className="text-xs text-stone-500">This directive is issued under the authority of the Sovereign Editorial Council.</p>
+                  <p className="text-xs text-stone-500">This directive is issued under the authority of the Founder and Chief Editor.</p>
                   <p className="font-serif text-lg font-black text-[#7a1f2b] mt-2">{editorName} — Founder & Chief Editor</p>
                   <p className="text-[10px] text-stone-500 mt-1">The Ceylon Review | June 2026</p>
                   <div className="w-12 h-[2px] bg-[#7a1f2b] mx-auto mt-4" />
@@ -1603,7 +1601,7 @@ export default function App() {
                       EDITORIAL INDEPENDENCE
                     </h4>
                     <p className="text-justify">
-                      The Ceylon Review operates as a fully independent media outlet. We are not affiliated with, funded by, or editorially influenced by any government, political party, corporate entity, religious institution, or foreign organization. All editorial decisions are made independently in the public interest.
+                      The Ceylon Review operates as a fully independent media outlet. The Ceylon Review is owned and funded solely by its founder. It is not the organ of any government, political party, corporate entity, religious institution, or foreign organization. All editorial decisions are made independently in the public interest.
                     </p>
                   </div>
 
@@ -1748,7 +1746,7 @@ export default function App() {
             Funding and ownership: The Ceylon Review is an independent page for global and local news. It is not funded by any individual or organisation, and is solely owned by its founder, Sameera Mahboobdeen.          </p>
 
           <div className="pt-6 border-t border-white/15 flex flex-col sm:flex-row justify-between items-center gap-3 text-[10px] font-mono text-white/70">
-            <span>© 2026 THE CEYLON REVIEW PRINT & INTERACTIVE REPRODUCTIONS INC. ALL RIGHTS PRESERVED.</span>
+            <span>© 2026 THE CEYLON REVIEW. ALL RIGHTS RESERVED.</span>
             <span className="flex flex-wrap justify-center gap-4 items-center">
               <span onClick={() => handleTabChange('about')} className="hover:text-white cursor-pointer hover:underline">ABOUT & CORRECTIONS</span>
               <span onClick={() => handleTabChange('directive')} className="hover:text-white cursor-pointer hover:underline">REGULATORY DIRECTIVE</span>
