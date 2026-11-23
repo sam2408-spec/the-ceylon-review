@@ -33,7 +33,7 @@ service cloud.firestore {
 
     function isValidArticle(data) {
       return data.keys().hasAll(['id', 'title', 'content', 'authorId', 'publishedAt', 'category']) &&
-        data.keys().hasOnly(['id', 'title', 'subtitle', 'summary', 'content', 'authorId', 'publishedAt', 'category', 'imageUrl', 'readTime', 'isCurrent', 'isFeatured', 'likes', 'views', 'comments']) &&
+        data.keys().hasOnly(['id', 'title', 'subtitle', 'summary', 'content', 'authorId', 'publishedAt', 'category', 'imageUrl', 'readTime', 'isCurrent', 'isFeatured', 'likes', 'views', 'comments', 'regions']) &&
         data.id is string && data.id.size() > 0 && data.id.size() <= 128 &&
         data.title is string && data.title.size() > 0 && data.title.size() <= 500 &&
         (!('subtitle' in data) || (data.subtitle is string && data.subtitle.size() <= 1000)) &&
@@ -46,6 +46,7 @@ service cloud.firestore {
         (!('readTime' in data) || (data.readTime is string && data.readTime.size() <= 64)) &&
         (!('isCurrent' in data) || data.isCurrent is bool) &&
         (!('isFeatured' in data) || data.isFeatured is bool) &&
+        (!('regions' in data) || (data.regions is list && data.regions.size() <= 10)) &&
         (!('likes' in data) || data.likes is number) &&
         (!('views' in data) || data.views is number) &&
         (!('comments' in data) || (data.comments is list && data.comments.size() <= 500));

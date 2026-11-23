@@ -28,6 +28,7 @@ export interface Article {
   authorId: string;
   publishedAt: string; // e.g., "2026-06-20" or custom format
   category: Category;
+  regions?: string[]; // e.g. ['palestine', 'sri-lanka']; see src/data/regions.ts
   imageUrl: string;
   readTime: string;
   isCurrent: boolean; // True for current news, False for past news

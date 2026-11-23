@@ -1,3 +1,4 @@
+import { REGIONS } from '../data/regions';
 import React, { useState, useRef, useEffect } from 'react';
 import { Article, Writer, Category, CATEGORIES } from '../types';
 import { 
@@ -23,6 +24,32 @@ interface SovereignEditorialDeskProps {
   currentUser?: User | null;
   onSignInGoogle?: () => void;
   onSignOutGoogle?: () => void;
+}
+
+function RegionPicker({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
+  return (
+    <div className="md:col-span-2">
+      <label className="block font-mono text-[9px] font-bold uppercase text-[#6a1a26] mb-1">
+        Regions (tabs this article appears under)
+      </label>
+      <div className="flex flex-wrap gap-2">
+        {REGIONS.map(r => {
+          const on = value.includes(r.id);
+          return (
+            <button
+              key={r.id}
+              type="button"
+              onClick={() => onChange(on ? value.filter(x => x !== r.id) : [...value, r.id])}
+              className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded border cursor-pointer ${on ? 'bg-[#7a1f2b] text-white border-[#7a1f2b]' : 'bg-stone-100 text-stone-800 border-[#7a1f2b]/40'}`}
+            >
+              {r.label}
+            </button>
+          );
+        })}
+      </div>
+      <p className="font-mono text-[9px] text-stone-500 mt-1">Leave all off to place it automatically from its title and summary.</p>
+    </div>
+  );
 }
 
 export default function SovereignEditorialDesk({
@@ -55,6 +82,8 @@ export default function SovereignEditorialDesk({
   const [newSubtitle, setNewSubtitle] = useState('');
   const [newSummary, setNewSummary] = useState('');
   const [newCategory, setNewCategory] = useState<Category>('Politics');
+  const [newRegions, setNewRegions] = useState<string[]>([]);
+  const [editRegions, setEditRegions] = useState<string[]>([]);
   const [newAuthorId, setNewAuthorId] = useState(writers[0]?.id || 'w-sameera');
   const [newImageUrl, setNewImageUrl] = useState('');
   const [newReadTime, setNewReadTime] = useState('6 min read');
@@ -94,6 +123,7 @@ export default function SovereignEditorialDesk({
     setEditSummary(art.summary || '');
     setEditCategory(art.category);
     setEditAuthorId(art.authorId);
+    setEditRegions(art.regions || []);
     setEditImageUrl(art.imageUrl || '');
     setEditReadTime(art.readTime || '6 min read');
     setEditContent(art.content.join('\n\n'));
@@ -118,6 +148,7 @@ export default function SovereignEditorialDesk({
       content: paragraphs.length > 0 ? paragraphs : [editContent.trim()],
       category: editCategory,
       authorId: editAuthorId,
+      ...(editRegions.length > 0 ? { regions: editRegions } : {}),
       imageUrl: editImageUrl.trim(),
       readTime: editReadTime.trim() || '6 min read',
       isCurrent: editIsCurrent,
@@ -142,6 +173,7 @@ export default function SovereignEditorialDesk({
       summary: newSummary.trim() || newSubtitle.trim() || newTitle.trim(),
       content: paragraphs.length > 0 ? paragraphs : [newContent.trim()],
       authorId: newAuthorId || writers[0]?.id || 'w-sameera',
+      ...(newRegions.length > 0 ? { regions: newRegions } : {}),
       publishedAt: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       category: newCategory,
       imageUrl: newImageUrl.trim() || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=630',
@@ -461,6 +493,8 @@ export default function SovereignEditorialDesk({
                     </select>
                   </div>
 
+                  <RegionPicker value={newRegions} onChange={setNewRegions} />
+
                   <div>
                     <label className="block font-mono text-[9px] font-bold uppercase text-[#6a1a26] mb-1">
                       Est. Read Time
@@ -642,6 +676,8 @@ export default function SovereignEditorialDesk({
                       className="w-full text-xs font-mono p-2 bg-stone-100 text-stone-900 border border-[#7a1f2b]/40 rounded focus:outline-none focus:ring-1 focus:ring-[#9b2c3b]"
                     />
                   </div>
+
+                  <RegionPicker value={editRegions} onChange={setEditRegions} />
 
                   <div>
                     <label className="block font-mono text-[9px] font-bold uppercase text-[#6a1a26] mb-1">

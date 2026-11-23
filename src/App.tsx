@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
+import RegionTabs from './components/RegionTabs';
+import RegionPage from './components/RegionPage';
 import Tabs from './components/Tabs';
 import SearchBar from './components/SearchBar';
 import EditorialNote from './components/EditorialNote';
@@ -177,6 +179,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>('current');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<Category | 'All'>('All');
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState<boolean>(false);
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
@@ -661,7 +664,16 @@ export default function App() {
     return matchesTab && matchesCategory && matchesKeyword;
   });
 
+  const handleRegionSelect = (id: string) => {
+    setActiveRegion(id);
+    setActiveTab('region');
+    setSearchTerm('');
+    setSelectedCategory('All');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleTabChange = (tab: string) => {
+    setActiveRegion(null);
     setActiveTab(tab);
     setSearchTerm(''); 
     setSelectedCategory('All');
@@ -775,6 +787,7 @@ export default function App() {
 
         {/* Tab Selection */}
         <Tabs activeTab={activeTab} setActiveTab={handleTabChange} />
+        <RegionTabs activeRegion={activeTab === 'region' ? activeRegion : null} onSelect={handleRegionSelect} />
 
         {/* Filter bar (not shown on editorial desk, privacy, or directive tab) */}
         {(activeTab === 'current' || activeTab === 'past') && (
@@ -794,6 +807,11 @@ export default function App() {
         {/* Viewport content router */}
         <main className="pb-16" id="main-paper-viewports">
           
+          {/* REGION TABS: Palestine, Sri Lanka, Sudan, Congo, Syria, Lebanon, Cuba, World */}
+          {activeTab === 'region' && activeRegion && (
+            <RegionPage regionId={activeRegion} articles={articles} onOpen={handleReadMore} />
+          )}
+
           {/* CURRENT JOURNAL RELEASE */}
           {activeTab === 'current' && (
             <div className="max-w-7xl mx-auto px-4 mt-8" id="viewport-current">
