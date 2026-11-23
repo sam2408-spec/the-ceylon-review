@@ -22,7 +22,7 @@ import {
 } from 'firebase/auth';
 import firebaseConfig from '../firebase-applet-config.json';
 import { Article, Writer } from './types';
-import { INITIAL_ARTICLES, INITIAL_WRITERS } from './initialData';
+import { INITIAL_ARTICLES, INITIAL_WRITERS, SAMEERA_AVATAR } from './initialData';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -266,7 +266,7 @@ export function subscribeToWriters(
               ...w,
               email: w.email === 'sameera.m@ceylonreview.com' ? 'theceylonreview@proton.me' : w.email,
               twitter: w.twitter === '@sameera_mahb' ? '' : w.twitter,
-              avatarUrl: w.avatarUrl?.includes('photo-1534528741775') ? '' : w.avatarUrl,
+              avatarUrl: !w.avatarUrl || w.avatarUrl.includes('photo-1534528741775') ? SAMEERA_AVATAR : w.avatarUrl,
             });
           } else {
             loaded.push(w);
@@ -396,7 +396,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     // per browser, so an article the editor later deletes is not brought back.
     try {
       for (const art of INITIAL_ARTICLES) {
-        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi') continue;
+        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi' && art.id !== 'art-rohingya-genocide-icj') continue;
         const flag = 'seeded22:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }

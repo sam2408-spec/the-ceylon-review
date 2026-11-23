@@ -1,12 +1,16 @@
 import { Article, Writer } from './types';
 
+// Initials badge used until a real portrait is uploaded in the Writers' Profiles.
+export const SAMEERA_AVATAR =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%237a1f2b'/%3E%3Ctext x='200' y='238' font-family='Georgia,serif' font-size='150' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ESM%3C/text%3E%3C/svg%3E";
+
 export const INITIAL_WRITERS: Writer[] = [
   {
     id: 'w-sameera',
     name: 'Sameera Mahboobdeen',
     role: 'Editor in Chief',
     bio: 'Founder and Chief Editor of The Ceylon Review. Reports extensively on postcolonial jurisprudence, executive emergency powers, and constitutional safeguards across South Asia and the Indian Ocean.',
-    avatarUrl: '',
+    avatarUrl: SAMEERA_AVATAR,
     email: 'theceylonreview@proton.me',
     twitter: '',
     location: 'Colombo, Sri Lanka',
@@ -334,6 +338,55 @@ export const INITIAL_ARTICLES: Article[] = [
     likes: 0,
     comments: [],
     views: 0
+  },
+  {
+    id: "art-rohingya-genocide-icj",
+    title: "Nine Years After the Burning: The World Court Finds Myanmar Responsible for Genocide Against the Rohingya",
+    subtitle: "The International Court of Justice has ruled, by nine votes to six, that Myanmar committed genocide. This is what it found, what Myanmar argued, what the dissenters said, and what the Rohingya are left with.",
+    summary: "On 19 November 2026 the International Court of Justice found Myanmar responsible for genocide against the Rohingya, by nine votes to six. About 10,000 were killed, according to the Court, and more than 700,000 fled. Myanmar denies it. The Court cannot enforce its ruling.",
+    content: [
+      "On 19 November 2026 the International Court of Justice found Myanmar responsible for genocide against the Rohingya. It is the first time in the Court’s history that a State has been held responsible for the crime. The judgment came nine years after the military operations that drove more than 700,000 people out of northern Rakhine State, and seven years after a small West African country, The Gambia, took the case to The Hague.",
+      "This article sets out what the Court found, the figures it relied on, what Myanmar argued, what the six dissenting judges said, and what the judgment does and does not change for the people it concerns. Every number is attributed to the body that issued it.",
+      "THE JUDGMENT AT A GLANCE:\nCase: The Gambia v. Myanmar, under the 1948 Genocide Convention\nCourt: International Court of Justice, The Hague\nDelivered: 19 November 2026, read by President Yuji Iwasawa\nFinding: Myanmar is responsible for genocide against the Rohingya, by nine votes to six\nAlso found: Myanmar failed to prevent genocide and failed to punish it\nStatus: final, binding on the parties, and not subject to appeal\nEnforcement: the Court has no means of enforcing its own judgment",
+      "I. The people and the place",
+      "The Rohingya are a Muslim minority from northern Rakhine State, in western Myanmar. Myanmar does not recognise them as an official minority and denies them citizenship, and nearly all of them are stateless. In its judgment the Court recognised the Rohingya as a distinct ethnic group, and therefore a protected group under the Genocide Convention.",
+      "Before 2017, about 815,000 Rohingya lived in northern Rakhine State. The Court treated that population as the part of the group that was targeted.",
+      "II. What happened in 2016 and 2017",
+      "The Court examined the “clearance operations” carried out by Myanmar’s security forces in northern Rakhine in 2016 and 2017. Hundreds of villages were burned, and the Court found killings, rapes and the burning of homes to have been systematic.",
+      "THE FIGURES IN THE JUDGMENT:\nKilled: about 10,000 Rohingya, by the Court’s estimate, including women and very young children\nChildren: up to 2,109 children under five are estimated to have died, in estimates cited by the Court\nRape: at least 1,834 acts of rape\nVillages: all or part of 392 villages burned, which is nearly 400 of the almost 1,000 villages in three northern townships, about 40 per cent\nHomes: the homes of about 326,000 Rohingya burned, as summarised in legal commentary on the judgment\nFled: about 700,000 Rohingya fled to Bangladesh\nMaungdaw Township: nearly 500,000 Rohingya lived there; restrictions on marriage and births were imposed, and Rohingya children were denied legal registration",
+      "Sources differ on how many people fled. About 700,000 is the figure reported from the judgment. More than 730,000 and about 750,000 appear in other reporting. Those who fled have not been allowed to return.",
+      "III. What the Court found",
+      "The Court found that Myanmar’s security forces and other State organs intentionally committed three of the prohibited acts listed in Article II of the Genocide Convention: killing members of the group, causing serious bodily or mental harm to them, and imposing measures intended to prevent births within the group. A fourth claim, that conditions of life were inflicted to destroy the group, was rejected.",
+      "The hardest question in any genocide case is intent: the Convention requires an intent to destroy a protected group, in whole or in part. The Court held that the only reasonable inference from the evidence was an intent to destroy the Rohingya in substantial part. Four factors were relied on: the general context, the selective targeting of the Rohingya, acts striking at the foundations of the group, including sexual violence and attacks on children, and the systematic scale of the operations. The Court said that the murder of infants supports an inference of an intent to prevent births within the group.",
+      "“powerful recognition of the Rohingya victims of genocide” — António Guterres, United Nations Secretary-General, on the judgment",
+      "The Court also found that Myanmar had failed to prevent genocide, failed to punish it and failed to adopt the legislation the Convention requires, and had breached the Court’s own earlier order to preserve evidence. That order, a provisional measures order issued on 23 January 2020, had told Myanmar to prevent genocidal acts against the Rohingya and to report regularly on its compliance.",
+      "IV. Myanmar’s case, and the six who dissented",
+      "Myanmar rejected the case. In a statement published on 14 January 2026, as the hearings opened, its Foreign Ministry called the case “flawed and unfounded in fact and law.” The statement did not use the word Rohingya. It referred to “persons from Rakhine state.” Myanmar’s position has been that the 2017 operations were a lawful counter-insurgency response to attacks by the Arakan Rohingya Salvation Army, an armed group, and that it was cooperating with the case in good faith. A witness called by Myanmar alleged that the group’s fighters killed around 100 civilians in a single attack.",
+      "The Court did not accept the counter-insurgency explanation. It found that the military had failed to distinguish civilians from insurgents, and that counter-terrorism did not explain the violence. Two other explanations offered by Myanmar, displacement without destruction and punishment without destruction, were examined and also rejected.",
+      "The Court was divided. Nine judges formed the majority: President Iwasawa and Judges Charlesworth, Brant, Gómez Robledo, Cleveland, Aurescu, Tladi and Hamoud, with Judge ad hoc Pillay. Six dissented in a joint opinion: Vice-President Sebutinde, Judges Tomka, Abraham, Xue and Nolte, and Judge ad hoc Kress.",
+      "The dissenters did not dispute that most of the atrocities took place. They rejected the finding of genocidal intent. In their view the majority read “destruction” too flexibly, blurring genocide with ethnic cleansing and crimes against humanity, and the evidence did not support the “only reasonable inference” of intent. The majority said it applied a “fully convincing evidence” standard. The dissent called the majority’s holistic approach to intent “so indeterminate that it borders on arbitrariness.”",
+      "V. What the Court ordered",
+      "WHAT MYANMAR HAS BEEN ORDERED TO DO:\nCease any ongoing violations by enacting legislation that fully implements the Genocide Convention\nInvestigate persons reasonably suspected of prohibited acts and, where warranted, prosecute and punish them (ordered by 13 votes to 2)\nGive assurances and guarantees of non-repetition\nProvide restitution, including safe, voluntary and dignified return to places of residence and the reunification of displaced families, inside Myanmar and abroad\nCompensate the Rohingya group and its members; the amount and form are to be decided in a later phase\nReport to the Court on restitution and compensation within two years\nNot ordered: the grant of citizenship",
+      "Whether any of this will happen is a separate matter. Richard Horsey of the International Crisis Group said that the Court has no means of enforcing its ruling, and that what matters now is whether governments engaging with Myanmar’s military government are prepared to attach any cost to ignoring it. He expects most to carry on regardless. Human Rights Watch urged Myanmar to comply with the judgment without delay. The United Kingdom has said it will order the expulsion of Myanmar’s defence attaché and call on the UN Security Council to act, according to Radio Free Asia. Myanmar’s military-backed government had not responded when the judgment was reported.",
+      "VI. Where the Rohingya are now",
+      "About 1.2 million Rohingya live in refugee camps in Bangladesh, most of them near Cox’s Bazar, the world’s largest refugee settlement. Another count, from January 2026, put the figure at about 1.17 million. Cuts in aid funding have reduced food rations in the camps.",
+      "Inside Myanmar the position is no safer. Rakhine State is largely controlled by the Arakan Army, which is in conflict with the military. An analyst at the Armed Conflict Location and Event Data Project said that the Rohingya are threatened by multiple armed groups, that many face acute hunger because of aid shortfalls and a blockade by the military, and that prospects for return are bleak unless conditions change.",
+      "Rohingya refugees watched the judgment announced on a large screen in the camps. “Recognition alone is not enough,” said Ma Roga Bibi, 18, a refugee. “We need justice, accountability, and the opportunity to return home with dignity.”",
+      "FLOWCHART: The road to the judgment\nAug–Sep 2017 — Military operations in northern Rakhine; hundreds of villages burned; more than 700,000 people flee to Bangladesh.\n11 Nov 2019 — The Gambia files its case at the International Court of Justice.\n23 Jan 2020 — The Court orders provisional measures: Myanmar must prevent genocidal acts and report regularly.\n2021 — Myanmar’s military seizes power.\nNov 2023 — Declarations of intervention are filed by Canada, Denmark, France, Germany, the Netherlands, the United Kingdom and the Maldives.\n12–29 Jan 2026 — Merits hearings. Myanmar’s Foreign Ministry calls the case “flawed and unfounded” on 14 January.\n19 Nov 2026 — Judgment: Myanmar is responsible for genocide, by nine votes to six.",
+      "VII. What the judgment settles, and what it does not",
+      "Before this judgment, the Court had ruled on the merits of two genocide cases between States. In Bosnia and Herzegovina v. Serbia and Montenegro (2007) it found that Serbia had not itself committed genocide but had failed to prevent the 1995 Srebrenica genocide. In Croatia v. Serbia (2015) it dismissed both States’ claims because neither had proved the required intent. The Gambia v. Myanmar is the first in which the Court has held a State responsible for committing genocide.",
+      "The judgment settles a question of law that survivors have answered from the first night: that what was done to the Rohingya was not a side effect of a security operation. It does not return a single home, grant a single person citizenship, or put any commander in a dock. Those steps depend on Myanmar, on the governments that deal with it, and on courts and prosecutors elsewhere. For the Rohingya, the verdict is a beginning that has taken nine years.",
+      "This article reports a judgment of the International Court of Justice and published figures from the bodies named. The finding of genocide was made by the Court by nine votes to six; the dissenting judges’ reasons and Myanmar’s denials are reported alongside. Casualty and displacement figures differ between sources and are attributed. Sources: United Nations News, “World’s top court finds Myanmar guilty of genocide against Rohingya” (19 November 2026); Just Security, “On the ICJ’s Judgment in the Myanmar Genocide Case” and “Gambia v. Myanmar: A Landmark Judgment That Unsettles the Law of Genocide” (November 2026); EJIL: Talk!, “Gambia v. Myanmar: The Bottom Line” (November 2026); NPR, “The U.N.’s top court rules Myanmar committed genocide against the Rohingya” (19 November 2026); Radio Free Asia, “World Court finds Myanmar responsible for Rohingya genocide in landmark ruling” (19 November 2026); Al Jazeera, “Myanmar says Rohingya genocide case at The Hague is ‘flawed, unfounded’” (14 January 2026); Rohingya genocide case, Wikipedia (case timeline); Convention on the Prevention and Punishment of the Crime of Genocide (1948)."
+    ],
+    authorId: "w-sameera",
+    publishedAt: "November 23, 2026",
+    category: "International Law",
+    imageUrl: "",
+    readTime: "7 min read",
+    isCurrent: true,
+    isFeatured: false,
+    likes: 0,
+    comments: [],
+    views: 0
   }
 ];
-
