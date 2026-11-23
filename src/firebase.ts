@@ -127,10 +127,11 @@ const REVISION_MARKERS: Record<string, string[]> = {
   'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
   'art-gaza-floods': ['run by Hamas', 'blames Hamas'],
   'art-saleh-aljafarawi': ['Many reports say he was shot', 'Wikipedia (biographical'],
-  'art-sovereign-debt-default': ['K. Ratnayake', 'SC/FR 212/2022'],
-  'art-galle-face-precedents': ['Section 77 of the Police Ordinance'],
-  'art-surveillance-shadows': ['Telecommunications Regulatory Commission Act'],
 };
+// Articles permanently removed by the editor (23 Nov 2026). Hidden for every visitor, and deleted
+// from Firestore the next time the editor loads the site while signed in.
+const REMOVED_ARTICLE_IDS = ['art-sovereign-debt-default', 'art-galle-face-precedents', 'art-surveillance-shadows'];
+
 function applyRevision(a: Article): Article {
   const markers = REVISION_MARKERS[a.id];
   if (!markers) return a;
@@ -214,6 +215,7 @@ function withPublishedCovers(a: Article): Article {
 export async function fetchArticleById(id: string): Promise<Article | null> {
   try {
     const snap = await getDocFromServer(doc(db, 'articles', id));
+    if (REMOVED_ARTICLE_IDS.includes(id)) return null;
     if (snap.exists()) return withPublishedCovers(snap.data() as Article);
   } catch { /* fall through */ }
   const local = INITIAL_ARTICLES.find((a) => a.id === id);
@@ -231,7 +233,7 @@ export function subscribeToArticles(
       if (!snapshot.empty) {
         const loaded: Article[] = [];
         snapshot.forEach((d) => {
-          loaded.push(withPublishedCovers(d.data() as Article));
+          if (!REMOVED_ARTICLE_IDS.includes(d.id)) loaded.push(withPublishedCovers(d.data() as Article));
         });
         onData(loaded);
       } else {
@@ -360,6 +362,13 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       }
     } catch (e) {
       console.warn('PTA article refresh skipped:', e);
+    }
+
+    // Permanently delete the removed archive articles from Firestore.
+    try {
+      for (const id of REMOVED_ARTICLE_IDS) await deleteDoc(doc(db, 'articles', id));
+    } catch (e) {
+      console.warn('Removal of archived articles skipped:', e);
     }
 
     // Write the legal-review revisions back to Firestore (once per browser, editor only).
