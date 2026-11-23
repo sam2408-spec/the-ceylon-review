@@ -16,6 +16,40 @@ export const INITIAL_WRITERS: Writer[] = [
 
 export const INITIAL_ARTICLES: Article[] = [
   {
+    id: 'art-sunflower-circle-fundraiser',
+    title: "An Afternoon of Art and Breath at The Fearless Space",
+    subtitle: "A Colombo fundraiser by the Sunflower Circle brought a relaxation session, a talk on art and the mind, and one-to-one conversations with a clinical psychologist. All funds raised go to a school in Gaza.",
+    summary: "On 22 November the Sunflower Circle held a fundraiser at The Fearless Space in Colombo 5. All funds raised go to Al Noor Educational Classes, a school in Gaza, to help it through the winter.",
+    content: [
+      "On Sunday 22 November, a room in Colombo 5 filled with people who had given up their afternoon for an event with a purpose beyond the room. They came to breathe, to talk about art, and to raise money for a school in Gaza.",
+      "The fundraiser was organised by the Sunflower Circle and held at The Fearless Space. It began at 3 pm, and it began quietly.",
+      "THE EVENT AT A GLANCE:\nDate: Sunday 22 November 2026\nVenue: The Fearless Space, Colombo 5\nOrganiser: The Sunflower Circle\nSession led by: Sameera Mahboobdeen, clinical psychologist\nStart: 3 pm. Finish: a little after 5 pm\nBeneficiary: Al Noor Educational Classes, a school in Gaza\nUse of funds: all funds raised go to the school, to help it and its students through the winter",
+      "I. Arriving",
+      "The afternoon opened with a relaxation session. Participants were guided through deep breaths until the usual noise of the week began to settle. It was a gentle way to arrive, and it set the tone for the hours that followed.",
+      "II. What art can show",
+      "The session was led by Sameera Mahboobdeen, a clinical psychologist. She spoke about art and what it means to express oneself through it. A person’s mental state tends to show up in what that person creates, she explained, and a piece can carry things its maker has not yet found words for.",
+      "She then returned to the breathing exercises. Certain techniques, participants were shown, can help the brain become more alert. It was something practical to take home.",
+      "III. Talking through the work",
+      "The conversation was what made the afternoon personal. Participants were able to sit with the psychologist and talk through their own art: what it might be saying, and what it revealed about them. An exchange of that kind with a professional is rare, and it was a highlight of the day.",
+      "IV. Why it mattered",
+      "The event ended a little after 5 pm. Its purpose continues beyond that. All funds raised go to Al Noor Educational Classes, a school in Gaza, to help the school and its students through the winter.",
+      "Winter is a hard season for displaced families in the Strip. Heavy rain earlier this month flooded tens of thousands of tents, according to Gaza’s Government Media Office, and the United Nations humanitarian office, OCHA, has warned that about 761,000 people at displacement sites face flood risk this winter. A school that stays open gives children a place to learn and a measure of routine.",
+      "Everyone in that room came for an afternoon of art and left having done something for children they are unlikely ever to meet.",
+      "The organisers thank Sameera Mahboobdeen for guiding the session with care, The Fearless Space for hosting, and everyone who attended.",
+      "This article reports an event held on 22 November 2026, as described by its organisers, and published figures from the sources named. Sources: The Sunflower Circle, account of the fundraiser at The Fearless Space (22 November 2026); OCHA oPt, “Humanitarian Situation Report: Heavy Rains in the Gaza Strip” (8 November 2026)."
+],
+    authorId: 'w-sameera',
+    publishedAt: 'November 23, 2026',
+    category: 'Community',
+    imageUrl: '',
+    readTime: '3 min read',
+    isCurrent: true,
+    isFeatured: false,
+    likes: 0,
+    comments: [],
+    views: 0
+  },
+  {
     id: 'art-fergie-chambers',
     title: "Lost in Translation: The Case Against Fergie Chambers",
     subtitle: "Spain has freed the American donor on bail after Washington admitted its own paperwork overstated the case against him. The questions it leaves behind are bigger than one man.",

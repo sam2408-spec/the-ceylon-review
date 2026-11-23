@@ -277,7 +277,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     // per browser, so an article the editor later deletes is not brought back.
     try {
       for (const art of INITIAL_ARTICLES) {
-        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods') continue;
+        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser') continue;
         const flag = 'seeded14:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }
