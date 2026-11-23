@@ -1,6 +1,7 @@
 import React from 'react';
 import { BAND_QUOTES, BAND_INTERVAL_MS } from '../data/quotes';
 import { Article } from '../types';
+import FlashCarousel from './FlashCarousel';
 
 const fallbackImage =
   'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200&h=630';
@@ -21,6 +22,7 @@ export default function NewsPortal({ articles, onOpen }: NewsPortalProps) {
 
   return (
     <div className="space-y-10" id="news-portal">
+      <FlashCarousel />
       <section className="space-y-6" id="portal-top">
         <button
           type="button"
