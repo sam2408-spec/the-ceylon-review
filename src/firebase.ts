@@ -123,6 +123,7 @@ export async function signOutEditor(): Promise<void> {
 // was removed; once the editor saves or the seed writes the revised text, the marker is gone and
 // later edits in the Editorial Desk are left alone.
 const REVISION_MARKERS: Record<string, string[]> = {
+  'art-rohingya-genocide-icj': ['392 villages', '326,000', 'Hamoud'],
   'art-manufactured-silence': ['Hamas is ISIS', 'online hate campaigns', 'None of this is conspiracy'],
   'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
   'art-gaza-floods': ['run by Hamas', 'blames Hamas'],
