@@ -25,6 +25,8 @@ interface ArticleDetailModalProps {
   onDeleteArticle?: (articleId: string) => void;
 }
 
+const SHARE_ORIGIN = 'https://www.theceylonreview.lk';
+
 export default function ArticleDetailModal({
   article,
   author,
@@ -106,8 +108,7 @@ export default function ArticleDetailModal({
   };
 
   const handleShare = () => {
-    const currentUrl = window.location.href.split('?')[0];
-    const shareableLink = `${currentUrl}?article=${article.id}`;
+    const shareableLink = `${SHARE_ORIGIN}/share/${article.id}`;
     const done = () => {
       setSharedToast(true);
       setTimeout(() => setSharedToast(false), 2500);
@@ -537,7 +538,7 @@ export default function ArticleDetailModal({
               <span className="uppercase tracking-wider text-[#6a1a26]">Broadside Social Share:</span>
               <div className="flex items-center gap-2 flex-wrap">
                 <a 
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(window.location.origin + '?article=' + article.id)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(SHARE_ORIGIN + '/share/' + article.id)}`}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 bg-[#1da1f2] hover:bg-[#1a91da] text-white px-3 py-1.5 rounded text-[10px] sm:text-xs transition-colors font-bold shadow-sm"
@@ -546,7 +547,7 @@ export default function ArticleDetailModal({
                   <span>X / Twitter</span>
                 </a>
                 <a 
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.origin + '?article=' + article.id)}`}
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_ORIGIN + '/share/' + article.id)}`}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 bg-[#1877f2] hover:bg-[#166fe5] text-white px-3 py-1.5 rounded text-[10px] sm:text-xs transition-colors font-bold shadow-sm"
@@ -555,7 +556,7 @@ export default function ArticleDetailModal({
                   <span>Facebook</span>
                 </a>
                 <a 
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin + '?article=' + article.id)}`}
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SHARE_ORIGIN + '/share/' + article.id)}`}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 bg-[#0077b5] hover:bg-[#00669c] text-white px-3 py-1.5 rounded text-[10px] sm:text-xs transition-colors font-bold shadow-sm"
