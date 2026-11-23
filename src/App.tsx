@@ -27,7 +27,8 @@ import {
   deleteArticleFromFirestore,
   saveWriterToFirestore,
   deleteWriterFromFirestore,
-  seedInitialFirestoreArchives
+  seedInitialFirestoreArchives,
+  fetchArticleById
 } from './firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
@@ -344,19 +345,50 @@ export default function App() {
     };
   }, []);
 
-  // Handle URL article parameters for deep linking. Runs whenever the article list
-  // changes until the linked article is found (the list loads after first render).
+  // Deep links (?article=id): open the linked article straight away by fetching that one
+  // document, and also whenever the list loads, until it has been opened.
   const deepLinkOpened = useRef(false);
+  const [openingLink, setOpeningLink] = useState(
+    () => !!new URLSearchParams(window.location.search).get('article')
+  );
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get('article');
+    if (!id) return;
+    let cancelled = false;
+    fetchArticleById(id).then((art) => {
+      if (cancelled || deepLinkOpened.current) return;
+      if (art) { deepLinkOpened.current = true; setSelectedArticle(art); }
+      setOpeningLink(false);
+    });
+    return () => { cancelled = true; };
+  }, []);
   useEffect(() => {
     if (deepLinkOpened.current) return;
-    const paramArticleId = new URLSearchParams(window.location.search).get('article');
-    if (!paramArticleId) { deepLinkOpened.current = true; return; }
-    const art = articles.find(a => a.id === paramArticleId);
+    const id = new URLSearchParams(window.location.search).get('article');
+    if (!id) { deepLinkOpened.current = true; return; }
+    const art = articles.find(a => a.id === id);
     if (art) {
       deepLinkOpened.current = true;
       setSelectedArticle(art);
+      setOpeningLink(false);
     }
   }, [articles]);
+
+  // Keep the address bar on a shareable link while an article is open.
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      if (selectedArticle) {
+        if (url.searchParams.get('article') !== selectedArticle.id) {
+          url.searchParams.set('article', selectedArticle.id);
+          window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+        }
+      } else if (deepLinkOpened.current && url.searchParams.has('article')) {
+        url.searchParams.delete('article');
+        window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+      }
+    } catch { /* ignore */ }
+  }, [selectedArticle]);
 
   // --- Article Interaction Handlers ---
   const handleToggleBookmark = (e: React.MouseEvent | undefined, articleId: string) => {
@@ -1726,6 +1758,11 @@ export default function App() {
       </footer>
 
       {/* PERSISTENT FULL DETAILED READER MODAL */}
+      {openingLink && !selectedArticle && (
+        <div className="fixed inset-0 z-[90] bg-white/90 flex items-center justify-center font-mono text-xs tracking-widest text-[#7a1f2b]">
+          OPENING ARTICLE…
+        </div>
+      )}
       {selectedArticle && (
         <ArticleDetailModal 
           article={selectedArticle} 

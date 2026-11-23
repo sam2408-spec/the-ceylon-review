@@ -149,6 +149,16 @@ function withPublishedCovers(a: Article): Article {
   return a;
 }
 
+// Fetch one article directly (used by shared links so they open without waiting for the full list).
+export async function fetchArticleById(id: string): Promise<Article | null> {
+  try {
+    const snap = await getDocFromServer(doc(db, 'articles', id));
+    if (snap.exists()) return withPublishedCovers(snap.data() as Article);
+  } catch { /* fall through */ }
+  const local = INITIAL_ARTICLES.find((a) => a.id === id);
+  return local ? withPublishedCovers(local) : null;
+}
+
 export function subscribeToArticles(
   onData: (articles: Article[]) => void,
   onError?: (err: Error) => void
