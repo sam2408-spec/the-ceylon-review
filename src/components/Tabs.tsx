@@ -1,5 +1,5 @@
 import React from 'react';
-import { Newspaper, Archive, UserCircle, Film } from 'lucide-react';
+import { Newspaper, UserCircle, Film } from 'lucide-react';
 
 interface TabsProps {
   activeTab: string;
@@ -9,7 +9,7 @@ interface TabsProps {
 export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
   const tabs = [
     { id: 'current', label: 'Current News', icon: Newspaper },
-    { id: 'past', label: 'Archival Ledger', icon: Archive },
+    // Archival Ledger hidden until there is archive material (re-add: { id: 'past', label: 'Archival Ledger', icon: Archive }).
     { id: 'media', label: 'Media & Galleries', icon: Film },
     { id: 'writer', label: "Writers' Profiles", icon: UserCircle },
   ];
