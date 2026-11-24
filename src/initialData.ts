@@ -6,12 +6,18 @@ export const SAMEERA_AVATAR =
 
 export const THANZEELA_AVATAR = SAMEERA_AVATAR.replace('SM%3C','TO%3C');
 
+export const SAMEERA_BIO =
+  'Sameera Mahboobdeen is the founder and Chief Editor of The Ceylon Review, based in Colombo. Her professional background spans criminology, the criminal justice system, forensic medicine and clinical psychology, and she brings that grounding to her reporting on law, human rights and global justice. She took part in a humanitarian mission to Gaza as the first Sri Lankan in an international mission. Through the Review she writes and commissions work that is sourced, plainly stated and attentive to the people behind every figure. She believes that accuracy is a form of respect, and that those who suffer injustice are owed the truth told in full.';
+
+export const THANZEELA_BIO =
+  'Thanzeela is a Sri Lankan social activist, freelance writer and advocate for human rights and social justice, committed to women\u2019s rights, gender equality, child protection and the Palestinian cause. Her activism focuses on gender-based violence, harassment, online abuse and the exploitation of women and children, and on amplifying Palestinian voices. She has a professional background in occupational therapy and special needs education, with nearly a decade of experience working with children with diverse learning and developmental needs. She believes that words are powerful, that silence in the face of injustice is not an option, and that collective action builds a more just world.';
+
 export const INITIAL_WRITERS: Writer[] = [
   {
     id: 'w-sameera',
     name: 'Sameera Mahboobdeen',
     role: 'Editor in Chief',
-    bio: 'Founder and Chief Editor of The Ceylon Review. Reports extensively on postcolonial jurisprudence, executive emergency powers, and constitutional safeguards across South Asia and the Indian Ocean.',
+    bio: SAMEERA_BIO,
     avatarUrl: SAMEERA_AVATAR,
     email: 'theceylonreview@proton.me',
     twitter: '',
@@ -22,7 +28,7 @@ export const INITIAL_WRITERS: Writer[] = [
     id: 'w-thanzeela-ousman',
     name: 'Thanzeela Ousman',
     role: 'Guest Contributor',
-    bio: 'Guest contributor to The Ceylon Review, writing on online safety, and the protection of women and children, in Sri Lanka.',
+    bio: THANZEELA_BIO,
     avatarUrl: THANZEELA_AVATAR,
     email: '',
     twitter: '',

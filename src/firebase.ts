@@ -22,7 +22,7 @@ import {
 } from 'firebase/auth';
 import firebaseConfig from '../firebase-applet-config.json';
 import { Article, Writer } from './types';
-import { INITIAL_ARTICLES, INITIAL_WRITERS, SAMEERA_AVATAR } from './initialData';
+import { INITIAL_ARTICLES, INITIAL_WRITERS, SAMEERA_AVATAR, SAMEERA_BIO } from './initialData';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -270,6 +270,7 @@ export function subscribeToWriters(
               ...w,
               email: w.email === 'sameera.m@ceylonreview.com' ? 'theceylonreview@proton.me' : w.email,
               twitter: w.twitter === '@sameera_mahb' ? '' : w.twitter,
+              bio: !w.bio || w.bio.includes('postcolonial jurisprudence') ? SAMEERA_BIO : w.bio,
               avatarUrl: !w.avatarUrl || w.avatarUrl.includes('photo-1534528741775') ? SAMEERA_AVATAR : w.avatarUrl,
             });
           } else {
