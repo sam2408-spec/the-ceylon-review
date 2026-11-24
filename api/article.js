@@ -24,6 +24,39 @@ const COVER_OVERRIDES = {
   'art-rohingya-genocide-icj': '/images/rohingya-judgment-cover.jpg',
 };
 
+// Fallback headlines for share previews when the article is not (yet) in the database.
+const FALLBACK = {
+ "art-manufactured-silence": {"t": "The Manufactured Silence: Hasbara, Hate Speech, and the War on Truth", "d": "An investigation into Hasbara: the Israeli government’s public-diplomacy effort, and what it means for Sri Lanka."},
+ "art-saleh-aljafarawi": {
+  "t": "Saleh Aljafarawi, 27: A Journalist Remembered, and the Toll Behind His Name",
+  "d": "Saleh Aljafarawi, a 27-year-old Gaza journalist, was shot dead in Sabra on 12 October 2025. Accounts of the killing differ, and no court has examined it. His case sits within a toll of at least 209 journalists, according to CPJ, and 263 according to Gaza’s media office."
+ },
+ "art-sunflower-circle-fundraiser": {
+  "t": "An Afternoon of Art and Breath at The Fearless Space",
+  "d": "On 22 November the Sunflower Circle held a fundraiser at The Fearless Space in Colombo 5. All funds raised go to Al Noor Educational Classes, a school in Gaza, to help it through the winter."
+ },
+ "art-fergie-chambers": {
+  "t": "Lost in Translation: The Case Against Fergie Chambers",
+  "d": "Fergie Chambers was freed on bail in Spain on 20 November after the US admitted three errors in the Spanish translation of its evidence. He denies every allegation and is not charged with terrorism. A UN rapporteur, lawyers, and pro-Palestinian protesters have backed him."
+ },
+ "art-gaza-floods": {
+  "t": "Tents Are Not Shelter: What Gaza’s First Winter Storm Did, in the Numbers",
+  "d": "Tents were flooded across Gaza by the first winter storm of 6–8 November. Over 6,000 family shelters were destroyed, according to OCHA, and five people were killed when a sandy hill collapsed. More than 150,000 tents are held outside Gaza. Different explanations are given by Israel and aid groups."
+ },
+ "art-colonial-law": {
+  "t": "Forty-Seven Years of a “Temporary” Law: The PTA and What Replaces It",
+  "d": "Parliament has yet to vote on a bill meant to replace the Prevention of Terrorism Act. Rights groups say it keeps the old powers. UN experts call it much improved. This is what each side has actually said."
+ },
+ "art-rohingya-genocide-icj": {
+  "t": "Nine Years After the Burning: The World Court Finds Myanmar Responsible for Genocide Against the Rohingya",
+  "d": "On 19 November 2026 the International Court of Justice found, by 9 votes to 6, that Myanmar committed genocide against the Rohingya. At least 10,000 were killed, according to the Court, and at least 1,834 rapes were recorded. Myanmar denies it. The Court cannot enforce its ruling."
+ },
+ "art-behind-the-screen": {
+  "t": "Behind the Screen: Online Harassment of Women and Children in Sri Lanka",
+  "d": "A 2025 UNFPA and UN Women study found that 64% of surveyed survivors of technology-facilitated violence in Sri Lanka withdrew from social media. The National Child Protection Authority recorded 151 and 150 cyberbullying complaints involving nude photographs in 2024 and 2025. Thanzeela Osman asks what must change."
+ }
+};
+
 const esc = (s) =>
   String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -43,6 +76,11 @@ export default async function handler(req, res) {
   let title = 'The Ceylon Review';
   let desc = 'An independent publication on law, human rights and global justice, from Sri Lanka.';
   let image = DEFAULT_IMAGE;
+
+  if (valid && FALLBACK[id]) {
+    title = FALLBACK[id].t;
+    desc = FALLBACK[id].d;
+  }
 
   if (valid) {
     try {
