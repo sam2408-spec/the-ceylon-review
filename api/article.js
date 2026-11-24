@@ -15,6 +15,9 @@ const DEFAULT_IMAGE = SITE + '/icon-512.png';
 
 // Covers that the site swaps in on the client (see withPublishedCovers in src/firebase.ts).
 const COVER_OVERRIDES = {
+  'art-saleh-aljafarawi': '/images/saleh-aljafarawi-tribute.jpg',
+  'art-sunflower-circle-fundraiser': '/images/fundraiser/table-from-above.jpg',
+  'art-gaza-floods': '/images/gaza-floods/flooded-camp.jpg',
   'art-manufactured-silence': '/images/hasbara-flag.jpg',
   'art-colonial-law': '/images/psta-protest-parliament.jpg',
   'art-behind-the-screen': '/images/behind-the-screen-cover-2.jpg',
@@ -56,8 +59,10 @@ export default async function handler(req, res) {
         if (COVER_OVERRIDES[id] && (!img || img.includes('images.unsplash.com'))) img = COVER_OVERRIDES[id];
         image = absolute(img);
       }
+      else if (COVER_OVERRIDES[id]) image = absolute(COVER_OVERRIDES[id]);
     } catch {
-      /* fall back to site defaults */
+      /* fall back to the article's own cover where known, else site defaults */
+      if (COVER_OVERRIDES[id]) image = absolute(COVER_OVERRIDES[id]);
     }
   }
 
