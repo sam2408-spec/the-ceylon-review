@@ -22,7 +22,7 @@ import {
 } from 'firebase/auth';
 import firebaseConfig from '../firebase-applet-config.json';
 import { Article, Writer } from './types';
-import { INITIAL_ARTICLES, INITIAL_WRITERS, SAMEERA_AVATAR, SAMEERA_BIO } from './initialData';
+import { INITIAL_ARTICLES, INITIAL_WRITERS, SAMEERA_AVATAR, SAMEERA_BIO, THANZEELA_AVATAR } from './initialData';
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -278,7 +278,9 @@ export function subscribeToWriters(
             loaded.push(w);
           }
         });
-        loaded.forEach((w, i) => { if (w.name === 'Thanzeela Ousman') loaded[i] = { ...w, name: 'Thanzeela Osman' }; });
+        loaded.forEach((w, i) => {
+          if (w.id === 'w-thanzeela-ousman') loaded[i] = { ...w, name: 'Thanzeela Osman', avatarUrl: !w.avatarUrl || w.avatarUrl.startsWith('data:image/svg') ? THANZEELA_AVATAR : w.avatarUrl };
+        });
         // Guest writers shipped with the site appear even if the stored list predates them.
         for (const g of INITIAL_WRITERS) {
           if (g.id !== 'w-sameera' && !loaded.some((w) => w.id === g.id)) loaded.push(g);

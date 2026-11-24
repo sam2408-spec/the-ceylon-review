@@ -4,7 +4,7 @@ import { Article, Writer } from './types';
 export const SAMEERA_AVATAR =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%237a1f2b'/%3E%3Ctext x='200' y='238' font-family='Georgia,serif' font-size='150' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ESM%3C/text%3E%3C/svg%3E";
 
-export const THANZEELA_AVATAR = SAMEERA_AVATAR.replace('SM%3C','TO%3C');
+export const THANZEELA_AVATAR = '/images/thanzeela-osman.jpg';
 
 export const SAMEERA_BIO =
   'Sameera Mahboobdeen is the founder and Chief Editor of The Ceylon Review, based in Colombo. Her professional background spans criminology, the criminal justice system, forensic medicine and clinical psychology, and she brings that grounding to her reporting on law, human rights and global justice. She took part in a humanitarian mission to Gaza as the first Sri Lankan in an international mission. Through the Review she writes and commissions work that is sourced, plainly stated and attentive to the people behind every figure. She believes that accuracy is a form of respect, and that those who suffer injustice are owed the truth told in full.';
