@@ -450,7 +450,7 @@ export const INITIAL_ARTICLES: Article[] = [
     authorId: 'w-thanzeela-ousman',
     publishedAt: 'November 24, 2026',
     category: 'Opinion',
-    imageUrl: '',
+    imageUrl: '/images/behind-the-screen-cover.jpg',
     readTime: '5 min read',
     isCurrent: true,
     likes: 0,
