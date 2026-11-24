@@ -123,7 +123,7 @@ export async function signOutEditor(): Promise<void> {
 // was removed; once the editor saves or the seed writes the revised text, the marker is gone and
 // later edits in the Editorial Desk are left alone.
 const REVISION_MARKERS: Record<string, string[]> = {
-  'art-behind-the-screen': ['Thanzeela Ousman'],
+  'art-behind-the-screen': ['Thanzeela Ousman', 'a guest contributor;', 'A guest opinion by'],
   'art-rohingya-genocide-icj': ['392 villages', '326,000', 'Hamoud', '1.2 per cent'],
   'art-manufactured-silence': ['Hamas is ISIS', 'online hate campaigns', 'None of this is conspiracy'],
   'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
@@ -279,7 +279,7 @@ export function subscribeToWriters(
           }
         });
         loaded.forEach((w, i) => {
-          if (w.id === 'w-thanzeela-ousman') loaded[i] = { ...w, name: 'Thanzeela Osman', avatarUrl: !w.avatarUrl || w.avatarUrl.startsWith('data:image/svg') ? THANZEELA_AVATAR : w.avatarUrl };
+          if (w.id === 'w-thanzeela-ousman') loaded[i] = { ...w, name: 'Thanzeela Osman', role: w.role === 'Guest Contributor' ? 'Community Writer' : w.role, avatarUrl: !w.avatarUrl || w.avatarUrl.startsWith('data:image/svg') ? THANZEELA_AVATAR : w.avatarUrl };
         });
         // Guest writers shipped with the site appear even if the stored list predates them.
         for (const g of INITIAL_WRITERS) {
