@@ -279,7 +279,7 @@ export function subscribeToWriters(
           }
         });
         loaded.forEach((w, i) => {
-          if (w.id === 'w-thanzeela-ousman') loaded[i] = { ...w, name: 'Thanzeela Osman', role: w.role === 'Guest Contributor' || w.role === 'Community Writer' ? 'Writer' : w.role, avatarUrl: !w.avatarUrl || w.avatarUrl.startsWith('data:image/svg') ? THANZEELA_AVATAR : w.avatarUrl };
+          if (w.id === 'w-thanzeela-ousman') loaded[i] = { ...w, name: 'Thanzeela Osman', role: ['Guest Contributor', 'Community Writer', 'Writer'].includes(w.role) ? 'Social Justice Writer' : w.role, avatarUrl: !w.avatarUrl || w.avatarUrl.startsWith('data:image/svg') ? THANZEELA_AVATAR : w.avatarUrl };
         });
         // Guest writers shipped with the site appear even if the stored list predates them.
         for (const g of INITIAL_WRITERS) {

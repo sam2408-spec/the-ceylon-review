@@ -27,7 +27,7 @@ export const INITIAL_WRITERS: Writer[] = [
   {
     id: 'w-thanzeela-ousman',
     name: 'Thanzeela Osman',
-    role: 'Writer',
+    role: 'Social Justice Writer',
     bio: THANZEELA_BIO,
     avatarUrl: THANZEELA_AVATAR,
     email: '',
