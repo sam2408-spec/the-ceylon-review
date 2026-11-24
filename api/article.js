@@ -108,6 +108,18 @@ export default async function handler(req, res) {
   const shareUrl = valid ? `${SITE}/share/${encodeURIComponent(id)}` : SITE + '/';
   const d = desc.length > 300 ? desc.slice(0, 297).trimEnd() + '…' : desc;
 
+  // Link-preview crawlers (Facebook, WhatsApp, X, LinkedIn...) must read this page's own
+  // meta tags, and some follow a redirect and use the destination's tags instead. So crawlers
+  // get the page; everyone else is sent straight to the article.
+  const ua = String(req.headers['user-agent'] || '');
+  const isCrawler = /facebookexternalhit|facebot|meta-externalagent|meta-externalfetcher|whatsapp|twitterbot|linkedinbot|slackbot|telegrambot|discordbot|skypeuripreview|pinterest|googlebot|bingbot|applebot|embedly|vkshare|redditbot|bot\b|crawler|spider|preview/i.test(ua);
+  if (!isCrawler) {
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Location', target);
+    res.status(302).end();
+    return;
+  }
+
   const html = `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8" />
@@ -115,7 +127,6 @@ export default async function handler(req, res) {
 <title>${esc(title === "The Ceylon Review" ? title : title + " — The Ceylon Review")}</title>
 <meta name="description" content="${esc(d)}" />
 <link rel="canonical" href="${esc(shareUrl)}" />
-<meta http-equiv="refresh" content="0; url=${esc(target)}" />
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="The Ceylon Review" />
 <meta property="og:title" content="${esc(title)}" />
@@ -129,6 +140,7 @@ export default async function handler(req, res) {
 </head><body><p><a href="${esc(target)}">${esc(title)}</a></p></body></html>`;
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=3600');
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=3600');
+  res.setHeader('Vary', 'User-Agent');
   res.status(200).send(html);
 }
