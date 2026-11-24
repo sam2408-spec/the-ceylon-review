@@ -123,7 +123,7 @@ export async function signOutEditor(): Promise<void> {
 // was removed; once the editor saves or the seed writes the revised text, the marker is gone and
 // later edits in the Editorial Desk are left alone.
 const REVISION_MARKERS: Record<string, string[]> = {
-  'art-behind-the-screen': ['Thanzeela Ousman', 'a guest contributor;', 'A guest opinion by', 'a community writer;', 'A community opinion by', 'Women In Need, Our services.'],
+  'art-behind-the-screen': ['Thanzeela Ousman', 'a guest contributor;', 'A guest opinion by', 'a community writer;', 'A community opinion by', 'Cover graphic: created by The Ceylon Review in Canva.'],
   'art-rohingya-genocide-icj': ['392 villages', '326,000', 'Hamoud', '1.2 per cent'],
   'art-manufactured-silence': ['Hamas is ISIS', 'online hate campaigns', 'None of this is conspiracy'],
   'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
