@@ -156,8 +156,8 @@ function applyRevision(a: Article): Article {
 
 function withPublishedCovers(a: Article): Article {
   a = applyRevision(a);
-  if (a.id === 'art-behind-the-screen' && !a.imageUrl) {
-    a = { ...a, imageUrl: '/images/behind-the-screen-cover.jpg' };
+  if (a.id === 'art-behind-the-screen' && (!a.imageUrl || a.imageUrl === '/images/behind-the-screen-cover.jpg')) {
+    a = { ...a, imageUrl: '/images/behind-the-screen-cover-2.jpg' };
   }
   if (a.id === 'art-rohingya-genocide-icj' && !a.imageUrl) {
     a = { ...a, imageUrl: '/images/rohingya-judgment-cover.jpg' };
