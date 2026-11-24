@@ -27,7 +27,7 @@ export const INITIAL_WRITERS: Writer[] = [
   {
     id: 'w-thanzeela-ousman',
     name: 'Thanzeela Osman',
-    role: 'Community Writer',
+    role: 'Writer',
     bio: THANZEELA_BIO,
     avatarUrl: THANZEELA_AVATAR,
     email: '',
@@ -414,7 +414,7 @@ export const INITIAL_ARTICLES: Article[] = [
   {
     id: "art-behind-the-screen",
     title: "Behind the Screen: Online Harassment of Women and Children in Sri Lanka",
-    subtitle: "A community opinion by Thanzeela Osman on cyberstalking, sextortion and AI-made images, and why the burden of shame must never fall on the victim.",
+    subtitle: "An opinion piece by Thanzeela Osman on cyberstalking, sextortion and AI-made images, and why the burden of shame must never fall on the victim.",
     summary: "A 2025 UNFPA and UN Women study found that 64% of surveyed survivors of technology-facilitated violence in Sri Lanka withdrew from social media. The National Child Protection Authority recorded 151 and 150 cyberbullying complaints involving nude photographs in 2024 and 2025. Thanzeela Osman asks what must change.",
     content: [
       "Online harassment, exploitation and abuse of women and children in Sri Lanka is a growing problem, and one that is increasingly difficult to ignore. It reaches far beyond offensive comments. For many victims, the consequences extend well beyond a mobile phone screen.",
@@ -445,7 +445,7 @@ export const INITIAL_ARTICLES: Article[] = [
       "WHERE TO GET HELP:\nNational Child Protection Authority (NCPA) child helpline: 1929\nSri Lanka CERT (cybersecurity assistance): 101\nNational Women’s Helpline: 1938\nWomen In Need: winsl.net/our-services\nSri Lanka Police",
       "Responsibility for online harassment must never be placed on the person experiencing it. A woman should not have to abandon social media to feel safe, and a child should never have to fear seeking help because of something a perpetrator has manipulated them into doing.",
       "Online harassment is a matter of human rights, gender equality and child protection. The digital world should be a space where women and children can learn, communicate, express themselves and take part without fear. That requires more than awareness campaigns and occasional arrests. It requires accountability, effective laws, responsible technology companies and a society that stands with survivors rather than judging them.",
-      "This article is an opinion piece by Thanzeela Osman, a community writer; the views expressed are the author’s own. It reports published figures from the bodies named and is not legal advice. Sources: National Child Protection Authority, Child abuse and other child related complaints reported to NCPA: Year 2024 (2025), and Child abuse and other child related offence wise (miscellaneous category): Year 2025 (2026); Computer Crimes Act, No. 24 of 2007; Online Safety Act, No. 9 of 2024; Penal Code Ordinance, No. 2 of 1883; UNFPA and UN Women, Research study on technology-facilitated violence experienced by women, girls, LGBTQIA+ persons, and ethnic minorities in Sri Lanka (2025); D. Wijesinghe, “As cyber crimes targeting children rise, authorities seek to raise awareness”, The Sunday Times (1 September 2024); Women In Need, Our services."
+      "This article is an opinion piece by Thanzeela Osman, a writer with The Ceylon Review; the views expressed are the author’s own. It reports published figures from the bodies named and is not legal advice. Sources: National Child Protection Authority, Child abuse and other child related complaints reported to NCPA: Year 2024 (2025), and Child abuse and other child related offence wise (miscellaneous category): Year 2025 (2026); Computer Crimes Act, No. 24 of 2007; Online Safety Act, No. 9 of 2024; Penal Code Ordinance, No. 2 of 1883; UNFPA and UN Women, Research study on technology-facilitated violence experienced by women, girls, LGBTQIA+ persons, and ethnic minorities in Sri Lanka (2025); D. Wijesinghe, “As cyber crimes targeting children rise, authorities seek to raise awareness”, The Sunday Times (1 September 2024); Women In Need, Our services."
     ],
     authorId: 'w-thanzeela-ousman',
     publishedAt: 'November 24, 2026',
