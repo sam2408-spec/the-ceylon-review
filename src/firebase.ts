@@ -276,6 +276,10 @@ export function subscribeToWriters(
             loaded.push(w);
           }
         });
+        // Guest writers shipped with the site appear even if the stored list predates them.
+        for (const g of INITIAL_WRITERS) {
+          if (g.id !== 'w-sameera' && !loaded.some((w) => w.id === g.id)) loaded.push(g);
+        }
         onData(loaded);
       } else {
         onData([]);
@@ -400,7 +404,7 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
     // per browser, so an article the editor later deletes is not brought back.
     try {
       for (const art of INITIAL_ARTICLES) {
-        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi' && art.id !== 'art-rohingya-genocide-icj') continue;
+        if (art.id !== 'art-fergie-chambers' && art.id !== 'art-gaza-floods' && art.id !== 'art-sunflower-circle-fundraiser' && art.id !== 'art-saleh-aljafarawi' && art.id !== 'art-rohingya-genocide-icj' && art.id !== 'art-behind-the-screen') continue;
         const flag = 'seeded22:' + art.id;
         let done = false;
         try { done = localStorage.getItem(flag) === '1'; } catch { /* ignore */ }

@@ -4,6 +4,8 @@ import { Article, Writer } from './types';
 export const SAMEERA_AVATAR =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Crect width='400' height='400' fill='%237a1f2b'/%3E%3Ctext x='200' y='238' font-family='Georgia,serif' font-size='150' font-weight='700' fill='%23ffffff' text-anchor='middle'%3ESM%3C/text%3E%3C/svg%3E";
 
+export const THANZEELA_AVATAR = SAMEERA_AVATAR.replace('SM%3C','TO%3C');
+
 export const INITIAL_WRITERS: Writer[] = [
   {
     id: 'w-sameera',
@@ -15,6 +17,17 @@ export const INITIAL_WRITERS: Writer[] = [
     twitter: '',
     location: 'Colombo, Sri Lanka',
     joinedDate: 'June 2026'
+  },
+  {
+    id: 'w-thanzeela-ousman',
+    name: 'Thanzeela Ousman',
+    role: 'Guest Contributor',
+    bio: 'Guest contributor to The Ceylon Review, writing on online safety, and the protection of women and children, in Sri Lanka.',
+    avatarUrl: THANZEELA_AVATAR,
+    email: '',
+    twitter: '',
+    location: 'Sri Lanka',
+    joinedDate: 'November 2026'
   }
 ];
 
@@ -388,6 +401,52 @@ export const INITIAL_ARTICLES: Article[] = [
     readTime: "8 min read",
     isCurrent: true,
     isFeatured: false,
+    likes: 0,
+    comments: [],
+    views: 0
+  },
+  {
+    id: "art-behind-the-screen",
+    title: "Behind the Screen: Online Harassment of Women and Children in Sri Lanka",
+    subtitle: "A guest opinion by Thanzeela Ousman on cyberstalking, sextortion and AI-made images, and why the burden of shame must never fall on the victim.",
+    summary: "A 2025 UNFPA and UN Women study found that 64% of surveyed survivors of technology-facilitated violence in Sri Lanka withdrew from social media. The National Child Protection Authority recorded 151 and 150 cyberbullying complaints involving nude photographs in 2024 and 2025. Thanzeela Ousman asks what must change.",
+    content: [
+      "Online harassment, exploitation and abuse of women and children in Sri Lanka is a growing problem, and one that is increasingly difficult to ignore. It reaches far beyond offensive comments. For many victims, the consequences extend well beyond a mobile phone screen.",
+      "WHAT ONLINE ABUSE INCLUDES:\nCyberstalking\nSexual harassment\nBlackmail\nImpersonation\nCyberbullying\nThe non-consensual sharing of intimate images\nSexually explicit images created with artificial intelligence, without consent",
+      "I. A problem with real-world consequences",
+      "The internet has become an essential part of everyday life in Sri Lanka. From education and employment to communication and entertainment, digital platforms have created opportunities that were once unimaginable. Behind the convenience of social media and online communication, however, women and children are being harassed, exploited and abused.",
+      "A 2025 study commissioned by the United Nations Population Fund (UNFPA) and UN Women on technology-facilitated violence in Sri Lanka documents the damage. Among the survivors surveyed, 54% experienced offline harm, 64% withdrew from social media and 51% experienced relationship breakdowns.",
+      "WHAT SURVIVORS REPORTED (UNFPA AND UN WOMEN, 2025):\nExperienced offline harm: 54%\nWithdrew from social media: 64%\nExperienced relationship breakdowns: 51%",
+      "These findings show that online violence is not a digital inconvenience. It can affect a person’s safety, livelihood, relationships and ability to take part freely in society.",
+      "II. Women",
+      "Women are particularly exposed to sexualised harassment and gender-based intimidation. Private photographs shared within relationships can become instruments of blackmail when former partners threaten to publish them. Fake social media accounts are created using women’s photographs to damage their reputations, while others face sexually degrading comments and threats for expressing opinions in public. Women journalists, activists and public figures are also targeted in coordinated harassment designed to silence them.",
+      "III. Children",
+      "The situation for children is equally serious. Online grooming, cyberbullying and sexual exploitation are threats, particularly where perpetrators use social media, messaging applications and online games to establish relationships with children. A person may approach a child as a friend, gain the child’s trust, and then request photographs, introduce sexual conversation or use emotional manipulation and threats to obtain further material. This can develop into sextortion, where a child is blackmailed with the threat of having private images exposed.",
+      "The National Child Protection Authority (NCPA) recorded 151 complaints in 2024 in the category of cyberbullying involving threats using nude photographs. Its 2025 statistics record a further 150 complaints in the same category.",
+      "THE NCPA COMPLAINTS, BY YEAR:\n2024: 151 complaints of cyberbullying involving threats using nude photographs\n2025: 150 complaints in the same category",
+      "These figures represent reported cases, not the full extent of the problem. Many children remain silent out of fear, shame or concern about how their parents and communities may react.",
+      "IV. Artificial intelligence",
+      "Ordinary photographs of women and children can be manipulated to produce sexually explicit images without their knowledge or consent. In September 2024 an official of Sri Lanka CERT, the national computer emergency response team, said that AI tools were being used to alter victims’ images by removing clothing. The same report described Telegram bots that falsely claimed to remove children’s photographs but instead solicited further images and personal information.",
+      "“The screen may separate the perpetrator from the victim, but it does not make the harm any less real.”",
+      "V. The fear of being blamed",
+      "One of the greatest obstacles victims face is not the absence of evidence or the inability to identify the abuse. It is the fear of being blamed. Women hesitate to report harassment for fear of damage to their reputation, rejection by their families or social humiliation. Girls remain silent because they are afraid of being punished for communicating with strangers or sharing photographs. Perpetrators are able to continue while victims carry the burden of shame.",
+      "VI. The law, and what is still missing",
+      "Several legal provisions may apply to online abuse in Sri Lanka.",
+      "THE LAWS THAT MAY APPLY:\nPenal Code Ordinance, Section 345\nComputer Crimes Act, No. 24 of 2007\nOnline Safety Act, No. 9 of 2024",
+      "Legislation does not by itself guarantee protection. Difficulties in reporting, investigating digital offences, removing harmful content and providing support remain significant concerns. Laws that protect victims must also not become instruments for restricting legitimate expression or silencing criticism.",
+      "Responsibility cannot rest on victims and their families alone. Social media companies must improve content moderation in Sinhala and Tamil, respond more quickly to reports of non-consensual intimate images and strengthen protections for children. Schools must introduce meaningful digital safety education covering grooming, cyberbullying, sextortion and online manipulation. Law enforcement agencies require specialised training, and victims need accessible legal assistance, counselling and confidential reporting mechanisms.",
+      "VII. Where help is available",
+      "WHERE TO GET HELP:\nNational Child Protection Authority (NCPA) child helpline: 1929\nSri Lanka CERT (cybersecurity assistance): 101\nNational Women’s Helpline: 1938\nWomen In Need: winsl.net/our-services\nSri Lanka Police",
+      "Responsibility for online harassment must never be placed on the person experiencing it. A woman should not have to abandon social media to feel safe, and a child should never have to fear seeking help because of something a perpetrator has manipulated them into doing.",
+      "Online harassment is a matter of human rights, gender equality and child protection. The digital world should be a space where women and children can learn, communicate, express themselves and take part without fear. That requires more than awareness campaigns and occasional arrests. It requires accountability, effective laws, responsible technology companies and a society that stands with survivors rather than judging them.",
+      "This article is an opinion piece by Thanzeela Ousman, a guest contributor; the views expressed are the author’s own. It reports published figures from the bodies named and is not legal advice. Sources: National Child Protection Authority, Child abuse and other child related complaints reported to NCPA: Year 2024 (2025), and Child abuse and other child related offence wise (miscellaneous category): Year 2025 (2026); Computer Crimes Act, No. 24 of 2007; Online Safety Act, No. 9 of 2024; Penal Code Ordinance, No. 2 of 1883; UNFPA and UN Women, Research study on technology-facilitated violence experienced by women, girls, LGBTQIA+ persons, and ethnic minorities in Sri Lanka (2025); D. Wijesinghe, “As cyber crimes targeting children rise, authorities seek to raise awareness”, The Sunday Times (1 September 2024); Women In Need, Our services."
+    ],
+    authorId: 'w-thanzeela-ousman',
+    publishedAt: 'November 24, 2026',
+    category: 'Opinion',
+    imageUrl: '',
+    readTime: '5 min read',
+    isCurrent: true,
     likes: 0,
     comments: [],
     views: 0
