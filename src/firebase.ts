@@ -123,6 +123,7 @@ export async function signOutEditor(): Promise<void> {
 // was removed; once the editor saves or the seed writes the revised text, the marker is gone and
 // later edits in the Editorial Desk are left alone.
 const REVISION_MARKERS: Record<string, string[]> = {
+  'art-behind-the-screen': ['Thanzeela Ousman'],
   'art-rohingya-genocide-icj': ['392 villages', '326,000', 'Hamoud', '1.2 per cent'],
   'art-manufactured-silence': ['Hamas is ISIS', 'online hate campaigns', 'None of this is conspiracy'],
   'art-fergie-chambers': ['five-year-old son', 'linking the Tunisian money to Hamas', 'leads the polls'],
@@ -277,6 +278,7 @@ export function subscribeToWriters(
             loaded.push(w);
           }
         });
+        loaded.forEach((w, i) => { if (w.name === 'Thanzeela Ousman') loaded[i] = { ...w, name: 'Thanzeela Osman' }; });
         // Guest writers shipped with the site appear even if the stored list predates them.
         for (const g of INITIAL_WRITERS) {
           if (g.id !== 'w-sameera' && !loaded.some((w) => w.id === g.id)) loaded.push(g);
