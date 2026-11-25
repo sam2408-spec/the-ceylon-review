@@ -156,6 +156,9 @@ function applyRevision(a: Article): Article {
 
 function withPublishedCovers(a: Article): Article {
   a = applyRevision(a);
+  if (a.id === 'art-gaza-ceasefire-day-410' && !a.imageUrl) {
+    a = { ...a, imageUrl: '/images/gaza-day-410-cover.jpg' };
+  }
   if (a.id === 'art-sudan-drone-war' && (!a.imageUrl || a.imageUrl === '/images/sudan-drones-cover.jpg')) {
     a = { ...a, imageUrl: '/images/sudan-drones-cover-2.jpg' };
   }

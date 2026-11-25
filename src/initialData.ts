@@ -561,7 +561,7 @@ export const INITIAL_ARTICLES: Article[] = [
     "authorId": "w-sameera",
     "publishedAt": "November 25, 2026",
     "category": "Humanitarian",
-    "imageUrl": "",
+    "imageUrl": "/images/gaza-day-410-cover.jpg",
     "readTime": "6 min read",
     "isCurrent": true,
     "likes": 0,
