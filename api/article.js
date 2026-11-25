@@ -15,6 +15,7 @@ const DEFAULT_IMAGE = SITE + '/icon-512.png';
 
 // Covers that the site swaps in on the client (see withPublishedCovers in src/firebase.ts).
 const COVER_OVERRIDES = {
+  'art-sudan-drone-war': '/images/sudan-drones-cover.jpg',
   'art-saleh-aljafarawi': '/images/saleh-aljafarawi-tribute.jpg',
   'art-sunflower-circle-fundraiser': '/images/fundraiser/table-from-above.jpg',
   'art-gaza-floods': '/images/gaza-floods/flooded-camp.jpg',
@@ -26,6 +27,7 @@ const COVER_OVERRIDES = {
 
 // Fallback headlines for share previews when the article is not (yet) in the database.
 const FALLBACK = {
+ "art-sudan-drone-war": {"t": "Death from the Sky: Who Arms Sudan's Drone War", "d": "More than 1,630 of the 2,230 civilian deaths verified by the UN Human Rights Office in Sudan between January and October 2026 were caused by drone strikes. A UN inquiry has mapped a UAE-linked supply network to the RSF, which the UAE denies. Drones flown by the army have been linked to Türkiye, Egypt and Iran. The UN arms embargo covers Darfur alone."},
  "art-manufactured-silence": {"t": "The Manufactured Silence: Hasbara, Hate Speech, and the War on Truth", "d": "An investigation into Hasbara: the Israeli government’s public-diplomacy effort, and what it means for Sri Lanka."},
  "art-saleh-aljafarawi": {
   "t": "Saleh Aljafarawi, 27: A Journalist Remembered, and the Toll Behind His Name",
