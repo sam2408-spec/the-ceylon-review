@@ -108,6 +108,47 @@ export default async function handler(req, res) {
   const shareUrl = valid ? `${SITE}/share/${encodeURIComponent(id)}` : SITE + '/';
   const d = desc.length > 300 ? desc.slice(0, 297).trimEnd() + '…' : desc;
 
+  // Best path: serve the real site page (index.html) with THIS article's tags swapped in.
+  // Crawlers and people get the identical page, so there is no redirect for a crawler to follow
+  // and nothing depends on recognising a crawler. The site's script then opens the article.
+  const tags = [
+    `<title>${esc(title === 'The Ceylon Review' ? title : title + ' — The Ceylon Review')}</title>`,
+    `<meta name="description" content="${esc(d)}" />`,
+    `<link rel="canonical" href="${esc(shareUrl)}" />`,
+    `<meta property="og:type" content="article" />`,
+    `<meta property="og:site_name" content="The Ceylon Review" />`,
+    `<meta property="og:title" content="${esc(title)}" />`,
+    `<meta property="og:description" content="${esc(d)}" />`,
+    `<meta property="og:url" content="${esc(shareUrl)}" />`,
+    `<meta property="og:image" content="${esc(image)}" />`,
+    `<meta property="og:image:alt" content="${esc(title)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(title)}" />`,
+    `<meta name="twitter:description" content="${esc(d)}" />`,
+    `<meta name="twitter:image" content="${esc(image)}" />`,
+  ].join('\n    ');
+  if (valid) {
+    try {
+      const pr = await fetch(SITE + '/index.html', { signal: AbortSignal.timeout(6000) });
+      if (pr.ok) {
+        let page = await pr.text();
+        if (/<\/head>/i.test(page) && /<div id="root">/.test(page)) {
+          page = page
+            .replace(/<title>[\s\S]*?<\/title>/i, '')
+            .replace(/<link\s+rel="canonical"[^>]*>/gi, '')
+            .replace(/<meta\s+(?:name|property)="(?:description|og:[^"]*|twitter:[^"]*)"[^>]*>/gi, '')
+            .replace(/<\/head>/i, `    ${tags}\n  </head>`);
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=3600');
+          res.status(200).send(page);
+          return;
+        }
+      }
+    } catch {
+      /* fall through to the small preview page below */
+    }
+  }
+
   // Link-preview crawlers (Facebook, WhatsApp, X, LinkedIn...) must read this page's own
   // meta tags, and some follow a redirect and use the destination's tags instead. So crawlers
   // get the page; everyone else is sent straight to the article.
