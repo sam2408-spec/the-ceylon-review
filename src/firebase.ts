@@ -475,6 +475,21 @@ export async function seedInitialFirestoreArchives(): Promise<void> {
       console.warn('New article seeding skipped:', e);
     }
 
+    // Sudan drone-war article: replace the first published text once (names who made each claim).
+    try {
+      const sRef = doc(db, 'articles', 'art-sudan-drone-war');
+      const sSnap = await getDocFromServer(sRef);
+      const sFresh = INITIAL_ARTICLES.find(a => a.id === 'art-sudan-drone-war');
+      if (sFresh && sSnap.exists()) {
+        const cur = sSnap.data() as Article;
+        if (cur.content?.some(c => c.startsWith('Egypt (claim, backed by satellite imagery)'))) {
+          await setDoc(sRef, { ...cur, content: sFresh.content });
+        }
+      }
+    } catch (e) {
+      console.warn('Sudan article refresh skipped:', e);
+    }
+
     // Add the 4 November protest photo to the PTA article once, keeping any later edits.
     try {
       const ptaRef2 = doc(db, 'articles', 'art-colonial-law');
