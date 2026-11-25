@@ -280,6 +280,14 @@ export default function App() {
             }
             return art;
           });
+          // Newly published articles show for every reader straight away, even before
+          // the editor's sign-in has copied them into the cloud database.
+          const LIVE_FROM_CODE = ['art-sudan-drone-war'];
+          for (const id of LIVE_FROM_CODE) {
+            if (currentDeleted.includes(id) || cleanedArticles.some(a => a.id === id)) continue;
+            const fromCode = INITIAL_ARTICLES.find(a => a.id === id);
+            if (fromCode) cleanedArticles.unshift(fromCode);
+          }
           setArticles(cleanedArticles);
         }
       }, (err) => {
