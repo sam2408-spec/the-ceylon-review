@@ -27,6 +27,7 @@ const COVER_OVERRIDES = {
 
 // Fallback headlines for share previews when the article is not (yet) in the database.
 const FALLBACK = {
+ "art-gaza-ceasefire-day-410": {"t": "Five Killed Before Mid-Morning, Operating Rooms Shut: Gaza on the 410th Day of the Ceasefire", "d": "Between midnight and 10:30 a.m. on 25 November 2026, five Palestinians were killed in Israeli shelling and gunfire across Gaza, according to Radio Alam’s correspondent. Gaza’s Health Ministry said Al-Oyoun Hospital’s operating rooms stopped after a generator shut down at Al-Rantisi Hospital. The Gaza Government Media Office counts 1,690 killed in 410 days of ceasefire."},
  "art-sudan-drone-war": {"t": "Death from the Sky: Who Arms Sudan's Drone War", "d": "More than 1,630 of the 2,230 civilian deaths verified by the UN Human Rights Office in Sudan between January and October 2026 were caused by drone strikes. A UN inquiry has mapped a UAE-linked supply network to the RSF, which the UAE denies. Drones flown by the army have been linked to Türkiye, Egypt and Iran. The UN arms embargo covers Darfur alone."},
  "art-manufactured-silence": {"t": "The Manufactured Silence: Hasbara, Hate Speech, and the War on Truth", "d": "An investigation into Hasbara: the Israeli government’s public-diplomacy effort, and what it means for Sri Lanka."},
  "art-saleh-aljafarawi": {
