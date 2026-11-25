@@ -58,7 +58,9 @@ export default function RegionPage({ regionId, articles, onOpen }: RegionPagePro
     })),
   ];
   const mine = articles.filter((a) => regionId === 'world' || articleRegions(a).includes(regionId as never));
-  const ours = regionId === 'world' ? articles.filter((a) => articleRegions(a).includes('world' as never)) : mine;
+  // The World tab showcases every article that is not purely Sri Lankan news; Sri Lanka-only
+  // articles stay on the Sri Lanka tab.
+  const ours = regionId === 'world' ? articles.filter((a) => { const r = articleRegions(a); return r.length === 0 || r.some((x) => x !== 'sri-lanka'); }) : mine;
   const hasOurs = ours.length > 0;
 
   return (
