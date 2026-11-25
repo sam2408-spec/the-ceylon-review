@@ -99,7 +99,7 @@ export const INITIAL_ARTICLES: Article[] = [
       "sudan",
       "world"
     ],
-    "imageUrl": "/images/sudan-drones-cover.jpg",
+    "imageUrl": "/images/sudan-drones-cover-2.jpg",
     "readTime": "9 min read",
     "isCurrent": true,
     "isFeatured": false,
