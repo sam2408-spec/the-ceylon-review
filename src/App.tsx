@@ -282,7 +282,7 @@ export default function App() {
           });
           // Newly published articles show for every reader straight away, even before
           // the editor's sign-in has copied them into the cloud database.
-          const LIVE_FROM_CODE = ['art-sudan-drone-war', 'art-gaza-ceasefire-day-410'];
+          const LIVE_FROM_CODE = ['art-sudan-drone-war', 'art-gaza-ceasefire-day-410', 'art-albanese-costa-rica'];
           for (const id of LIVE_FROM_CODE) {
             if (currentDeleted.includes(id)) continue;
             const fromCode = INITIAL_ARTICLES.find(a => a.id === id);
