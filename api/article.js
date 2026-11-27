@@ -16,6 +16,7 @@ const DEFAULT_IMAGE = SITE + '/icon-512.png';
 // Covers that the site swaps in on the client (see withPublishedCovers in src/firebase.ts).
 const COVER_OVERRIDES = {
   'art-gaza-ceasefire-day-410': '/images/gaza-day-410-cover.jpg',
+  'art-albanese-costa-rica': '/images/albanese-costa-rica-cover.jpg',
   'art-sudan-drone-war': '/images/sudan-drones-cover-2.jpg',
   'art-saleh-aljafarawi': '/images/saleh-aljafarawi-tribute.jpg',
   'art-sunflower-circle-fundraiser': '/images/fundraiser/table-from-above.jpg',

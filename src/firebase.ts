@@ -156,6 +156,9 @@ function applyRevision(a: Article): Article {
 
 function withPublishedCovers(a: Article): Article {
   a = applyRevision(a);
+  if (a.id === 'art-albanese-costa-rica' && !a.imageUrl) {
+    a = { ...a, imageUrl: '/images/albanese-costa-rica-cover.jpg' };
+  }
   if (a.id === 'art-gaza-ceasefire-day-410' && !a.imageUrl) {
     a = { ...a, imageUrl: '/images/gaza-day-410-cover.jpg' };
   }
