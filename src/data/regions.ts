@@ -36,6 +36,7 @@ const KNOWN: Record<string, RegionId[]> = {
   'art-rohingya-genocide-icj': ['world'],
   'art-gaza-ceasefire-day-410': ['palestine'],
   'art-albanese-costa-rica': ['world'],
+  'art-syu-maradana-solidarity': ['sri-lanka', 'palestine'],
   'art-sunflower-circle-fundraiser': ['sri-lanka', 'palestine'],
 };
 

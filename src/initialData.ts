@@ -609,5 +609,42 @@ export const INITIAL_ARTICLES: Article[] = [
     "likes": 0,
     "comments": [],
     "views": 0
+  },
+  {
+    "id": "art-syu-maradana-solidarity",
+    "title": "Let Palestine Live: Socialist Youth Union Holds a Solidarity Programme in Maradana",
+    "subtitle": "Two days before the International Day of Solidarity with the Palestinian People, the SYU gathered near the Zahira Mosque in Colombo and a solidarity banner was signed.",
+    "summary": "On Friday, 27 November 2026, the Socialist Youth Union (SYU) held a “Let Palestine Live” solidarity programme in Maradana, Colombo, ahead of the International Day of Solidarity with the Palestinian People on 29 November. A solidarity banner was signed by those present. The organisers said the aim was to strengthen international solidarity for Palestinians’ freedom, human rights and right to live in peace.",
+    "content": [
+      "COLOMBO — A solidarity programme titled “Let Palestine Live” was held in Maradana, Colombo, on Friday, 27 November 2026, organised by the Socialist Youth Union (SYU). It was announced for 12.30 p.m. near the Zahira Mosque, and marked the International Day of Solidarity with the Palestinian People, which falls on 29 November.",
+      "During the programme a solidarity banner was signed by those who attended. According to the organisers, the programme aimed to strengthen international solidarity for the freedom, the human rights and the right to live in peace of the Palestinian people.",
+      "[[image:/images/syu/flag.jpg|SYU flags at the Maradana programme on 27 November.|Photo: Socialist Youth Union (SYU) Sri Lanka]]",
+      "THE PROGRAMME, 27 NOVEMBER 2026:\nOrganiser: Socialist Youth Union (SYU), Sri Lanka\nTitle: “Let Palestine Live”\nPlace: Maradana, near the Zahira Mosque, Colombo\nAnnounced time: 12.30 p.m.\nMarking: International Day of Solidarity with the Palestinian People, 29 November\nActivity: a solidarity banner signed by participants",
+      "I. What was said and shown",
+      "The message of the day was carried in three languages. The solidarity banner, signed by those present and shown at the top of this article, read “Let Palestine Live! Let us unite for a free Palestine!” in English, with the same call in Sinhala and in Tamil. The programme’s poster carried the call “Let Palestine Live” in Sinhala and English.",
+      "Placards carried at the programme included one in Sinhala calling for the two-state solution to be put into practice and for respect for the resolution of the United Nations. Another placard called for “freedom instead of oppression”. SYU flags and the Palestinian flag were carried together. Journalists from several television channels gathered around one of the speakers.",
+      "[[image:/images/syu/speakers.jpg|A speaker addresses journalists at the programme. A placard in Sinhala and another reading “Freedom instead of oppression” are held up behind.|Photo: Socialist Youth Union (SYU) Sri Lanka]]",
+      "“Let Palestine Live! Let us unite for a free Palestine!” — banner at the SYU programme, Maradana, 27 November 2026",
+      "II. Why 29 November",
+      "The date is set by the United Nations. In 1977 the UN General Assembly decided that 29 November would be observed every year as the International Day of Solidarity with the Palestinian People, the anniversary of the adoption of Resolution 181 in 1947, the plan to partition Palestine.",
+      "FLOWCHART: How the day came about\n29 Nov 1947 — UN General Assembly adopts Resolution 181 on the partition of Palestine.\n2 Dec 1977 — The General Assembly decides that 29 November is observed each year as the International Day of Solidarity with the Palestinian People.\n27 Nov 2026 — The SYU holds its “Let Palestine Live” programme in Maradana.\n29 Nov 2026 — The International Day of Solidarity with the Palestinian People.",
+      "III. The situation the programme refers to",
+      "The programme was held more than 400 days into the ceasefire in Gaza. On 25 November the Gaza Government Media Office counted 1,690 Palestinians killed since the ceasefire took effect. The UN Office for the Coordination of Humanitarian Affairs (OCHA), citing Gaza’s Ministry of Health, reported 1,650 killed and 5,975 injured as of 16 November. The two counts were made by different bodies on different dates. The Israeli military has said that armed groups have violated the ceasefire; Palestinian officials describe Israeli operations as violations of it.",
+      "IV. Who the SYU are",
+      "The Socialist Youth Union is the youth wing of the Janatha Vimukthi Peramuna (JVP), a political party in Sri Lanka. In March 2022 the union organised a march in Colombo from Maradana Technical Junction to Colombo Fort, against a fuel price rise and the sale of local resources to foreign states. In May 2026 it announced a nationwide youth programme, the “Youth Summit”, under the theme “Youth Energy to Build the Nation”.",
+      "Solidarity events for Palestinians have been held in Colombo by several groups since the war on Gaza began, among them an interfaith protest of Buddhists and a peace conference calling for a ceasefire.",
+      "V. What the organisers ask",
+      "The organisers said the programme was held to strengthen international solidarity with the Palestinian people’s freedom, their human rights and their right to live in peace. The banner, signed by those present, carries the programme’s title: “Let Palestine Live”.",
+      "This article is based on the account and photographs of the SYU programme supplied for The Ceylon Review. Statements about the programme are those of the organisers. Figures from different bodies are marked as such, and allegations are claims by those who made them. Sources: SYU Sri Lanka, statement and poster for the “Let Palestine Live” programme (27 November 2026); United Nations General Assembly, Resolution 181 (II), 1947, and the decision establishing the International Day of Solidarity with the Palestinian People, 1977; OCHA occupied Palestinian territory, Humanitarian Situation Report (18 November 2026); Gaza Government Media Office, ceasefire figures at day 410 (25 November 2026); The Island, report on the SYU press conference; Newswire.lk, announcement of the SYU Youth Summit (14 May 2026); Lanka News Web, “Socialist Youth protest in Colombo” (18 March 2022); Arab News, reports on solidarity events in Sri Lanka."
+    ],
+    "authorId": "w-sameera",
+    "publishedAt": "November 27, 2026",
+    "category": "Human Rights",
+    "imageUrl": "/images/syu/banner.jpg",
+    "readTime": "4 min read",
+    "isCurrent": true,
+    "likes": 0,
+    "comments": [],
+    "views": 0
   }
 ];

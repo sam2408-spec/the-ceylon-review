@@ -17,6 +17,7 @@ const DEFAULT_IMAGE = SITE + '/icon-512.png';
 const COVER_OVERRIDES = {
   'art-gaza-ceasefire-day-410': '/images/gaza-day-410-cover.jpg',
   'art-albanese-costa-rica': '/images/albanese-costa-rica-cover.jpg',
+  'art-syu-maradana-solidarity': '/images/syu/banner.jpg',
   'art-sudan-drone-war': '/images/sudan-drones-cover-2.jpg',
   'art-saleh-aljafarawi': '/images/saleh-aljafarawi-tribute.jpg',
   'art-sunflower-circle-fundraiser': '/images/fundraiser/table-from-above.jpg',
@@ -31,6 +32,7 @@ const COVER_OVERRIDES = {
 const FALLBACK = {
  "art-gaza-ceasefire-day-410": {"t": "Five Killed Before Mid-Morning, Operating Rooms Shut: Gaza on the 410th Day of the Ceasefire", "d": "Between midnight and 10:30 a.m. on 25 November 2026, five Palestinians were killed in Israeli shelling and gunfire across Gaza, according to Radio Alam’s correspondent. Gaza’s Health Ministry said Al-Oyoun Hospital’s operating rooms stopped after a generator shut down at Al-Rantisi Hospital. The Gaza Government Media Office counts 1,690 killed in 410 days of ceasefire."},
   "art-albanese-costa-rica": {"t": "Stopped at the Airport on the Way to Her Honorary Doctorate: Costa Rica Bars a UN Rapporteur", "d": "Francesca Albanese, UN Special Rapporteur on the occupied Palestinian territory, was refused entry to Costa Rica on 26 November 2026 over an unspecified international alert. UN human rights chief Volker Türk urged Costa Rica to reconsider."},
+  "art-syu-maradana-solidarity": {"t": "Let Palestine Live: Socialist Youth Union Holds a Solidarity Programme in Maradana", "d": "On 27 November 2026 the Socialist Youth Union (SYU) held a “Let Palestine Live” solidarity programme in Maradana, Colombo, ahead of the International Day of Solidarity with the Palestinian People. A solidarity banner was signed by those present."},
  "art-sudan-drone-war": {"t": "Death from the Sky: Who Arms Sudan's Drone War", "d": "More than 1,630 of the 2,230 civilian deaths verified by the UN Human Rights Office in Sudan between January and October 2026 were caused by drone strikes. A UN inquiry has mapped a UAE-linked supply network to the RSF, which the UAE denies. Drones flown by the army have been linked to Türkiye, Egypt and Iran. The UN arms embargo covers Darfur alone."},
  "art-manufactured-silence": {"t": "The Manufactured Silence: Hasbara, Hate Speech, and the War on Truth", "d": "An investigation into Hasbara: the Israeli government’s public-diplomacy effort, and what it means for Sri Lanka."},
  "art-saleh-aljafarawi": {
