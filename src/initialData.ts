@@ -649,8 +649,8 @@ export const INITIAL_ARTICLES: Article[] = [
   },
   {
     "id": "art-un-solidarity-day-2026",
-    "title": "Nineteen Years of Siege, Seventy-Four Thousand Dead: What Solidarity Day Asks of the World",
-    "subtitle": "On the UN’s International Day of Solidarity with the Palestinian People: a struggle that runs from the Balfour Declaration and the Nakba through two uprisings to a blockade in its nineteenth year, children operated on without adequate pain relief, and a UN finding of genocide that Israel rejects.",
+    "title": "Solidarity Should Not Be Limited to a Date on the Calendar",
+    "subtitle": "From the Balfour Declaration and the Nakba to a blockade in its nineteenth year, 74,000 dead in Gaza and a UN finding of genocide that Israel rejects: what the Palestinian people are owed on 29 November, and every day after it.",
     "summary": "The International Day of Solidarity with the Palestinian People falls on 29 November 2026. From the Balfour Declaration and the 1948 Nakba to two intifadas and the war on Gaza, a record of dispossession and loss; Gaza’s Ministry of Health counts more than 74,700 dead, and a UN Commission of Inquiry found genocide, which Israel rejects.",
     "content": [
       "Every 29 November since 1977, the United Nations has marked the International Day of Solidarity with the Palestinian People. The struggle it honours is older than any ceasefire or war: more than a century of dispossession, occupation and resistance. This year the day falls on Sunday, and it arrives with Gaza’s numbers still rising, under a ceasefire that has not stopped the dying.",
